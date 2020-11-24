@@ -1,1 +1,1 @@
-# Client Chat App
+# Group Chat App
