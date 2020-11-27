@@ -26,7 +26,7 @@ export default function AddGroup(props) {
         <View style={styles.tcontainer}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
             <View>
-              <Ionicons name="ios-arrow-back" size={30} color="white" />
+              <Ionicons name="ios-arrow-back" size={30} color="black" />
             </View>
           </TouchableOpacity>
 
@@ -36,40 +36,34 @@ export default function AddGroup(props) {
           ></TouchableOpacity>
         </View>
         <View style={styles.bcontainer}>
-          <View style={styles.topbcontainer}>
-            <View style={styles.menuContainer}>
-              <Image
-                style={{ height: 180, width: 200 }}
-                source={require("../../images/group_chat.png")}
-              ></Image>
-              <Text style={styles.activemenuText}>Create Group</Text>
-              <Image
-                style={{ height: 90, width: 89 }}
-                source={{
-                  uri:
-                    "https://static.vecteezy.com/system/resources/thumbnails/001/191/814/small/circle-abstract.png"
-                }}
-              />
-              <TextInput
-                placeholder="Enter Group Name"
-                placeholderTextColor="#666666"
-                style={styles.inputs}
-                onChangeText={text => onChangeText(text)}
-              />
-              <TextInput
-                placeholder="Enter Hashtag"
-                placeholderTextColor="#666666"
-                style={styles.inputs}
-                onChangeText={text => onChangeText(text)}
-              />
-              <TextInput
-                style={{ height: 4 }}
-                placeholder="Enter Group Description"
-                placeholderTextColor="#666666"
-                style={styles.inputs}
-                onChangeText={text => onChangeText(text)}
-              />
-            </View>
+          <View style={styles.menuContainer}>
+            <Text style={styles.activemenuText}>Create Group</Text>
+            <Image
+              style={{ height: 90, width: 89 }}
+              source={{
+                uri:
+                  "https://static.vecteezy.com/system/resources/thumbnails/001/191/814/small/circle-abstract.png"
+              }}
+            />
+            <TextInput
+              placeholder="Enter Group Name"
+              placeholderTextColor="#666666"
+              style={styles.inputs}
+              onChangeText={text => onChangeText(text)}
+            />
+            <TextInput
+              placeholder="Enter Hashtag"
+              placeholderTextColor="#666666"
+              style={styles.inputs}
+              onChangeText={text => onChangeText(text)}
+            />
+            <TextInput
+              style={{ height: 4 }}
+              placeholder="Enter Group Description"
+              placeholderTextColor="#666666"
+              style={styles.inputs}
+              onChangeText={text => onChangeText(text)}
+            />
           </View>
         </View>
       </KeyboardAvoidingView>
@@ -83,10 +77,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF"
   },
   tcontainer: {
-    backgroundColor: "#000",
+    backgroundColor: "white",
     flex: 1,
     flexDirection: "row",
-    padding: 50,
+    padding: 0,
+    paddingLeft: 30,
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30
   },
@@ -98,7 +93,7 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   tHeading: {
-    color: "white",
+    color: "black",
     fontWeight: "bold",
     fontSize: 20,
     paddingLeft: "30%"

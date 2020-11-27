@@ -19,7 +19,7 @@ const Messages = ({ username, uri, count, onPress }) => {
           colors={["#147efb", "#147efb"]}
           style={styles.gradientStyle}
         >
-          <Text style={styles.count}>{count}</Text>
+          {/* <Text style={styles.count}>{count}</Text> */}
         </LinearGradient>
       ) : null}
 
@@ -42,9 +42,9 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   gradientStyle: {
-    height: 20,
-    width: 20,
-    borderRadius: 10,
+    height: 15,
+    width: 15,
+    borderRadius: 7.5,
     alignItems: "center",
     justifyContent: "center",
     marginRight: 20

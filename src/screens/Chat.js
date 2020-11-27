@@ -13,8 +13,11 @@ import Icon from "@expo/vector-icons/MaterialIcons";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import Profiles from "../components/Profiles";
 import Messages from "../components/Messages";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import AddGroup from "./Sub/AddGroup";
+import TrendingStocks from "../components/TrendingStocks";
+import StockGroupCard from "../components/StockGroupCard";
+
 const Chat = props => {
   const URL = `https://api.github.com/users`;
   const [data, setData] = useState([]);
@@ -50,16 +53,24 @@ const Chat = props => {
   return (
     <LinearGradient colors={["#657786", "#FFF"]} style={styles.gradient}>
       <View style={styles.headerContainer}>
-        <Text style={styles.header}>Chat</Text>
+        <Text style={styles.header}>Trending Stocks</Text>
         <View>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
-            <AntDesign name="pluscircleo" size={24} color="white" />
+            <FontAwesome name="search" size={24} color="white" />
+            {/* <Entypo name="look" color="#000119" size={30} /> */}
           </TouchableOpacity>
         </View>
       </View>
-      <ScrollView
+
+      <TrendingStocks
+        onPress={() => {
+          this.props.navigation.navigate("StockChat");
+        }}
+      ></TrendingStocks>
+
+      {/* <ScrollView
         horizontal
         style={styles.proContainer}
         showsHorizontalScrollIndicator={false}
@@ -77,14 +88,69 @@ const Chat = props => {
             ))}
           </Animated.View>
         )}
-      </ScrollView>
+      </ScrollView> */}
 
       <View style={styles.ops}>
         <View style={styles.col}>
-          <Text style={styles.day}>Sunday</Text>
-          <Entypo name="dots-three-horizontal" color="#000119" size={30} />
+          <Text style={styles.day}>Stock Chats</Text>
+          <AntDesign
+            onPress={() => props.navigation.navigate("AddGroup")}
+            name="pluscircleo"
+            size={30}
+            color="black"
+          />
+          {/* <Entypo name="dots-three-horizontal" color="#000119" size={30} /> */}
         </View>
         <ScrollView>
+          <View style={styles.col2}>
+            <StockGroupCard
+              ticker="$TSLA"
+              pctchange="+1.02%"
+              onPress={() => {
+                props.navigation.navigate("StockChat", {
+                  //itemId: "TSLA",
+                  itemName: "$TSLA"
+                  // itemPic: logo
+                });
+              }}
+            ></StockGroupCard>
+            <StockGroupCard
+              ticker="$SQ"
+              pctchange="+4.55%"
+              onPress={() => {
+                props.navigation.navigate("StockChat", {
+                  // itemId: item.id,
+                  // itemName: item.login,
+                  // itemPic: item.avatar_url
+                  itemName: "$SQ"
+                });
+              }}
+            ></StockGroupCard>
+            <StockGroupCard
+              ticker="$NET"
+              pctchange="+3.521%"
+              onPress={() => {
+                props.navigation.navigate("StockChat", {
+                  itemName: "$NET"
+                  // itemId: item.id,
+                  // itemName: item.login,
+                  // itemPic: item.avatar_url
+                });
+              }}
+            ></StockGroupCard>
+          </View>
+
+          <View style={styles.col}>
+            <Text style={styles.day}>Trading Groups</Text>
+            <AntDesign
+              onPress={() => props.navigation.navigate("AddGroup")}
+              name="pluscircleo"
+              size={30}
+              color="black"
+            />
+            {/* <Entypo name="dots-three-horizontal" color="#000119" size={30} /> */}
+          </View>
+
           {loading ? (
             <ActivityIndicator size="large" color="#f20042" />
           ) : (
@@ -128,13 +194,14 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
     paddingTop: 30
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingTop: 20
+    paddingTop: 20,
+    paddingHorizontal: 20
   },
   header: {
     fontFamily: "Montserrat_800ExtraBold",
@@ -151,13 +218,20 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 40,
     height: 600,
     backgroundColor: "#FFF",
-    marginHorizontal: -20
+    marginHorizontal: 0,
+    paddingHorizontal: 20
   },
   col: {
     flexDirection: "row",
     marginTop: 25,
     marginHorizontal: 20,
     alignItems: "center"
+  },
+  col2: {
+    flexDirection: "column",
+    marginTop: 25
+    //marginHorizontal: 20,
+    //alignItems: "center"
   },
   day: {
     fontFamily: "Montserrat_800ExtraBold",

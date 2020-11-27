@@ -3,6 +3,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../screens/Home";
 import Discussion from "../screens/Discussion";
+import StockChat from "../screens/StockChat";
+import StockProfile from "../screens/StockProfile";
+
 import Profile from "../screens/Profile";
 import Chat from "../screens/Chat";
 import Icon from "@expo/vector-icons/Ionicons";
@@ -75,6 +78,8 @@ const ChatStackNavigator = () => {
       <Stack.Screen name="Chat" component={BottomTabNavigator} />
       <Stack.Screen name="Discussion" component={Discussion} />
       <Stack.Screen name="AddGroup" component={AddGroup} />
+      <Stack.Screen name="StockChat" component={StockChat} />
+      <Stack.Screen name="StockProfile" component={StockProfile} />
     </Stack.Navigator>
   );
 };
