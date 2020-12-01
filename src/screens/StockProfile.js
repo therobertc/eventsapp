@@ -57,7 +57,7 @@ const StockProfile = ({ route, navigation }) => {
                     alignSelf: "center",
                     marginTop: 15
                   }}
-                  source={require("../../images/tslalogo.png")}
+                  source={{ uri: "https://i.stack.imgur.com/l60Hf.png" }}
                 />
               </TouchableOpacity>
               <Text
@@ -68,7 +68,7 @@ const StockProfile = ({ route, navigation }) => {
                   paddingVertical: 20
                 }}
               >
-                TESLA, INC.
+                COMPANY, INC.
               </Text>
 
               <Text
@@ -94,11 +94,11 @@ const StockProfile = ({ route, navigation }) => {
                   paddingVertical: 20
                 }}
               >
-                Tesla's mission is to accelerate the world's transition to
-                sustainable energy. Tesla was founded in 2003 by a group of
-                engineers who wanted to prove that people didn't need to
-                compromise to drive electric – that electric vehicles can be
-                better, quicker and more fun to drive than gasoline cars.
+                Company's mission is to accelerate the world's transition.
+                Company was founded in 2003 by a group of engineers who wanted
+                to prove that people didn't need to compromise to drive electric
+                – that electric vehicles can be better, quicker and more fun to
+                drive than gasoline cars.
               </Text>
 
               <Button
@@ -124,8 +124,7 @@ const StockProfile = ({ route, navigation }) => {
                     textAlign: "center"
                   }}
                 >
-                  {" "}
-                  Join Group{" "}
+                  Join Group
                 </Text>
               </Button>
 

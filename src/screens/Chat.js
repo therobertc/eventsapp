@@ -109,8 +109,8 @@ const Chat = props => {
               onPress={() => {
                 props.navigation.navigate("StockChat", {
                   //itemId: "TSLA",
-                  itemName: "$TSLA"
-                  // itemPic: logo
+                  itemName: "$TSLA",
+                  itemPic: "https://i.stack.imgur.com/l60Hf.png"
                 });
               }}
             ></StockGroupCard>
@@ -121,7 +121,7 @@ const Chat = props => {
                 props.navigation.navigate("StockChat", {
                   // itemId: item.id,
                   // itemName: item.login,
-                  // itemPic: item.avatar_url
+                  itemPic: "https://i.stack.imgur.com/l60Hf.png",
                   itemName: "$SQ"
                 });
               }}
@@ -131,10 +131,10 @@ const Chat = props => {
               pctchange="+3.521%"
               onPress={() => {
                 props.navigation.navigate("StockChat", {
-                  itemName: "$NET"
+                  itemName: "$NET",
                   // itemId: item.id,
                   // itemName: item.login,
-                  // itemPic: item.avatar_url
+                  itemPic: "https://i.stack.imgur.com/l60Hf.png"
                 });
               }}
             ></StockGroupCard>

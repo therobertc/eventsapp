@@ -39,11 +39,15 @@ const StockChat = ({ route, navigation }) => {
               <Icon name="left" color="#000119" size={24} />
             </TouchableOpacity>
             <Text style={styles.username}>{itemName}</Text>
+
+            {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
+
             <TouchableOpacity
               onPress={() => navigation.navigate("StockProfile")}
             >
               <Image
-                source={require("../../images/tslalogo.png")}
+                //source={require("../../images/tslalogo.png")}
+                source={{ uri: itemPic }}
                 style={styles.avatar}
               />
             </TouchableOpacity>

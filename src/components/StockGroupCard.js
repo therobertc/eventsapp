@@ -33,7 +33,7 @@ const StockGroupCard = ({ ticker, pctchange, uri, count, onPress, image }) => {
               //alignSelf: "center",
               //marginTop: 15
             }}
-            source={require("../../images/group_chat.png")}
+            source={{ uri: "https://i.stack.imgur.com/l60Hf.png" }}
           />
         </TouchableOpacity>
         <View style={{ flexDirection: "column" }}>

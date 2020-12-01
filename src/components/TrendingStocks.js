@@ -24,15 +24,6 @@ class TrendingStocks extends Component {
   }
 
   componentDidMount() {
-    Linking.addEventListener("url", this.handleOpenURL);
-    AsyncStorage.getItem("user")
-      .then(user => {
-        user = JSON.parse(user);
-        this.setState({ isSubscribed: user.sub_status });
-      })
-      .catch(err => {
-        console.log(err.message);
-      });
     this.getTrandingData();
   }
 
@@ -71,12 +62,12 @@ class TrendingStocks extends Component {
     });
   }
 
-  TrendingComponent = () => {
+  TrendingComponent = (props, onPress) => {
     if (this.state.data.length) {
       return this.state.data.map((service, index) => (
         <TouchableOpacity
           key={index}
-          //onPress={onPress}
+          onPress={onPress}
           // onPress={() =>
           //   props.navigation.navigate("StockChat", {
           //     // symbol: service.symbol
