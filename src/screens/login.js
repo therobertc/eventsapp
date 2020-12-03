@@ -11,7 +11,7 @@ import {
   TextInput,
   Button,
   Alert,
-  ActivityIndicator,
+  ActivityIndicator
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import firebase from "../database/firebase";
@@ -30,7 +30,7 @@ export default function Login({ navigation }) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then((res) => {
+        .then(res => {
           console.log(res);
           console.log("User logged-in successfully!");
           setLoading(false);
@@ -38,32 +38,32 @@ export default function Login({ navigation }) {
           setPass("");
           navigation.navigate("Chat");
         })
-        .catch((error) => Alert.alert(error.message));
+        .catch(error => Alert.alert(error.message));
     }
   };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.tcontainer}>
         <Image
-          style={{ height: 60, width: 400 }}
-          source={require("./../images/logo.png")}
+          style={{ height: 100, width: 100 }}
+          source={require("../../assets/icondark.png")}
         ></Image>
       </View>
       <View style={styles.bcontainer}>
         <View style={styles.header}>
-          <Text style={styles.tHeading}>Login</Text>
+          <Text style={styles.tHeading}>Sign In</Text>
         </View>
         <TextInput
           style={styles.inputStyle}
           placeholder="Email"
           value={email}
-          onChangeText={(val) => setEmail(val)}
+          onChangeText={val => setEmail(val)}
         />
         <TextInput
           style={styles.inputStyle}
           placeholder="Password"
           value={password}
-          onChangeText={(val) => setPass(val)}
+          onChangeText={val => setPass(val)}
           maxLength={15}
           secureTextEntry={true}
         />
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
   },
   inputStyle: {
     width: "100%",
@@ -101,12 +101,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderColor: "#ccc",
     borderBottomWidth: 1,
-    margin: 20,
+    margin: 20
   },
   loginText: {
     color: "black",
     marginTop: 40,
-    textAlign: "center",
+    textAlign: "center"
   },
   preloader: {
     left: 0,
@@ -116,37 +116,37 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff"
   },
   tcontainer: {
-    backgroundColor: "#000",
+    //backgroundColor: "#000",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
+    borderBottomRightRadius: 30
   },
   bcontainer: {
     flex: 2,
     borderTopLeftRadius: 90,
     width: "100%",
-    padding: 30,
+    padding: 30
   },
 
   tHeading: {
     color: "black",
-    fontSize: 50,
+    fontSize: 50
   },
 
   topbcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-around"
   },
   bottombcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-around"
   },
   menuContainer: {
     justifyContent: "space-around",
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     padding: 30,
     width: "100%",
     backgroundColor: "#fff",
-    borderRadius: 26,
+    borderRadius: 26
   },
   activemenu: {
     justifyContent: "center",
@@ -163,17 +163,17 @@ const styles = StyleSheet.create({
     height: "80%",
     width: "45%",
     backgroundColor: "#17C37B",
-    borderRadius: 10,
+    borderRadius: 10
   },
   activemenuText: {
     fontSize: 20,
     color: "#000000",
-    marginTop: 5,
+    marginTop: 5
   },
   aText: {
     color: "#FFFFFF",
     fontSize: 20,
-    marginTop: 5,
+    marginTop: 5
   },
 
   inputs: {
@@ -183,8 +183,16 @@ const styles = StyleSheet.create({
     width: "90%",
     height: "10%",
     borderWidth: 1,
-    borderColor: "grey",
+    borderColor: "grey"
   },
   header: { alignItems: "center", padding: 30 },
-  btn: { borderRadius: 16,borderTopRightRadius:0, backgroundColor: "#0bcac7", height: 60 ,alignItems:"center",justifyContent:"center",marginTop:20},
+  btn: {
+    borderRadius: 16,
+    //borderTopRightRadius: 0,
+    backgroundColor: "#147efb",
+    height: 60,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20
+  }
 });

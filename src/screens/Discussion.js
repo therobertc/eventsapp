@@ -44,6 +44,7 @@ const Discussion = ({ route, navigation }) => {
           <ScrollView showsVerticalScrollIndicator={false}>
             <LastWatch checkedOn="Yesterday" />
             <Received image={itemPic} message={Data[0].message} />
+
             <Sent message={Data[1].message} />
             <Received image={itemPic} message={Data[2].message} />
             <Sent message={Data[3].message} />

@@ -14,6 +14,7 @@ import Received from "../components/Received";
 import Sent from "../components/Sent";
 import Data from "../dummy/Data.json";
 import Input from "../components/Input";
+import NewsCard from "../components/NewsCard";
 
 const StockChat = ({ route, navigation }) => {
   const { itemName, itemPic } = route.params;
@@ -56,6 +57,7 @@ const StockChat = ({ route, navigation }) => {
           <ScrollView showsVerticalScrollIndicator={false}>
             <LastWatch checkedOn="Yesterday" />
             <Received image={itemPic} message={Data[0].message} />
+            <NewsCard image={itemPic} message={Data[0].message}></NewsCard>
             <Sent message={Data[1].message} />
             <Received image={itemPic} message={Data[2].message} />
             <Sent message={Data[3].message} />
