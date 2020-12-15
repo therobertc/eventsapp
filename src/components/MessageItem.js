@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import firebase, { firestore } from "./../database/firebase";
 import { LinearGradient } from "expo-linear-gradient";
 
-const MessageItem = ({ item, image, message }) => {
+const MessageItem = ({ item, message }) => {
   const userID = firebase.auth().currentUser.uid;
   function messageView() {
     if (userID === item.senderId) {
@@ -18,7 +18,7 @@ const MessageItem = ({ item, image, message }) => {
     } else {
       return (
         <View style={styles.receivedContainer}>
-          <Image source={{ uri: image }} style={styles.img} />
+          {/* <Image source={{ uri: image }} style={styles.img} /> */}
           <View>
             <View style={styles.recievedBubble}>
               <Text style={styles.message}>{item.message}</Text>

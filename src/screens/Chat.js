@@ -27,6 +27,8 @@ const Chat = props => {
 
   const isVisible = useIsFocused();
   const [groups, setGroups] = useState([]);
+  const [publicgroups, setpublicgroups] = useState([]);
+
   const [Chatheads, setChatheads] = useState([]);
 
   useEffect(() => {
@@ -36,10 +38,30 @@ const Chat = props => {
   }, [isVisible]);
 
   function getChats() {
-    var UserId = fire.auth().currentUser.uid;
     const db = firestore;
     var groupArray = [];
+    var pubgroupArray = [];
+
     var ChatHeadsArr = [];
+    var UserId = fire.auth().currentUser.uid;
+
+    db.collection("publicgroups")
+    .onSnapshot(function (snapshot) {
+        snapshot.docChanges().forEach(function (change) {
+            if (change.type == "added") {
+                console.log("New Group: ", change.doc.data())
+                pubgroupArray.push(change.doc.data())
+            }
+            if (change.type === "modified") {
+                console.log("Modified Group: ", change.doc.data())
+            }
+            if (change.type === "removed") {
+                console.log("Removed Group", change.doc.data())
+            }
+
+            setpublicgroups(pubgroupArray)
+        })
+    });
 
     db.collection("users").doc(UserId).collection("Groups").onSnapshot(function (snapshot) {
       snapshot.docChanges().forEach(function (change) {
@@ -158,9 +180,36 @@ const Chat = props => {
             msg="This stock is trending"
           ></StockGroupCard>
         </View>
+        <View style={{ marginTop: 20 }, styles.col}>
+          <Text style={styles.header2}>Public Groups chat</Text>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("AddGroup")}
+          >
+            <AntDesign name="pluscircleo" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+
+
+        <FlatList
+                data={publicgroups}
+                keyExtractor={(item, index) => 'key' + index}
+                renderItem={({ item }) => {
+                  const name = item.groupName;
+
+                    return (
+                      <TouchableOpacity onPress={() => {
+                        props.navigation.navigate('Discussion', {
+  item                          })
+                      }}>
+                            <Messages item={name}></Messages>
+                        </TouchableOpacity>
+                    )
+                }}
+            >
+            </FlatList>
 
         <View style={{ marginTop: 20 }, styles.col}>
-          <Text style={styles.header2}>Other's chat</Text>
+          <Text style={styles.header2}>Private Messages</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("CreateChat")}
           >
@@ -191,7 +240,7 @@ const Chat = props => {
           }}
         ></FlatList>
   <View style={styles.col}>
-          <Text style={styles.header2}>Trading Groups</Text>
+          <Text style={styles.header2}>Private Group Chats</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >

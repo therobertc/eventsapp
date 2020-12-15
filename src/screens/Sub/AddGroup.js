@@ -27,50 +27,50 @@ export default function AddGroup(props) {
   const [errorState, setErrorState] = useState("");
   const [isLoading, setisLoading] = useState(false);
 
-  // function createGroupToFirebaseGroup() {
-  //   setisLoading(true);
-  //   const groupRef = firestore.collection("groups").doc();
-  //   const userID = firebase.auth().currentUser.uid;
+  function createGroupToFirebaseGroup() {
+    setisLoading(true);
+    const groupRef = firestore.collection("publicgroups").doc();
+    const userID = fire.auth().currentUser.uid;
 
-  //   groupRef
-  //     .set({
-  //       groupID: groupRef.id,
-  //       groupName: groupName,
-  //       userID: userID
-  //     })
-  //     .then(function (docRef) {
-  //       setisLoading(false);
-  //       console.log("Document Written with ID", groupRef.id);
-  //       addMemberOfChatInFirebase(groupRef.id, userID);
-  //     })
-  //     .catch(function (error) {
-  //       Alert.alert(error.message);
-  //       setisLoading(false);
-  //       console.log("error adding Doc", error);
-  //     });
-  // }
-  // function addMemberOfChatInFirebase(groupID, userID) {
-  //   const memberRefs = firestore
-  //     .collection("members")
-  //     .doc(groupID)
-  //     .collection("member")
-  //     .doc();
-  //   memberRefs
-  //     .set({
-  //       userID: userID
-  //     })
-  //     .then(function (docRef) {
-  //       props.navigation.goBack();
-  //     })
-  //     .catch(function (error) {
-  //       setisLoading(false);
-  //       console.error("Error adding Document", error);
-  //     });
-  // }
+    groupRef
+      .set({
+        groupID: groupRef.id,
+        groupName: groupName,
+        userID: userID
+      })
+      .then(function (docRef) {
+        setisLoading(false);
+        console.log("Document Written with ID", groupRef.id);
+        addMemberOfChatInFirebase(groupRef.id, userID);
+      })
+      .catch(function (error) {
+        Alert.alert(error.message);
+        setisLoading(false);
+        console.log("error adding Doc", error);
+      });
+  }
+  function addMemberOfChatInFirebase(groupID, userID) {
+    const memberRefs = firestore
+      .collection("members")
+      .doc(groupID)
+      .collection("member")
+      .doc();
+    memberRefs
+      .set({
+        userID: userID
+      })
+      .then(function (docRef) {
+        props.navigation.goBack();
+      })
+      .catch(function (error) {
+        setisLoading(false);
+        console.error("Error adding Document", error);
+      });
+  }
 
-  // function performCreateGroup = () => {
-  //   createGroupToFirebaseGroup();
-  // };
+  function performCreateGroup() {
+    createGroupToFirebaseGroup();
+  };
 
   function createGroup() {
     if (groupName !== undefined && groupName !== "") {
@@ -114,7 +114,7 @@ export default function AddGroup(props) {
             placeholder="Enter Group Name"
             value={groupName}
             onChangeText={val => setGroupName(val)}
-          />
+          />  
 
         </View>
 
@@ -139,9 +139,27 @@ export default function AddGroup(props) {
                 fontWeight: "600"
               }}
             >
-              Create Group
+              Create Private Group
             </Text>
           </TouchableOpacity>
+          <View>
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => performCreateGroup()}
+            isLoading={isLoading}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                textAlign: "center",
+                color: "white",
+                fontWeight: "600"
+              }}
+            >
+              Create Public Group
+            </Text>
+          </TouchableOpacity>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </View>
