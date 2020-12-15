@@ -159,15 +159,6 @@ const Chat = props => {
           ></StockGroupCard>
         </View>
 
-        <View style={styles.col}>
-          <Text style={styles.header2}>Trading Groups</Text>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("AddGroup")}
-          >
-            <AntDesign name="pluscircleo" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-
         <View style={{ marginTop: 20 }, styles.col}>
           <Text style={styles.header2}>Other's chat</Text>
           <TouchableOpacity
@@ -176,6 +167,38 @@ const Chat = props => {
             <AntDesign name="pluscircleo" size={24} color="black" />
           </TouchableOpacity>
         </View>
+
+        <FlatList
+          data={Chatheads}
+          keyExtractor={(item, index) => "key" + index}
+          renderItem={({ item }) => {
+            console.log("FLAAAAAAAAAATIST ==>", item)
+            const name = item.name;
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("ChatRoom", {
+                    name: item.name,
+                    uid: item.uid,
+                    title: item.name
+                  });
+                }}
+              >
+                <Messages item={name}></Messages>
+                <View style={styles.seperator}></View>
+              </TouchableOpacity>
+            );
+          }}
+        ></FlatList>
+  <View style={styles.col}>
+          <Text style={styles.header2}>Trading Groups</Text>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("AddGroup")}
+          >
+            <AntDesign name="pluscircleo" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+       
         {/* {groups.map((items, x) => {
           return <StockGroupCard key={x}
             ticker={items.groupName}
@@ -211,28 +234,7 @@ const Chat = props => {
           }}
         ></FlatList>
 
-        <FlatList
-          data={Chatheads}
-          keyExtractor={(item, index) => "key" + index}
-          renderItem={({ item }) => {
-            console.log("FLAAAAAAAAAATIST ==>", item)
-            const name = item.name;
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate("ChatRoom", {
-                    name: item.name,
-                    uid: item.uid,
-                    title: item.name
-                  });
-                }}
-              >
-                <Messages item={name}></Messages>
-                <View style={styles.seperator}></View>
-              </TouchableOpacity>
-            );
-          }}
-        ></FlatList>
+        
         {/* {Chatheads.map((items, x) => {
           const name = items.name
           return <TouchableOpacity
