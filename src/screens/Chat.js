@@ -24,7 +24,6 @@ import fire, { firestore } from "../database/firebase";
 import StockGroupCard from "../components/StockGroupCard";
 
 const Chat = props => {
-
   const isVisible = useIsFocused();
   const [groups, setGroups] = useState([]);
   const [Chatheads, setChatheads] = useState([]);
@@ -41,37 +40,42 @@ const Chat = props => {
     var groupArray = [];
     var ChatHeadsArr = [];
 
-    db.collection("users").doc(UserId).collection("Groups").onSnapshot(function (snapshot) {
-      snapshot.docChanges().forEach(function (change) {
-        console.log("New Group: ", change.doc.data());
-        // for (var i = 0; i < change.doc.data.length; i++) {
-        //   groupArray.push({
-        //     GroupName: change.doc.data().GroupName[i]
-        //   })
-        // }
+    db.collection("users")
+      .doc(UserId)
+      .collection("Groups")
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+          console.log("New Group: ", change.doc.data());
+          // for (var i = 0; i < change.doc.data.length; i++) {
+          //   groupArray.push({
+          //     GroupName: change.doc.data().GroupName[i]
+          //   })
+          // }
 
-        groupArray.push(change.doc.data());
+          groupArray.push(change.doc.data());
 
-        setGroups(groupArray);
+          setGroups(groupArray);
+        });
       });
-    });
 
-    db.collection("users").doc(UserId).collection("ChatHeads").onSnapshot(function (snapshot) {
-      snapshot.docChanges().forEach(function (anotherSnapshot) {
-        console.log("anotherSnapshot.doc.data()", anotherSnapshot.doc.data())
+    db.collection("users")
+      .doc(UserId)
+      .collection("ChatHeads")
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(anotherSnapshot) {
+          console.log("anotherSnapshot.doc.data()", anotherSnapshot.doc.data());
 
-        // ChatHeadsArr.push(anotherSnapshot.doc.data())
-        for (var i = 0; i < anotherSnapshot.doc.data.length; i++) {
-          ChatHeadsArr.push({
-            name: anotherSnapshot.doc.data().name,
-            uid: anotherSnapshot.doc.data().uid,
-          })
-        }
+          // ChatHeadsArr.push(anotherSnapshot.doc.data())
+          for (var i = 0; i < anotherSnapshot.doc.data.length; i++) {
+            ChatHeadsArr.push({
+              name: anotherSnapshot.doc.data().name,
+              uid: anotherSnapshot.doc.data().uid
+            });
+          }
 
-        setChatheads(ChatHeadsArr)
-
-      })
-    })
+          setChatheads(ChatHeadsArr);
+        });
+      });
     // var DBref = db.collection("users").doc(UserId);
     // DBref.collection("ChatHeads").get().then(function (snapshot) {
 
@@ -128,7 +132,6 @@ const Chat = props => {
               });
             }}
             msg="This stock is trending"
-
           ></StockGroupCard>
           <StockGroupCard
             ticker="$SQ"
@@ -142,7 +145,6 @@ const Chat = props => {
               });
             }}
             msg="This stock is trending"
-
           ></StockGroupCard>
           <StockGroupCard
             ticker="$NET"
@@ -159,8 +161,8 @@ const Chat = props => {
           ></StockGroupCard>
         </View>
 
-        <View style={{ marginTop: 20 }, styles.col}>
-          <Text style={styles.header2}>Other's chat</Text>
+        <View style={styles.col}>
+          <Text style={styles.header2}>Direct Messages</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("CreateChat")}
           >
@@ -172,7 +174,7 @@ const Chat = props => {
           data={Chatheads}
           keyExtractor={(item, index) => "key" + index}
           renderItem={({ item }) => {
-            console.log("FLAAAAAAAAAATIST ==>", item)
+            console.log("FLAAAAAAAAAATIST ==>", item);
             const name = item.name;
             return (
               <TouchableOpacity
@@ -190,7 +192,7 @@ const Chat = props => {
             );
           }}
         ></FlatList>
-  <View style={styles.col}>
+        <View style={styles.col}>
           <Text style={styles.header2}>Trading Groups</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
@@ -198,7 +200,7 @@ const Chat = props => {
             <AntDesign name="pluscircleo" size={24} color="black" />
           </TouchableOpacity>
         </View>
-       
+
         {/* {groups.map((items, x) => {
           return <StockGroupCard key={x}
             ticker={items.groupName}
@@ -217,7 +219,7 @@ const Chat = props => {
           data={groups}
           keyExtractor={(item, index) => "key" + index}
           renderItem={({ item }) => {
-            console.log("FLAAAAAAAAAATIST ==>", item)
+            console.log("FLAAAAAAAAAATIST ==>", item);
             const name = item.GroupName;
             return (
               <TouchableOpacity
@@ -234,7 +236,6 @@ const Chat = props => {
           }}
         ></FlatList>
 
-        
         {/* {Chatheads.map((items, x) => {
           const name = items.name
           return <TouchableOpacity
@@ -327,7 +328,7 @@ const styles = StyleSheet.create({
   },
   col: {
     flexDirection: "row",
-    //marginTop: 25,
+    marginTop: 10,
     marginHorizontal: 20,
     alignItems: "center"
   },
