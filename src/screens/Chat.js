@@ -134,7 +134,7 @@ const Chat = props => {
         <TrendingStocks></TrendingStocks>
 
         <View style={styles.col}>
-          <Text style={styles.header}> Stock Chats</Text>
+          <Text style={styles.header}>Stock Chats</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
