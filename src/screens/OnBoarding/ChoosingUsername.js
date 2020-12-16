@@ -1,133 +1,132 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
+import React, {useState} from "react";
 import {
-  StyleSheet,
-  Image,
-  Text,
-  View,
-  TouchableOpacity,
   Dimensions,
+  Image,
   KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
-  Alert
+  View
 } from "react-native";
-import { Input } from "react-native-elements";
-import { AntDesign } from "@expo/vector-icons";
-import fire, { firestore } from "../../database/firebase";
+import {Input} from "react-native-elements";
+import {AntDesign} from "@expo/vector-icons";
+import {firestore} from "../../database/firebase";
 
 const DismissKeyboard = ({ children }) => (
-  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-    {" "}
-    {children}
-  </TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      {" "}
+      {children}
+    </TouchableWithoutFeedback>
 );
 
-export default function App({ route, navigation }) {
-  const [usersName, setUsersName] = useState([]);
-  const [username, setusername] = useState();
+export default function App({ ...props }) {
 
-  useEffect(() => {
-    fetchNames();
-  }, []);
+  const [username, setUsername] = useState("")
 
-  function fetchNames() {
-    firestore
-      .collection("users")
-      .get()
-      .then(function(snapshot) {
-        var names = [];
-        snapshot.forEach(anotherSnapshot => {
-          console.log("anotherSnapshot.data()", anotherSnapshot.data().Name);
-          for (var i = 0; i < anotherSnapshot.data.length; i++) {
-            names.push(anotherSnapshot.data().Name);
-          }
-          setUsersName(names);
-        });
-      });
-  }
+  const createUserInFirestore = () => {
 
-  function checkUserName() {
-    console.log("usersName *****", usersName);
-    if (username !== undefined && username !== "") {
-      if (usersName.indexOf(username) > -1) {
-        Alert.alert("this username is not available.. Please try another one.");
-      } else {
-        navigation.navigate("PhoneNumber", { username: username });
-      }
-      // var arraycontainname = usersName.indexOf(username) > -1;
-
-      // if(arraycontainname){
-      // navigation.navigate("PhoneNumber", {username : username})
-      // }
-      // else{
-      // Alert.alert("this username is not available.. Please try another one.")
-      // }
-    } else {
-      Alert.alert("Please enter user name");
+    if(username === undefined || username === null || username.trim() === ""){
+      alert("Username can't be blank!!");
+      return false
     }
+
+    let user_name = username.trim().toLowerCase();
+    firestore
+        .collection('profile').doc(user_name)
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            alert("Username already exists!!");
+            return false;
+          }else{
+            props.navigation.push("Email", {username:user_name})
+          }
+        })
+        .catch((error) => alert(error.message))
   }
 
   return (
-    <View style={styles.getStarted}>
-      <TouchableOpacity
-        style={{ position: "absolute", top: 50, left: 20 }}
-        onPress={() => navigation.goBack()}
-      >
-        <AntDesign style={styles.back} name="left" size={30} color="black" />
-      </TouchableOpacity>
-      <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
-        <Image
-          source={require("../../../assets/logo-outline.png")}
-          style={{ width: 80, height: 80 }}
-        />
-      </View>
-
-      <View>
-        <Text style={styles.Stockchat}> START BY CREATING A USERNAME</Text>
-      </View>
-      <View>
-        <Text style={styles.username}>
-          Usernames will be tagged in messages and shown inside your chats.
-        </Text>
-      </View>
-
-      <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
-        <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
-          <Input
-            //einputContainerStyle={{ borderBottomWidth: 0 }}
-            style={styles.Input}
-            placeholder="Username"
-            placeholderTextColor="lightgrey"
-            onChangeText={val => setusername(val)}
+      <View style={styles.getStarted}>
+        <TouchableOpacity
+            style={{ position: "absolute", top: 50, left: 20 }}
+            onPress={() => props.navigation.goBack()}
+        >
+          <AntDesign style={styles.back} name="left" size={30} color="black" />
+        </TouchableOpacity>
+        <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
+          <Image
+              source={require("../../../assets/logo-outline.png")}
+              style={{ width: 150, height: 150 }}
           />
         </View>
 
-        <View
-          style={{
-            paddingHorizontal: 10,
-            top: 50,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          <TouchableOpacity
-            style={styles.Button}
-            onPress={() => checkUserName()}
-          >
-            <Text
-              style={{
-                fontSize: 18,
-                textAlign: "center",
-                color: "white",
-                fontWeight: "600"
-              }}
-            >
-              Continue
-            </Text>
-          </TouchableOpacity>
+        <View>
+          <Text style={styles.Stockchat}>CREATE YOUR USERNAME</Text>
         </View>
-      </KeyboardAvoidingView>
-    </View>
+        <View>
+          <Text style={styles.username}>
+            Usernames will be tagged in messages and shown inside your chats.
+          </Text>
+        </View>
+
+        <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
+          <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
+            <Input
+                //einputContainerStyle={{ borderBottomWidth: 0 }}
+                style={styles.Input}
+                placeholder="Username"
+                placeholderTextColor="lightgrey"
+                onChangeText={(username)=> setUsername(username)}
+            />
+            {/* <TextInput
+              style={styles.inputStyle}
+              placeholder="Enter Group Name"
+              value={groupName}
+              // onValidateTextField = {validateField}
+              onChangeText={val => setGroupName(val)}
+            /> */}
+          </View>
+
+          <View
+              style={{
+                paddingHorizontal: 10,
+                top: 50,
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+          >
+            {/* <TouchableOpacity
+              onPress={performCreateGroup}
+              isLoading={isLoading}
+            >
+              <View style={styles.btn}>
+                <Text
+                  style={{ color: "white", fontSize: 19, fontWeight: "bold" }}
+                >
+                  Create Group
+                </Text>
+              </View>
+            </TouchableOpacity> */}
+            <TouchableOpacity
+                style={styles.Button}
+                onPress={()=>createUserInFirestore()}
+
+            >
+              <Text
+                  style={{
+                    fontSize: 18,
+                    textAlign: "center",
+                    color: "white",
+                    fontWeight: "600"
+                  }}
+              >
+                Continue
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </View>
   );
 }
 

@@ -32,26 +32,28 @@ import CreateMsg from "../screens/CreateMsg";
 import ChatRoom from "../screens/ChatRoom";
 import fire, { firestore } from "../database/firebase";
 import { useLinkProps } from "@react-navigation/native";
+import Email from "../screens/OnBoarding/Email";
+import Password from "../screens/OnBoarding/Password";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
-  return (
-    <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: "#147efb",
-        inactiveTintColor: "#AAB8C2",
-        style: {
-          height: "10%",
-          //justifyContent: "center",
-          //alignItems: "center",
-          paddingTop: 15,
-          backgroundColor: "#FFF",
-          //elevation: 2
-          alignContent: "center"
-        }
-      }}
-    >
-      {/* <Tab.Screen
+    return (
+        <Tab.Navigator
+            tabBarOptions={{
+                activeTintColor: "#147efb",
+                inactiveTintColor: "#AAB8C2",
+                style: {
+                    height: "10%",
+                    //justifyContent: "center",
+                    //alignItems: "center",
+                    paddingTop: 15,
+                    backgroundColor: "#FFF",
+                    //elevation: 2
+                    alignContent: "center"
+                }
+            }}
+        >
+            {/* <Tab.Screen
         name="Home"
         component={Home}
         options={{
@@ -61,28 +63,28 @@ const BottomTabNavigator = () => {
           )
         }}
       /> */}
-      <Tab.Screen
-        name="Chat"
-        component={Chat}
-        options={{
-          tabBarLabel: "",
-          tabBarIcon: ({ color, size }) => (
-            <Icon2 name="chat" color={color} size={30} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarLabel: "",
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="ios-person" color={color} size={30} />
-          )
-        }}
-      />
-    </Tab.Navigator>
-  );
+            <Tab.Screen
+                name="Chat"
+                component={Chat}
+                options={{
+                    tabBarLabel: "",
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon2 name="chat" color={color} size={30} />
+                    )
+                }}
+            />
+            <Tab.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    tabBarLabel: "",
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon name="ios-person" color={color} size={30} />
+                    )
+                }}
+            />
+        </Tab.Navigator>
+    );
 };
 const Stack = createStackNavigator();
 // const screenOptionStyle = {
@@ -90,140 +92,150 @@ const Stack = createStackNavigator();
 // };
 
 const ChatStackNavigator = () => {
-  const [isUser, SetUser] = useState(false);
+    const [isUser, SetUser] = useState(false);
 
-  React.useEffect(() =>
-    fire.auth().onAuthStateChanged(user => {
-      if (user) {
-        SetUser(true);
-        console.log("IF ===> ", isUser);
-      } else {
-        SetUser(false);
-        console.log("ELSE ===>", isUser);
-      }
-    })
-  );
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="GetStarted"
-        component={GetStarted}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ChoosingUsername"
-        component={ChoosingUsername}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="VerifyPhoneNumber"
-        component={VerifyPhoneNumber}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="PhoneNumber"
-        component={PhoneNumber}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="LinkPortfolio"
-        component={LinkPortfolio}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="InviteFriends"
-        component={InviteFriends}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Notification"
-        component={Notification}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Success"
-        component={Success}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Chat"
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CreateChat"
-        component={CreateMsg}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ChatRoom"
-        component={ChatRoom}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="AddMember"
-        component={AddGroupMember}
-        //options={{ title: "Add Receipents" }}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="AddMoreMember"
-        component={AddMoreGroupMember}
-        //options={{ title: "Add Receipents" }}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Discussion"
-        component={Discussion}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="AddGroup"
-        component={AddGroup}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="GroupChat"
-        component={GroupChat}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="GroupInfo"
-        component={GroupInfo}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StockChat"
-        component={StockChat}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StockProfile"
-        component={StockProfile}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Profile"
-        component={Profile}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Settings"
-        component={Settings}
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  );
+    React.useEffect(() =>
+        fire.auth().onAuthStateChanged(user => {
+            if (user) {
+                SetUser(true);
+                console.log("IF ===> ", isUser);
+            } else {
+                SetUser(false);
+                console.log("ELSE ===>", isUser);
+            }
+        })
+    );
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="GetStarted"
+                component={GetStarted}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="ChoosingUsername"
+                component={ChoosingUsername}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Email"
+                component={Email}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Password"
+                component={Password}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="VerifyPhoneNumber"
+                component={VerifyPhoneNumber}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="PhoneNumber"
+                component={PhoneNumber}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="LinkPortfolio"
+                component={LinkPortfolio}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="InviteFriends"
+                component={InviteFriends}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Notification"
+                component={Notification}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Success"
+                component={Success}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="SignUp"
+                component={SignUp}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Chat"
+                component={BottomTabNavigator}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="CreateChat"
+                component={CreateMsg}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="ChatRoom"
+                component={ChatRoom}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="AddMember"
+                component={AddGroupMember}
+                //options={{ title: "Add Receipents" }}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="AddMoreMember"
+                component={AddMoreGroupMember}
+                //options={{ title: "Add Receipents" }}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Discussion"
+                component={Discussion}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="AddGroup"
+                component={AddGroup}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="GroupChat"
+                component={GroupChat}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="GroupInfo"
+                component={GroupInfo}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="StockChat"
+                component={StockChat}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="StockProfile"
+                component={StockProfile}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Profile"
+                component={Profile}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Settings"
+                component={Settings}
+                options={{ headerShown: false }}
+            />
+        </Stack.Navigator>
+    );
 };
 
 export default ChatStackNavigator;

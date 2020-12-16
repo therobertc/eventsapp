@@ -14,13 +14,21 @@ export default function ChatRoom({ route, navigation }) {
 
     const [messages, setMessages] = useState([])
     const [image, setImage] = useState(null);
-    const [isloading, setLoading] = useState(true)
+    const [username, setUsername] = useState("")
 
     const { name, uid } = route.params;
+    console.log(name, uid);
 
     useEffect(() => {
 
         var UserId = fire.auth().currentUser.uid;
+        console.log("hello", fire.auth().currentUser.email);
+        firestore.collection("profile").where('email', '==', fire.auth().currentUser.email).get().then(data=>{
+            data.forEach(doc => {
+                setUsername(doc.id);
+                console.log(doc.id, '=>', doc.data());
+            });
+        })
 
         const unsubscribeListener = firestore
             .collection('users')
@@ -157,6 +165,7 @@ export default function ChatRoom({ route, navigation }) {
                 text: newMessage[i].text,
                 user: {
                     _id: 1,
+                    name: name
                 }
             })
 
@@ -166,8 +175,7 @@ export default function ChatRoom({ route, navigation }) {
                 text: newMessage[i].text,
                 user: {
                     _id: 2,
-                    // avatar: firebase.auth().currentUser.photoURL,
-                    name: fire.auth().currentUser.displayName
+                    name: username
                 }
             })
 
@@ -221,6 +229,7 @@ export default function ChatRoom({ route, navigation }) {
                     onSend={newMessages => onSend(newMessages)}
                     user={{
                         _id: 1,
+                        name: username
                     }}
                 />
             </KeyboardAvoidingView>

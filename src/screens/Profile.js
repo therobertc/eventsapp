@@ -17,7 +17,7 @@ import { Feather } from "@expo/vector-icons";
 
 const Profile = props => {
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.col}>
         <Text style={styles.header}>Portfolio</Text>
         <TouchableOpacity onPress={() => props.navigation.navigate("Settings")}>
@@ -35,7 +35,7 @@ const Profile = props => {
               itemPic: "https://i.stack.imgur.com/l60Hf.png"
             });
           }}
-        ></StockGroupCard>
+        />
         <StockGroupCard
           ticker="$SQ"
           pctchange="+4.55%"
@@ -47,7 +47,7 @@ const Profile = props => {
               itemName: "$SQ"
             });
           }}
-        ></StockGroupCard>
+        />
         <StockGroupCard
           ticker="$NET"
           pctchange="+3.521%"
@@ -59,7 +59,7 @@ const Profile = props => {
               itemPic: "https://i.stack.imgur.com/l60Hf.png"
             });
           }}
-        ></StockGroupCard>
+        />
       </View>
       <View style={styles.col}>
         <Text style={styles.header}>Trade History</Text>
@@ -79,7 +79,7 @@ const Profile = props => {
               itemPic: "https://i.stack.imgur.com/l60Hf.png"
             });
           }}
-        ></StockGroupCard>
+        />
       </View>
       <TouchableOpacity
         style={styles.btn}
@@ -96,7 +96,7 @@ const Profile = props => {
           Logout
         </Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 export default Profile;
