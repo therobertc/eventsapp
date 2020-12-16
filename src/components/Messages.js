@@ -18,23 +18,41 @@ const randomTime = () => {
   return String(hFormat + hrs + ":" + mFormat + mins + " " + amPm);
 };
 
-const Messages = ({ item }) => {
+const Messages = ({ item, uri }) => {
   return (
-    <View style={styles.container}>
-      {/* {count > 0 ? (
-        <LinearGradient
-          colors={["#7F8C8D", "#FFFFFF", "#000"]}
-          style={styles.gradientStyle}
-        >
-          <Text style={styles.count}>{count}</Text>
-        </LinearGradient>
-      ) : null} */}
-
-      {/* <Image source={ Images.groups } style={styles.image} /> */}
-      <View style={{ marginLeft: 10 }}>
-        <Text style={styles.username}>#{item}</Text>
-        {/* <Text style={styles.text}>{item.groupMembers}</Text> */}
+    <View style={styles.card}>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Image
+          source={{ uri: uri }}
+          style={{
+            //flex: 1,
+            height: 40,
+            width: 40,
+            borderRadius: 20,
+            //borderWidth: 2,
+            marginBottom: 0,
+            marginRight: 5,
+            borderColor: "#147efb"
+            //alignSelf: "center",
+            //marginTop: 15
+          }}
+          source={{
+            uri: "https://i.stack.imgur.com/l60Hf.png"
+          }}
+        />
+        <View style={{ marginLeft: 10 }}>
+          <Text style={styles.username}>#{item}</Text>
+          <Text style={styles.preview}>This group is trending</Text>
+          {/* <Text style={styles.text}>{item.groupMembers}</Text> */}
+        </View>
       </View>
+
       <View>
         <Text style={styles.duration}>{randomTime()}</Text>
       </View>
@@ -45,12 +63,7 @@ export default Messages;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    paddingHorizontal: 20,
-    alignItems: "center",
-    marginTop: 15,
-    //marginBottom: 20,
-    justifyContent: "space-between"
+    paddingHorizontal: 10
   },
   gradientStyle: {
     height: 20,
@@ -77,13 +90,43 @@ const styles = StyleSheet.create({
   duration: {
     color: "#000119",
     fontSize: 12,
-    flex: 1,
+    //flex: 1,
 
     //position: "absolute",
     fontFamily: "Montserrat_600SemiBold"
   },
   username: {
     color: "#000119",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
+    fontSize: 15,
+    paddingLeft: 10
+  },
+  preview: {
+    color: "#000119",
+    //fontFamily: "Montserrat_300SemiBold",
+    fontSize: 15,
+    paddingLeft: 10
+  },
+  card: {
+    shadowOffset: { width: 0.5, height: 0.5 },
+    shadowRadius: 2,
+    shadowColor: "lightgrey",
+    marginHorizontal: 10,
+    shadowOpacity: 1.0,
+    marginVertical: 5,
+    elevation: 1,
+    //backgroundColor: "#e8eef1",
+    //backgroundColor: "#F5F8FA"
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    flexDirection: "row",
+    //paddingHorizontal: 40,
+    alignItems: "center",
+    //marginTop: 15,
+    //marginBottom: 20,
+    justifyContent: "space-between",
+    height: 80
   }
 });

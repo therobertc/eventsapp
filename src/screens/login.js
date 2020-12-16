@@ -16,7 +16,6 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import fire, { firestore } from "../database/firebase";
 import { useIsFocused } from "@react-navigation/native";
 
-
 export default function Login({ navigation }) {
   const [email, setEmail] = useState();
   const [password, setPass] = useState();
@@ -24,26 +23,28 @@ export default function Login({ navigation }) {
   const [error, setError] = useState();
   const isVisible = useIsFocused();
 
-
   useEffect(() => {
     if (isVisible) {
       AuthUser();
     }
   }, [isVisible]);
 
-  function AuthUser(){
-    fire.auth().onAuthStateChanged(function(user){
-      if(user){
-        navigation.navigate("Chat")
+  function AuthUser() {
+    fire.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        navigation.navigate("Chat");
+      } else {
       }
-      else{
-
-      }
-    })
+    });
   }
 
   const userLogin = () => {
-    if (email !== undefined && email !== "" && password !== undefined && password !== "") {
+    if (
+      email !== undefined &&
+      email !== "" &&
+      password !== undefined &&
+      password !== ""
+    ) {
       setLoading(true);
       fire
         .auth()
@@ -66,15 +67,22 @@ export default function Login({ navigation }) {
       <View style={styles.tcontainer}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Image
-            style={{ height: 60, width: 60 }}
-            source={require("../../assets/icondark.png")}
+            style={{ height: 100, width: 100 }}
+            source={require("../../assets/logo-outline.png")}
           ></Image>
 
           <Text style={styles.Stockchat}> Stock Chat</Text>
         </View>
         <Text style={styles.tHeading}>Welcome Back</Text>
 
-        <View style={{ padding: 15, width: '100%', alignItems: "center", marginTop: 15 }}>
+        <View
+          style={{
+            padding: 15,
+            width: "100%",
+            alignItems: "center",
+            marginTop: 15
+          }}
+        >
           <TextInput
             style={styles.inputStyle}
             placeholder="Email"
@@ -91,9 +99,11 @@ export default function Login({ navigation }) {
           />
           <TouchableOpacity onPress={() => userLogin()}>
             <View style={styles.btn}>
-              <Text style={{ color: "white", fontSize: 19, fontWeight: "bold" }}>
+              <Text
+                style={{ color: "white", fontSize: 19, fontWeight: "bold" }}
+              >
                 Sign In
-            </Text>
+              </Text>
             </View>
           </TouchableOpacity>
 
@@ -102,7 +112,7 @@ export default function Login({ navigation }) {
             onPress={() => navigation.navigate("ChoosingUsername")}
           >
             Don't have an account? Sign Up
-        </Text>
+          </Text>
         </View>
       </View>
       {/* <View style={styles.bcontainer}>
@@ -176,7 +186,7 @@ const styles = StyleSheet.create({
     //backgroundColor: "#000",
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
     // borderBottomLeftRadius: 30,
     // borderBottomRightRadius: 30
   },
@@ -256,7 +266,7 @@ const styles = StyleSheet.create({
     color: "#1E2429",
     textAlign: "center",
     fontSize: 40,
-    fontWeight: "bold",
+    fontWeight: "bold"
     //fontFamily: "Montserrat_700Bold"
   }
 });

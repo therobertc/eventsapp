@@ -7,14 +7,16 @@ import StockChat from "../screens/StockChat";
 import StockProfile from "../screens/StockProfile";
 
 import Profile from "../screens/Profile";
+import Settings from "../screens/Settings";
+
 import Chat from "../screens/Chat";
 import Icon from "@expo/vector-icons/Ionicons";
 import Icon2 from "@expo/vector-icons/Entypo";
 import AddGroup from "../screens/Sub/AddGroup";
-import AddGroupMember from '../screens/Sub/AddGroup_Members';
-import AddMoreGroupMember from '../screens/Sub/AddMore_GroupMembers';
-import GroupChat from '../screens/Sub/GroupChat';
-import GroupInfo from '../screens/Sub/GroupInfo';
+import AddGroupMember from "../screens/Sub/AddGroup_Members";
+import AddMoreGroupMember from "../screens/Sub/AddMore_GroupMembers";
+import GroupChat from "../screens/Sub/GroupChat";
+import GroupInfo from "../screens/Sub/GroupInfo";
 
 import GetStarted from "../screens/OnBoarding/GetStarted";
 import ChoosingUsername from "../screens/OnBoarding/ChoosingUsername";
@@ -26,11 +28,10 @@ import Notification from "../screens/OnBoarding/Notification";
 import Success from "../screens/OnBoarding/Success";
 import Login from "../screens/login";
 import SignUp from "../screens/signup";
-import CreateMsg from '../screens/CreateMsg';
-import ChatRoom from '../screens/ChatRoom';
+import CreateMsg from "../screens/CreateMsg";
+import ChatRoom from "../screens/ChatRoom";
 import fire, { firestore } from "../database/firebase";
 import { useLinkProps } from "@react-navigation/native";
-
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -88,20 +89,20 @@ const Stack = createStackNavigator();
 //   headerShown: false
 // };
 
-
 const ChatStackNavigator = () => {
   const [isUser, SetUser] = useState(false);
 
-  React.useEffect(() => fire.auth().onAuthStateChanged(user => {
-    if (user) {
-      SetUser(true)
-      console.log("IF ===> ", isUser)
-    }
-    else {
-      SetUser(false)
-      console.log("ELSE ===>", isUser)
-    }
-  }))
+  React.useEffect(() =>
+    fire.auth().onAuthStateChanged(user => {
+      if (user) {
+        SetUser(true);
+        console.log("IF ===> ", isUser);
+      } else {
+        SetUser(false);
+        console.log("ELSE ===>", isUser);
+      }
+    })
+  );
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -144,20 +145,83 @@ const ChatStackNavigator = () => {
         component={Success}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
-      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-      <Stack.Screen name="Chat" component={BottomTabNavigator} options={{ headerShown: false }} />
-      <Stack.Screen name="CreateChat" component={CreateMsg} />
-      <Stack.Screen name="ChatRoom" component={ChatRoom} options={{ headerShown: false }} />
-      <Stack.Screen name="AddMember" component={AddGroupMember} options={{ title: "Add Receipents" }} />
-      <Stack.Screen name="AddMoreMember" component={AddMoreGroupMember} options={{ title: "Add Receipents" }} />
-      <Stack.Screen name="Discussion" component={Discussion} />
-      <Stack.Screen name="AddGroup" component={AddGroup} />
-      <Stack.Screen name="GroupChat" component={GroupChat} options={{ headerShown: false }} />
-      <Stack.Screen name="GroupInfo" component={GroupInfo} options={{ headerShown: false }} />
-      <Stack.Screen name="StockChat" component={StockChat} />
-      <Stack.Screen name="StockProfile" component={StockProfile} />
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Chat"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CreateChat"
+        component={CreateMsg}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ChatRoom"
+        component={ChatRoom}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddMember"
+        component={AddGroupMember}
+        //options={{ title: "Add Receipents" }}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddMoreMember"
+        component={AddMoreGroupMember}
+        //options={{ title: "Add Receipents" }}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Discussion"
+        component={Discussion}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="AddGroup"
+        component={AddGroup}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="GroupChat"
+        component={GroupChat}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="GroupInfo"
+        component={GroupInfo}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="StockChat"
+        component={StockChat}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="StockProfile"
+        component={StockProfile}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={Settings}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };

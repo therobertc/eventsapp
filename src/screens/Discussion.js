@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Alert
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "@expo/vector-icons/AntDesign";
@@ -108,10 +109,11 @@ function Discussion({ route, navigation }) {
     db.collection("message")
       .doc(item.groupID)
       .collection("messages")
+      //.orderBy("date_time")
       .onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(change) {
           if (change.type === "added") {
-            console.log("New Message: ", change.doc.data());
+            // console.log("New Message: ", change.doc.data());
             messages.push(change.doc.data());
           }
           if (change.type === "modified") {
@@ -139,9 +141,10 @@ function Discussion({ route, navigation }) {
         message: message,
         senderId: userID,
         senderEmail: userEmail
+        //date_time: new Date()
       })
       .then(function(docRef) {
-        console.log("Document written with ID: ", messageRef.id);
+        // console.log("Document written with ID: ", messageRef.id);
         setMessage("");
       })
       .catch(function(error) {

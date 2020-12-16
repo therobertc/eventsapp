@@ -27,84 +27,89 @@ export default function AddGroup(props) {
   const [errorState, setErrorState] = useState("");
   const [isLoading, setisLoading] = useState(false);
 
-  // function createGroupToFirebaseGroup() {
-  //   setisLoading(true);
-  //   const groupRef = firestore.collection("groups").doc();
-  //   const userID = firebase.auth().currentUser.uid;
+  function createGroupToFirebaseGroup() {
+    setisLoading(true);
+    const groupRef = firestore.collection("publicgroups").doc();
+    const userID = fire.auth().currentUser.uid;
 
-  //   groupRef
-  //     .set({
-  //       groupID: groupRef.id,
-  //       groupName: groupName,
-  //       userID: userID
-  //     })
-  //     .then(function (docRef) {
-  //       setisLoading(false);
-  //       console.log("Document Written with ID", groupRef.id);
-  //       addMemberOfChatInFirebase(groupRef.id, userID);
-  //     })
-  //     .catch(function (error) {
-  //       Alert.alert(error.message);
-  //       setisLoading(false);
-  //       console.log("error adding Doc", error);
-  //     });
-  // }
-  // function addMemberOfChatInFirebase(groupID, userID) {
-  //   const memberRefs = firestore
-  //     .collection("members")
-  //     .doc(groupID)
-  //     .collection("member")
-  //     .doc();
-  //   memberRefs
-  //     .set({
-  //       userID: userID
-  //     })
-  //     .then(function (docRef) {
-  //       props.navigation.goBack();
-  //     })
-  //     .catch(function (error) {
-  //       setisLoading(false);
-  //       console.error("Error adding Document", error);
-  //     });
-  // }
+    groupRef
+      .set({
+        groupID: groupRef.id,
+        groupName: groupName,
+        userID: userID
+      })
+      .then(function(docRef) {
+        setisLoading(false);
+        console.log("Document Written with ID", groupRef.id);
+        addMemberOfChatInFirebase(groupRef.id, userID);
+      })
+      .catch(function(error) {
+        Alert.alert(error.message);
+        setisLoading(false);
+        console.log("error adding Doc", error);
+      });
+  }
+  function addMemberOfChatInFirebase(groupID, userID) {
+    const memberRefs = firestore
+      .collection("members")
+      .doc(groupID)
+      .collection("member")
+      .doc();
+    memberRefs
+      .set({
+        userID: userID
+      })
+      .then(function(docRef) {
+        props.navigation.goBack();
+      })
+      .catch(function(error) {
+        setisLoading(false);
+        console.error("Error adding Document", error);
+      });
+  }
 
-  // function performCreateGroup = () => {
-  //   createGroupToFirebaseGroup();
-  // };
+  function createPublicGroup() {
+    createGroupToFirebaseGroup();
+  }
 
-  function createGroup() {
+  function createPrivateGroup() {
     if (groupName !== undefined && groupName !== "") {
       var UserId = fire.auth().currentUser.uid;
-      firestore.collection("users").doc(UserId).collection("Groups").doc(groupName).get().then(function (snapshot) {
-        if (snapshot.exists) {
-          Alert.alert("Group Already exists with same name..")
-        }
-        else {
-          props.navigation.push("AddMember", { groupName: groupName })
-        }
-      })
-    }
-    else {
-      Alert.alert("Please Enter Group name!!!!")
+      firestore
+        .collection("users")
+        .doc(UserId)
+        .collection("Groups")
+        .doc(groupName)
+        .get()
+        .then(function(snapshot) {
+          if (snapshot.exists) {
+            Alert.alert("Group Already exists with same name..");
+          } else {
+            props.navigation.push("AddMember", { groupName: groupName });
+          }
+        });
+    } else {
+      Alert.alert("Please Enter Group name!!!!");
     }
   }
 
   return (
     <View style={styles.getStarted}>
-      <View style={{ display: "flex", alignSelf: "center" }}>
+      <TouchableOpacity
+        style={{ position: "absolute", top: 50, left: 20 }}
+        onPress={() => props.navigation.goBack()}
+      >
+        <AntDesign style={styles.back} name="left" size={30} color="black" />
+      </TouchableOpacity>
+      <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/icondark.png")}
-          style={{ width: 80, height: 80 }}
+          source={require("../../../assets/logo-outline.png")}
+          style={{ width: 150, height: 150 }}
         />
       </View>
       <View>
-        <Text style={styles.Stockchat}> START BY CREATING A GROUP</Text>
+        <Text style={styles.Stockchat}> CREATE A GROUP</Text>
       </View>
-      {/* <View>
-        <Text style={styles.username}>
-          Your group will publicly available in the Stock Chat community.
-        </Text>
-      </View> */}
 
       <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
         <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
@@ -115,7 +120,6 @@ export default function AddGroup(props) {
             value={groupName}
             onChangeText={val => setGroupName(val)}
           />
-
         </View>
 
         <View
@@ -128,7 +132,7 @@ export default function AddGroup(props) {
         >
           <TouchableOpacity
             style={styles.Button}
-            onPress={() => createGroup()}
+            onPress={() => createPrivateGroup()}
             isLoading={isLoading}
           >
             <Text
@@ -139,7 +143,24 @@ export default function AddGroup(props) {
                 fontWeight: "600"
               }}
             >
-              Create Group
+              Create Private Group
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => createPublicGroup()}
+            isLoading={isLoading}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                textAlign: "center",
+                color: "white",
+                fontWeight: "600"
+              }}
+            >
+              Create Public Group
             </Text>
           </TouchableOpacity>
         </View>
@@ -162,9 +183,10 @@ const styles = StyleSheet.create({
   },
   Button: {
     backgroundColor: "#147efb",
-    padding: 15,
+    paddingVertical: 15,
     borderRadius: 30,
-    width: "100%"
+    width: "100%",
+    marginVertical: 20
   },
   HaveAccount: {
     color: "white",

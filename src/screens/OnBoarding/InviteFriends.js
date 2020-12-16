@@ -31,8 +31,8 @@ export default function App({ ...props }) {
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/icondark.png")}
-          style={{ width: 80, height: 80 }}
+          source={require("../../../assets/logo-outline.png")}
+          style={{ width: 150, height: 150 }}
         />
       </View>
 
@@ -40,46 +40,37 @@ export default function App({ ...props }) {
         <Text style={styles.Stockchat}> INVITE FRIENDS</Text>
       </View>
       <View>
-        <Text style={styles.username}>
-          Usernames will be tagged in messages and shown inside your chats.
-        </Text>
+        <TouchableOpacity>
+          <Text style={styles.username}>
+            https://share.stockchatapp.com/invite=usernamefdhh5
+          </Text>
+        </TouchableOpacity>
       </View>
 
-      <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
-        <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
-          <Input
-            //einputContainerStyle={{ borderBottomWidth: 0 }}
-            style={styles.Input}
-            placeholder="Username"
-            placeholderTextColor="lightgrey"
-          />
-        </View>
-
-        <View
-          style={{
-            paddingHorizontal: 10,
-            top: 50,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
+      <View
+        style={{
+          paddingHorizontal: 10,
+          top: 50,
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <TouchableOpacity
+          style={styles.Button}
+          //onPress={() => props.navigation.push("Notification")}
         >
-          <TouchableOpacity
-            style={styles.Button}
-            onPress={() => props.navigation.push("Notification")}
+          <Text
+            style={{
+              fontSize: 18,
+              textAlign: "center",
+              color: "white",
+              fontWeight: "600"
+            }}
           >
-            <Text
-              style={{
-                fontSize: 18,
-                textAlign: "center",
-                color: "white",
-                fontWeight: "600"
-              }}
-            >
-              Continue
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
+            Share Link
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -116,8 +107,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: "black",
     textAlign: "center",
-    fontSize: 15,
-    padding: 18
+    fontSize: 20,
+    padding: 18,
+    fontWeight: "800"
   },
   Input: {
     borderBottomWidth: 0,

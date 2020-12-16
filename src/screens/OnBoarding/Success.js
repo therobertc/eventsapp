@@ -31,7 +31,7 @@ export default function App({ ...props }) {
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/icondark.png")}
+          source={require("../../../assets/logo-outline.png")}
           style={{ width: 80, height: 80 }}
         />
       </View>

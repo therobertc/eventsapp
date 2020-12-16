@@ -26,6 +26,8 @@ import StockGroupCard from "../components/StockGroupCard";
 const Chat = props => {
   const isVisible = useIsFocused();
   const [groups, setGroups] = useState([]);
+  const [publicgroups, setpublicgroups] = useState([]);
+
   const [Chatheads, setChatheads] = useState([]);
 
   useEffect(() => {
@@ -35,10 +37,29 @@ const Chat = props => {
   }, [isVisible]);
 
   function getChats() {
-    var UserId = fire.auth().currentUser.uid;
     const db = firestore;
     var groupArray = [];
+    var pubgroupArray = [];
+
     var ChatHeadsArr = [];
+    var UserId = fire.auth().currentUser.uid;
+
+    db.collection("publicgroups").onSnapshot(function(snapshot) {
+      snapshot.docChanges().forEach(function(change) {
+        if (change.type == "added") {
+          console.log("New Group: ", change.doc.data());
+          pubgroupArray.push(change.doc.data());
+        }
+        if (change.type === "modified") {
+          console.log("Modified Group: ", change.doc.data());
+        }
+        if (change.type === "removed") {
+          console.log("Removed Group", change.doc.data());
+        }
+
+        setpublicgroups(pubgroupArray);
+      });
+    });
 
     db.collection("users")
       .doc(UserId)
@@ -101,16 +122,16 @@ const Chat = props => {
           <Text style={styles.header}>Trending Stocks</Text>
           <View>
             <TouchableOpacity
-            // onPress={() => props.navigation.navigate("AddGroup")}
+              style={styles.invite}
+              onPress={() => props.navigation.navigate("InviteFriends")}
             >
-              <Feather name="search" size={30} color="black" />
+              <Feather name="user-plus" size={20} color="white" />
+              <Text style={{ color: "white" }}> Invite </Text>
             </TouchableOpacity>
           </View>
         </View>
 
         <TrendingStocks></TrendingStocks>
-
-        {/* <View style={styles.ops}> */}
 
         <View style={styles.col}>
           <Text style={styles.header}> Stock Chats</Text>
@@ -160,99 +181,97 @@ const Chat = props => {
             msg="This stock is trending"
           ></StockGroupCard>
         </View>
-
         <View style={styles.col}>
-          <Text style={styles.header2}>Direct Messages</Text>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("CreateChat")}
-          >
-            <AntDesign name="pluscircleo" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-
-        <FlatList
-          data={Chatheads}
-          keyExtractor={(item, index) => "key" + index}
-          renderItem={({ item }) => {
-            console.log("FLAAAAAAAAAATIST ==>", item);
-            const name = item.name;
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate("ChatRoom", {
-                    name: item.name,
-                    uid: item.uid,
-                    title: item.name
-                  });
-                }}
-              >
-                <Messages item={name}></Messages>
-                <View style={styles.seperator}></View>
-              </TouchableOpacity>
-            );
-          }}
-        ></FlatList>
-        <View style={styles.col}>
-          <Text style={styles.header2}>Trading Groups</Text>
+          <Text style={styles.header2}>Public Groups</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
             <AntDesign name="pluscircleo" size={24} color="black" />
           </TouchableOpacity>
         </View>
+        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+          <FlatList
+            data={publicgroups}
+            keyExtractor={(item, index) => "key" + index}
+            renderItem={({ item }) => {
+              const name = item.groupName;
 
-        {/* {groups.map((items, x) => {
-          return <StockGroupCard key={x}
-            ticker={items.groupName}
-            // pctchange=""
-            onPress={() => {
-              props.navigation.navigate("StockChat", {
-                itemName: "$NET",
-                itemPic: "https://i.stack.imgur.com/l60Hf.png"
-              });
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    props.navigation.navigate("Discussion", {
+                      item
+                    });
+                  }}
+                >
+                  <Messages item={name}></Messages>
+                </TouchableOpacity>
+              );
             }}
-            msg="Last message appear here..."
-          ></StockGroupCard>
-        })} */}
+          ></FlatList>
+        </View>
 
-        <FlatList
-          data={groups}
-          keyExtractor={(item, index) => "key" + index}
-          renderItem={({ item }) => {
-            console.log("FLAAAAAAAAAATIST ==>", item);
-            const name = item.GroupName;
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate("GroupChat", {
-                    groupName: name
-                  });
-                }}
-              >
-                <Messages item={name}></Messages>
-                <View style={styles.seperator}></View>
-              </TouchableOpacity>
-            );
-          }}
-        ></FlatList>
-
-        {/* {Chatheads.map((items, x) => {
-          const name = items.name
-          return <TouchableOpacity
-            key={x}
-            onPress={() => {
-              props.navigation.navigate("ChatRoom", {
-                name: items.name,
-                uid: items.uid,
-                title: items.name
-              });
-            }}
+        <View style={styles.col}>
+          <Text style={styles.header}>Direct Messages</Text>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("CreateChat")}
           >
-            <Messages item={name}></Messages>
-            <View style={styles.seperator}></View>
+            <AntDesign name="pluscircleo" size={24} color="black" />
           </TouchableOpacity>
+        </View>
+        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+          <FlatList
+            data={Chatheads}
+            keyExtractor={(item, index) => "key" + index}
+            renderItem={({ item }) => {
+              console.log("FLAAAAAAAAAATIST ==>", item);
+              const name = item.name;
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    props.navigation.navigate("ChatRoom", {
+                      name: item.name,
+                      uid: item.uid,
+                      title: item.name
+                    });
+                  }}
+                >
+                  <Messages item={name}></Messages>
+                </TouchableOpacity>
+              );
+            }}
+          ></FlatList>
+        </View>
 
-        })} */}
+        <View style={styles.col}>
+          <Text style={styles.header2}>Private Groups</Text>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("AddGroup")}
+          >
+            <AntDesign name="pluscircleo" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+          <FlatList
+            data={groups}
+            keyExtractor={(item, index) => "key" + index}
+            renderItem={({ item }) => {
+              console.log("FLAAAAAAAAAATIST ==>", item);
+              const name = item.GroupName;
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    props.navigation.navigate("GroupChat", {
+                      groupName: name
+                    });
+                  }}
+                >
+                  <Messages item={name}></Messages>
+                </TouchableOpacity>
+              );
+            }}
+          ></FlatList>
+        </View>
       </ScrollView>
     </View>
     // </View>
@@ -305,14 +324,14 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_800ExtraBold",
     color: "#000",
     flex: 1,
-    fontSize: 24
+    fontSize: 20
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#000",
     flex: 1,
-    fontSize: 24,
-    paddingBottom: 10
+    fontSize: 20
+    //paddingVertical: 10
   },
   proContainer: {
     marginRight: -20,
@@ -326,9 +345,18 @@ const styles = StyleSheet.create({
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },
+  invite: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#147efb",
+    borderRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 5
+  },
   col: {
     flexDirection: "row",
-    marginTop: 10,
+    //marginTop: 25,
     marginHorizontal: 20,
     alignItems: "center"
   },

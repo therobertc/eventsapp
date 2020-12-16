@@ -15,13 +15,12 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useIsFocused } from "@react-navigation/native";
 
-
 export default function Signup({ route, navigation }) {
   // const [displayName, setdisplay] = useState();
   const [email, setEmail] = useState();
   const [password, setPass] = useState();
   const [isLoading, setLoading] = useState(false);
-  const {username, phoneNo} = route.params;
+  const { username, phoneNo } = route.params;
   const isVisible = useIsFocused();
 
   useEffect(() => {
@@ -30,59 +29,63 @@ export default function Signup({ route, navigation }) {
     }
   }, [isVisible]);
 
-  function AuthUser(){
-    fire.auth().onAuthStateChanged(function(user){
-      if(user){
-        navigation.navigate("Chat")
+  function AuthUser() {
+    fire.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        navigation.navigate("Chat");
+      } else {
       }
-      else{
-
-      }
-    })
+    });
   }
 
   const registerUser = () => {
-    console.log(email)
-    if (email !== "" && email !== undefined && password !== "" && password !== undefined) {
+    console.log(email);
+    if (
+      email !== "" &&
+      email !== undefined &&
+      password !== "" &&
+      password !== undefined
+    ) {
       setLoading(true);
       fire
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(res => {
-          firestore.collection("users").doc(res.user.uid).set({
-            id: res.user.uid,
-            Name: username,
-            email: email,
-            phoneNo : phoneNo
-          }).then(() => {
-            res.user.updateProfile({
-              displayName: username,
+          firestore
+            .collection("users")
+            .doc(res.user.uid)
+            .set({
+              id: res.user.uid,
+              Name: username,
+              email: email,
+              phoneNo: phoneNo
             })
-            alert("User registered succesfully")
-            setLoading(false);
-            // setdisplay("");
-            setEmail("");
-            setPass("");
-            navigation.navigate("Chat");
-
-          })
-          .catch(error => alert(error.message));
+            .then(() => {
+              res.user.updateProfile({
+                displayName: username
+              });
+              alert("User registered succesfully");
+              setLoading(false);
+              // setdisplay("");
+              setEmail("");
+              setPass("");
+              navigation.navigate("Chat");
+            })
+            .catch(error => alert(error.message));
         })
         .catch(error => alert(error.message));
-    }
-    else {
-      alert("please fill all fields!!!")
+    } else {
+      alert("please fill all fields!!!");
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.tcontainer}>
-
         <View style={{ flexDirection: "row" }}>
           <Image
-            style={{ height: 60, width: 60 }}
-            source={require("../../assets/icondark.png")}
+            style={{ height: 100, width: 100 }}
+            source={require("../../assets/logo-outline.png")}
           ></Image>
 
           <Text style={styles.Stockchat}> Stock Chat</Text>
@@ -91,7 +94,6 @@ export default function Signup({ route, navigation }) {
         <Text style={styles.tHeading}>Create Account</Text>
 
         <View style={{ width: "100%", alignItems: "center", padding: 5 }}>
-
           {/* <TextInput
             style={styles.inputStyle}
             placeholder="Name"
@@ -115,9 +117,11 @@ export default function Signup({ route, navigation }) {
 
           <TouchableOpacity onPress={() => registerUser()}>
             <View style={styles.btn}>
-              <Text style={{ color: "white", fontSize: 19, fontWeight: "bold" }}>
+              <Text
+                style={{ color: "white", fontSize: 19, fontWeight: "bold" }}
+              >
                 Sign Up
-            </Text>
+              </Text>
             </View>
           </TouchableOpacity>
 
@@ -126,10 +130,9 @@ export default function Signup({ route, navigation }) {
             onPress={() => navigation.navigate("Login")}
           >
             Already Registered? Sign In
-        </Text>
+          </Text>
         </View>
       </View>
-
     </SafeAreaView>
   );
 }

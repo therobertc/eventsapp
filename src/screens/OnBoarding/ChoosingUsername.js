@@ -23,36 +23,36 @@ const DismissKeyboard = ({ children }) => (
 );
 
 export default function App({ route, navigation }) {
-  const [usersName, setUsersName] = useState([])
+  const [usersName, setUsersName] = useState([]);
   const [username, setusername] = useState();
 
-
   useEffect(() => {
-    fetchNames()
+    fetchNames();
   }, []);
 
   function fetchNames() {
-    firestore.collection("users").get().then(function (snapshot) {
-      var names = []
-      snapshot.forEach(anotherSnapshot => {
-        console.log("anotherSnapshot.data()", anotherSnapshot.data().Name)
-        for (var i = 0; i < anotherSnapshot.data.length; i++) {
-          names.push(anotherSnapshot.data().Name)
-        }
-        setUsersName(names)
-
-      })
-    })
+    firestore
+      .collection("users")
+      .get()
+      .then(function(snapshot) {
+        var names = [];
+        snapshot.forEach(anotherSnapshot => {
+          console.log("anotherSnapshot.data()", anotherSnapshot.data().Name);
+          for (var i = 0; i < anotherSnapshot.data.length; i++) {
+            names.push(anotherSnapshot.data().Name);
+          }
+          setUsersName(names);
+        });
+      });
   }
 
   function checkUserName() {
-    console.log("usersName *****", usersName)
+    console.log("usersName *****", usersName);
     if (username !== undefined && username !== "") {
       if (usersName.indexOf(username) > -1) {
-        Alert.alert("this username is not available.. Please try another one.")
-      }
-      else {
-        navigation.navigate("PhoneNumber", { username: username })
+        Alert.alert("this username is not available.. Please try another one.");
+      } else {
+        navigation.navigate("PhoneNumber", { username: username });
       }
       // var arraycontainname = usersName.indexOf(username) > -1;
 
@@ -62,9 +62,8 @@ export default function App({ route, navigation }) {
       // else{
       // Alert.alert("this username is not available.. Please try another one.")
       // }
-    }
-    else {
-      Alert.alert("Please enter user name")
+    } else {
+      Alert.alert("Please enter user name");
     }
   }
 
@@ -78,7 +77,7 @@ export default function App({ route, navigation }) {
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/icondark.png")}
+          source={require("../../../assets/logo-outline.png")}
           style={{ width: 80, height: 80 }}
         />
       </View>
@@ -101,7 +100,6 @@ export default function App({ route, navigation }) {
             placeholderTextColor="lightgrey"
             onChangeText={val => setusername(val)}
           />
-
         </View>
 
         <View

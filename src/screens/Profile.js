@@ -20,10 +20,8 @@ const Profile = props => {
     <View style={styles.container}>
       <View style={styles.col}>
         <Text style={styles.header}>Portfolio</Text>
-        <TouchableOpacity
-        // onPress={() => props.navigation.navigate("")}
-        >
-          <Feather name="bell" size={30} color="black" />
+        <TouchableOpacity onPress={() => props.navigation.navigate("Settings")}>
+          <Feather name="settings" size={30} color="black" />
         </TouchableOpacity>
       </View>
       <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
@@ -62,18 +60,42 @@ const Profile = props => {
             });
           }}
         ></StockGroupCard>
-          </View>
-      <TouchableOpacity onPress={() => {    firebase.auth().signOut().then(function(){
-       props.navigation.navigate('GetStarted')
-      });
-}}>
-          <View style={styles.btn}>
-            <Text style={{ color: "white", fontSize: 19, fontWeight: "bold" }}>
-              Logout 
-            </Text>
-          </View>
-        </TouchableOpacity>
-      
+      </View>
+      <View style={styles.col}>
+        <Text style={styles.header}>Trade History</Text>
+        {/* <TouchableOpacity onPress={() => props.navigation.navigate("Settings")}>
+          <Feather name="settings" size={30} color="black" />
+        </TouchableOpacity> */}
+      </View>
+      <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+        <StockGroupCard
+          ticker="$NET"
+          pctchange="BOUGHT"
+          onPress={() => {
+            props.navigation.navigate("StockChat", {
+              itemName: "$NET",
+              // itemId: item.id,
+              // itemName: item.login,
+              itemPic: "https://i.stack.imgur.com/l60Hf.png"
+            });
+          }}
+        ></StockGroupCard>
+      </View>
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => {
+          firebase
+            .auth()
+            .signOut()
+            .then(function() {
+              props.navigation.navigate("GetStarted");
+            });
+        }}
+      >
+        <Text style={{ color: "white", fontSize: 19, fontWeight: "bold" }}>
+          Logout
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -103,6 +125,16 @@ const styles = StyleSheet.create({
     top: 0,
     //paddingHorizontal: 20,
     paddingTop: 30
+  },
+  btn: {
+    borderRadius: 16,
+    //borderTopRightRadius: 0,
+    backgroundColor: "#147efb",
+    height: 80,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    marginHorizontal: 20
   },
   container: {
     height: "100%",
@@ -149,16 +181,6 @@ const styles = StyleSheet.create({
     //marginTop: 25,
     marginHorizontal: 20,
     alignItems: "center"
-  },
-  
-  btn: {
-    borderRadius: 16,
-    //borderTopRightRadius: 0,
-    backgroundColor: "#147efb",
-    height: 60,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20
   },
   stockchats: {
     //flexDirection: "row"

@@ -12,9 +12,7 @@ import { Entypo } from "@expo/vector-icons";
 import fire, { firestore } from "../../database/firebase";
 
 export default function App({ ...props }) {
-
   const [isUser, SetUser] = useState(false);
-
 
   return (
     <View style={styles.getStarted}>
@@ -28,8 +26,8 @@ export default function App({ ...props }) {
           }}
         >
           <Image
-            source={require("../../../assets/icondark.png")}
-            style={{ width: 80, height: 80 }}
+            source={require("../../../assets/logo-outline.png")}
+            style={{ width: 150, height: 150 }}
           />
         </View>
 
@@ -58,13 +56,13 @@ export default function App({ ...props }) {
           </Text>
         </TouchableOpacity>
 
-        <View style={{marginTop : 20}}>
+        <View style={{ marginTop: 20 }}>
           <Text
             style={styles.loginText}
             onPress={() => props.navigation.push("Login")}
           >
             Already Registered? Sign In
-        </Text>
+          </Text>
         </View>
         {/* <View>
           <TouchableOpacity onPress={() => props.navigation.push("Login")}>
@@ -117,7 +115,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginHorizontal: 40
   },
-  loginText : {
-    fontSize : 18
+  loginText: {
+    fontSize: 18
   }
 });

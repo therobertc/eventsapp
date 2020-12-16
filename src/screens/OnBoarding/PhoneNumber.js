@@ -21,11 +21,10 @@ const DismissKeyboard = ({ children }) => (
 );
 
 export default function App({ route, navigation }) {
-
-  const [phoneNo, setPhoneNo] = useState([])
+  const [phoneNo, setPhoneNo] = useState([]);
 
   const { username } = route.params;
-  console.log("RRRRRRRRRRRROUUUUUUUTE ==>", username)
+  console.log("RRRRRRRRRRRROUUUUUUUTE ==>", username);
   return (
     <View style={styles.getStarted}>
       <TouchableOpacity
@@ -36,7 +35,7 @@ export default function App({ route, navigation }) {
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/icondark.png")}
+          source={require("../../../assets/logo-outline.png")}
           style={{ width: 80, height: 80 }}
         />
       </View>
@@ -72,7 +71,12 @@ export default function App({ route, navigation }) {
         >
           <TouchableOpacity
             style={styles.Button}
-            onPress={() => navigation.navigate("VerifyPhoneNumber", { username: username, phoneNo: phoneNo })}
+            onPress={() =>
+              navigation.navigate("VerifyPhoneNumber", {
+                username: username,
+                phoneNo: phoneNo
+              })
+            }
           >
             <Text
               style={{
@@ -86,7 +90,12 @@ export default function App({ route, navigation }) {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("LinkPortfolio", { username: username, phoneNo: "" })}
+            onPress={() =>
+              navigation.navigate("LinkPortfolio", {
+                username: username,
+                phoneNo: ""
+              })
+            }
           >
             <Text style={styles.username}>Skip</Text>
           </TouchableOpacity>

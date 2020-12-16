@@ -21,7 +21,6 @@ const DismissKeyboard = ({ children }) => (
 );
 
 export default function App({ route, navigation }) {
-
   const { username, phoneNo } = route.params;
   return (
     <View style={styles.getStarted}>
@@ -33,7 +32,7 @@ export default function App({ route, navigation }) {
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/icondark.png")}
+          source={require("../../../assets/logo-outline.png")}
           style={{ width: 80, height: 80 }}
         />
       </View>
@@ -59,7 +58,12 @@ export default function App({ route, navigation }) {
         >
           <TouchableOpacity
             style={styles.Button}
-            onPress={() => navigation.navigate("SignUp", { username: username, phoneNo: phoneNo })}
+            onPress={() =>
+              navigation.navigate("SignUp", {
+                username: username,
+                phoneNo: phoneNo
+              })
+            }
           >
             <Text
               style={{
@@ -75,7 +79,12 @@ export default function App({ route, navigation }) {
 
           <View>
             <TouchableOpacity
-              onPress={() => navigation.navigate("SignUp", { username: username, phoneNo: phoneNo })}
+              onPress={() =>
+                navigation.navigate("SignUp", {
+                  username: username,
+                  phoneNo: phoneNo
+                })
+              }
             >
               <Text style={styles.username}>Skip</Text>
             </TouchableOpacity>
