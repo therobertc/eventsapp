@@ -8,7 +8,9 @@ import {
   Animated,
   TouchableOpacity,
   ScrollView,
-  Image, AsyncStorage
+  Share,
+  Image,
+  AsyncStorage
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Entypo from "@expo/vector-icons/Entypo";
@@ -114,6 +116,26 @@ const Chat = props => {
 
     // })
   }
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          "Join Stock Chat with my link and you'll get access to my trading groups https://stockchatapp.com"
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     // <LinearGradient colors={["#AAB8C2", "#FFF"]} style={styles.gradient}>
     <View style={styles.container}>
@@ -123,7 +145,9 @@ const Chat = props => {
           <View>
             <TouchableOpacity
               style={styles.invite}
-              onPress={() => props.navigation.navigate("InviteFriends")}
+              onPress={onShare}
+              title="Share"
+              //onPress={() => props.navigation.navigate("InviteFriends")}
             >
               <Feather name="user-plus" size={20} color="white" />
               <Text style={{ color: "white" }}> Invite </Text>

@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Dimensions,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Share
 } from "react-native";
 import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
@@ -19,6 +20,26 @@ const DismissKeyboard = ({ children }) => (
     {children}
   </TouchableWithoutFeedback>
 );
+
+const onShare = async () => {
+  try {
+    const result = await Share.share({
+      message:
+        "Let's talk about stocks, join my Stock Chat  https://stockchatapp.com"
+    });
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // shared with activity type of result.activityType
+      } else {
+        // shared
+      }
+    } else if (result.action === Share.dismissedAction) {
+      // dismissed
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+};
 
 export default function App({ ...props }) {
   return (
@@ -57,6 +78,8 @@ export default function App({ ...props }) {
       >
         <TouchableOpacity
           style={styles.Button}
+          onPress={onShare}
+          title="Share"
           //onPress={() => props.navigation.push("Notification")}
         >
           <Text
