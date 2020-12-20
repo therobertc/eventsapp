@@ -34,25 +34,11 @@ var itm = [];
 export default function ChatRoom({ route, navigation }) {
   const [messages, setMessages] = useState([]);
   const [image, setImage] = useState(null);
-  const [username, setUsername] = useState("");
-
+  const [username, setUsername] = useState(fire.auth().currentUser.displayName);
+  const [userId, setUserId] = useState(fire.auth().currentUser.uid)
   const { name, uid } = route.params;
-  console.log(name, uid);
 
   useEffect(() => {
-    var UserId = fire.auth().currentUser.uid;
-    console.log("hello", fire.auth().currentUser.email);
-    firestore
-      .collection("profile")
-      .where("email", "==", fire.auth().currentUser.email)
-      .get()
-      .then(data => {
-        data.forEach(doc => {
-          setUsername(doc.id);
-          console.log(doc.id, "=>", doc.data());
-        });
-      });
-
     const unsubscribeListener = firestore
       .collection("users")
       .doc(UserId)
@@ -63,17 +49,14 @@ export default function ChatRoom({ route, navigation }) {
       .onSnapshot(querySnapshot => {
         const messages = querySnapshot.docs.map(doc => {
           const firebaseData = doc.data();
-
           const data = {
             _id: doc.id,
             text: "",
             createdAt: new Date().getTime(),
             ...firebaseData
           };
-
           return data;
         });
-
         setMessages(messages);
       });
 
@@ -97,7 +80,7 @@ export default function ChatRoom({ route, navigation }) {
   };
 
   const uploadImage = async uri => {
-    // var _ = this;
+
     const response = await fetch(uri);
     const blob = await response.blob();
     var ref = fire
@@ -106,18 +89,16 @@ export default function ChatRoom({ route, navigation }) {
       .child(new Date().toDateString());
     ref
       .put(blob)
-
       .then(result => {
         result.ref.getDownloadURL().then(url => {
-          console.log(url);
           const message = [
             {
               _id: new Date().toUTCString(),
               image: url,
               createdAt: new Date(),
               user: {
-                _id: 1,
-                name: "React Native",
+                _id: userId,
+                name: username,
                 avatar: "https://placeimg.com/140/140/any"
               }
             }
@@ -127,8 +108,6 @@ export default function ChatRoom({ route, navigation }) {
           var newPostKey = ref.id;
           for (var i = 0; i < message.length; i++) {
             if (message[i].image) {
-              console.log("true");
-
               firestore
                 .collection("users")
                 .doc(UserId)
@@ -161,7 +140,8 @@ export default function ChatRoom({ route, navigation }) {
                   createdAt: message[i].createdAt.toUTCString(),
                   image: message[i].image,
                   user: {
-                    _id: 1
+                    _id: userId,
+                    name:username
                   }
                 });
 
@@ -177,8 +157,9 @@ export default function ChatRoom({ route, navigation }) {
                   createdAt: message[i].createdAt.toUTCString(),
                   image: message[i].image,
                   user: {
-                    _id: 2,
-                    avatar: fire.auth().currentUser.photoURL
+                    _id: userId,
+                    avatar: fire.auth().currentUser.photoURL,
+                      name:username
                   }
                 });
             } else {
@@ -229,7 +210,7 @@ export default function ChatRoom({ route, navigation }) {
           createdAt: newMessage[i].createdAt.toUTCString(),
           text: newMessage[i].text,
           user: {
-            _id: 1,
+            _id: userId,
             name: name
           }
         });
@@ -246,7 +227,7 @@ export default function ChatRoom({ route, navigation }) {
           createdAt: newMessage[i].createdAt.toUTCString(),
           text: newMessage[i].text,
           user: {
-            _id: 2,
+            _id: userId,
             name: username
           }
         });
@@ -323,11 +304,10 @@ export default function ChatRoom({ route, navigation }) {
         <GiftedChat
           isAnimated={true}
           renderAccessory={CustomView}
-          // renderSend={this.SendBtn}
           messages={messages}
           onSend={newMessages => onSend(newMessages)}
           user={{
-            _id: 1,
+            _id: userId,
             name: username
           }}
         />

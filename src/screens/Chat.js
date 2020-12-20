@@ -19,10 +19,8 @@ import Messages from "../components/Messages";
 import TrendingStocks from "../components/TrendingStocks";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-
 import AddGroup from "./Sub/AddGroup";
 import fire, { firestore } from "../database/firebase";
-
 import StockGroupCard from "../components/StockGroupCard";
 
 const Chat = props => {
@@ -68,15 +66,13 @@ const Chat = props => {
       .collection("Groups")
       .onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(change) {
-          console.log("New Group: ", change.doc.data());
+          // console.log("New Group: ", change.doc.data());
           // for (var i = 0; i < change.doc.data.length; i++) {
           //   groupArray.push({
           //     GroupName: change.doc.data().GroupName[i]
           //   })
           // }
-
           groupArray.push(change.doc.data());
-
           setGroups(groupArray);
         });
       });
@@ -95,7 +91,6 @@ const Chat = props => {
               uid: anotherSnapshot.doc.data().uid
             });
           }
-
           setChatheads(ChatHeadsArr);
         });
       });
@@ -136,8 +131,8 @@ const Chat = props => {
       alert(error.message);
     }
   };
+
   return (
-    // <LinearGradient colors={["#AAB8C2", "#FFF"]} style={styles.gradient}>
     <View style={styles.container}>
       <ScrollView style={styles.col2}>
         <View style={styles.headerContainer}>
@@ -177,7 +172,7 @@ const Chat = props => {
               });
             }}
             msg="This stock is trending"
-          ></StockGroupCard>
+          />
           <StockGroupCard
             ticker="$SQ"
             pctchange="+4.55%"
@@ -190,7 +185,7 @@ const Chat = props => {
               });
             }}
             msg="This stock is trending"
-          ></StockGroupCard>
+          />
           <StockGroupCard
             ticker="$NET"
             pctchange="+3.521%"
@@ -203,7 +198,7 @@ const Chat = props => {
               });
             }}
             msg="This stock is trending"
-          ></StockGroupCard>
+          />
         </View>
         <View style={styles.col}>
           <Text style={styles.header2}>Public Groups</Text>
@@ -232,7 +227,7 @@ const Chat = props => {
                 </TouchableOpacity>
               );
             }}
-          ></FlatList>
+          />
         </View>
 
         <View style={styles.col}>
@@ -264,7 +259,7 @@ const Chat = props => {
                 </TouchableOpacity>
               );
             }}
-          ></FlatList>
+          />
         </View>
 
         <View style={styles.col}>
@@ -280,7 +275,7 @@ const Chat = props => {
             data={groups}
             keyExtractor={(item, index) => "key" + index}
             renderItem={({ item }) => {
-              console.log("FLAAAAAAAAAATIST ==>", item);
+              // console.log("FLAAAAAAAAAATIST ==>", item);
               const name = item.GroupName;
               return (
                 <TouchableOpacity
@@ -294,12 +289,11 @@ const Chat = props => {
                 </TouchableOpacity>
               );
             }}
-          ></FlatList>
+          />
         </View>
       </ScrollView>
     </View>
-    // </View>
-    // </LinearGradient>
+
   );
 };
 export default Chat;

@@ -65,10 +65,6 @@ export default function Signup({ route, navigation }) {
                 displayName: username
               });
               alert("User registered succesfully");
-              setLoading(false);
-              // setdisplay("");
-              setEmail("");
-              setPass("");
               navigation.navigate("Chat");
             })
             .catch(error => alert(error.message));

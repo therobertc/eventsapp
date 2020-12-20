@@ -15,7 +15,8 @@ import firebase, {firestore} from "../../database/firebase";
 export default function App({ ...props }) {
 
     const [password, setPassword] = useState("")
-
+    const [userId, setUserId] = useState("");
+    console.log("hellocerferferf");
     const _signUp = () =>{
         if(password === undefined || password === null || password.trim() === ""){
             alert("Password can't be blank!!.");
@@ -25,15 +26,34 @@ export default function App({ ...props }) {
         let phone = props.route.params.phone;
         let username = props.route.params.username.toLowerCase();
         firebase.auth().createUserWithEmailAndPassword(email, password.trim()).then(user=>{
+            user.user.updateProfile({
+                displayName: username
+            });
+            setUserId(user.user.uid);
+            var user_id = user.user.uid;
             firestore.collection("profile").doc(username).set({
                 email: email,
                 phone: phone,
                 username:username,
-                password: password
-            }).then((data)=>{
-                props.navigation.push("Notification", {username:username});
+                password: password,
+                user_id: user_id
+            }).then((res)=>{
+                console.log("result is", res);
+                firestore
+                    .collection("users")
+                    .doc(user_id)
+                    .set({
+                        id: user_id,
+                        Name: username,
+                        email: email,
+                        phoneNo: phone
+                    })
+                    .then(() => {
+                        alert("User registered succesfully");
+                        props.navigation.push("Notification", {username:username});
+                    })
+                    .catch(error => alert(error.message))
             }).catch(error=> alert(error.message))
-
         }).catch(error=> alert(error.message));
     }
 
@@ -41,7 +61,7 @@ export default function App({ ...props }) {
         <View style={styles.getStarted}>
             <TouchableOpacity
                 style={{ position: "absolute", top: 50, left: 20 }}
-                onPress={() => props.navigation.goBack()}
+                onPress={() =>{}}
             >
                 <AntDesign style={styles.back} name="left" size={30} color="black" />
             </TouchableOpacity>

@@ -50,8 +50,8 @@ export default function App({ ...props }) {
         );
       }
       await Notifications.getExpoPushTokenAsync()
-        .then(token => {
-          firestore
+        .then(async token => {
+          await firestore
             .collection("profile")
             .doc(props.route.params.username)
             .set({ token: token }, { merge: true });
