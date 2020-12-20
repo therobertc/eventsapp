@@ -1,80 +1,166 @@
 import React, { useState, useEffect, useRef } from "react";
 
-import { Text, StyleSheet, View, Image, TouchableOpacity, ScrollView, Alert, Button, FlatList } from 'react-native';
-import { Ionicons, Entypo, EvilIcons, FontAwesome, AntDesign, MaterialCommunityIcons, Feather } from '@expo/vector-icons';
+import {
+  Text,
+  StyleSheet,
+  View,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  Button,
+  FlatList
+} from "react-native";
+import {
+  Ionicons,
+  Entypo,
+  EvilIcons,
+  FontAwesome,
+  AntDesign,
+  MaterialCommunityIcons,
+  Feather
+} from "@expo/vector-icons";
 import fire, { firestore } from "../database/firebase";
 
 var itm = [];
 
 export default function CreateMsg({ navigation }) {
+  const [isloading, setloading] = useState(true);
+  const [AllUsers, SetUsers] = useState([]);
 
-    const [isloading, setloading] = useState(true);
-    const [AllUsers, SetUsers] = useState([])
+  useEffect(() => {
+    isloading && fetchedUsers();
+  });
 
-    useEffect(() => {
-        isloading && fetchedUsers()
-    })
+  function fetchedUsers() {
+    var items = [];
 
-    function fetchedUsers() {
+    firestore
+      .collection("users")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(anotherSnapshot => {
+          if (anotherSnapshot.data().id === fire.auth().currentUser.uid) {
+            console.log("Current user profile");
+          } else {
+            items.push({
+              id: anotherSnapshot.data().id,
+              Name: anotherSnapshot.data().Name,
+              email: anotherSnapshot.data().email
+            });
+          }
+        });
+      })
+      .then(() => {
+        SetUsers(items);
+        setloading(false);
+      });
+  }
 
-        var items = []
+  return (
+    <View
+      style={{ flex: 1, width: "100%", padding: 18, backgroundColor: "white" }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          height: 80,
+          //width: "100%",
+          //backgroundColor: "white",
+          alignItems: "center",
+          //justifyContent: "space-around",
+          paddingTop: 30,
+          marginBottom: 20
+        }}
+      >
+        <TouchableOpacity
+          // style={{ position: "absolute", top: 50, left: 20 }}
+          onPress={() => navigation.goBack()}
+        >
+          <AntDesign
+            name="left"
+            size={30}
+            color="black"
+            style={{ marginTop: 20 }}
+          />
+        </TouchableOpacity>
+        <Text
+          style={{
+            fontSize: 22,
+            fontWeight: "bold",
+            marginTop: 20,
+            paddingLeft: 30
+          }}
+        >
+          {/* {groupName} */}
+          Direct Messages
+        </Text>
+        <Entypo
+          name="info"
+          size={24}
+          color="white"
+          style={{ marginTop: 20 }}
+          //   onPress={() =>
+          //     navigation.navigate("GroupInfo", { groupName: groupName })
+          //   }
+        />
+      </View>
 
-        firestore.collection("users").get().then((snapshot) => {
-            snapshot.forEach((anotherSnapshot) => {
-                if (anotherSnapshot.data().id === fire.auth().currentUser.uid) {
-                    console.log("Current user profile")
-                }
-                else {
-                    items.push({
-                        id: anotherSnapshot.data().id,
-                        Name: anotherSnapshot.data().Name,
-                        email: anotherSnapshot.data().email
-                    })
-                }
-            })
-        }).then(() => {
-            SetUsers(items)
-            setloading(false)
-        })
-    }
-
-    return (
-        <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={{ flex: 1, width: '100%', padding: 18 }}>
-                {/* <Text>{"\n"}</Text> */}
-                <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                    <Text style={{ fontSize: 22, marginBottom: 15, fontWeight: "bold" }}>Select Receipent</Text>
-                    <TouchableOpacity>
-                        <Feather name="search" size={30} color="black" />
-                    </TouchableOpacity>
-                </View>
-                <FlatList
-                    data={AllUsers}
-                    keyExtractor={(item, index) => "key" + index}
-                    renderItem={({ item }) => {
-                        console.log("FLAAAAAAAAAATIST ==>", item)
-                        return (
-                            <TouchableOpacity
-                                onPress={() => {
-                                    navigation.navigate("ChatRoom", {
-                                        name: item.Name,
-                                        uid: item.id,
-                                        title: item.Name
-                                    })
-                                }}
-                            >
-                                <View style={{ flexDirection: "column" }} >
-                                    <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "flex-start", height: 60, marginBottom: 10 }}>
-                                        <Image style={{ borderRadius: 100, backgroundColor: 'black', width: 50, height: 50, alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "white" }} />
-                                        <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
-                                        <Text style={{ fontSize: 18, fontWeight: "bold" }}>{item.Name}</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                        );
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <FlatList
+          data={AllUsers}
+          keyExtractor={(item, index) => "key" + index}
+          renderItem={({ item }) => {
+            console.log("FLAAAAAAAAAATIST ==>", item);
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("ChatRoom", {
+                    name: item.Name,
+                    uid: item.id,
+                    title: item.Name
+                  });
+                }}
+              >
+                <View style={{ flexDirection: "column" }}>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                      height: 60,
+                      marginBottom: 10
                     }}
-                ></FlatList>
-            </View>
-        </ScrollView>
-    )
+                  >
+                    <Image
+                      //source={{ uri: uri }}
+                      style={{
+                        //flex: 1,
+                        height: 40,
+                        width: 40,
+                        borderRadius: 20,
+                        //borderWidth: 2,
+                        marginBottom: 0,
+                        marginRight: 5,
+                        borderColor: "#147efb"
+                        //alignSelf: "center",
+                        //marginTop: 15
+                      }}
+                      source={{
+                        url: "https://i.stack.imgur.com/l60Hf.png"
+                      }}
+                    />
+                    <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
+                    <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                      {item.Name}
+                    </Text>
+                  </View>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        ></FlatList>
+      </ScrollView>
+    </View>
+  );
 }
