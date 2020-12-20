@@ -41,9 +41,9 @@ export default function App({ ...props }) {
       if (finalStatus !== "granted") {
         Alert.alert(
           "Enable Notifications",
-          "Open your notification settings and turn on notifications for ChartBot",
+          "Open your notification settings and turn on notifications for StockChat",
           [
-            { text: "cancel", onPress: () => console.log("cancel") },
+            { text: "Cancel", onPress: () => console.log("cancel") },
             { text: "Allow", onPress: () => Linking.openURL("app-settings:") }
           ],
           { cancelable: false }

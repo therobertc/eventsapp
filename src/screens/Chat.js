@@ -121,7 +121,7 @@ const Chat = props => {
     try {
       const result = await Share.share({
         message:
-          "Join Stock Chat with my link and you'll get access to my trading groups https://stockchatapp.com"
+          "Download Stock Chat and join my trading group! https://stockchatapp.com"
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

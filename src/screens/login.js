@@ -65,12 +65,11 @@ export default function Login({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.tcontainer}>
+        <Image
+          style={{ height: 150, width: 150 }}
+          source={require("../../assets/logo-outline.png")}
+        ></Image>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Image
-            style={{ height: 100, width: 100 }}
-            source={require("../../assets/logo-outline.png")}
-          ></Image>
-
           <Text style={styles.Stockchat}> Stock Chat</Text>
         </View>
         <Text style={styles.tHeading}>Welcome Back</Text>
@@ -80,7 +79,8 @@ export default function Login({ navigation }) {
             padding: 15,
             width: "100%",
             alignItems: "center",
-            marginTop: 15
+            marginTop: 15,
+            paddingHorizontal: 40
           }}
         >
           <TextInput
@@ -100,7 +100,12 @@ export default function Login({ navigation }) {
           <TouchableOpacity onPress={() => userLogin()}>
             <View style={styles.btn}>
               <Text
-                style={{ color: "white", fontSize: 19, fontWeight: "bold" }}
+                style={{
+                  fontSize: 18,
+                  textAlign: "center",
+                  color: "white",
+                  fontWeight: "600"
+                }}
               >
                 Sign In
               </Text>
@@ -185,7 +190,8 @@ const styles = StyleSheet.create({
   tcontainer: {
     //backgroundColor: "#000",
     flex: 1,
-    justifyContent: "center",
+    paddingTop: 100,
+    //justifyContent: "center"
     alignItems: "center"
     // borderBottomLeftRadius: 30,
     // borderBottomRightRadius: 30
@@ -253,14 +259,11 @@ const styles = StyleSheet.create({
   },
   header: { alignItems: "center", padding: 30 },
   btn: {
-    borderRadius: 16,
-    //borderTopRightRadius: 0,
     backgroundColor: "#147efb",
-    height: 60,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 50,
-    width: 120
+    padding: 15,
+    borderRadius: 30,
+    width: 300,
+    marginTop: 30
   },
   Stockchat: {
     color: "#1E2429",

@@ -33,7 +33,7 @@ export default function App({ route, navigation }) {
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
           source={require("../../../assets/logo-outline.png")}
-          style={{ width: 80, height: 80 }}
+          style={{ width: 150, height: 150 }}
         />
       </View>
 

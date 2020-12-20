@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,7 +12,6 @@ import { Entypo } from "@expo/vector-icons";
 import firebase, { firestore } from "../../database/firebase";
 
 export default function App({ ...props }) {
-
   const [isUser, SetUser] = useState(false);
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function(user) {
@@ -23,64 +22,64 @@ export default function App({ ...props }) {
   }, []);
 
   return (
-      <View style={styles.getStarted}>
-        <View>
-          <View
-              style={{
-                display: "flex",
-                alignSelf: "center",
-                marginTop: 10,
-                marginBottom: 50
-              }}
-          >
-            <Image
-                source={require("../../../assets/icondark.png")}
-                style={{ width: 80, height: 80 }}
-            />
-          </View>
-
-          <View>
-            <Text style={styles.Stockchat}> Stock Chat</Text>
-          </View>
-
-          <View>
-            <Text style={styles.subtext}>Connect with investors</Text>
-          </View>
+    <View style={styles.getStarted}>
+      <View>
+        <View
+          style={{
+            display: "flex",
+            alignSelf: "center",
+            marginTop: 10,
+            marginBottom: 10
+          }}
+        >
+          <Image
+            source={require("../../../assets/logo-outline.png")}
+            style={{ width: 150, height: 150 }}
+          />
         </View>
-        <View>
-          <TouchableOpacity
-              style={styles.getstartedButton}
-              onPress={() => props.navigation.push("ChoosingUsername")}
-          >
-            <Text
-                style={{
-                  fontSize: 18,
-                  textAlign: "center",
-                  color: "white",
-                  fontWeight: "600"
-                }}
-            >
-              Get Started
-            </Text>
-          </TouchableOpacity>
 
-          <View style={{marginTop : 20}}>
-            <Text
-                style={styles.loginText}
-                onPress={() => props.navigation.push("Login")}
-            >
-              Already Registered? Sign In
-            </Text>
-          </View>
-          {/* <View>
+        <View>
+          <Text style={styles.Stockchat}> Stock Chat</Text>
+        </View>
+
+        <View>
+          <Text style={styles.subtext}>Connect with investors</Text>
+        </View>
+      </View>
+      <View>
+        <TouchableOpacity
+          style={styles.getstartedButton}
+          onPress={() => props.navigation.push("ChoosingUsername")}
+        >
+          <Text
+            style={{
+              fontSize: 18,
+              textAlign: "center",
+              color: "white",
+              fontWeight: "600"
+            }}
+          >
+            Get Started
+          </Text>
+        </TouchableOpacity>
+
+        <View style={{ marginTop: 20 }}>
+          <Text
+            style={styles.loginText}
+            onPress={() => props.navigation.push("Login")}
+          >
+            Already Registered? Sign In
+          </Text>
+        </View>
+        {/* <View>
           <TouchableOpacity onPress={() => props.navigation.push("Login")}>
             <Text style={styles.HaveAccount}>
               Already have an account? Sign In
             </Text>
           </TouchableOpacity>
         </View> */}
-        </View>
       </View>
+    </View>
   );
 }
 
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginHorizontal: 40
   },
-  loginText : {
-    fontSize : 18
+  loginText: {
+    fontSize: 18
   }
 });
