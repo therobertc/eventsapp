@@ -94,7 +94,7 @@ export default function AddMember({ route, navigation }) {
             GroupName: groupName,
             Creater_Uid: UserId,
             Creater_Name: fire.auth().currentUser.displayName,
-            Create_Date: new Date().toUTCString(),
+            Create_Date: new Date(),
             // Group_Icon: this.state.avatarSource
         }).then(() => {
             firestore.collection("users").doc(UserId).collection("Groups").doc(groupName).collection("Participents").doc("IDsofParticipants").set({
@@ -108,7 +108,7 @@ export default function AddMember({ route, navigation }) {
                     GroupName: groupName,
                     Creater_Uid: UserId,
                     Creater_Name: fire.auth().currentUser.displayName,
-                    Create_Date: new Date().toUTCString(),
+                    Create_Date: new Date(),
                     // Group_Icon: _.state.avatarSource
                 })
             }
@@ -174,7 +174,7 @@ export default function AddMember({ route, navigation }) {
                                 </TouchableOpacity>
                             );
                         }}
-                    ></FlatList>
+                    />
                 </View>
             </ScrollView>
             {selectedReceipents.length ? <TouchableOpacity onPress={() => CreateGroup()} style={{ height: 70, width: 70, backgroundColor: "black", position: "absolute", bottom: 45, right: 30, borderRadius: 100, justifyContent: "center", alignItems: "center" }}>

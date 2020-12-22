@@ -320,7 +320,7 @@ export default function AddMember({ route, navigation }) {
               </TouchableOpacity>
             );
           }}
-        ></FlatList>
+        />
       </ScrollView>
     </View>
   );

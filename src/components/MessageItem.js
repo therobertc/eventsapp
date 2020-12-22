@@ -1,31 +1,56 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import firebase, { firestore } from "./../database/firebase";
-import { LinearGradient } from "expo-linear-gradient";
 
-const MessageItem = ({ item, message }) => {
+
+
+function getTime(date) {
+
+  try {
+    date = date.toDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var newformat = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+    return hours + ':' + minutes + ' ' + newformat;
+  }catch(err) {
+    console.log(err);
+    return ""
+  }
+}
+
+
+const MessageItem = ({ item, image, message }) => {
   const userID = firebase.auth().currentUser.uid;
   function messageView() {
     if (userID === item.senderId) {
       return (
-        <View style={styles.SentContainer}>
-          <View style={styles.sentBubble}>
-            <Text style={styles.sentMessage}>{item.message}</Text>
+          <View style={styles.SentContainer}>
+            <View style={styles.sentBubble}>
+              <Text style={styles.sentMessage}>{item.message}</Text>
+            </View>
+            <View style={{flexDirection:"row", justifyContent:"space-separated"}}>
+              <Text style={styles.duration}>{item.username}</Text>
+              <Text style={styles.recievedDuration} >{(item.date_time !== undefined && item.date_time != null) ? getTime(item.date_time):""}</Text>
+            </View>
           </View>
-          <Text style={styles.duration}>{item.senderEmail}</Text>
-        </View>
       );
     } else {
       return (
-        <View style={styles.receivedContainer}>
-          {/* <Image source={{ uri: image }} style={styles.img} /> */}
-          <View>
-            <View style={styles.recievedBubble}>
-              <Text style={styles.message}>{item.message}</Text>
+          <View style={styles.receivedContainer}>
+            <Image source={{ uri: image }} style={styles.img} />
+            <View>
+              <View style={styles.recievedBubble}>
+                <Text style={styles.message}>{item.message}</Text>
+              </View>
+              <View style={{flexDirection:"row", justifyContent:"space-separated"}}>
+                <Text style={styles.recievedDuration}>{item.username}</Text>
+                <Text style={styles.recievedDuration} >{(item.date_time !== undefined && item.date_time != null) ? getTime(item.date_time):""}</Text>
+              </View>
             </View>
-            <Text style={styles.recievedDuration}>{item.senderEmail}</Text>
           </View>
-        </View>
       );
     }
   }

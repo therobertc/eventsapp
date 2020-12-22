@@ -81,15 +81,16 @@ export default function GroupChat({ route, navigation }) {
             .doc(UserId)
             .collection("Groups")
             .doc(groupName)
-            .collection("Messages").orderBy('createdAt')
+                .collection("Messages").orderBy('createdAt', "desc")
             .onSnapshot(querySnapshot => {
                 const messages = querySnapshot.docs.map(doc => {
-                    const firebaseData = doc.data();
-                    // console.log("FIREBBBBBBASEDATTTTA",doc.id)
+                    let firebaseData = doc.data();
+                    firebaseData.createdAt = firebaseData.createdAt.toDate().toUTCString();
+                    console.log("FIREBBBBBBASEDATTTTA",firebaseData)
                     const data = {
                         _id: doc.id,
                         text: "",
-                        createdAt: new Date().getTime(),
+                        createdAt: new Date().toUTCString(),
                         ...firebaseData
                     };
                     // console.log("DDDDDDDDDAAAAAAAAAAATTTTTTTTTTA", data)
@@ -160,7 +161,7 @@ export default function GroupChat({ route, navigation }) {
                                 .doc(newPostKey)
                                 .set({
                                     _id: message[i]._id,
-                                    createdAt: message[i].createdAt.toUTCString(),
+                                    createdAt: message[i].createdAt,
                                     image: message[i].image,
                                     user: {
                                         _id: UserId,
@@ -182,7 +183,7 @@ export default function GroupChat({ route, navigation }) {
                                     .doc(newPostKey)
                                     .set({
                                         _id: message[i]._id,
-                                        createdAt: message[i].createdAt.toUTCString(),
+                                        createdAt: message[i].createdAt,
                                         image: message[i].image,
                                         user: {
                                             _id: ParticipentsIDS[x],
@@ -216,7 +217,7 @@ export default function GroupChat({ route, navigation }) {
                 .doc(newPostKey)
                 .set({
                     _id: newMessage[i]._id,
-                    createdAt: newMessage[i].createdAt.toUTCString(),
+                    createdAt: newMessage[i].createdAt,
                     text: newMessage[i].text,
                     user: {
                         _id:1,
@@ -236,7 +237,7 @@ export default function GroupChat({ route, navigation }) {
                     .doc(newPostKey)
                     .set({
                         _id: newMessage[i]._id,
-                        createdAt: newMessage[i].createdAt.toUTCString(),
+                        createdAt: newMessage[i].createdAt,
                         text: newMessage[i].text,
                         user: {
                             _id: 2,
@@ -336,7 +337,7 @@ export default function GroupChat({ route, navigation }) {
                     onSend={newMessages => onSend(newMessages)}
                     user={{
                         _id: 1,
-                        name:fire.auth().currentUser
+                        name:fire.auth().currentUser.displayName
                     }}
                 />
             </KeyboardAvoidingView>
