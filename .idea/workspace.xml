@@ -31,13 +31,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33f01175-814c-468f-b495-1fed712fb675" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.expo/packager-info.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/packager-info.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MessageItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MessageItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Discussion.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Discussion.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Sub/AddGroup_Members.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Sub/AddGroup_Members.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/screens/Sub/GroupChat.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Sub/GroupChat.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/Sub/GroupInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/Sub/GroupInfo.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +95,7 @@
       <workItem from="1608133311680" duration="8116000" />
       <workItem from="1608525433655" duration="584000" />
       <workItem from="1608563920694" duration="628000" />
-      <workItem from="1608645041689" duration="6719000" />
+      <workItem from="1608645041689" duration="7977000" />
     </task>
     <servers />
   </component>

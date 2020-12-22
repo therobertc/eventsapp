@@ -139,7 +139,7 @@ export default function GroupChat({ route, navigation }) {
                             image: url,
                             createdAt: new Date(),
                             user: {
-                                _id: UserId,
+                                _id: 1,
                                 name: fire.auth().currentUser.displayName,
                                 avatar: "https://placeimg.com/140/140/any"
                             }
@@ -164,7 +164,7 @@ export default function GroupChat({ route, navigation }) {
                                     createdAt: message[i].createdAt,
                                     image: message[i].image,
                                     user: {
-                                        _id: UserId,
+                                        _id: 1,
                                         name: fire.auth().currentUser.displayName
                                     }
                                 });
@@ -186,7 +186,7 @@ export default function GroupChat({ route, navigation }) {
                                         createdAt: message[i].createdAt,
                                         image: message[i].image,
                                         user: {
-                                            _id: ParticipentsIDS[x],
+                                            _id: 2,
                                             // avatar: fire.auth().currentUser.photoURL,
                                             name: fire.auth().currentUser.displayName
                                         }
