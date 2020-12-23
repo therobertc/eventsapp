@@ -6,20 +6,16 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-  AsyncStorage
 } from "react-native";
-
-import * as Linking from "expo-linking";
 
 class TrendingStocks extends Component {
   constructor(props) {
     super(props);
-    // Analytics.ANALYTICS.track("Hompage", { Visited: "Currently on home page" });
     this.state = {
       data: [],
       isLoading: true,
       final_data: [],
-      isSubscribed: false
+      isSubscribed: true
     };
   }
 
@@ -31,9 +27,6 @@ class TrendingStocks extends Component {
     this.getTrandingData();
   }
 
-  handleRefresh = () => {
-    this.loadPage();
-  };
 
   async getTrandingData() {
     return fetch("https://sharestock.io/api/trendingStock", {
@@ -41,7 +34,6 @@ class TrendingStocks extends Component {
     })
       .then(response => response.json())
       .then(responseJson => {
-        // console.log("responseJson", responseJson);
         this.setState(
           {
             data: responseJson.data,
@@ -56,23 +48,18 @@ class TrendingStocks extends Component {
       });
   }
 
-  shuffleData() {
-    this.setState({
-      data: this.state.data.sort(() => Math.random() - 0.5)
-    });
-  }
 
-  TrendingComponent = (props, onPress) => {
+  TrendingComponent = () => {
     if (this.state.data.length) {
       return this.state.data.map((service, index) => (
         <TouchableOpacity
           key={index}
-          onPress={onPress}
-          // onPress={() =>
-          //   props.navigation.navigate("StockChat", {
-          //     // symbol: service.symbol
-          //   })
-          // }
+
+          onPress={() =>
+            this.props.navigation.push("StockDetails", {
+              symbol: service.symbol
+            })
+          }
           style={{ marginLeft: 10, borderRadius: 35 }}
         >
           <View
@@ -128,10 +115,6 @@ class TrendingStocks extends Component {
     }
   };
 
-  callBack = () => {
-    console.log("hello");
-  };
-
   render() {
     if (this.state.isLoading) {
       return (
@@ -154,9 +137,6 @@ class TrendingStocks extends Component {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             alignItems: "center"
-            // paddingStart: 5,
-            // paddingEnd: 5,
-            //paddingTop: 10
           }}
         >
           {this.TrendingComponent()}

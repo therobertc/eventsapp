@@ -142,7 +142,12 @@ function Discussion({ route, navigation }) {
                 date_time: new Date(),
             })
             .then(function(docRef) {
+                if(message.includes("$")&& isNaN(message.slice(1))){
+                    let s =  message.slice(1)
+                  navigation.push("StockDetails", {"symbol": s.trim().toUpperCase()})
+                }
                 setMessage("");
+
             })
             .catch(function(error) {
                 Alert.alert(error.message);

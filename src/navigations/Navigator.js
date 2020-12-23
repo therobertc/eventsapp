@@ -34,6 +34,8 @@ import fire, { firestore } from "../database/firebase";
 import { useLinkProps } from "@react-navigation/native";
 import Email from "../screens/OnBoarding/Email";
 import Password from "../screens/OnBoarding/Password";
+import StockDetails from "../components/StockDetails";
+import TrendingStocks from "../components/TrendingStocks";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -233,6 +235,16 @@ const ChatStackNavigator = () => {
                 name="Settings"
                 component={Settings}
                 options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="StockDetails"
+                component={StockDetails}
+                options={{ headerShown: true }}
+            />
+            <Stack.Screen
+                name="TrendingStocks"
+                component={TrendingStocks}
+                options={{ headerShown: true }}
             />
         </Stack.Navigator>
     );

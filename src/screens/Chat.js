@@ -31,6 +31,7 @@ const Chat = props => {
   const [Chatheads, setChatheads] = useState([]);
 
   useEffect(() => {
+    // props.navigation.push("StockDetails", {symbol:"TSLA"})
     if (isVisible) {
       getChats();
     }
@@ -56,7 +57,6 @@ const Chat = props => {
         if (change.type === "removed") {
           console.log("Removed Group", change.doc.data());
         }
-
         setpublicgroups(pubgroupArray);
       });
     });
@@ -66,12 +66,6 @@ const Chat = props => {
       .collection("Groups")
       .onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(change) {
-          // console.log("New Group: ", change.doc.data());
-          // for (var i = 0; i < change.doc.data.length; i++) {
-          //   groupArray.push({
-          //     GroupName: change.doc.data().GroupName[i]
-          //   })
-          // }
           groupArray.push(change.doc.data());
           setGroups(groupArray);
         });
@@ -94,22 +88,7 @@ const Chat = props => {
           setChatheads(ChatHeadsArr);
         });
       });
-    // var DBref = db.collection("users").doc(UserId);
-    // DBref.collection("ChatHeads").get().then(function (snapshot) {
 
-    //   snapshot.forEach((anotherSnapshot) => {
-    //     console.log("SNAPSHOT OF USER Chata ==>", anotherSnapshot.data())
-    //     // ChatHeadsArr.push(anotherSnapshot.data())
-    // for (var i = 0; i < snapshot.data.length; i++) {
-    //   ChatHeadsArr.push({
-    //     name: anotherSnapshot.data().name,
-    //     uid: anotherSnapshot.data().uid,
-    //   })
-    // }
-    //     setChatheads(ChatHeadsArr)
-    //   })
-
-    // })
   }
 
   const onShare = async () => {
@@ -150,7 +129,7 @@ const Chat = props => {
           </View>
         </View>
 
-        <TrendingStocks></TrendingStocks>
+        <TrendingStocks {...props}/>
 
         <View style={styles.col}>
           <Text style={styles.header}>Stock Chats</Text>
