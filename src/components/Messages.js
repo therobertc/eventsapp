@@ -28,7 +28,7 @@ const Messages = ({ item, uri }) => {
           alignItems: "center"
         }}
       >
-        <Image
+        {/* <Image
           source={{ uri: uri }}
           style={{
             //flex: 1,
@@ -45,17 +45,17 @@ const Messages = ({ item, uri }) => {
           source={{
             uri: "https://i.stack.imgur.com/l60Hf.png"
           }}
-        />
+        /> */}
         <View style={{ marginLeft: 10 }}>
           <Text style={styles.username}>#{item}</Text>
-          <Text style={styles.preview}>This group is trending</Text>
+          <Text style={styles.preview}>1,552 members </Text>
           {/* <Text style={styles.text}>{item.groupMembers}</Text> */}
         </View>
       </View>
 
-      <View>
+      {/* <View>
         <Text style={styles.duration}>{randomTime()}</Text>
-      </View>
+      </View> */}
     </View>
   );
 };

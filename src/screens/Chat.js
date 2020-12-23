@@ -88,7 +88,6 @@ const Chat = props => {
           setChatheads(ChatHeadsArr);
         });
       });
-
   }
 
   const onShare = async () => {
@@ -129,7 +128,7 @@ const Chat = props => {
           </View>
         </View>
 
-        <TrendingStocks {...props}/>
+        <TrendingStocks {...props} />
 
         <View style={styles.col}>
           <Text style={styles.header}>Stock Chats</Text>
@@ -140,7 +139,28 @@ const Chat = props => {
           </TouchableOpacity>
         </View>
         <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
-          <StockGroupCard
+          <TouchableOpacity
+            style={styles.btn}
+            // onPress={() => {
+            //   firebase
+            //     .auth()
+            //     .signOut()
+            //     .then(function() {
+            //       props.navigation.navigate("GetStarted");
+            //     });
+            // }}
+          >
+            <Text
+              style={{
+                color: "white",
+                fontSize: 19,
+                fontFamily: "Montserrat_700Bold"
+              }}
+            >
+              Connect Portfolio
+            </Text>
+          </TouchableOpacity>
+          {/* <StockGroupCard
             ticker="$TSLA"
             pctchange="+1.02%"
             onPress={() => {
@@ -177,10 +197,10 @@ const Chat = props => {
               });
             }}
             msg="This stock is trending"
-          />
+          /> */}
         </View>
         <View style={styles.col}>
-          <Text style={styles.header2}>Public Groups</Text>
+          <Text style={styles.header2}>Trading Groups</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
@@ -209,7 +229,36 @@ const Chat = props => {
           />
         </View>
 
-        <View style={styles.col}>
+        {/* <View style={styles.col}>
+          <Text style={styles.header2}>Private Groups</Text>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("AddGroup")}
+          >
+            <AntDesign name="pluscircleo" size={24} color="black" />
+          </TouchableOpacity>
+        </View>
+        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+          <FlatList
+            data={groups}
+            keyExtractor={(item, index) => "key" + index}
+            renderItem={({ item }) => {
+              // console.log("FLAAAAAAAAAATIST ==>", item);
+              const name = item.GroupName;
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    props.navigation.navigate("GroupChat", {
+                      groupName: name
+                    });
+                  }}
+                >
+                  <Messages item={name}></Messages>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </View> */}
+        {/* <View style={styles.col}>
           <Text style={styles.header}>Direct Messages</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("CreateChat")}
@@ -239,40 +288,9 @@ const Chat = props => {
               );
             }}
           />
-        </View>
-
-        <View style={styles.col}>
-          <Text style={styles.header2}>Private Groups</Text>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("AddGroup")}
-          >
-            <AntDesign name="pluscircleo" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
-          <FlatList
-            data={groups}
-            keyExtractor={(item, index) => "key" + index}
-            renderItem={({ item }) => {
-              // console.log("FLAAAAAAAAAATIST ==>", item);
-              const name = item.GroupName;
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    props.navigation.navigate("GroupChat", {
-                      groupName: name
-                    });
-                  }}
-                >
-                  <Messages item={name}></Messages>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </View>
+        </View> */}
       </ScrollView>
     </View>
-
   );
 };
 export default Chat;
@@ -285,6 +303,16 @@ const styles = StyleSheet.create({
     marginLeft: 400,
     width: 400,
     flexDirection: "row"
+  },
+  btn: {
+    borderRadius: 16,
+    //borderTopRightRadius: 0,
+    backgroundColor: "black",
+    height: 80,
+    alignItems: "center",
+    justifyContent: "center",
+    //marginTop: 20,
+    marginHorizontal: 10
   },
   seperator: {
     borderColor: "lightgrey",

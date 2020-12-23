@@ -12,6 +12,7 @@ import {
   KeyboardAvoidingView,
   FlatList
 } from "react-native";
+import firebase, { firestore } from "../database/firebase";
 
 import { Header, Left, Right, Body, Icon, Button } from "native-base";
 import { Feather } from "@expo/vector-icons";
@@ -19,8 +20,8 @@ import StockGroupCard from "../components/StockGroupCard";
 import ToggleSwitch from "../components/ToggleSwitch";
 
 class Settings extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       show: false,
       hide: true,
@@ -168,6 +169,22 @@ class Settings extends Component {
             </View>
           </View>
         </View>
+
+        <TouchableOpacity
+          style={styles.btn}
+          // onPress={() => {
+          //   firebase
+          //     .auth()
+          //     .signOut()
+          //     .then(function() {
+          //       this.props.navigate("GetStarted");
+          //     });
+          // }}
+        >
+          <Text style={{ color: "white", fontSize: 19, fontWeight: "bold" }}>
+            Logout
+          </Text>
+        </TouchableOpacity>
 
         {/* {this.state.hide ? (
           <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
@@ -326,5 +343,15 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     textAlign: "center"
     //fontFamily: "Montserrat_700Bold"
+  },
+  btn: {
+    borderRadius: 16,
+    //borderTopRightRadius: 0,
+    backgroundColor: "#147efb",
+    height: 80,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    marginHorizontal: 20
   }
 });

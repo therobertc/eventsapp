@@ -81,7 +81,7 @@ const Profile = props => {
           }}
         />
       </View>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.btn}
         onPress={() => {
           firebase
@@ -95,7 +95,7 @@ const Profile = props => {
         <Text style={{ color: "white", fontSize: 19, fontWeight: "bold" }}>
           Logout
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </ScrollView>
   );
 };
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_800ExtraBold",
     color: "#000",
     flex: 1,
-    fontSize: 24
+    fontSize: 20
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",

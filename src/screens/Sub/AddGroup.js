@@ -132,23 +132,6 @@ export default function AddGroup(props) {
         >
           <TouchableOpacity
             style={styles.Button}
-            onPress={() => createPrivateGroup()}
-            isLoading={isLoading}
-          >
-            <Text
-              style={{
-                fontSize: 18,
-                textAlign: "center",
-                color: "white",
-                fontWeight: "600"
-              }}
-            >
-              Create Private Group
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={styles.Button}
             onPress={() => createPublicGroup()}
             isLoading={isLoading}
           >
@@ -160,9 +143,35 @@ export default function AddGroup(props) {
                 fontWeight: "600"
               }}
             >
-              Create Public Group
+              Public Group
             </Text>
           </TouchableOpacity>
+          <View
+            style={styles.lockedButton}
+            // onPress={() => createPrivateGroup()}
+            isLoading={isLoading}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Feather name="lock" size={20} color="lightgrey" />
+              <Text
+                style={{
+                  fontSize: 18,
+                  textAlign: "center",
+                  color: "lightgrey",
+                  fontWeight: "600",
+                  paddingLeft: 20
+                }}
+              >
+                Private Group
+              </Text>
+            </View>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </View>
@@ -183,6 +192,13 @@ const styles = StyleSheet.create({
   },
   Button: {
     backgroundColor: "#147efb",
+    paddingVertical: 15,
+    borderRadius: 30,
+    width: "100%",
+    marginVertical: 20
+  },
+  lockedButton: {
+    backgroundColor: "grey",
     paddingVertical: 15,
     borderRadius: 30,
     width: "100%",
@@ -217,11 +233,12 @@ const styles = StyleSheet.create({
     //borderColor: "#3C4956",
     borderColor: "black",
     padding: 12,
-    paddingLeft: 30,
+    //paddingLeft: 30,
     color: "black",
     height: 50,
     fontSize: 21,
-    borderRadius: 30
+    borderRadius: 30,
+    textAlign: "center"
   },
   tcontainer: {
     //backgroundColor: "#000",
