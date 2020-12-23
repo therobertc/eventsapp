@@ -110,7 +110,7 @@ function Discussion({ route, navigation }) {
                 snapshot.docChanges().forEach(function(change) {
                     if (change.type === "added") {
                         // console.log("New Message: ", change.doc.data());
-                        messages.push(change.doc.data());
+                        messages.unshift(change.doc.data());
                     }
                     if (change.type === "modified") {
                         console.log("Modified Message", change.doc.data());
@@ -118,6 +118,7 @@ function Discussion({ route, navigation }) {
                     if (change.type === "removed") {
                         console.log("Removed Message:", change.doc.data());
                     }
+                    console.log("hello");
                     setMessageList(messages);
                 });
             });
@@ -163,6 +164,7 @@ function Discussion({ route, navigation }) {
                 </View>
 
                 <FlatList
+                    inverted
                     showsVerticalScrollIndicator={false}
                     style={styles.flatList}
                     data={messageList}
