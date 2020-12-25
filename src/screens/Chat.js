@@ -139,7 +139,7 @@ const Chat = props => {
           </TouchableOpacity>
         </View>
         <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.btn}
             // onPress={() => {
             //   firebase
@@ -159,7 +159,7 @@ const Chat = props => {
             >
               Connect Portfolio
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           {/* <StockGroupCard
             ticker="$TSLA"
             pctchange="+1.02%"
@@ -171,7 +171,7 @@ const Chat = props => {
               });
             }}
             msg="This stock is trending"
-          />
+          /> */}
           <StockGroupCard
             ticker="$SQ"
             pctchange="+4.55%"
@@ -185,7 +185,7 @@ const Chat = props => {
             }}
             msg="This stock is trending"
           />
-          <StockGroupCard
+          {/* <StockGroupCard
             ticker="$NET"
             pctchange="+3.521%"
             onPress={() => {
@@ -200,7 +200,7 @@ const Chat = props => {
           /> */}
         </View>
         <View style={styles.col}>
-          <Text style={styles.header2}>Trading Groups</Text>
+          <Text style={styles.header}>Trading Groups</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   header: {
-    fontFamily: "Montserrat_800ExtraBold",
+    fontFamily: "Montserrat_700Bold",
     color: "#000",
     flex: 1,
     fontSize: 20

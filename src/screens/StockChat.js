@@ -44,7 +44,12 @@ const StockChat = ({ route, navigation }) => {
             {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
 
             <TouchableOpacity
-              onPress={() => navigation.navigate("StockProfile")}
+              onPress={() =>
+                navigation.push("StockDetails", {
+                  symbol: "SQ"
+                })
+              }
+              //onPress={() => navigation.navigate("StockProfile")}
             >
               <Image
                 //source={require("../../images/tslalogo.png")}

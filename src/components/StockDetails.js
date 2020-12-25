@@ -18,6 +18,8 @@ import { Feather } from "@expo/vector-icons";
 const TOKEN = "pk_0db8d87dbdde49c5b215cd4ec559ed13";
 export const TEST_URL = "sandbox.iexapis.com/stable";
 const PROD_URL = "cloud.iexapis.com/stable";
+import ChartComp from "./ChartComp";
+
 
 function convert(number) {
     let num =
@@ -391,7 +393,7 @@ class StockDetails extends Component {
                         </View>
                         {this.state.sub_status ? (
                             <View>
-                                <Image
+                                {/* <Image
                                     style={{
                                         width: "100%",
                                         height: 350
@@ -403,8 +405,9 @@ class StockDetails extends Component {
                                             data.symbol +
                                             "&Type=3&Scale=0&IND=AreaRSI(14){U};VOLMA(60);&OVER=MA(13);MA(50);TCFast()&Skin=GreenRed&Size=520&RT=1&Start=20200601"
                                     }}
-                                />
-                                <View
+                                /> */}
+                                  <ChartComp symbol={data.symbol} />
+                                {/* <View
                                     style={{
                                         justifyContent: "space-between",
                                         display: "flex",
@@ -505,10 +508,10 @@ class StockDetails extends Component {
                                             Share
                                         </Text>
                                     </TouchableOpacity>
-                                </View>
+                                </View>*/}
                             </View>
                         ) : (
-                            <View />
+                        <View /> 
                         )}
                     </View>
                     {this.state.sub_status ? (
