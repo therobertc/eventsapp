@@ -155,7 +155,13 @@ function Discussion({ route, navigation }) {
             });
     }
 
-
+    const _navigateToStockDetails = (item) =>{
+        let message = item.message;
+        if(message.includes("$")&& isNaN(message.slice(1))){
+            let s =  message.slice(1)
+            navigation.push("StockDetails", {"symbol": s.trim().toUpperCase()})
+        }
+    }
 
     return (
         <KeyboardAvoidingView behavior="padding" enabled>
@@ -165,7 +171,6 @@ function Discussion({ route, navigation }) {
                         <Icon name="left" color="#000119" size={24} />
                     </TouchableOpacity>
                     <Text style={styles.username}>{item.groupName}</Text>
-                    {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
                 </View>
 
                 <FlatList
@@ -176,7 +181,7 @@ function Discussion({ route, navigation }) {
                     keyExtractor={(item, index) => "key" + index}
                     renderItem={({ item }) => {
                         return (
-                            <TouchableOpacity onPress={() => {}}>
+                            <TouchableOpacity onPress={() => _navigateToStockDetails(item)}>
                                 <MessageItem item={item} />
                             </TouchableOpacity>
                         );

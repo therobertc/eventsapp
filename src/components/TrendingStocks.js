@@ -44,7 +44,7 @@ class TrendingStocks extends Component {
       })
       .catch(error => {
         this.setState({ isLoading: false });
-        console.error(error);
+        console.log(error);
       });
   }
 
