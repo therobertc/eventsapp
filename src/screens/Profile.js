@@ -81,7 +81,7 @@ const Profile = props => {
           }}
         />
       </View>
-      {/* <TouchableOpacity
+      <TouchableOpacity
         style={styles.btn}
         onPress={() => {
           firebase
@@ -95,7 +95,7 @@ const Profile = props => {
         <Text style={{ color: "white", fontSize: 19, fontWeight: "bold" }}>
           Logout
         </Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </ScrollView>
   );
 };

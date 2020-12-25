@@ -2,55 +2,76 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import firebase, { firestore } from "./../database/firebase";
 
-
-
 function getTime(date) {
-
   try {
     date = date.toDate();
     var hours = date.getHours();
     var minutes = date.getMinutes();
-    var newformat = hours >= 12 ? 'PM' : 'AM';
+    var newformat = hours >= 12 ? "PM" : "AM";
     hours = hours % 12;
     hours = hours ? hours : 12;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-    return hours + ':' + minutes + ' ' + newformat;
-  }catch(err) {
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    return hours + ":" + minutes + " " + newformat;
+  } catch (err) {
     console.log(err);
-    return ""
+    return "";
   }
 }
-
 
 const MessageItem = ({ item, image, message }) => {
   const userID = firebase.auth().currentUser.uid;
   function messageView() {
     if (userID === item.senderId) {
       return (
-          <View style={styles.SentContainer}>
-            <View style={styles.sentBubble}>
-              <Text style={styles.sentMessage}>{item.message}</Text>
-            </View>
-            <View style={{flexDirection:"row", justifyContent:"space-separated"}}>
-              <Text style={styles.duration}>{item.username}</Text>
-              <Text style={styles.recievedDuration} >{(item.date_time !== undefined && item.date_time != null) ? getTime(item.date_time):""}</Text>
-            </View>
+        <View style={styles.SentContainer}>
+          <View style={styles.sentBubble}>
+            <Text style={styles.sentMessage}>{item.message}</Text>
           </View>
+          <View
+            style={{
+              flexDirection: "row",
+
+              justifyContent: "flex-end"
+            }}
+          >
+            <Text style={styles.duration}>{item.username}</Text>
+            <Text style={styles.duration}>
+              {item.date_time !== undefined && item.date_time != null
+                ? getTime(item.date_time)
+                : ""}
+            </Text>
+          </View>
+        </View>
       );
     } else {
       return (
-          <View style={styles.receivedContainer}>
-            <Image source={{ uri: image }} style={styles.img} />
-            <View>
-              <View style={styles.recievedBubble}>
-                <Text style={styles.message}>{item.message}</Text>
-              </View>
-              <View style={{flexDirection:"row", justifyContent:"space-separated"}}>
-                <Text style={styles.recievedDuration}>{item.username}</Text>
-                <Text style={styles.recievedDuration} >{(item.date_time !== undefined && item.date_time != null) ? getTime(item.date_time):""}</Text>
-              </View>
+        <View style={styles.receivedContainer}>
+          {/* <Image source={{ uri: image }} style={styles.img} /> */}
+          <Image
+            style={styles.img}
+            source={{
+              uri: "https://i.stack.imgur.com/l60Hf.png"
+            }}
+          />
+          <View>
+            <View style={styles.recievedBubble}>
+              <Text style={styles.message}>{item.message}</Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-start"
+              }}
+            >
+              <Text style={styles.recievedDuration}>{item.username}</Text>
+              <Text style={styles.recievedDuration}>
+                {item.date_time !== undefined && item.date_time != null
+                  ? getTime(item.date_time)
+                  : ""}
+              </Text>
             </View>
           </View>
+        </View>
       );
     }
   }
@@ -65,7 +86,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginTop: 5,
     fontFamily: "Montserrat_600SemiBold",
-    textAlign: "right"
+    textAlign: "right",
+    alignSelf: "flex-end"
   },
   recievedDuration: {
     color: "#b6b6b6",
@@ -77,31 +99,37 @@ const styles = StyleSheet.create({
   },
   receivedContainer: {
     flexDirection: "row",
-    marginTop: 20,
-    width: 250
+    marginTop: 10,
+    paddingRight: 20
+
+    //width: "auto"
   },
   SentContainer: {
     marginVertical: 15,
     alignSelf: "flex-end",
     borderRadius: 30
+    //width: "auto"
   },
   img: {
-    width: 40,
     height: 40,
+    width: 40,
     borderRadius: 20,
-    backgroundColor: "#000",
-    marginRight: 10
+    marginBottom: 0,
+    marginRight: 5,
+    borderColor: "#147efb"
   },
   message: {
-    fontSize: 14,
-    marginHorizontal: 15,
-    fontFamily: "Montserrat_700Bold"
+    fontSize: 15,
+    marginHorizontal: 5,
+    fontWeight: "500"
+    //fontFamily: "Montserrat_700Bold"
   },
   sentMessage: {
-    fontSize: 14,
-    marginHorizontal: 15,
-    fontFamily: "Montserrat_700Bold",
-    color: "#FFF"
+    fontSize: 15,
+    marginHorizontal: 5,
+    //fontFamily: "Montserrat_700Bold",
+    color: "#FFF",
+    fontWeight: "500"
   },
   sentBubble: {
     backgroundColor: "#147efb",
@@ -109,12 +137,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderBottomRightRadius: 5
+    //width: "auto"
   },
   recievedBubble: {
-    backgroundColor: "lightgrey",
+    backgroundColor: "#F5F8FA",
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 10,
-    borderBottomLeftRadius: 5
+    borderBottomLeftRadius: 5,
+    width: "auto",
+    marginRight: 25
   }
 });

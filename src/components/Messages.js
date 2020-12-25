@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10
   },
   preview: {
-    color: "#000119",
+    color: "#657786",
     //fontFamily: "Montserrat_300SemiBold",
     fontSize: 15,
     paddingLeft: 10
