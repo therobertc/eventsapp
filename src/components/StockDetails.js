@@ -9,16 +9,34 @@ import {
     ScrollView,
     AsyncStorage,
     Share,
-    Clipboard
+    Clipboard,
+   
 } from "react-native";
 import  DetailItem  from "./DetailItem";
 import axios from "axios";
-// import * as WebBrowser from "expo-web-browser";
+import * as WebBrowser from "expo-web-browser";
 import { Feather } from "@expo/vector-icons";
 const TOKEN = "pk_0db8d87dbdde49c5b215cd4ec559ed13";
 export const TEST_URL = "sandbox.iexapis.com/stable";
 const PROD_URL = "cloud.iexapis.com/stable";
 import ChartComp from "./ChartComp";
+import Feedback from "./Feedback";
+import {
+    Ionicons,
+    Entypo,
+    EvilIcons,
+    FontAwesome,
+    AntDesign,
+    MaterialCommunityIcons
+  } from "@expo/vector-icons";
+
+//   const Feedback = () => {
+//     const [showModal, setModal] = useState(false);
+//     const [isLoading, setLoading] = useState(false);
+//     useEffect(() => {}, [isLoading]);
+//     useEffect(() => {
+//       setLoading(true);
+//     }, []);
 
 
 function convert(number) {
@@ -131,6 +149,8 @@ class StockDetails extends Component {
             }
         });
     };
+
+    
 
     renderError = () => {
         return (
@@ -339,6 +359,7 @@ class StockDetails extends Component {
                 <View style={styles.card}>
                     <View style={{ paddingBottom: 1 }}>
                         <Text style={styles.heading}>Latest News</Text>
+                        <Feedback></Feedback>
                     </View>
                     {news.map((data, index) => {
                         return (
@@ -375,6 +396,57 @@ class StockDetails extends Component {
 
         return (
             <View style={styles.container}>
+    <View
+        style={{
+          flexDirection: "row",
+          //height: 80,
+          width: "100%",
+          
+          alignItems: "center",
+          paddingTop: 50,
+          paddingHorizontal: 20,
+          marginBottom: 10,
+        justifyContent: 'space-between'
+         
+        }}
+      >
+        <TouchableOpacity
+          // style={{ position: "absolute", top: 50, left: 20 }}
+          onPress={() => this.props.navigation.goBack()}
+        >
+          <AntDesign
+            name="left"
+            size={30}
+            color="black"
+            //style={{ marginTop: 20, marginLeft: 20 }}
+          />
+        </TouchableOpacity>
+        {/* <Text
+          style={{
+            marginLeft: 20,
+            fontSize: 20,
+            marginTop: 20,
+            fontWeight: "bold"
+          }}
+        >
+        Join Chat
+        </Text> */}
+        <TouchableOpacity
+              style={styles.invite}
+              onPress={() => {
+                this.props.navigation.navigate("StockChat", {
+                  // itemId: item.id,
+                  // itemName: item.login,
+                  itemPic: "https://i.stack.imgur.com/l60Hf.png",
+                  itemName: "$SQ"
+                });
+              }}
+           
+            >
+              <Feather name="message-circle" size={20} color="white" />
+              <Text style={{ color: "white", fontWeight: '500' }}> Join Chat </Text>
+            </TouchableOpacity>
+      </View>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                 >
@@ -869,7 +941,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: "#F5F8FA"
+        backgroundColor: "#F5F8FA",
         //paddingHorizontal: 20
     },
     card: {
@@ -992,7 +1064,16 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         marginTop: 10,
         marginBottom: 5
-    }
+    },
+    invite: {
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#147efb",
+        borderRadius: 30,
+        paddingHorizontal: 20,
+        paddingVertical: 5
+      },
 });
 
 export default StockDetails;

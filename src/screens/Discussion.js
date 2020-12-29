@@ -21,7 +21,9 @@ function Discussion({ route, navigation }) {
   const [messageList, setMessageList] = useState([]);
   const [message, setMessage] = useState("");
   const [isJoined, setIsJoined] = useState(false);
-  const [username, setUsername] = useState(firebase.auth().currentUser.displayName);
+  const [username, setUsername] = useState(
+    firebase.auth().currentUser.displayName
+  );
   const { item } = route.params;
   const userID = firebase.auth().currentUser.uid;
 
@@ -33,69 +35,69 @@ function Discussion({ route, navigation }) {
 
   function getUserJoinedAlreadyOrNot() {
     firestore
-        .collection("members")
-        .doc(item.groupID)
-        .collection("member")
-        .where("userID", "==", userID)
-        .get()
-        .then(function(querySnapshot) {
-          if (querySnapshot.size > 0) {
-            querySnapshot.forEach(function(doc) {
-              if (doc.data() != null) {
-                setIsJoined(true);
-              } else {
-                setIsJoined(false);
-                showAlertToJoinGroup();
-              }
-            });
-          } else {
-            showAlertToJoinGroup();
-          }
-        })
-        .catch(function(error) {
-          console.log("Error getting documents: ", error);
-        });
+      .collection("members")
+      .doc(item.groupID)
+      .collection("member")
+      .where("userID", "==", userID)
+      .get()
+      .then(function(querySnapshot) {
+        if (querySnapshot.size > 0) {
+          querySnapshot.forEach(function(doc) {
+            if (doc.data() != null) {
+              setIsJoined(true);
+            } else {
+              setIsJoined(false);
+              showAlertToJoinGroup();
+            }
+          });
+        } else {
+          showAlertToJoinGroup();
+        }
+      })
+      .catch(function(error) {
+        console.log("Error getting documents: ", error);
+      });
   }
 
   function showAlertToJoinGroup() {
     Alert.alert(
-        Strings.JoinChat,
-        Strings.JoinChatConfirmMessage,
-        [
-          {
-            text: "Yes",
-            onPress: () => {
-              joinGroup();
-            }
-          },
-          {
-            text: "No",
-            onPress: () => {}
+      Strings.JoinChat,
+      Strings.JoinChatConfirmMessage,
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+            joinGroup();
           }
-        ],
-        { cancelable: false }
+        },
+        {
+          text: "No",
+          onPress: () => {}
+        }
+      ],
+      { cancelable: false }
     );
   }
 
   function joinGroup() {
     const groupMemberRef = firestore
-        .collection("members")
-        .doc(item.groupID)
-        .collection("member")
-        .doc();
+      .collection("members")
+      .doc(item.groupID)
+      .collection("member")
+      .doc();
     groupMemberRef
-        .set({
-          userID: userID
-        })
-        .then(function(docRef) {
-          setIsJoined(true);
-          Alert.alert(Strings.joinMessage);
-          setMessage("");
-        })
-        .catch(function(error) {
-          setIsJoined(false);
-          Alert.alert(Strings.JoinGroupError);
-        });
+      .set({
+        userID: userID
+      })
+      .then(function(docRef) {
+        setIsJoined(true);
+        Alert.alert(Strings.joinMessage);
+        setMessage("");
+      })
+      .catch(function(error) {
+        setIsJoined(false);
+        Alert.alert(Strings.JoinGroupError);
+      });
   }
 
   function getMessages() {
@@ -103,102 +105,101 @@ function Discussion({ route, navigation }) {
     var messages = [];
 
     db.collection("message")
-        .doc(item.groupID)
-        .collection("messages")
-        .orderBy('date_time')
-        .onSnapshot(function(snapshot) {
-          snapshot.docChanges().forEach(function(change) {
-            if (change.type === "added") {
-              // console.log("New Message: ", change.doc.data());
-              messages.unshift(change.doc.data());
-            }
-            if (change.type === "modified") {
-              console.log("Modified Message", change.doc.data());
-            }
-            if (change.type === "removed") {
-              console.log("Removed Message:", change.doc.data());
-            }
-            console.log("hello");
-            setMessageList(messages);
-          });
+      .doc(item.groupID)
+      .collection("messages")
+      .orderBy("date_time")
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+          if (change.type === "added") {
+            // console.log("New Message: ", change.doc.data());
+            messages.unshift(change.doc.data());
+          }
+          if (change.type === "modified") {
+            console.log("Modified Message", change.doc.data());
+          }
+          if (change.type === "removed") {
+            console.log("Removed Message:", change.doc.data());
+          }
+          console.log("hello");
+          setMessageList(messages);
         });
+      });
   }
 
   function sendMessagesToChat() {
     const messageRef = firestore
-        .collection("message")
-        .doc(item.groupID)
-        .collection("messages")
-        .doc();
+      .collection("message")
+      .doc(item.groupID)
+      .collection("messages")
+      .doc();
     const userEmail = firebase.auth().currentUser.email;
 
     messageRef
-        .set({
-          messageID: messageRef.id,
-          message: message,
-          senderId: userID,
-          senderEmail: userEmail,
-          username: username,
-          date_time: new Date(),
-        })
-        .then(function(docRef) {
-          if(message.includes("$")&& isNaN(message.slice(1))){
-            let s =  message.slice(1)
-            navigation.push("StockDetails", {"symbol": s.trim().toUpperCase()})
-          }
-          setMessage("");
-
-        })
-        .catch(function(error) {
-          Alert.alert(error.message);
-          console.log("Error:", error);
-        });
+      .set({
+        messageID: messageRef.id,
+        message: message,
+        senderId: userID,
+        senderEmail: userEmail,
+        username: username,
+        date_time: new Date()
+      })
+      .then(function(docRef) {
+        if (message.includes("$") && isNaN(message.slice(1))) {
+          let s = message.slice(1);
+          navigation.push("StockDetails", { symbol: s.trim().toUpperCase() });
+        }
+        setMessage("");
+      })
+      .catch(function(error) {
+        Alert.alert(error.message);
+        console.log("Error:", error);
+      });
   }
 
-  const _navigateToStockDetails = (item) =>{
+  const _navigateToStockDetails = item => {
     let message = item.message;
-    if(message.includes("$")&& isNaN(message.slice(1))){
-      let s =  message.slice(1)
-      navigation.push("StockDetails", {"symbol": s.trim().toUpperCase()})
+    if (message.includes("$") && isNaN(message.slice(1))) {
+      let s = message.slice(1);
+      navigation.push("StockDetails", { symbol: s.trim().toUpperCase() });
     }
-  }
+  };
 
   return (
-      <KeyboardAvoidingView behavior="padding" enabled>
-        <View style={styles.main}>
-          <View style={styles.headerContainer}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon name="left" color="#000119" size={24} />
-            </TouchableOpacity>
-            <Text style={styles.username}>{item.groupName}</Text>
-          </View>
-
-          <FlatList
-              inverted
-              showsVerticalScrollIndicator={false}
-              style={styles.flatList}
-              data={messageList}
-              keyExtractor={(item, index) => "key" + index}
-              renderItem={({ item }) => {
-                return (
-                    <TouchableOpacity onPress={() => _navigateToStockDetails(item)}>
-                      <MessageItem item={item} />
-                    </TouchableOpacity>
-                );
-              }}
-          />
-
-          <Input
-              term={message}
-              onTermChange={message => setMessage(message)}
-              onSendPress={sendMessagesToChat}
-          />
-
-          {/* </TouchableWithoutFeedback> */}
+    <KeyboardAvoidingView behavior="padding" enabled>
+      <View style={styles.main}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="left" color="#000119" size={24} />
+          </TouchableOpacity>
+          <Text style={styles.username}>{item.groupName}</Text>
         </View>
-      </KeyboardAvoidingView>
 
-      // </LinearGradient>
+        <FlatList
+          inverted
+          showsVerticalScrollIndicator={false}
+          style={styles.flatList}
+          data={messageList}
+          keyExtractor={(item, index) => "key" + index}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity onPress={() => _navigateToStockDetails(item)}>
+                <MessageItem item={item} />
+              </TouchableOpacity>
+            );
+          }}
+        />
+
+        <Input
+          term={message}
+          onTermChange={message => setMessage(message)}
+          onSendPress={sendMessagesToChat}
+        />
+
+        {/* </TouchableWithoutFeedback> */}
+      </View>
+    </KeyboardAvoidingView>
+
+    // </LinearGradient>
   );
 }
 export default Discussion;

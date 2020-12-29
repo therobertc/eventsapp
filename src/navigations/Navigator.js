@@ -240,7 +240,7 @@ const ChatStackNavigator = () => {
       <Stack.Screen
         name="StockDetails"
         component={StockDetails}
-        options={{ headerShown: true }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="TrendingStocks"
