@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 
+
 class TrendingStocks extends Component {
   constructor(props) {
     super(props);
@@ -50,6 +51,7 @@ class TrendingStocks extends Component {
 
 
   TrendingComponent = () => {
+    // CheckGroupExistsOrNot("SQ").then((snapshot))
     if (this.state.data.length) {
       return this.state.data.map((service, index) => (
         <TouchableOpacity
