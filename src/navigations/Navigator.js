@@ -36,6 +36,7 @@ import Email from "../screens/OnBoarding/Email";
 import Password from "../screens/OnBoarding/Password";
 import StockDetails from "../components/StockDetails";
 import TrendingStocks from "../components/TrendingStocks";
+import Wallet from "../screens/Wallet";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -246,6 +247,11 @@ const ChatStackNavigator = () => {
         name="TrendingStocks"
         component={TrendingStocks}
         options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="Wallet"
+        component={Wallet}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

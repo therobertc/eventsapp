@@ -20,6 +20,32 @@ const Profile = props => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.col}>
         <Text style={styles.header}>Portfolio</Text>
+        <TouchableOpacity
+          style={{
+            paddingHorizontal: 10,
+            marginRight: 20,
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: "#F5F8FA",
+            borderRadius: 20,
+            paddingVertical: 5,
+            borderWidth: 1,
+            borderColor: "lightgrey"
+          }}
+          onPress={() => props.navigation.navigate("Wallet")}
+        >
+          <Feather name="stop-circle" size={20} color="orange" />
+
+          <Text style={{ fontWeight: "bold", paddingLeft: 5, fontSize: 16 }}>
+            0
+          </Text>
+        </TouchableOpacity>
+        {/* <TouchableOpacity
+          style={{ paddingHorizontal: 20 }}
+          onPress={() => props.navigation.navigate("Wallet")}
+        >
+          <Feather name="credit-card" size={30} color="black" />
+        </TouchableOpacity> */}
         <TouchableOpacity onPress={() => props.navigation.navigate("Settings")}>
           <Feather name="settings" size={30} color="black" />
         </TouchableOpacity>
