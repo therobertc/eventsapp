@@ -229,7 +229,7 @@ const Chat = props => {
           />
         </View>
 
-        {/* <View style={styles.col}>
+        <View style={styles.col}>
           <Text style={styles.header2}>Private Groups</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
@@ -257,8 +257,8 @@ const Chat = props => {
               );
             }}
           />
-        </View> */}
-        {/* <View style={styles.col}>
+        </View>
+        <View style={styles.col}>
           <Text style={styles.header}>Direct Messages</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("CreateChat")}
@@ -288,7 +288,7 @@ const Chat = props => {
               );
             }}
           />
-        </View> */}
+        </View>
       </ScrollView>
     </View>
   );
