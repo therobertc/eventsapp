@@ -9,7 +9,14 @@ import {
   Image
 } from "react-native";
 import firebase, { firestore } from "./../database/firebase";
-import { GiftedChat, Send } from "react-native-gifted-chat";
+import * as ImagePicker from "expo-image-picker";
+
+import {
+  GiftedChat,
+  Send,
+  Bubble,
+  InputToolbar
+} from "react-native-gifted-chat";
 import {
   AntDesign,
   Entypo,
@@ -28,12 +35,11 @@ function Discussion({ route, navigation }) {
   const [username, setUsername] = useState(
     firebase.auth().currentUser.displayName
   );
-
   const [userid, setUserid] = useState(firebase.auth().currentUser.uid);
   const [messages, setMessages] = useState([]);
   const [userEmail, setUserEmail] = useState(firebase.auth().currentUser.email);
-
   const { item } = route.params;
+
   console.log("curremt user ", userid, userEmail);
 
   useEffect(() => {
@@ -58,7 +64,7 @@ function Discussion({ route, navigation }) {
           const data = {
             _id: doc.id,
             text: "",
-            createdAt: new Date().getTime(),
+            createdAt: new Date().toUTCString(),
             ...firebaseData
           };
           return data;
@@ -73,7 +79,6 @@ function Discussion({ route, navigation }) {
       .collection("members")
       .doc(item.groupID)
       .collection("member")
-
       .where("userID", "==", userid)
       .get()
       .then(function(querySnapshot) {
@@ -136,31 +141,29 @@ function Discussion({ route, navigation }) {
       });
   }
 
-  function getMessages() {
-    const db = firestore;
-    var messages = [];
-
-    db.collection("message")
-      .doc(item.groupID)
-      .collection("messages")
-      .orderBy("date_time")
-      .onSnapshot(function(snapshot) {
-        snapshot.docChanges().forEach(function(change) {
-          if (change.type === "added") {
-            // console.log("New Message: ", change.doc.data());
-            messages.unshift(change.doc.data());
-          }
-          if (change.type === "modified") {
-            console.log("Modified Message", change.doc.data());
-          }
-          if (change.type === "removed") {
-            console.log("Removed Message:", change.doc.data());
-          }
-          console.log("hello");
-          setMessageList(messages);
-        });
-      });
-  }
+  // function onLongPress() {
+  //   if (this.props.onLongPress) {
+  //     this.props.onLongPress(this.context, this.props.currentMessage);
+  //   } else {
+  //     if (this.props.currentMessage.text) {
+  //       const options = ["Copy Text", "Cancel"];
+  //       const cancelButtonIndex = options.length - 1;
+  //       this.context.actionSheet().showActionSheetWithOptions(
+  //         {
+  //           options,
+  //           cancelButtonIndex
+  //         },
+  //         buttonIndex => {
+  //           switch (buttonIndex) {
+  //             case 0:
+  //               Clipboard.setString(this.props.currentMessage.text);
+  //               break;
+  //           }
+  //         }
+  //       );
+  //     }
+  //   }
+  // }
 
   function sendMessagesToChat() {
     const messageRef = firestore
@@ -168,7 +171,6 @@ function Discussion({ route, navigation }) {
       .doc(item.groupID)
       .collection("messages")
       .doc();
-
 
     messageRef
       .set({
@@ -181,18 +183,6 @@ function Discussion({ route, navigation }) {
           _id: userId,
           name: username
         }
-
-    const userEmail = firebase.auth().currentUser.email;
-
-    messageRef
-      .set({
-        messageID: messageRef.id,
-        message: message,
-        senderId: userID,
-        senderEmail: userEmail,
-        username: username,
-        date_time: new Date()
-
       })
       .then(function(docRef) {
         if (message.includes("$") && isNaN(message.slice(1))) {
@@ -205,7 +195,6 @@ function Discussion({ route, navigation }) {
         Alert.alert(error.message);
         console.log("Error:", error);
       });
-
   }
 
   function onSend(newMessage = []) {
@@ -257,6 +246,22 @@ function Discussion({ route, navigation }) {
     }
   };
 
+  renderBubble = props => {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: "grey"
+          },
+          left: {
+            backgroundColor: "lightgrey"
+          }
+        }}
+      />
+    );
+  };
+
   renderSend = props => {
     return (
       <Send {...props} containerStyle={styles.sendContainer}>
@@ -282,6 +287,21 @@ function Discussion({ route, navigation }) {
           />
         </View>
       </Send>
+    );
+  };
+
+  const customtInputToolbar = props => {
+    return (
+      <InputToolbar
+        {...props}
+        containerStyle={{
+          backgroundColor: "white",
+          borderTopColor: "#E8E8E8",
+          borderTopWidth: 1
+
+          //padding: 8
+        }}
+      />
     );
   };
 
@@ -339,25 +359,34 @@ function Discussion({ route, navigation }) {
             style={{ marginTop: 20, marginLeft: 20 }}
           />
         </TouchableOpacity>
-        <Text
-          style={{
-            marginLeft: 20,
-            fontSize: 20,
-            marginTop: 20,
-            fontWeight: "bold",
-            textAlign: "center"
-          }}
-        >
-          {item.groupName}
-        </Text>
+        <View style={{ justifyContent: "center" }}>
+          <Text
+            style={{
+              marginLeft: 20,
+              fontSize: 20,
+              marginTop: 20,
+              fontWeight: "bold",
+              textAlign: "center"
+            }}
+          >
+            {item.groupName}
+          </Text>
+        </View>
       </View>
       <KeyboardAvoidingView style={styles.container}>
         <GiftedChat
           isAnimated={true}
           renderAccessory={CustomView}
-          onPressActionButton={() => _navigateToStockDetails}
+          //onPressActionButton={() => _navigateToStockDetails}
           messages={messages}
           renderSend={renderSend}
+          renderBubble={renderBubble}
+          textInputStyle={styles.textInput}
+          isTyping={true}
+          renderUsernameOnMessage={true}
+          renderInputToolbar={props => customtInputToolbar(props)}
+          multiline
+          placeholder={"Enter a message..."}
           onSend={newMessages => onSend(newMessages)}
           user={{
             _id: 1,
@@ -365,62 +394,38 @@ function Discussion({ route, navigation }) {
           }}
           parsePatterns={linkStyle => [
             {
+              type: "phone",
+              style: linkStyle
+              // onPress: this.onPressPhoneNumber
+            },
+            {
               pattern: /#(\w+)/,
-              style: { ...linkStyle, color: "lightgreen" },
-              onPress: props => {
-                alert(`press on ${props}`);
-              }
+              style: { ...linkStyle, color: "lightgreen" }
+              // onPress: this.onPressHashtag
+            },
+            {
+              pattern: /\$(\w+)/,
+              style: { ...linkStyle, color: "lightgreen" }
+              // onPress: this.onPressHashtag
+            },
+            {
+              pattern: /\@(\w+)/,
+              style: { ...linkStyle, color: "lightgreen" }
+              // onPress: this.onPressHashtag
             }
           ]}
+          // parsePatterns={linkStyle => [
+          //   {
+          //     pattern: /#(\w+)/,
+          //     style: { ...linkStyle, color: "lightgreen" },
+          //     onPress: props => {
+          //       alert(`press on ${props}`);
+          //     }
+          //   }
+          // ]}
         />
       </KeyboardAvoidingView>
     </View>
-  }
-
-  const _navigateToStockDetails = item => {
-    let message = item.message;
-    if (message.includes("$") && isNaN(message.slice(1))) {
-      let s = message.slice(1);
-      navigation.push("StockDetails", { symbol: s.trim().toUpperCase() });
-    }
-  };
-
-  return (
-    <KeyboardAvoidingView behavior="padding" enabled>
-      <View style={styles.main}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="left" color="#000119" size={24} />
-          </TouchableOpacity>
-          <Text style={styles.username}>{item.groupName}</Text>
-        </View>
-
-        <FlatList
-          inverted
-          showsVerticalScrollIndicator={false}
-          style={styles.flatList}
-          data={messageList}
-          keyExtractor={(item, index) => "key" + index}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity onPress={() => _navigateToStockDetails(item)}>
-                <MessageItem item={item} />
-              </TouchableOpacity>
-            );
-          }}
-        />
-
-        <Input
-          term={message}
-          onTermChange={message => setMessage(message)}
-          onSendPress={sendMessagesToChat}
-        />
-
-        {/* </TouchableWithoutFeedback> */}
-      </View>
-    </KeyboardAvoidingView>
-
-    // </LinearGradient>
   );
 }
 export default Discussion;
@@ -452,6 +457,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginRight: 15
   },
+
   main: {
     backgroundColor: "#FFF",
     height: "100%",
@@ -470,6 +476,18 @@ const styles = StyleSheet.create({
     fontSize: 20,
     flex: 1,
     textAlign: "center"
+  },
+
+  textInput: {
+    //backgroundColor: "lightgrey",
+    borderColor: "grey",
+    borderWidth: 1,
+    borderRadius: 30,
+    marginHorizontal: 30,
+    padding: 10,
+    paddingLeft: 10,
+    justifyContent: "center",
+    alignItems: "center"
   },
 
   avatar: {

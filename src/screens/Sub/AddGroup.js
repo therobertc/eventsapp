@@ -146,9 +146,9 @@ export default function AddGroup(props) {
               Public Group
             </Text>
           </TouchableOpacity>
-          <View
+          <TouchableOpacity
             style={styles.lockedButton}
-            // onPress={() => createPrivateGroup()}
+            onPress={() => createPrivateGroup()}
             isLoading={isLoading}
           >
             <View
@@ -171,7 +171,7 @@ export default function AddGroup(props) {
                 Private Group
               </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     </View>
