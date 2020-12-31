@@ -5,7 +5,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
+  ActivityIndicator
 } from "react-native";
 
 
@@ -28,7 +28,6 @@ class TrendingStocks extends Component {
     this.getTrandingData();
   }
 
-
   async getTrandingData() {
     return fetch("https://sharestock.io/api/trendingStock", {
       method: "GET"
@@ -49,68 +48,61 @@ class TrendingStocks extends Component {
       });
   }
 
-
   TrendingComponent = () => {
     // CheckGroupExistsOrNot("SQ").then((snapshot))
     if (this.state.data.length) {
       return this.state.data.map((service, index) => (
+        // <TouchableOpacity
+        //   key={index}
+        //   onPress={() =>
+        //     this.props.navigation.push("StockDetails", {
+        //       symbol: service.symbol
+        //     })
+        //   }
+        //   style={{ marginLeft: 10, borderRadius: 35 }}
+        // >
         <TouchableOpacity
           key={index}
-
           onPress={() =>
             this.props.navigation.push("StockDetails", {
               symbol: service.symbol
             })
           }
-          style={{ marginLeft: 10, borderRadius: 35 }}
+          style={styles.card}
         >
           <View
             style={{
-              backgroundColor: "#fff",
-              justifyContent: "center",
+              height: 80,
+              width: 100,
+
+              justifyContent: "space-between",
               alignItems: "center",
-              borderRadius: 20,
-              //   shadowOffset: { width: 0.05, height: 0.05 },
-              //   shadowColor: "lightgrey",
-              //   shadowOpacity: 0.05,
-              borderWidth: 1,
-              borderColor: "#E1E8ED"
+              paddingVertical: 20
             }}
           >
-            <View
+            <Text
               style={{
-                height: 80,
-                width: 100,
-
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingVertical: 20
+                fontWeight: "600",
+                fontSize: 18
+                //textAlign: "left"
               }}
             >
-              <Text
-                style={{
-                  fontWeight: "600",
-                  fontSize: 18
-                  //textAlign: "left"
-                }}
-              >
-                {service.symbol}
-              </Text>
+              {service.symbol}
+            </Text>
 
-              <Text
-                style={{
-                  fontWeight: "500",
-                  fontSize: 14,
-                  textAlign: "center",
-                  color: parseFloat(service.changePercent) < 0 ? "red" : "green"
-                }}
-              >
-                {parseFloat(service.changePercent) < 0
-                  ? (parseFloat(service.changePercent) * 100).toFixed(2)
-                  : "+" + (parseFloat(service.changePercent) * 100).toFixed(2)}
-                %
-              </Text>
-            </View>
+            <Text
+              style={{
+                fontWeight: "500",
+                fontSize: 14,
+                textAlign: "center",
+                color: parseFloat(service.changePercent) < 0 ? "red" : "green"
+              }}
+            >
+              {parseFloat(service.changePercent) < 0
+                ? (parseFloat(service.changePercent) * 100).toFixed(2)
+                : "+" + (parseFloat(service.changePercent) * 100).toFixed(2)}
+              %
+            </Text>
           </View>
         </TouchableOpacity>
       ));
@@ -186,6 +178,29 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#3498db",
     marginLeft: 10
+  },
+  card: {
+    shadowOffset: { width: 0.5, height: 0.5 },
+    shadowRadius: 2,
+    shadowColor: "lightgrey",
+    marginLeft: 10,
+    shadowOpacity: 1.0,
+    marginVertical: 5,
+    elevation: 1,
+    //backgroundColor: "#e8eef1",
+    //backgroundColor: "#F5F8FA"
+    backgroundColor: "#fff",
+    borderRadius: 20,
+    //paddingHorizontal: 20,
+    paddingVertical: 10,
+    flexDirection: "row",
+    //paddingHorizontal: 40,
+    alignItems: "center",
+    //marginTop: 15,
+    //marginBottom: 20,
+    justifyContent: "space-between",
+    height: 80,
+    start: 10
   },
   datacard: {
     //backgroundColor: "#147efb",

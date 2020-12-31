@@ -28,9 +28,11 @@ function Discussion({ route, navigation }) {
   const [username, setUsername] = useState(
     firebase.auth().currentUser.displayName
   );
+
   const [userid, setUserid] = useState(firebase.auth().currentUser.uid);
   const [messages, setMessages] = useState([]);
   const [userEmail, setUserEmail] = useState(firebase.auth().currentUser.email);
+
   const { item } = route.params;
   console.log("curremt user ", userid, userEmail);
 
@@ -71,6 +73,7 @@ function Discussion({ route, navigation }) {
       .collection("members")
       .doc(item.groupID)
       .collection("member")
+
       .where("userID", "==", userid)
       .get()
       .then(function(querySnapshot) {
@@ -133,12 +136,39 @@ function Discussion({ route, navigation }) {
       });
   }
 
+  function getMessages() {
+    const db = firestore;
+    var messages = [];
+
+    db.collection("message")
+      .doc(item.groupID)
+      .collection("messages")
+      .orderBy("date_time")
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+          if (change.type === "added") {
+            // console.log("New Message: ", change.doc.data());
+            messages.unshift(change.doc.data());
+          }
+          if (change.type === "modified") {
+            console.log("Modified Message", change.doc.data());
+          }
+          if (change.type === "removed") {
+            console.log("Removed Message:", change.doc.data());
+          }
+          console.log("hello");
+          setMessageList(messages);
+        });
+      });
+  }
+
   function sendMessagesToChat() {
     const messageRef = firestore
       .collection("message")
       .doc(item.groupID)
       .collection("messages")
       .doc();
+
 
     messageRef
       .set({
@@ -151,6 +181,18 @@ function Discussion({ route, navigation }) {
           _id: userId,
           name: username
         }
+
+    const userEmail = firebase.auth().currentUser.email;
+
+    messageRef
+      .set({
+        messageID: messageRef.id,
+        message: message,
+        senderId: userID,
+        senderEmail: userEmail,
+        username: username,
+        date_time: new Date()
+
       })
       .then(function(docRef) {
         if (message.includes("$") && isNaN(message.slice(1))) {
@@ -163,6 +205,7 @@ function Discussion({ route, navigation }) {
         Alert.alert(error.message);
         console.log("Error:", error);
       });
+
   }
 
   function onSend(newMessage = []) {
@@ -332,6 +375,52 @@ function Discussion({ route, navigation }) {
         />
       </KeyboardAvoidingView>
     </View>
+  }
+
+  const _navigateToStockDetails = item => {
+    let message = item.message;
+    if (message.includes("$") && isNaN(message.slice(1))) {
+      let s = message.slice(1);
+      navigation.push("StockDetails", { symbol: s.trim().toUpperCase() });
+    }
+  };
+
+  return (
+    <KeyboardAvoidingView behavior="padding" enabled>
+      <View style={styles.main}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="left" color="#000119" size={24} />
+          </TouchableOpacity>
+          <Text style={styles.username}>{item.groupName}</Text>
+        </View>
+
+        <FlatList
+          inverted
+          showsVerticalScrollIndicator={false}
+          style={styles.flatList}
+          data={messageList}
+          keyExtractor={(item, index) => "key" + index}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity onPress={() => _navigateToStockDetails(item)}>
+                <MessageItem item={item} />
+              </TouchableOpacity>
+            );
+          }}
+        />
+
+        <Input
+          term={message}
+          onTermChange={message => setMessage(message)}
+          onSendPress={sendMessagesToChat}
+        />
+
+        {/* </TouchableWithoutFeedback> */}
+      </View>
+    </KeyboardAvoidingView>
+
+    // </LinearGradient>
   );
 }
 export default Discussion;

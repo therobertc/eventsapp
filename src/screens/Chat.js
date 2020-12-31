@@ -123,7 +123,10 @@ const Chat = props => {
               //onPress={() => props.navigation.navigate("InviteFriends")}
             >
               <Feather name="user-plus" size={20} color="white" />
-              <Text style={{ color: "white" }}> Invite </Text>
+              <Text style={{ color: "white", fontWeight: "500" }}>
+                {" "}
+                Invite{" "}
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
