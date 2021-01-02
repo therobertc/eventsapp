@@ -33,7 +33,7 @@ const StockGroupCard = ({ ticker, pctchange, uri, count, onPress, image }) => {
           alignItems: "center"
         }}
       >
-        <Image
+        {/* <Image
           source={{ uri: uri }}
           style={{
             //flex: 1,
@@ -50,7 +50,7 @@ const StockGroupCard = ({ ticker, pctchange, uri, count, onPress, image }) => {
           source={{
             uri: "https://i.stack.imgur.com/l60Hf.png"
           }}
-        />
+        /> */}
         <View style={{ marginLeft: 10 }}>
           <View style={{ flexDirection: "row" }}>
             <Text style={styles.username}>{ticker}</Text>

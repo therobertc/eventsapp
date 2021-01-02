@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import firebase, { firestore } from "./../database/firebase";
 import * as ImagePicker from "expo-image-picker";
+import Icon from "@expo/vector-icons/AntDesign";
 
 import {
   GiftedChat,
@@ -38,7 +39,7 @@ function Discussion({ route, navigation }) {
   const [userid, setUserid] = useState(firebase.auth().currentUser.uid);
   const [messages, setMessages] = useState([]);
   const [userEmail, setUserEmail] = useState(firebase.auth().currentUser.email);
-  const { item } = route.params;
+  const { item, itemPic } = route.params;
 
   console.log("curremt user ", userid, userEmail);
 
@@ -252,10 +253,10 @@ function Discussion({ route, navigation }) {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: "grey"
+            backgroundColor: "#147efb"
           },
           left: {
-            backgroundColor: "lightgrey"
+            backgroundColor: "#F5F8FA"
           }
         }}
       />
@@ -338,46 +339,37 @@ function Discussion({ route, navigation }) {
   };
   console.log("item is ", item);
   return (
-    <View style={{ flex: 1 }}>
-      <View
-        style={{
-          flexDirection: "row",
-          height: 80,
-          width: "100%",
-          backgroundColor: "white",
-          alignItems: "center"
-        }}
-      >
-        <TouchableOpacity
-          // style={{ position: "absolute", top: 50, left: 20 }}
-          onPress={() => navigation.navigate("Chat")}
-        >
-          <AntDesign
-            name="left"
-            size={30}
-            color="black"
-            style={{ marginTop: 20, marginLeft: 20 }}
-          />
-        </TouchableOpacity>
-        <View style={{ justifyContent: "center" }}>
-          <Text
-            style={{
-              marginLeft: 20,
-              fontSize: 20,
-              marginTop: 20,
-              fontWeight: "bold",
-              textAlign: "center"
-            }}
+    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <View style={styles.main}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="left" color="#000119" size={24} />
+          </TouchableOpacity>
+          <Text style={styles.username}> {item.groupName}</Text>
+          {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
+          <TouchableOpacity
+            onPress={() =>
+              navigation.push("StockDetails", {
+                symbol: "SQ"
+              })
+            }
+            //onPress={() => navigation.navigate("StockProfile")}
           >
-            {item.groupName}
-          </Text>
+            <Image
+              //source={require("../../images/tslalogo.png")}
+              source={{ uri: itemPic }}
+              style={styles.avatar}
+            />
+          </TouchableOpacity>
         </View>
-      </View>
-      <KeyboardAvoidingView style={styles.container}>
+
         <GiftedChat
           isAnimated={true}
           renderAccessory={CustomView}
           //onPressActionButton={() => _navigateToStockDetails}
+          //showUserAvatar={false}
+          //showAvatarForEveryMessage={true}
+          renderAvatar={null}
           messages={messages}
           renderSend={renderSend}
           renderBubble={renderBubble}
@@ -400,41 +392,43 @@ function Discussion({ route, navigation }) {
             },
             {
               pattern: /#(\w+)/,
-              style: { ...linkStyle, color: "lightgreen" }
+              style: {
+                ...linkStyle,
+                color: "black",
+                fontWeight: "bold",
+                textDecorationLine: "underline"
+              }
               // onPress: this.onPressHashtag
             },
             {
               pattern: /\$(\w+)/,
-              style: { ...linkStyle, color: "lightgreen" }
+              style: {
+                ...linkStyle,
+                color: "black",
+                fontWeight: "bold",
+                textDecorationLine: "underline"
+              }
               // onPress: this.onPressHashtag
             },
             {
               pattern: /\@(\w+)/,
-              style: { ...linkStyle, color: "lightgreen" }
+              style: {
+                ...linkStyle,
+                color: "black",
+                fontWeight: "bold",
+                textDecorationLine: "underline"
+              }
               // onPress: this.onPressHashtag
             }
           ]}
-          // parsePatterns={linkStyle => [
-          //   {
-          //     pattern: /#(\w+)/,
-          //     style: { ...linkStyle, color: "lightgreen" },
-          //     onPress: props => {
-          //       alert(`press on ${props}`);
-          //     }
-          //   }
-          // ]}
         />
-      </KeyboardAvoidingView>
-    </View>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 export default Discussion;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white"
-  },
   input: {
     width: 80
   },
@@ -461,14 +455,15 @@ const styles = StyleSheet.create({
   main: {
     backgroundColor: "#FFF",
     height: "100%",
-    paddingHorizontal: 20,
+    //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
     // borderBottomRightRadius: 35,
     paddingTop: 40
   },
   headerContainer: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    paddingHorizontal: 20
   },
   username: {
     color: "#000119",
@@ -480,19 +475,29 @@ const styles = StyleSheet.create({
 
   textInput: {
     //backgroundColor: "lightgrey",
-    borderColor: "grey",
+    borderColor: "lightgrey",
     borderWidth: 1,
     borderRadius: 30,
-    marginHorizontal: 30,
-    padding: 10,
-    paddingLeft: 10,
-    justifyContent: "center",
-    alignItems: "center"
+    marginRight: 20,
+    marginLeft: 20,
+    lineHeight: 20,
+    //fontSize: 20,
+    //paddingTop: 8,
+    paddingLeft: 20
+    //justifyContent: "center",
+    //alignItems: "center"
   },
 
   avatar: {
     width: 40,
     height: 40,
     borderRadius: 20
+  },
+  container: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%"
   }
 });

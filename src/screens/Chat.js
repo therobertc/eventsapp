@@ -221,7 +221,8 @@ const Chat = props => {
                 <TouchableOpacity
                   onPress={() => {
                     props.navigation.navigate("Discussion", {
-                      item
+                      item,
+                      itemPic: "https://i.stack.imgur.com/l60Hf.png"
                     });
                   }}
                 >
@@ -251,7 +252,8 @@ const Chat = props => {
                 <TouchableOpacity
                   onPress={() => {
                     props.navigation.navigate("GroupChat", {
-                      groupName: name
+                      groupName: name,
+                      itemPic: "https://i.stack.imgur.com/l60Hf.png"
                     });
                   }}
                 >

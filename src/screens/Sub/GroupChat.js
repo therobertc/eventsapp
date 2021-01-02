@@ -25,6 +25,9 @@ import {
   MaterialCommunityIcons
 } from "@expo/vector-icons";
 import * as Permissions from "expo-permissions";
+
+import Icon from "@expo/vector-icons/AntDesign";
+
 // import { Camera } from 'expo-camera';
 import {
   GiftedChat,
@@ -44,7 +47,7 @@ export default function GroupChat({ route, navigation }) {
   const [image, setImage] = useState(null);
   const [isloading, setLoading] = useState(true);
   var UserId = fire.auth().currentUser.uid;
-  const { groupName } = route.params;
+  const { groupName, itemPic } = route.params;
 
   useEffect(() => {
     isloading && Fetched();
@@ -129,14 +132,14 @@ export default function GroupChat({ route, navigation }) {
           }}
         >
           {/* <Feather name="arrow-up" color="white" size={28} fontWeight={900} /> */}
-          {/* <FontAwesome5
+          <FontAwesome5
             name="arrow-up"
             color="white"
             size={20}
             fontWeight={900}
-          /> */}
+          />
 
-          <Text style={{ fontWEight: "700", color: "white" }}>Send</Text>
+          {/* <Text style={{ fontWEight: "700", color: "white" }}>Send</Text> */}
         </View>
       </Send>
     );
@@ -355,56 +358,37 @@ export default function GroupChat({ route, navigation }) {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
-      <View
-        style={{
-          flexDirection: "row",
-          height: 80,
-          width: "100%",
-          //backgroundColor: "white",
-          alignItems: "center",
-          justifyContent: "space-around",
-          paddingTop: 30
-        }}
-      >
-        <TouchableOpacity
-          // style={{ position: "absolute", top: 50, left: 20 }}
-          onPress={() => navigation.navigate("Chat")}
-        >
-          <AntDesign
-            name="left"
-            size={30}
-            color="black"
-            style={{ marginTop: 20 }}
-          />
-        </TouchableOpacity>
-        <Text style={{ fontSize: 22, fontWeight: "bold", marginTop: 20 }}>
-          {groupName}
-        </Text>
-        <Entypo
-          name="info"
-          size={24}
-          color="black"
-          style={{ marginTop: 20 }}
-          onPress={() =>
-            navigation.navigate("GroupInfo", { groupName: groupName })
-          }
-        />
-      </View>
-      {/* <View style={{ flexDirection: "row", height: 85, width: "100%", backgroundColor: "white" }}>
-                <TouchableOpacity
-                    style={{ position: "absolute", top: 50, left: 20 }}
-                    onPress={() => navigation.navigate("Chat")}
-                >
-                    <AntDesign name="left" size={30} color="black" />
-                </TouchableOpacity>
-                <Text style={{ marginLeft: 20 }}>{groupName}</Text>
-            </View> */}
-      <KeyboardAvoidingView style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <View style={styles.main}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="left" color="#000119" size={24} />
+          </TouchableOpacity>
+          <Text style={styles.username}> {groupName}</Text>
+          {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("GroupInfo", { groupName: groupName })
+            }
+            //onPress={() => navigation.navigate("StockProfile")}
+          >
+            <Image
+              onPress={() =>
+                navigation.navigate("GroupInfo", { groupName: groupName })
+              }
+              //source={require("../../images/tslalogo.png")}
+              source={{ uri: itemPic }}
+              style={styles.avatar}
+            />
+          </TouchableOpacity>
+        </View>
         <GiftedChat
           isAnimated={true}
           renderAccessory={CustomView}
           //onPressActionButton={() => _navigateToStockDetails()}
+          //showUserAvatar={false}
+          //showAvatarForEveryMessage={true}
+          renderAvatar={null}
           messages={messages}
           renderSend={renderSend}
           renderBubble={renderBubble}
@@ -466,8 +450,8 @@ export default function GroupChat({ route, navigation }) {
           //   }
           // ]}
         />
-      </KeyboardAvoidingView>
-    </View>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -477,36 +461,24 @@ const styles = StyleSheet.create({
   },
   textInput: {
     //backgroundColor: "lightgrey",
-    borderColor: "grey",
+    borderColor: "lightgrey",
     borderWidth: 1,
     borderRadius: 30,
-    marginRight: 10,
-    marginLeft: 80,
-
+    marginRight: 20,
+    marginLeft: 20,
     lineHeight: 20,
-    fontSize: 20,
+    //fontSize: 20,
+    //paddingTop: 8,
+    paddingLeft: 20
+    //justifyContent: "center",
+    //alignItems: "center"
+  },
 
-    paddingTop: 5,
-    paddingLeft: 20,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  input: {
-    width: 80
-  },
-  ImageStyle: {
-    height: 25,
-    width: 25,
-    resizeMode: "stretch",
-    alignItems: "center"
-  },
   container: {
     flex: 1,
     backgroundColor: "white"
   },
-  input: {
-    width: 80
-  },
+
   ImageStyle: {
     height: 25,
     width: 25,
@@ -530,14 +502,15 @@ const styles = StyleSheet.create({
   main: {
     backgroundColor: "#FFF",
     height: "100%",
-    paddingHorizontal: 20,
+    //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
     // borderBottomRightRadius: 35,
     paddingTop: 40
   },
   headerContainer: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    paddingHorizontal: 20
   },
   username: {
     color: "#000119",

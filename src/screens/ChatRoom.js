@@ -35,7 +35,7 @@ export default function ChatRoom({ route, navigation }) {
   const [messages, setMessages] = useState([]);
   const [image, setImage] = useState(null);
   const [username, setUsername] = useState(fire.auth().currentUser.displayName);
-  const [userId, setUserId] = useState(fire.auth().currentUser.uid)
+  const [userId, setUserId] = useState(fire.auth().currentUser.uid);
   const { name, uid } = route.params;
 
   useEffect(() => {
@@ -80,96 +80,93 @@ export default function ChatRoom({ route, navigation }) {
   };
 
   const uploadImage = async uri => {
-
     const response = await fetch(uri);
     const blob = await response.blob();
     var ref = fire
       .storage()
       .ref("images")
       .child(new Date().toDateString());
-    ref
-      .put(blob)
-      .then(result => {
-        result.ref.getDownloadURL().then(url => {
-          const message = [
-            {
-              _id: new Date().toUTCString(),
-              image: url,
-              createdAt: new Date(),
-              user: {
-                _id: userId,
-                name: username,
-                avatar: "https://placeimg.com/140/140/any"
-              }
-            }
-          ];
-          var UserId = fire.auth().currentUser.uid;
-          var ref = firestore.collection("users").doc();
-          var newPostKey = ref.id;
-          for (var i = 0; i < message.length; i++) {
-            if (message[i].image) {
-              firestore
-                .collection("users")
-                .doc(UserId)
-                .collection("ChatHeads")
-                .doc(uid)
-                .set({
-                  name: name,
-                  uid: uid
-                });
-
-              firestore
-                .collection("users")
-                .doc(uid)
-                .collection("ChatHeads")
-                .doc(UserId)
-                .set({
-                  name: fire.auth().currentUser.displayName,
-                  uid: UserId
-                });
-
-              firestore
-                .collection("users")
-                .doc(UserId)
-                .collection("ChatHeads")
-                .doc(uid)
-                .collection("ChatMsgs")
-                .doc(newPostKey)
-                .set({
-                  _id: message[i]._id,
-                  createdAt: message[i].createdAt.toUTCString(),
-                  image: message[i].image,
-                  user: {
-                    _id: userId,
-                    name:username
-                  }
-                });
-
-              firestore
-                .collection("users")
-                .doc(uid)
-                .collection("ChatHeads")
-                .doc(UserId)
-                .collection("ChatMsgs")
-                .doc(newPostKey)
-                .set({
-                  _id: message[i]._id,
-                  createdAt: message[i].createdAt.toUTCString(),
-                  image: message[i].image,
-                  user: {
-                    _id: userId,
-                    avatar: fire.auth().currentUser.photoURL,
-                      name:username
-                  }
-                });
-            } else {
-              console.log("false");
+    ref.put(blob).then(result => {
+      result.ref.getDownloadURL().then(url => {
+        const message = [
+          {
+            _id: new Date().toUTCString(),
+            image: url,
+            createdAt: new Date(),
+            user: {
+              _id: userId,
+              name: username,
+              avatar: "https://placeimg.com/140/140/any"
             }
           }
+        ];
+        var UserId = fire.auth().currentUser.uid;
+        var ref = firestore.collection("users").doc();
+        var newPostKey = ref.id;
+        for (var i = 0; i < message.length; i++) {
+          if (message[i].image) {
+            firestore
+              .collection("users")
+              .doc(UserId)
+              .collection("ChatHeads")
+              .doc(uid)
+              .set({
+                name: name,
+                uid: uid
+              });
 
-          setMessages(GiftedChat.append(messages, message));
-        });
+            firestore
+              .collection("users")
+              .doc(uid)
+              .collection("ChatHeads")
+              .doc(UserId)
+              .set({
+                name: fire.auth().currentUser.displayName,
+                uid: UserId
+              });
+
+            firestore
+              .collection("users")
+              .doc(UserId)
+              .collection("ChatHeads")
+              .doc(uid)
+              .collection("ChatMsgs")
+              .doc(newPostKey)
+              .set({
+                _id: message[i]._id,
+                createdAt: message[i].createdAt.toUTCString(),
+                image: message[i].image,
+                user: {
+                  _id: userId,
+                  name: username
+                }
+              });
+
+            firestore
+              .collection("users")
+              .doc(uid)
+              .collection("ChatHeads")
+              .doc(UserId)
+              .collection("ChatMsgs")
+              .doc(newPostKey)
+              .set({
+                _id: message[i]._id,
+                createdAt: message[i].createdAt.toUTCString(),
+                image: message[i].image,
+                user: {
+                  _id: userId,
+                  avatar: fire.auth().currentUser.photoURL,
+                  name: username
+                }
+              });
+          } else {
+            console.log("false");
+          }
+        }
+
+        setMessages(GiftedChat.append(messages, message));
       });
+    });
   };
 
   function onSend(newMessage = []) {
