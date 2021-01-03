@@ -216,7 +216,10 @@ const Chat = props => {
             keyExtractor={(item, index) => "key" + index}
             renderItem={({ item }) => {
               const name = item.groupName;
-
+              const totalmembers =
+                item && item.totalmembers ? item.totalmembers : 0;
+              const lastmessage =
+                item && item.lastmessage ? item.lastmessage : "";
               return (
                 <TouchableOpacity
                   onPress={() => {
@@ -226,7 +229,11 @@ const Chat = props => {
                     });
                   }}
                 >
-                  <Messages item={name}></Messages>
+                  <Messages
+                    item={name}
+                    totalmembers={totalmembers}
+                    lastmessage={lastmessage}
+                  ></Messages>
                 </TouchableOpacity>
               );
             }}

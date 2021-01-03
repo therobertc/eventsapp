@@ -166,6 +166,21 @@ function Discussion({ route, navigation }) {
   //   }
   // }
 
+  const lastMessage = async message => {
+    await firestore
+      .collection("publicgroups")
+      .doc(item.groupID)
+      .update({
+        lastmessage: message
+      });
+    // inc
+    //   .update({
+    //     lastmessage: message,
+    //   })
+    //   .then(() => {})
+    //   .catch(() => {});
+  };
+
   function sendMessagesToChat() {
     const messageRef = firestore
       .collection("message")
@@ -222,6 +237,7 @@ function Discussion({ route, navigation }) {
         .then(function(docRef) {
           setMessages(GiftedChat.append(messages, newMessage));
           let message = newMessage[i].text;
+          lastMessage(message);
           if (message.includes("$") && isNaN(message.slice(1))) {
             let s = message.slice(1);
             navigation.push("StockDetails", { symbol: s.trim().toUpperCase() });

@@ -18,7 +18,7 @@ const randomTime = () => {
   return String(hFormat + hrs + ":" + mFormat + mins + " " + amPm);
 };
 
-const Messages = ({ item, uri }) => {
+const Messages = ({ item, totalmembers, lastmessage, uri }) => {
   return (
     <View style={styles.card}>
       <View
@@ -48,7 +48,10 @@ const Messages = ({ item, uri }) => {
         /> */}
         <View style={{ marginLeft: 10 }}>
           <Text style={styles.username}>#{item}</Text>
-          <Text style={styles.preview}>1,552 members </Text>
+          <Text style={styles.preview}>{totalmembers} members </Text>
+          <Text style={styles.preview}>
+            {lastmessage > 10 ? `${lastmessage.slice(0, 40)}...` : lastmessage}
+          </Text>
           {/* <Text style={styles.text}>{item.groupMembers}</Text> */}
         </View>
       </View>
