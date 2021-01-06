@@ -42,6 +42,7 @@ const screen = Dimensions.get("window");
 var itm = [];
 
 export default function GroupChat({ route, navigation }) {
+  console.log("hellooooooo in group chat000");
   const [messages, setMessages] = useState([]);
   const [ParticipentsIDS, setParticipentsID] = useState([]);
   const [image, setImage] = useState(null);
@@ -301,7 +302,6 @@ export default function GroupChat({ route, navigation }) {
 
       for (var x = 0; x < ParticipentsIDS.length; x++) {
         console.log("PARTICIPENTS FROM ONSEND FUNC", ParticipentsIDS[x]);
-
         firestore
           .collection("users")
           .doc(ParticipentsIDS[x])
@@ -315,7 +315,6 @@ export default function GroupChat({ route, navigation }) {
             text: newMessage[i].text,
             user: {
               _id: 2,
-              // avatar: firebase.auth().currentUser.photoURL,
               name: fire.auth().currentUser.displayName
             }
           });
@@ -343,13 +342,6 @@ export default function GroupChat({ route, navigation }) {
         <TouchableOpacity onPress={() => pickImage()}>
           <Ionicons name="md-images" size={26} color="#3e7af0" />
         </TouchableOpacity>
-        {/* <TouchableOpacity>
-              <EvilIcons name="location" size={29} color="#3e7af0" />
-            </TouchableOpacity> */}
-        {/* <TouchableOpacity>
-              <FontAwesome name="microphone" size={24} color="#3e7af0" />
-            </TouchableOpacity> */}
-
         <TouchableOpacity>
           <MaterialCommunityIcons name="gif" size={35} color="#3e7af0" />
         </TouchableOpacity>
@@ -365,18 +357,15 @@ export default function GroupChat({ route, navigation }) {
             <Icon name="left" color="#000119" size={24} />
           </TouchableOpacity>
           <Text style={styles.username}> {groupName}</Text>
-          {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("GroupInfo", { groupName: groupName })
             }
-            //onPress={() => navigation.navigate("StockProfile")}
           >
             <Image
               onPress={() =>
                 navigation.navigate("GroupInfo", { groupName: groupName })
               }
-              //source={require("../../images/tslalogo.png")}
               source={{ uri: itemPic }}
               style={styles.avatar}
             />
@@ -385,9 +374,6 @@ export default function GroupChat({ route, navigation }) {
         <GiftedChat
           isAnimated={true}
           renderAccessory={CustomView}
-          //onPressActionButton={() => _navigateToStockDetails()}
-          //showUserAvatar={false}
-          //showAvatarForEveryMessage={true}
           renderAvatar={null}
           messages={messages}
           renderSend={renderSend}
@@ -440,15 +426,7 @@ export default function GroupChat({ route, navigation }) {
               // onPress: this.onPressHashtag
             }
           ]}
-          // parsePatterns={linkStyle => [
-          //   {
-          //     pattern: /#(\w+)/,
-          //     style: { ...linkStyle, color: "lightgreen" },
-          //     onPress: props => {
-          //       alert(`press on ${props}`);
-          //     }
-          //   }
-          // ]}
+
         />
       </View>
     </KeyboardAvoidingView>
@@ -456,22 +434,14 @@ export default function GroupChat({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
   textInput: {
-    //backgroundColor: "lightgrey",
     borderColor: "lightgrey",
     borderWidth: 1,
     borderRadius: 30,
     marginRight: 20,
     marginLeft: 20,
     lineHeight: 20,
-    //fontSize: 20,
-    //paddingTop: 8,
     paddingLeft: 20
-    //justifyContent: "center",
-    //alignItems: "center"
   },
 
   container: {
@@ -486,7 +456,6 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   flatList: {
-    //position: "absolute",
     left: 0,
     right: 0,
     top: 0,
