@@ -359,7 +359,7 @@ class StockDetails extends Component {
                 <View style={styles.card}>
                     <View style={{ paddingBottom: 1 }}>
                         <Text style={styles.heading}>Latest News</Text>
-                        <Feedback></Feedback>
+                        {/* <Feedback></Feedback> */}
                     </View>
                     {news.map((data, index) => {
                         return (
@@ -450,7 +450,7 @@ class StockDetails extends Component {
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                 >
-                    <View style={styles.card}>
+                    <View style={styles.chart}>
                         <View>
                             <View style={styles.titleCon}>
                                 <Text style={styles.heading}>{data.symbol}</Text>
@@ -954,6 +954,20 @@ const styles = StyleSheet.create({
         elevation: 1,
         //backgroundColor: "#e8eef1",
         backgroundColor: "#fff",
+        borderRadius: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 20
+    },
+    chart: {
+        // shadowOffset: { width: 0.5, height: 0.5 },
+        // shadowRadius: 5,
+        // shadowColor: "lightgrey",
+        marginHorizontal: 10,
+        // shadowOpacity: 1.0,
+        marginVertical: 10,
+        elevation: 1,
+        //backgroundColor: "#e8eef1",
+        //backgroundColor: "#fff",
         borderRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 20

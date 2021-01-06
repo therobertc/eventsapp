@@ -142,6 +142,14 @@ function Discussion({ route, navigation }) {
       });
   }
 
+  onPressCashtag = cashtag => {
+    let symbol = cashtag.replace("$", "");
+    navigation.navigate("StockDetails", {
+      symbol: symbol,
+      screen: "StockDetails"
+    });
+  };
+
   // function onLongPress() {
   //   if (this.props.onLongPress) {
   //     this.props.onLongPress(this.context, this.props.currentMessage);
@@ -418,13 +426,14 @@ function Discussion({ route, navigation }) {
             },
             {
               pattern: /\$(\w+)/,
+
               style: {
                 ...linkStyle,
                 color: "black",
                 fontWeight: "bold",
                 textDecorationLine: "underline"
-              }
-              // onPress: this.onPressHashtag
+              },
+              onPress: onPressCashtag
             },
             {
               pattern: /\@(\w+)/,

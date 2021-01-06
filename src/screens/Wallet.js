@@ -46,7 +46,7 @@ const Wallet = props => {
         <Text style={styles.header}>Wallet</Text>
       </View>
       <View style={styles.col2}>
-        <Text style={styles.header2}>Coin Balance</Text>
+        <Text style={styles.header2}>ChatCoin Balance</Text>
       </View>
       <View style={styles.coinrow}>
         <Feather name="stop-circle" size={30} color="orange" />
@@ -55,8 +55,57 @@ const Wallet = props => {
           <Text style={{ color: "white", fontWeight: "500" }}> Cash Out </Text>
         </TouchableOpacity>
       </View>
+
+      <View style={styles.earnbox}>
+        <View style={styles.earncoins}>
+          <Text style={{ color: "orange", fontWeight: "800", paddingRight: 5 }}>
+            Earn 100
+          </Text>
+          <Feather name="stop-circle" size={30} color="orange" />
+        </View>
+
+        <Text
+          style={{
+            color: "white",
+            fontWeight: "800",
+            fontSize: 18,
+            paddingRight: 5,
+            textAlign: "center",
+            paddingTop: 10
+          }}
+        >
+          Invite an investor who signs up
+        </Text>
+
+        <TouchableOpacity style={styles.btn} onPress={onShare} title="Share">
+          <Text
+            style={{
+              color: "white",
+              fontWeight: "500",
+              paddingRight: 5,
+              fontSize: 18
+            }}
+          >
+            Copy my link
+          </Text>
+        </TouchableOpacity>
+        <Text
+          style={{
+            color: "white",
+            fontWeight: "700",
+            fontSize: 14,
+            paddingHorizontal: 20,
+            textAlign: "center",
+            paddingTop: 20
+          }}
+        >
+          Share your link with other investors. Once 5 people you refer sign up,
+          you'll earn 100 coins.
+        </Text>
+      </View>
+
       <View style={styles.col2}>
-        <Text style={styles.header2}>Buy Coins</Text>
+        <Text style={styles.header2}>Buy ChatCoin</Text>
       </View>
       <View style={styles.coinrow}>
         <Feather name="stop-circle" size={30} color="orange" />
@@ -87,57 +136,7 @@ const Wallet = props => {
         </TouchableOpacity>
       </View>
 
-      <View>
-        <View style={styles.earnbox}>
-          <View style={styles.earncoins}>
-            <Text
-              style={{ color: "orange", fontWeight: "800", paddingRight: 5 }}
-            >
-              Earn 100
-            </Text>
-            <Feather name="stop-circle" size={30} color="orange" />
-          </View>
-
-          <Text
-            style={{
-              color: "white",
-              fontWeight: "800",
-              fontSize: 18,
-              paddingRight: 5,
-              textAlign: "center",
-              paddingTop: 10
-            }}
-          >
-            Invite an investor who signs up
-          </Text>
-
-          <TouchableOpacity style={styles.btn} onPress={onShare} title="Share">
-            <Text
-              style={{
-                color: "white",
-                fontWeight: "500",
-                paddingRight: 5,
-                fontSize: 18
-              }}
-            >
-              Copy my link
-            </Text>
-          </TouchableOpacity>
-          <Text
-            style={{
-              color: "white",
-              fontWeight: "700",
-              fontSize: 14,
-              paddingHorizontal: 20,
-              textAlign: "center",
-              paddingTop: 20
-            }}
-          >
-            Share your link with other investors. Once 5 people you refer sign
-            up, you'll earn 100 coins.
-          </Text>
-        </View>
-      </View>
+      <View></View>
 
       {/* <TouchableOpacity
         style={styles.btn}

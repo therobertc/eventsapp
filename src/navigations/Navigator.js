@@ -37,6 +37,7 @@ import Password from "../screens/OnBoarding/Password";
 import StockDetails from "../components/StockDetails";
 import TrendingStocks from "../components/TrendingStocks";
 import Wallet from "../screens/Wallet";
+import GroupProfile from "../screens/Sub/GroupProfile";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -251,6 +252,11 @@ const ChatStackNavigator = () => {
       <Stack.Screen
         name="Wallet"
         component={Wallet}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="GroupProfile"
+        component={GroupProfile}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

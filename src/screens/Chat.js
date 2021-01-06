@@ -179,12 +179,14 @@ const Chat = props => {
             ticker="$SQ"
             pctchange="+4.55%"
             onPress={() => {
-              props.navigation.navigate("StockChat", {
-                // itemId: item.id,
-                // itemName: item.login,
-                itemPic: "https://i.stack.imgur.com/l60Hf.png",
-                itemName: "$SQ"
-              });
+              props.navigation.navigate("GroupProfile");
+
+              // onPress={() => {
+              //   props.navigation.navigate("StockChat", {
+              //     // itemId: item.id,
+              //     // itemName: item.login,
+              //     itemPic: "https://i.stack.imgur.com/l60Hf.png",
+              //     itemName: "$SQ"
             }}
             msg="This stock is trending"
           />

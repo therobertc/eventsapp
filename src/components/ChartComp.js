@@ -185,13 +185,13 @@ export default class ChartComp extends Component {
           yAxisInterval={1} // optional, defaults to 1
           chartConfig={{
             strokeWidth: 2,
-            // backgroundColor: "red",
-            // backgroundGradientFromOpacity: 0.,
-            backgroundGradientFrom: "rgba(255, 255, 255,0.0)",
-            backgroundGradientTo: "rgba(255, 255, 255,0.0)",
+            backgroundColor: "white",
+            //backgroundGradientFromOpacity: "100%",
+            backgroundGradientFrom: "#F5F8FA",
+            backgroundGradientTo: "#F5F8FA",
             decimalPlaces: 2, // optional, defaults to 2dp
             // fillShadowGradient="red",
-            // color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            //color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             color: (opacity = 1) => "#33CC00",
             // labelColor: (opacity = 1) => "red",
             style: {
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    backgroundColor: "#fff",
+    //backgroundColor: "#fff",
     marginBottom: 10
   },
   item: {
@@ -226,7 +226,6 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     alignItems: "center",
     borderRadius: 10,
-
     width: screenWidth / 6 - 10
   },
   selected: {
@@ -241,7 +240,7 @@ const styles = StyleSheet.create({
   },
   chartStyle: {
     alignItems: "center",
-    backgroundColor: "red",
+    backgroundColor: "#F5F8FA",
     padding: 0
   }
 });
