@@ -8,7 +8,6 @@ import {
   ActivityIndicator
 } from "react-native";
 
-
 class TrendingStocks extends Component {
   constructor(props) {
     super(props);
@@ -144,7 +143,7 @@ export default TrendingStocks;
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 20
+    paddingVertical: 10
     //marginLeft: 20
   },
   text: {

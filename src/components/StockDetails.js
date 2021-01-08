@@ -431,7 +431,7 @@ class StockDetails extends Component {
         >
         Join Chat
         </Text> */}
-        <TouchableOpacity
+        {/* <TouchableOpacity
               style={styles.invite}
               onPress={() => {
                 this.props.navigation.navigate("StockChat", {
@@ -445,7 +445,7 @@ class StockDetails extends Component {
             >
               <Feather name="message-circle" size={20} color="white" />
               <Text style={{ color: "white", fontWeight: '500' }}> Join Chat </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
       </View>
                 <ScrollView
                     showsVerticalScrollIndicator={false}

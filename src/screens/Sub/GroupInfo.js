@@ -163,7 +163,7 @@ export default function AddMember({ route, navigation }) {
               <View
                 style={{
                   borderRadius: 100,
-                  backgroundColor: "grey",
+                  backgroundColor: "#147efb",
                   width: 50,
                   height: 50,
                   alignItems: "center",
@@ -195,7 +195,7 @@ export default function AddMember({ route, navigation }) {
               <View
                 style={{
                   borderRadius: 100,
-                  backgroundColor: "grey",
+                  backgroundColor: "#147efb",
                   width: 50,
                   height: 50,
                   alignItems: "center",
@@ -214,7 +214,7 @@ export default function AddMember({ route, navigation }) {
           </View>
         </TouchableOpacity>
 
-        <View style={styles.viewseparator} />
+        {/* <View style={styles.viewseparator} />
 
         <Text
           style={{
@@ -227,9 +227,9 @@ export default function AddMember({ route, navigation }) {
           Owners
         </Text>
 
-        <View style={styles.listseparator} />
+        <View style={styles.listseparator} /> */}
 
-        <View style={{ flexDirection: "column", paddingHorizontal: 20 }}>
+        {/* <View style={{ flexDirection: "column", paddingHorizontal: 20 }}>
           <View
             style={{
               flexDirection: "row",
@@ -256,8 +256,8 @@ export default function AddMember({ route, navigation }) {
             </View>
             <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
             <Text style={{ fontSize: 18, fontWeight: "bold" }}>@StockChat</Text>
-          </View>
-        </View>
+          </View> 
+        </View>*/}
 
         <View style={styles.viewseparator} />
 

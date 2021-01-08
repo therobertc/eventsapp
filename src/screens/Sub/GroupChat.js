@@ -426,7 +426,6 @@ export default function GroupChat({ route, navigation }) {
               // onPress: this.onPressHashtag
             }
           ]}
-
         />
       </View>
     </KeyboardAvoidingView>

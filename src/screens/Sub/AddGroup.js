@@ -83,13 +83,13 @@ export default function AddGroup(props) {
         .get()
         .then(function(snapshot) {
           if (snapshot.exists) {
-            Alert.alert("Group Already exists with same name..");
+            Alert.alert("Group already exists with same name..");
           } else {
             props.navigation.push("AddMember", { groupName: groupName });
           }
         });
     } else {
-      Alert.alert("Please Enter Group name!!!!");
+      Alert.alert("Enter a group name");
     }
   }
 
@@ -148,7 +148,7 @@ export default function AddGroup(props) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.lockedButton}
-            onPress={() => createPrivateGroup()}
+            // onPress={() => createPrivateGroup()}
             isLoading={isLoading}
           >
             <View

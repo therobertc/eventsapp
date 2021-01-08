@@ -159,13 +159,13 @@ export default function AddMoreMember({ route, navigation }) {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "white" }}>
       <View
         style={{
           flexDirection: "row",
           height: 80,
           width: "100%",
-          //backgroundColor: "white",
+          backgroundColor: "white",
           alignItems: "center",
           justifyContent: "space-around",
           paddingTop: 30,

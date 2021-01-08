@@ -41,7 +41,7 @@ function Discussion({ route, navigation }) {
   const [userEmail, setUserEmail] = useState(firebase.auth().currentUser.email);
   const { item, itemPic } = route.params;
 
-  console.log("curremt user ", userid, userEmail);
+  console.log("current user ", userid, userEmail);
 
   useEffect(() => {
     getUserJoinedAlreadyOrNot();
@@ -68,6 +68,7 @@ function Discussion({ route, navigation }) {
             createdAt: new Date().toUTCString(),
             ...firebaseData
           };
+
           return data;
         });
         setMessages(messages);
@@ -345,7 +346,9 @@ function Discussion({ route, navigation }) {
         <TouchableOpacity>
           <Feather name="at-sign" size={22} color="#3e7af0" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => pickImage()}>
+        <TouchableOpacity
+        // onPress={() => pickImage()}
+        >
           <Ionicons name="md-images" size={26} color="#3e7af0" />
         </TouchableOpacity>
         {/* <TouchableOpacity>
@@ -363,92 +366,91 @@ function Discussion({ route, navigation }) {
   };
   console.log("item is ", item);
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-      <View style={styles.main}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="left" color="#000119" size={24} />
-          </TouchableOpacity>
-          <Text style={styles.username}> {item.groupName}</Text>
-          {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
-          <TouchableOpacity
-            onPress={() =>
-              navigation.push("StockDetails", {
-                symbol: "SQ"
-              })
-            }
-            //onPress={() => navigation.navigate("StockProfile")}
-          >
-            <Image
-              //source={require("../../images/tslalogo.png")}
-              source={{ uri: itemPic }}
-              style={styles.avatar}
-            />
-          </TouchableOpacity>
-        </View>
-
-        <GiftedChat
-          isAnimated={true}
-          renderAccessory={CustomView}
-          //onPressActionButton={() => _navigateToStockDetails}
-          //showUserAvatar={false}
-          //showAvatarForEveryMessage={true}
-          renderAvatar={null}
-          messages={messages}
-          renderSend={renderSend}
-          renderBubble={renderBubble}
-          textInputStyle={styles.textInput}
-          isTyping={true}
-          renderUsernameOnMessage={true}
-          renderInputToolbar={props => customtInputToolbar(props)}
-          multiline
-          placeholder={"Enter a message..."}
-          onSend={newMessages => onSend(newMessages)}
-          user={{
-            _id: 1,
-            name: username
-          }}
-          parsePatterns={linkStyle => [
-            {
-              type: "phone",
-              style: linkStyle
-              // onPress: this.onPressPhoneNumber
-            },
-            {
-              pattern: /#(\w+)/,
-              style: {
-                ...linkStyle,
-                color: "black",
-                fontWeight: "bold",
-                textDecorationLine: "underline"
-              }
-              // onPress: this.onPressHashtag
-            },
-            {
-              pattern: /\$(\w+)/,
-
-              style: {
-                ...linkStyle,
-                color: "black",
-                fontWeight: "bold",
-                textDecorationLine: "underline"
-              },
-              onPress: onPressCashtag
-            },
-            {
-              pattern: /\@(\w+)/,
-              style: {
-                ...linkStyle,
-                color: "black",
-                fontWeight: "bold",
-                textDecorationLine: "underline"
-              }
-              // onPress: this.onPressHashtag
-            }
-          ]}
-        />
+    <View style={styles.main}>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Icon name="left" color="#000119" size={24} />
+        </TouchableOpacity>
+        <Text style={styles.username}> {item.groupName}</Text>
+        {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
+        <TouchableOpacity
+        // onPress={() =>
+        //   navigation.push("StockDetails", {
+        //     symbol: "SQ"
+        //   })
+        // }
+        //onPress={() => navigation.navigate("StockProfile")}
+        >
+          <Image
+            source={require("../../assets/icon.png")}
+            // source={{ uri: itemPic }}
+            style={styles.avatar}
+          />
+        </TouchableOpacity>
       </View>
-    </KeyboardAvoidingView>
+
+      <GiftedChat
+        isAnimated={true}
+        renderAccessory={CustomView}
+        //onPressActionButton={() => _navigateToStockDetails}
+        //showUserAvatar={false}
+        //showAvatarForEveryMessage={true}
+        inverted={true}
+        renderAvatar={null}
+        messages={messages}
+        renderSend={renderSend}
+        renderBubble={renderBubble}
+        textInputStyle={styles.textInput}
+        isTyping={true}
+        renderUsernameOnMessage={true}
+        renderInputToolbar={props => customtInputToolbar(props)}
+        multiline
+        placeholder={"Enter a message..."}
+        onSend={newMessages => onSend(newMessages)}
+        user={{
+          _id: 1,
+          name: username
+        }}
+        parsePatterns={linkStyle => [
+          {
+            type: "phone",
+            style: linkStyle
+            // onPress: this.onPressPhoneNumber
+          },
+          {
+            pattern: /#(\w+)/,
+            style: {
+              ...linkStyle,
+              color: "black",
+              fontWeight: "bold",
+              textDecorationLine: "underline"
+            }
+            // onPress: this.onPressHashtag
+          },
+          {
+            pattern: /\$(\w+)/,
+
+            style: {
+              ...linkStyle,
+              color: "black",
+              fontWeight: "bold",
+              textDecorationLine: "underline"
+            },
+            onPress: onPressCashtag
+          },
+          {
+            pattern: /\@(\w+)/,
+            style: {
+              ...linkStyle,
+              color: "black",
+              fontWeight: "bold",
+              textDecorationLine: "underline"
+            }
+            // onPress: this.onPressHashtag
+          }
+        ]}
+      />
+    </View>
   );
 }
 export default Discussion;

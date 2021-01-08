@@ -65,12 +65,12 @@ export default function App({ ...props }) {
   };
   return (
     <View style={styles.getStarted}>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={{ position: "absolute", top: 50, left: 20 }}
         onPress={() => props.navigation.goBack()}
       >
         <AntDesign style={styles.back} name="left" size={30} color="black" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
           source={require("../../../assets/logo-outline.png")}

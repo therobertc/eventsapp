@@ -48,7 +48,7 @@ const Messages = ({ item, totalmembers, lastmessage, uri }) => {
         /> */}
         <View style={{ marginLeft: 10 }}>
           <Text style={styles.username}>#{item}</Text>
-          <Text style={styles.preview}>{totalmembers} members </Text>
+          {/* <Text style={styles.preview}>{totalmembers} members </Text> */}
           <Text style={styles.preview}>
             {lastmessage > 10 ? `${lastmessage.slice(0, 40)}...` : lastmessage}
           </Text>

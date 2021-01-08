@@ -133,7 +133,7 @@ const Chat = props => {
 
         <TrendingStocks {...props} />
 
-        <View style={styles.col}>
+        {/* <View style={styles.col}>
           <Text style={styles.header}>Stock Chats</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
@@ -163,7 +163,7 @@ const Chat = props => {
               Connect Portfolio
             </Text>
           </TouchableOpacity> */}
-          {/* <StockGroupCard
+        {/* <StockGroupCard
             ticker="$TSLA"
             pctchange="+1.02%"
             onPress={() => {
@@ -175,7 +175,7 @@ const Chat = props => {
             }}
             msg="This stock is trending"
           /> */}
-          <StockGroupCard
+        {/* <StockGroupCard
             ticker="$SQ"
             pctchange="+4.55%"
             onPress={() => {
@@ -189,8 +189,8 @@ const Chat = props => {
               //     itemName: "$SQ"
             }}
             msg="This stock is trending"
-          />
-          {/* <StockGroupCard
+          /> */}
+        {/* <StockGroupCard
             ticker="$NET"
             pctchange="+3.521%"
             onPress={() => {
@@ -203,14 +203,14 @@ const Chat = props => {
             }}
             msg="This stock is trending"
           /> */}
-        </View>
+        {/* </View>  */}
         <View style={styles.col}>
           <Text style={styles.header}>Trading Groups</Text>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
             <AntDesign name="pluscircleo" size={24} color="black" />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
           <FlatList
