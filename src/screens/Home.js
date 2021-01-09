@@ -3,14 +3,10 @@ import {
     StyleSheet,
     Text,
     View,
-    Image,
     ScrollView,
     TouchableOpacity,
     ActivityIndicator,
     AsyncStorage,
-    Platform,
-    Alert,
-    RefreshControl,
     Share
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
@@ -49,14 +45,14 @@ class Home extends Component {
     componentDidMount() {
 
         // Linking.addEventListener('url', this.handleOpenURL);
-        AsyncStorage.getItem("user")
-            .then(user => {
-                user = JSON.parse(user);
-                this.setState({ isSubscribed: user.sub_status});
-            })
-            .catch(err => {
-                console.log(err.message);
-            });
+        // AsyncStorage.getItem("user")
+        //     .then(user => {
+        //         user = JSON.parse(user);
+        //         this.setState({ isSubscribed: user.sub_status});
+        //     })
+        //     .catch(err => {
+        //         console.log(err.message);
+        //     });
         this._getAllDefaultScreener();
         this.getTrandingData();
     }
@@ -962,6 +958,12 @@ const styles = StyleSheet.create({
     notificationList: {
         marginTop: 20,
         padding: 10
+    },
+    stockcard: {
+        height: 30,
+        marginTop: 10,
+        borderRadius: 10,
+        backgroundColor: "#fff"
     },
     notificationBox: {
         padding: 20,
