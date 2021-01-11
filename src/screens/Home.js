@@ -118,7 +118,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[0].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : 'green'}]}>{data[0].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[0].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -128,7 +128,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[1].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : 'green'}]}>{data[1].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[1].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -137,7 +137,7 @@ class Home extends Component {
                             <TouchableOpacity style={styles.ticker}>
                                 <Text style={styles.tickertext}>{data[2].name}</Text>
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : 'green'}]}>{data[2].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[2].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -146,7 +146,7 @@ class Home extends Component {
                             <TouchableOpacity style={styles.ticker}>
                                 <Text style={styles.tickertext}>{data[3].name}</Text>
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : 'green'}]}>{data[3].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[3].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -184,7 +184,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[0].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : 'green'}]}>{data[0].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[0].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -194,7 +194,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[1].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : 'green'}]}>{data[1].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[1].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -204,7 +204,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[2].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : 'green'}]}>{data[2].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[2].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -214,7 +214,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[3].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : 'green'}]}>{data[3].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[3].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -257,7 +257,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[0].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : 'green'}]}>{data[0].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[0].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -267,7 +267,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[1].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : 'green'}]}>{data[1].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[1].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -277,7 +277,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[2].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : 'green'}]}>{data[2].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[2].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -286,7 +286,7 @@ class Home extends Component {
                             <TouchableOpacity style={styles.ticker}>
                                 <Text style={styles.tickertext}>{data[3].name}</Text>
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : 'green'}]}>{data[3].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[3].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -324,7 +324,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[0].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : 'green'}]}>{data[0].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[0].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -334,7 +334,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[1].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : 'green'}]}>{data[1].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[1].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -344,7 +344,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[2].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : 'green'}]}>{data[2].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[2].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -353,7 +353,7 @@ class Home extends Component {
                             <TouchableOpacity style={styles.ticker}>
                                 <Text style={styles.tickertext}>{data[3].name}</Text>
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : 'green'}]}>{data[3].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[3].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -394,7 +394,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[0].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : 'green'}]}>{data[0].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[0].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -406,7 +406,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[1].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : 'green'}]}>{data[1].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[1].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -418,7 +418,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[2].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : 'green'}]}>{data[2].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[2].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -428,7 +428,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[3].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : 'green'}]}>{data[3].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[3].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -468,7 +468,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[0].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : 'green'}]}>{data[0].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[0].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -480,7 +480,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[1].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : 'green'}]}>{data[1].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[1].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -489,7 +489,7 @@ class Home extends Component {
                             <TouchableOpacity style={styles.ticker}>
                                 <Text style={styles.tickertext}>{data[2].name}</Text>
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : 'green'}]}>{data[2].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[2].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -501,7 +501,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[3].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : 'green'}]}>{data[3].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[3].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -542,7 +542,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[0].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : 'green'}]}>{data[0].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[0].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[0].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -551,7 +551,7 @@ class Home extends Component {
                             <TouchableOpacity style={styles.ticker}>
                                 <Text style={styles.tickertext}>{data[1].name}</Text>
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : 'green'}]}>{data[1].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[1].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[1].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -563,7 +563,7 @@ class Home extends Component {
                                 <Text style={styles.tickertext}>{data[2].name}</Text>
 
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : 'green'}]}>{data[2].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[2].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[2].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -572,7 +572,7 @@ class Home extends Component {
                             <TouchableOpacity style={styles.ticker}>
                                 <Text style={styles.tickertext}>{data[3].name}</Text>
                                 <View style={styles.datacard}>
-                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : 'green'}]}>{data[3].change}</Text>
+                                    <Text style={[styles.stocktext,{color: parseFloat(data[3].change) < 0  ? '#CF2727' : '#33CC00'}]}>{data[3].change}</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>
@@ -656,7 +656,7 @@ class Home extends Component {
                 >
                     <View
                         style={{
-                            backgroundColor: "#fff",
+                            backgroundColor: "#383c4a",
                             justifyContent: "center",
                             alignItems: "center",
                             borderRadius: 20,
@@ -692,7 +692,7 @@ class Home extends Component {
                                     fontWeight: "500",
                                     fontSize: 14,
                                     textAlign: "center",
-                                    color: parseFloat(service.changePercent) < 0  ? '#CF2727' : 'green'
+                                    color: parseFloat(service.changePercent) < 0  ? '#CF2727' : '#33CC00'
                                 }}
                             >
                                 {parseFloat(service.changePercent) < 0 ? (parseFloat(service.changePercent)*100) .toFixed(2) : "+" + (parseFloat(service.changePercent)*100).toFixed(2)}%
@@ -714,7 +714,7 @@ class Home extends Component {
                         flex: 1,
                         justifyContent: "center",
                         alignItems: "center",
-                        backgroundColor: "white"
+                        backgroundColor: "#383c4a"
                     }}
                 >
                     <ActivityIndicator />
@@ -728,7 +728,7 @@ class Home extends Component {
                     <Left>
                         <Feather
                             style={{
-                                color: "black",
+                                color: "white",
                                 paddingHorizontal: Platform.OS === 'ios'? 20 : 15,
                                 fontSize: 30,
                                 fontWeight: "bold"
@@ -754,7 +754,7 @@ class Home extends Component {
                     <Right>
                         <Feather
                             style={{
-                                color: "black",
+                                color: "white",
                                 fontWeight: "bold",
                                 paddingHorizontal: Platform.OS === 'ios'? 10 : 10,
                                 fontSize: 30
@@ -787,8 +787,8 @@ class Home extends Component {
               title="Share"
               //onPress={() => props.navigation.navigate("InviteFriends")}
             >
-              <Feather name="user-plus" size={20} color="white" />
-              <Text style={{ color: "white", fontWeight: "500" }}>
+              <Feather name="user-plus" size={20} color="#383c4a" />
+              <Text style={{ color: "#383c4a", fontWeight: "500" }}>
                 {" "}
                 Invite{" "}
               </Text>
@@ -845,7 +845,7 @@ class Home extends Component {
                         >
                             <Text
                                 style={{
-                                    color: "white",
+                                    color: "#383c4a",
                                     fontWeight: "bold",
                                     fontSize: 16,
                                     //paddingLeft: 20
@@ -869,7 +869,7 @@ export default Home;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //backgroundColor: "#FFF"
+        //backgroundColor: "#383c4a"
         backgroundColor: "#F5F8FA",
         paddingTop: 30
     },
@@ -893,7 +893,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         borderBottomColor: "#F5FCFF",
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#383c4a",
         borderRadius: 30,
         borderBottomWidth: 1,
         height: 45,
@@ -909,7 +909,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#147efb"
     },
     offercard: {
-        backgroundColor: "white",
+        backgroundColor: "#383c4a",
         borderRadius: 10,
         padding: 10,
         //height: 100,
@@ -931,10 +931,10 @@ const styles = StyleSheet.create({
     inputs: {
         height: 50,
         marginLeft: 10,
-        borderBottomColor: "#FFFFFF",
+        borderBottomColor: "#383c4a",
         //flex: 1,
         width: 300,
-        backgroundColor: "white",
+        backgroundColor: "#383c4a",
         marginBottom: 50
     },
     inputIcon: {
@@ -953,7 +953,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     saveButtonText: {
-        color: "white"
+        color: "#383c4a"
     },
     notificationList: {
         marginTop: 20,
@@ -963,13 +963,13 @@ const styles = StyleSheet.create({
         height: 30,
         marginTop: 10,
         borderRadius: 10,
-        backgroundColor: "#fff"
+        backgroundColor: "#383c4a"
     },
     notificationBox: {
         padding: 20,
         marginTop: 5,
         marginBottom: 5,
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#383c4a",
         flexDirection: "row",
         borderRadius: 10
     },
@@ -995,7 +995,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "500",
         justifyContent: "center",
-        // color: 'green'
+        // color: '#33CC00'
     },
 
     stocktextred: {
@@ -1022,7 +1022,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 2.0,
         margin: 10,
         //backgroundColor: "#e8eef1",
-        backgroundColor: "#fff",
+        backgroundColor: "#383c4a",
         borderRadius: 20,
         padding: 10,
         paddingTop: 20
@@ -1034,7 +1034,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         marginBottom: 10,
         //backgroundColor: "#e8eef1",
-        backgroundColor: "#fff",
+        backgroundColor: "#383c4a",
         borderRadius: 20,
         padding: 10,
         paddingTop: 20

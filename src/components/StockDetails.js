@@ -166,7 +166,7 @@ class StockDetails extends Component {
         return (
             <View style={styles.loadCon}>
                 <Text style={styles.loadTitle}>Loading Chart...</Text>
-                <ActivityIndicator color="black" size="large" />
+                <ActivityIndicator color="white" size="large" />
             </View>
         );
     };
@@ -177,7 +177,7 @@ class StockDetails extends Component {
             return news.map((data, index) => {
                 return (
                     <View key={index}>
-                        <Text style={styles.subheading}>{data}</Text>
+                        <Text style={styles.subtext}>{data}</Text>
                     </View>
                 );
             });
@@ -312,8 +312,8 @@ class StockDetails extends Component {
                     <View style={{ paddingBottom: 0 }}>
                         <Text style={styles.heading}>Company Profile</Text>
                         <View>
-                            <DetailItem value={obj.description} />
-                            <View style={styles.seperator} />
+                            {/* <DetailItem value={obj.description} /> */}
+                            {/* <View style={styles.seperator} /> */}
                             <DetailItem title={"INDUSTRY"} value={obj.industry} />
                             <DetailItem title={"SECTOR"} value={obj.sector} />
                         </View>
@@ -373,7 +373,7 @@ class StockDetails extends Component {
                                 <TouchableOpacity
                                     onPress={() => WebBrowser.openBrowserAsync(data.url)}
                                 >
-                                    <Text style={{ fontSize: 12, paddingBottom: 5 }}>
+                                    <Text style={{ fontSize: 12, paddingBottom: 5, color: '#7c818c' }}>
                                         {data.source}
                                     </Text>
                                     <Text style={styles.subheading}>{data.headline}</Text>
@@ -417,7 +417,7 @@ class StockDetails extends Component {
           <AntDesign
             name="left"
             size={30}
-            color="black"
+            color="white"
             //style={{ marginTop: 20, marginLeft: 20 }}
           />
         </TouchableOpacity>
@@ -443,8 +443,8 @@ class StockDetails extends Component {
               }}
            
             >
-              <Feather name="message-circle" size={20} color="white" />
-              <Text style={{ color: "white", fontWeight: '500' }}> Join Chat </Text>
+              <Feather name="message-circle" size={20} color="#383c4a" />
+              <Text style={{ color: "#383c4a", fontWeight: '500' }}> Join Chat </Text>
             </TouchableOpacity> */}
       </View>
                 <ScrollView
@@ -475,112 +475,11 @@ class StockDetails extends Component {
                                         uri:
                                             "https://www.trucharts.com/Chart.aspx?Provider=DB&Code=" +
                                             data.symbol +
-                                            "&Type=3&Scale=0&IND=AreaRSI(14){U};VOLMA(60);&OVER=MA(13);MA(50);TCFast()&Skin=GreenRed&Size=520&RT=1&Start=20200601"
+                                            "&Type=3&Scale=0&IND=AreaRSI(14){U};VOLMA(60);&OVER=MA(13);MA(50);TCFast()&Skin=#33CC00Red&Size=520&RT=1&Start=20200601"
                                     }}
                                 /> */}
                                   <ChartComp symbol={data.symbol} />
-                                {/* <View
-                                    style={{
-                                        justifyContent: "space-between",
-                                        display: "flex",
-                                        flexDirection: "row",
-                                        alignItems: "center"
-                                    }}
-                                >
-                                    <TouchableOpacity
-                                        style={{
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            alignItems: "center"
-                                        }}
-                                        onPress={() =>
-                                            this.props.navigation.navigate("CreatePost", {
-                                                stock: data.symbol
-                                            })
-                                        }
-                                    >
-                                        <Feather name="heart" size={20} color={"black"} />
-                                        <Text
-                                            style={{
-                                                fontSize: 20,
-                                                fontWeight: "400",
-                                                paddingHorizontal: 10
-                                            }}
-                                        >
-                                            Save
-                                        </Text>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity
-                                        style={{
-                                            justifyContent: "space-between",
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            alignItems: "center"
-                                        }}
-                                        onPress={() => {
-                                            this.state.sub_status
-                                                ? this.props.navigation.navigate("AlertsPage", {
-                                                    stock: data.symbol
-                                                })
-                                                : this.props.navigation.navigate("Subscribe");
-                                        }}
-                                    >
-                                        <Feather name="bell" size={24} color={"black"} />
-                                        <Text
-                                            style={{
-                                                fontSize: 20,
-                                                fontWeight: "400",
-                                                paddingHorizontal: 10
-                                            }}
-                                        >
-                                            Alert
-                                        </Text>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity
-                                        style={{
-                                            justifyContent: "space-between",
-                                            display: "flex",
-                                            flexDirection: "row",
-                                            alignItems: "center"
-                                        }}
-                                        onPress={() =>
-                                            Share.share(
-                                                {
-                                                    message:
-                                                        "Just found " +
-                                                        "$" +
-                                                        data.symbol +
-                                                        " with ChartBot" +
-                                                        " https://chartbotapp.com/?stock=" +
-                                                        data.symbol,
-                                                    url: "https://chartbotapp.com/?stock=" + data.symbol,
-                                                    title: "ChartBot, Stock Screener"
-                                                },
-                                                {
-                                                    // Android only:
-                                                    dialogTitle: "Share ChartBot",
-                                                    // iOS only:
-                                                    excludedActivityTypes: [
-                                                        "com.apple.UIKit.activity.PostToTwitter"
-                                                    ]
-                                                }
-                                            )
-                                        }
-                                    >
-                                        <Feather name="send" size={24} color={"black"} />
-                                        <Text
-                                            style={{
-                                                fontSize: 20,
-                                                fontWeight: "400",
-                                                paddingLeft: 10
-                                            }}
-                                        >
-                                            Share
-                                        </Text>
-                                    </TouchableOpacity>
-                                </View>*/}
+                                
                             </View>
                         ) : (
                         <View /> 
@@ -600,7 +499,7 @@ class StockDetails extends Component {
                                         <Feather
                                             name="copy"
                                             size={24}
-                                            color={"black"}
+                                            color={"white"}
                                             onPress={() => {
                                                 Clipboard.setString(
                                                     this.state.news.length > 0 ? this.state.news[0] : ""
@@ -633,7 +532,7 @@ class StockDetails extends Component {
                                     uri:
                                         "https://www.trucharts.com/Chart.aspx?Provider=DB&Code=" +
                                         data.symbol +
-                                        "&Type=2&Scale=0&;&Skin=GreenRed&Size=600&Start=20200101"
+                                        "&Type=2&Scale=0&;&Skin=#33CC00Red&Size=600&Start=20200101"
                                 }}
                             />
 
@@ -657,7 +556,7 @@ class StockDetails extends Component {
                                         })
                                     }
                                 >
-                                    <Feather name="heart" size={20} color={"black"} />
+                                    <Feather name="heart" size={20} color={"white"} />
                                     <Text
                                         style={{
                                             fontSize: 20,
@@ -684,7 +583,7 @@ class StockDetails extends Component {
                                             : this.props.navigation.navigate("Subscribe");
                                     }}
                                 >
-                                    <Feather name="bell" size={24} color={"black"} />
+                                    <Feather name="bell" size={24} color={"white"} />
                                     <Text
                                         style={{
                                             fontSize: 20,
@@ -726,7 +625,7 @@ class StockDetails extends Component {
                                         )
                                     }
                                 >
-                                    <Feather name="send" size={24} color={"black"} />
+                                    <Feather name="send" size={24} color={"white"} />
                                     <Text
                                         style={{
                                             fontSize: 20,
@@ -941,19 +840,19 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: "#F5F8FA",
+        backgroundColor: "#383c4a",
         //paddingHorizontal: 20
     },
     card: {
         shadowOffset: { width: 0.5, height: 0.5 },
         shadowRadius: 5,
-        shadowColor: "lightgrey",
+        shadowColor: "#000",
         marginHorizontal: 10,
-        shadowOpacity: 1.0,
+        shadowOpacity: 0.5,
         marginVertical: 10,
         elevation: 1,
         //backgroundColor: "#e8eef1",
-        backgroundColor: "#fff",
+        backgroundColor: "#4b5162",
         borderRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 20
@@ -967,7 +866,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         elevation: 1,
         //backgroundColor: "#e8eef1",
-        //backgroundColor: "#fff",
+        //backgroundColor: "#383c4a",
         borderRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 20
@@ -981,7 +880,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         elevation: 1,
         //backgroundColor: "#e8eef1",
-        backgroundColor: "#fff",
+        backgroundColor: "#383c4a",
         borderRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 10
@@ -991,26 +890,36 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: "700",
         //marginTop: 5,
-        marginBottom: 10
+        marginBottom: 10,
+        color: '#FFF'
     },
     subheading: {
         fontSize: 18,
-        fontWeight: "600",
-        marginBottom: 5
+        fontWeight: "500",
+        marginBottom: 5,
+        color: '#FFF'
+    },
+    subtext: {
+        fontSize: 18,
+        fontWeight: "500",
+        marginBottom: 5,
+        color: '#FFF'
     },
     percent: {
         fontSize: 18,
         fontWeight: "bold",
-        marginBottom: 5
+        marginBottom: 5,
+        color: '#FFF'
     },
     companysubheading: {
         fontSize: 18,
         fontWeight: "500",
         marginBottom: 5,
-        width: "70%"
+        width: "70%",
+        color: '#FFF'
     },
     loadTitle: {
-        color: "black",
+        color: "white",
         fontSize: 16,
         //margin: 8,
         fontWeight: "700"
@@ -1018,7 +927,7 @@ const styles = StyleSheet.create({
     symbol: {
         fontWeight: "bold",
         fontSize: 22,
-        color: "#14171A",
+        color: "#FFF",
         justifyContent: "space-between"
         //textAlign: "right"
     },
@@ -1033,23 +942,23 @@ const styles = StyleSheet.create({
         padding: 10
     },
     company: {
-        color: "#14171A",
+        color: "#FFF",
         fontWeight: "bold",
         fontSize: 22
     },
     seperator: {
         marginVertical: 10,
-        borderColor: "#E1E8ED",
+        borderColor: "#7c818c",
         borderWidth: 0.5
     },
     stats: {
-        color: "#14171A",
+        color: "#FFF",
         fontWeight: "500",
         fontSize: 18
     },
     button: {
         borderRadius: 2,
-        backgroundColor: "black",
+        backgroundColor: "white",
         width: 80,
         textAlign: "center",
         marginVertical: 30
@@ -1062,7 +971,7 @@ const styles = StyleSheet.create({
         paddingTop: 20
     },
     icon: {
-        color: "black",
+        color: "white",
         fontSize: 25,
         fontWeight: "bold"
         //alignSelf: "left"

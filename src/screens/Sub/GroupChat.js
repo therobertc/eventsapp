@@ -132,15 +132,15 @@ export default function GroupChat({ route, navigation }) {
             //marginRight: 15
           }}
         >
-          {/* <Feather name="arrow-up" color="white" size={28} fontWeight={900} /> */}
+          {/* <Feather name="arrow-up" color="#383c4a" size={28} fontWeight={900} /> */}
           <FontAwesome5
             name="arrow-up"
-            color="white"
+            color="#383c4a"
             size={20}
             fontWeight={900}
           />
 
-          {/* <Text style={{ fontWEight: "700", color: "white" }}>Send</Text> */}
+          {/* <Text style={{ fontWEight: "700", color: "#383c4a" }}>Send</Text> */}
         </View>
       </Send>
     );
@@ -167,7 +167,7 @@ export default function GroupChat({ route, navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "white",
+          backgroundColor: "#383c4a",
           borderTopColor: "#E8E8E8",
           borderTopWidth: 1,
           paddingTop: 10
@@ -354,7 +354,7 @@ export default function GroupChat({ route, navigation }) {
       <View style={styles.main}>
         <View style={styles.headerContainer}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Icon name="left" color="#000119" size={24} />
+            <Icon name="left" color="#FFF" size={24} />
           </TouchableOpacity>
           <Text style={styles.username}> {groupName}</Text>
           <TouchableOpacity
@@ -399,7 +399,7 @@ export default function GroupChat({ route, navigation }) {
               pattern: /#(\w+)/,
               style: {
                 ...linkStyle,
-                color: "black",
+                color: "white",
                 fontWeight: "bold",
                 textDecorationLine: "underline"
               }
@@ -409,7 +409,7 @@ export default function GroupChat({ route, navigation }) {
               pattern: /\$(\w+)/,
               style: {
                 ...linkStyle,
-                color: "black",
+                color: "white",
                 fontWeight: "bold",
                 textDecorationLine: "underline"
               }
@@ -419,7 +419,7 @@ export default function GroupChat({ route, navigation }) {
               pattern: /\@(\w+)/,
               style: {
                 ...linkStyle,
-                color: "black",
+                color: "white",
                 fontWeight: "bold",
                 textDecorationLine: "underline"
               }
@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: "#383c4a"
   },
 
   ImageStyle: {
@@ -468,7 +468,7 @@ const styles = StyleSheet.create({
   },
 
   main: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#383c4a",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
@@ -481,7 +481,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   username: {
-    color: "#000119",
+    color: "#FFF",
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
     flex: 1,

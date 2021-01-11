@@ -28,7 +28,7 @@ export default function App({ route, navigation }) {
         style={{ position: "absolute", top: 50, left: 20 }}
         onPress={() => navigation.goBack()}
       >
-        <AntDesign style={styles.back} name="left" size={30} color="black" />
+        <AntDesign style={styles.back} name="left" size={30} color="white" />
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
@@ -77,7 +77,7 @@ export default function App({ route, navigation }) {
               style={{
                 fontSize: 18,
                 textAlign: "center",
-                color: "white",
+                color: "#383c4a",
                 fontWeight: "600"
               }}
             >
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "white",
+    backgroundColor: "#383c4a",
     width: Dimensions.get("screen").width
   },
   Button: {
@@ -105,13 +105,13 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   HaveAccount: {
-    color: "white",
+    color: "#383c4a",
     textAlign: "center",
     fontSize: 15
   },
   Stockchat: {
     marginTop: 50,
-    color: "black",
+    color: "white",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
@@ -120,21 +120,21 @@ const styles = StyleSheet.create({
   },
   username: {
     marginTop: 10,
-    color: "black",
+    color: "white",
     textAlign: "center",
     fontSize: 15,
     padding: 18
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "white",
+    backgroundColor: "#383c4a",
     //backgroundColor: "red",
-    //borderBottomColor: "black",
+    //borderBottomColor: "white",
     //borderColor: "#3C4956",
-    borderColor: "black",
+    borderColor: "white",
     padding: 12,
     paddingLeft: 30,
-    color: "black",
+    color: "white",
     height: 50,
     fontSize: 21,
     borderRadius: 30

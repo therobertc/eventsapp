@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginRight: 20
   },
   count: {
-    color: "#fff",
+    color: "#383c4a",
     fontFamily: "Montserrat_700Bold"
   },
   image: {
@@ -86,12 +86,12 @@ const styles = StyleSheet.create({
     borderRadius: 30
   },
   text: {
-    color: "black",
+    color: "white",
     fontFamily: "Montserrat_600SemiBold",
     fontSize: 11
   },
   duration: {
-    color: "#000119",
+    color: "#FFF",
     fontSize: 12,
     //flex: 1,
 
@@ -99,13 +99,14 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_600SemiBold"
   },
   username: {
-    color: "#000119",
+    color: "#FFF",
     fontFamily: "Montserrat_700Bold",
     fontSize: 15,
     paddingLeft: 10
   },
   preview: {
-    color: "#657786",
+    //color: "#657786",
+    color: "#7c818c",
     //fontFamily: "Montserrat_300SemiBold",
     fontSize: 15,
     paddingLeft: 10
@@ -113,14 +114,14 @@ const styles = StyleSheet.create({
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 2,
-    shadowColor: "lightgrey",
+    shadowColor: "#000",
     marginHorizontal: 10,
-    shadowOpacity: 1.0,
+    shadowOpacity: 0.5,
     marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
     //backgroundColor: "#F5F8FA"
-    backgroundColor: "#fff",
+    backgroundColor: "#4b5162",
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,

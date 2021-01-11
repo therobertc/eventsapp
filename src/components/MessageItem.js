@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginHorizontal: 5,
     //fontFamily: "Montserrat_700Bold",
-    color: "#FFF",
+    color: "#383c4a",
     fontWeight: "500"
   },
   sentBubble: {

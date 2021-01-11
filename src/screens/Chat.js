@@ -10,8 +10,11 @@ import {
   ScrollView,
   Share,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  TextInput
 } from "react-native";
+import { Icon, Header, Left, Right, Body, Button } from "native-base";
+
 import { LinearGradient } from "expo-linear-gradient";
 import Entypo from "@expo/vector-icons/Entypo";
 import Profiles from "../components/Profiles";
@@ -112,33 +115,109 @@ const Chat = props => {
 
   return (
     <View style={styles.container}>
+      <Header
+        style={{
+          backgroundColor: "#383c4a",
+          borderBottomWidth: 0.2,
+          borderBottomColor: "#383c4a"
+        }}
+      >
+        <Left>
+          <Feather
+            style={{
+              color: "white",
+              paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
+              fontSize: 30,
+              fontWeight: "bold"
+            }}
+            name="search"
+            onPress={() => this.props.navigation.navigate("Profile")}
+          />
+        </Left>
+
+        <Body>
+          {/* <Image
+            style={{
+              flex: 1,
+              aspectRatio: Platform.OS === "ios" ? 3.0 : 4.0,
+              resizeMode: "contain"
+            }}
+            source={require("../../assets/stockchattext.png")}
+          /> */}
+          {/* <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <Text style={styles.header2}>#stockchat</Text>
+          </View> */}
+        </Body>
+
+        <Right>
+          <Feather
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+              fontSize: 30
+            }}
+            name="user-plus"
+            onPress={onShare}
+          />
+
+          <Feather
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+              fontSize: 30
+            }}
+            name="bell"
+            onPress={() => props.navigation.navigate("Activity")}
+          />
+          <Feather
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+              fontSize: 30
+            }}
+            name="send"
+            onPress={() => props.navigation.navigate("Activity")}
+          />
+        </Right>
+      </Header>
+
       <ScrollView style={styles.col2}>
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Trending Stocks</Text>
-          <View>
+          {/* <View>
             <TouchableOpacity
               style={styles.invite}
               onPress={onShare}
               title="Share"
               //onPress={() => props.navigation.navigate("InviteFriends")}
             >
-              <Feather name="user-plus" size={20} color="white" />
-              <Text style={{ color: "white", fontWeight: "500" }}>
+              <Feather name="user-plus" size={20} color="#383c4a" />
+              <Text style={{ color: "#383c4a", fontWeight: "500" }}>
                 {" "}
                 Invite{" "}
               </Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
         </View>
 
         <TrendingStocks {...props} />
+
+        {/* <TextInput
+          style={styles.inputStyle}
+          placeholder="Search for groups or messages"
+          // value={email}
+          // onChangeText={val => setEmail(val)}
+        /> */}
 
         {/* <View style={styles.col}>
           <Text style={styles.header}>Stock Chats</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
-            <AntDesign name="pluscircleo" size={24} color="black" />
+            <AntDesign name="pluscircleo" size={24} color="white" />
           </TouchableOpacity>
         </View>
         <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
@@ -155,7 +234,7 @@ const Chat = props => {
           >
             <Text
               style={{
-                color: "white",
+                color: "#383c4a",
                 fontSize: 19,
                 fontFamily: "Montserrat_700Bold"
               }}
@@ -209,10 +288,10 @@ const Chat = props => {
           {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
-            <AntDesign name="pluscircleo" size={24} color="black" />
+            <AntDesign name="pluscircleo" size={24} color="white" />
           </TouchableOpacity> */}
         </View>
-        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+        <View style={{ paddingVertical: 10, marginHorizontal: 10 }}>
           <FlatList
             data={publicgroups}
             keyExtractor={(item, index) => "key" + index}
@@ -240,17 +319,7 @@ const Chat = props => {
               );
             }}
           />
-        </View>
 
-        <View style={styles.col}>
-          <Text style={styles.header2}>Private Groups</Text>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("AddGroup")}
-          >
-            <AntDesign name="pluscircleo" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
           <FlatList
             data={groups}
             keyExtractor={(item, index) => "key" + index}
@@ -272,12 +341,13 @@ const Chat = props => {
             }}
           />
         </View>
+
         <View style={styles.col}>
           <Text style={styles.header}>Direct Messages</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("CreateChat")}
           >
-            <AntDesign name="pluscircleo" size={24} color="black" />
+            <AntDesign name="pluscircleo" size={24} color="white" />
           </TouchableOpacity>
         </View>
         <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
@@ -321,7 +391,7 @@ const styles = StyleSheet.create({
   btn: {
     borderRadius: 16,
     //borderTopRightRadius: 0,
-    backgroundColor: "black",
+    backgroundColor: "white",
     height: 80,
     alignItems: "center",
     justifyContent: "center",
@@ -346,7 +416,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "white",
+    backgroundColor: "#383c4a",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -356,12 +426,12 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingTop: 30,
+    //paddingTop: 0,
     paddingHorizontal: 20
   },
   header: {
     fontFamily: "Montserrat_700Bold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
     fontSize: 20
   },
@@ -380,7 +450,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#FFF",
+    // backgroundColor: "#383c4a",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },
@@ -405,9 +475,25 @@ const styles = StyleSheet.create({
     marginHorizontal: 20
     //alignItems: "center"
   },
+  inputStyle: {
+    width: "100%",
+    marginBottom: 15,
+    //paddingBottom: 15,
+    paddingVertical: 10,
+    paddingLeft: 15,
+    alignSelf: "center",
+    borderColor: "grey",
+    borderWidth: 1,
+    borderRadius: 20,
+    marginHorizontal: 20,
+    paddingRight: 20,
+    fontSize: 20,
+    backgroundColor: "#F5F8FA",
+    flex: 1
+  },
   day: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000119",
+    color: "#FFF",
     flex: 1,
     fontSize: 20
   }

@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     marginRight: 20
   },
   count: {
-    color: "#fff",
+    color: "#383c4a",
     fontFamily: "Montserrat_700Bold"
   },
   image: {
@@ -92,12 +92,12 @@ const styles = StyleSheet.create({
     borderRadius: 30
   },
   text: {
-    color: "black",
+    color: "white",
     fontFamily: "Montserrat_600SemiBold",
     fontSize: 11
   },
   duration: {
-    color: "#000119",
+    color: "#FFF",
     fontSize: 12,
     //flex: 1,
 
@@ -105,19 +105,19 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_600SemiBold"
   },
   username: {
-    color: "#000119",
+    color: "#FFF",
     fontFamily: "Montserrat_700Bold",
     fontSize: 15,
     paddingLeft: 10
   },
   change: {
-    color: "green",
+    color: "#33CC00",
     fontFamily: "Montserrat_700Bold",
     fontSize: 15,
     paddingLeft: 10
   },
   preview: {
-    color: "#000119",
+    color: "#FFF",
     //fontFamily: "Montserrat_300SemiBold",
     fontSize: 15,
     paddingLeft: 10
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     //backgroundColor: "#e8eef1",
     //backgroundColor: "#F5F8FA"
-    backgroundColor: "#fff",
+    backgroundColor: "#383c4a",
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,

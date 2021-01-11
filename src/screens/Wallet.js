@@ -41,7 +41,7 @@ const Wallet = props => {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.col}>
         <TouchableOpacity onPress={() => props.navigation.goBack()}>
-          <Feather name="chevron-left" size={30} color="black" />
+          <Feather name="chevron-left" size={30} color="white" />
         </TouchableOpacity>
         <Text style={styles.header}>Wallet</Text>
       </View>
@@ -52,7 +52,10 @@ const Wallet = props => {
         <Feather name="stop-circle" size={30} color="orange" />
         <Text style={styles.coins}>0</Text>
         <TouchableOpacity style={styles.invite}>
-          <Text style={{ color: "white", fontWeight: "500" }}> Cash Out </Text>
+          <Text style={{ color: "#383c4a", fontWeight: "500" }}>
+            {" "}
+            Cash Out{" "}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -66,7 +69,7 @@ const Wallet = props => {
 
         <Text
           style={{
-            color: "white",
+            color: "#383c4a",
             fontWeight: "800",
             fontSize: 18,
             paddingRight: 5,
@@ -80,7 +83,7 @@ const Wallet = props => {
         <TouchableOpacity style={styles.btn} onPress={onShare} title="Share">
           <Text
             style={{
-              color: "white",
+              color: "#383c4a",
               fontWeight: "500",
               paddingRight: 5,
               fontSize: 18
@@ -91,7 +94,7 @@ const Wallet = props => {
         </TouchableOpacity>
         <Text
           style={{
-            color: "white",
+            color: "#383c4a",
             fontWeight: "700",
             fontSize: 14,
             paddingHorizontal: 20,
@@ -111,28 +114,28 @@ const Wallet = props => {
         <Feather name="stop-circle" size={30} color="orange" />
         <Text style={styles.buycoins}>100 COINS</Text>
         <TouchableOpacity style={styles.invite}>
-          <Text style={{ color: "white", fontWeight: "500" }}> $9.99 </Text>
+          <Text style={{ color: "#383c4a", fontWeight: "500" }}> $9.99 </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.coinrow}>
         <Feather name="stop-circle" size={30} color="orange" />
         <Text style={styles.buycoins}>1,000 COINS</Text>
         <TouchableOpacity style={styles.invite}>
-          <Text style={{ color: "white", fontWeight: "500" }}> $99.99 </Text>
+          <Text style={{ color: "#383c4a", fontWeight: "500" }}> $99.99 </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.coinrow}>
         <Feather name="stop-circle" size={30} color="orange" />
         <Text style={styles.buycoins}>10,000 COINS</Text>
         <TouchableOpacity style={styles.invite}>
-          <Text style={{ color: "white", fontWeight: "500" }}> $399.99 </Text>
+          <Text style={{ color: "#383c4a", fontWeight: "500" }}> $399.99 </Text>
         </TouchableOpacity>
       </View>
       <View style={styles.coinrow}>
         <Feather name="stop-circle" size={30} color="orange" />
         <Text style={styles.buycoins}>100,000 COINS</Text>
         <TouchableOpacity style={styles.invite}>
-          <Text style={{ color: "white", fontWeight: "500" }}> $999.99 </Text>
+          <Text style={{ color: "#383c4a", fontWeight: "500" }}> $999.99 </Text>
         </TouchableOpacity>
       </View>
 
@@ -149,7 +152,7 @@ const Wallet = props => {
             });
         }}
       >
-        <Text style={{ color: "white", fontSize: 19, fontWeight: "bold" }}>
+        <Text style={{ color: "#383c4a", fontSize: 19, fontWeight: "bold" }}>
           Send to Bank
         </Text>
       </TouchableOpacity> */}
@@ -196,7 +199,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "white",
+    backgroundColor: "#383c4a",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -252,7 +255,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#FFF",
+    // backgroundColor: "#383c4a",
     // marginHorizontal: -20,
     //paddingHorizontal: 20
   },
@@ -277,7 +280,7 @@ const styles = StyleSheet.create({
   },
   day: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000119",
+    color: "#FFF",
     flex: 1,
     fontSize: 20
   },

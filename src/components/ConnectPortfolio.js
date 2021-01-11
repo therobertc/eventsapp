@@ -71,7 +71,7 @@ class ConnectPortfolio extends Component {
 
               <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity style={{ paddingLeft: 20 }}>
-                  <Text style={{ color: "green", fontWeight: "bold" }}>
+                  <Text style={{ color: "#33CC00", fontWeight: "bold" }}>
                     $TSLA{" "}
                   </Text>
                 </TouchableOpacity>
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     //backgroundColor: "#e8eef1",
     //backgroundColor: "#F5F8FA"
-    backgroundColor: "#fff",
+    backgroundColor: "#383c4a",
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 10

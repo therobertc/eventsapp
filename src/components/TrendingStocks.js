@@ -82,8 +82,9 @@ class TrendingStocks extends Component {
             <Text
               style={{
                 fontWeight: "600",
-                fontSize: 18
+                fontSize: 18,
                 //textAlign: "left"
+                color: "#FFF"
               }}
             >
               {service.symbol}
@@ -94,7 +95,8 @@ class TrendingStocks extends Component {
                 fontWeight: "500",
                 fontSize: 14,
                 textAlign: "center",
-                color: parseFloat(service.changePercent) < 0 ? "red" : "green"
+                color:
+                  parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00"
               }}
             >
               {parseFloat(service.changePercent) < 0
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#383c4a",
     flexDirection: "row",
     borderRadius: 10
   },
@@ -181,14 +183,14 @@ const styles = StyleSheet.create({
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 2,
-    shadowColor: "lightgrey",
+    shadowColor: "#000",
     marginLeft: 10,
-    shadowOpacity: 1.0,
+    shadowOpacity: 0.5,
     marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
     //backgroundColor: "#F5F8FA"
-    backgroundColor: "#fff",
+    backgroundColor: "#4b5162",
     borderRadius: 20,
     //paddingHorizontal: 20,
     paddingVertical: 10,
@@ -214,7 +216,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     justifyContent: "center"
-    // color: 'green'
+    // color: '#33CC00'
   },
 
   stocktextred: {
@@ -241,7 +243,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 2.0,
     margin: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#fff",
+    backgroundColor: "#383c4a",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20
@@ -253,7 +255,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#fff",
+    backgroundColor: "#383c4a",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20

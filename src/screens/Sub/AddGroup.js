@@ -99,7 +99,7 @@ export default function AddGroup(props) {
         style={{ position: "absolute", top: 50, left: 20 }}
         onPress={() => props.navigation.goBack()}
       >
-        <AntDesign style={styles.back} name="left" size={30} color="black" />
+        <AntDesign style={styles.back} name="left" size={30} color="white" />
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
@@ -139,7 +139,7 @@ export default function AddGroup(props) {
               style={{
                 fontSize: 18,
                 textAlign: "center",
-                color: "white",
+                color: "#383c4a",
                 fontWeight: "600"
               }}
             >
@@ -181,13 +181,13 @@ export default function AddGroup(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF"
+    backgroundColor: "#383c4a"
   },
   getStarted: {
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "white",
+    backgroundColor: "#383c4a",
     width: Dimensions.get("screen").width
   },
   Button: {
@@ -205,13 +205,13 @@ const styles = StyleSheet.create({
     marginVertical: 20
   },
   HaveAccount: {
-    color: "white",
+    color: "#383c4a",
     textAlign: "center",
     fontSize: 15
   },
   Stockchat: {
     marginTop: 50,
-    color: "black",
+    color: "white",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
@@ -220,21 +220,21 @@ const styles = StyleSheet.create({
   },
   username: {
     marginTop: 10,
-    color: "black",
+    color: "white",
     textAlign: "center",
     fontSize: 15,
     padding: 18
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "white",
+    backgroundColor: "#383c4a",
     //backgroundColor: "red",
-    //borderBottomColor: "black",
+    //borderBottomColor: "white",
     //borderColor: "#3C4956",
-    borderColor: "black",
+    borderColor: "white",
     padding: 12,
     //paddingLeft: 30,
-    color: "black",
+    color: "white",
     height: 50,
     fontSize: 21,
     borderRadius: 30,
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   tHeading: {
-    color: "white",
+    color: "#383c4a",
     fontWeight: "bold",
     fontSize: 20,
     paddingLeft: "30%"
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
     //height: "100%",
     padding: 50,
     width: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "#383c4a",
     borderRadius: 26
   },
   activemenu: {
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     marginBottom: 50
   },
   aText: {
-    color: "#FFFFFF",
+    color: "#383c4a",
     fontSize: 20,
     marginTop: 5
   },

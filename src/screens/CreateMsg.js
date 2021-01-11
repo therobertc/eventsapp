@@ -59,14 +59,14 @@ export default function CreateMsg({ navigation }) {
 
   return (
     <View
-      style={{ flex: 1, width: "100%", padding: 18, backgroundColor: "white" }}
+      style={{ flex: 1, width: "100%", padding: 18, backgroundColor: "#383c4a" }}
     >
       <View
         style={{
           flexDirection: "row",
           height: 80,
           //width: "100%",
-          //backgroundColor: "white",
+          //backgroundColor: "#383c4a",
           alignItems: "center",
           //justifyContent: "space-around",
           paddingTop: 30,
@@ -80,7 +80,7 @@ export default function CreateMsg({ navigation }) {
           <AntDesign
             name="left"
             size={30}
-            color="black"
+            color="white"
             style={{ marginTop: 20 }}
           />
         </TouchableOpacity>
@@ -98,7 +98,7 @@ export default function CreateMsg({ navigation }) {
         <Entypo
           name="info"
           size={24}
-          color="white"
+          color="#383c4a"
           style={{ marginTop: 20 }}
           //   onPress={() =>
           //     navigation.navigate("GroupInfo", { groupName: groupName })

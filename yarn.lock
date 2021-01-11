@@ -1041,7 +1041,7 @@
 
 "@expo/websql@^1.0.1":
   version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@expo/websql/-/websql-1.0.1.tgz#fff0cf9c1baa1f70f9e1d658b7c39a420d9b10a9"
+  resolved "https://registry.yarnpkg.com/@expo/websql/-/websql-1.0.1.tgz#383c4a0cf9c1baa1f70f9e1d658b7c39a420d9b10a9"
   integrity sha1-//DPnBuqH3D54dZYt8OaQg2bEKk=
   dependencies:
     argsarray "^0.0.1"

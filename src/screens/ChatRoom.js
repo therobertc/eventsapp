@@ -261,7 +261,7 @@ export default function ChatRoom({ route, navigation }) {
                     flexDirection: "row",
                     height: 80,
                     width: "100%",
-                    backgroundColor: "white",
+                    backgroundColor: "#383c4a",
                     alignItems: "center"
                 }}
             >
@@ -271,7 +271,7 @@ export default function ChatRoom({ route, navigation }) {
                     <AntDesign
                         name="left"
                         size={30}
-                        color="black"
+                        color="white"
                         style={{ marginTop: 20, marginLeft: 20 }}
                     />
                 </TouchableOpacity>

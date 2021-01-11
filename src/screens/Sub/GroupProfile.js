@@ -21,7 +21,7 @@ const GroupProfile = props => {
       <View style={styles.bio}>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Feather name="chevron-left" size={30} color="black" />
+            <Feather name="chevron-left" size={30} color="white" />
           </TouchableOpacity>
 
           <Text style={styles.header}>#STOCKCHAT</Text>
@@ -89,7 +89,7 @@ const GroupProfile = props => {
             });
           }}
         >
-          <Feather name="send" size={25} color="white" />
+          <Feather name="send" size={25} color="#383c4a" />
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -105,10 +105,10 @@ const GroupProfile = props => {
           }}
           onPress={() => props.navigation.navigate("Wallet")}
         >
-          <Feather name="stop-circle" size={25} color="white" />
+          <Feather name="stop-circle" size={25} color="#383c4a" />
           <Text
             style={{
-              color: "white",
+              color: "#383c4a",
               fontWeight: "800",
               paddingRight: 5,
               fontSize: 20,
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "white",
+    backgroundColor: "#383c4a",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#FFF",
+    // backgroundColor: "#383c4a",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },
@@ -249,7 +249,7 @@ const styles = StyleSheet.create({
   },
   day: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000119",
+    color: "#FFF",
     flex: 1,
     fontSize: 20
   }

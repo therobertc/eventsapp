@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
   text: {
-    color: "#fff",
+    color: "#383c4a",
     fontFamily: "Montserrat_700Bold"
   }
 });

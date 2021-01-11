@@ -114,7 +114,7 @@ export default function Signup({ route, navigation }) {
           <TouchableOpacity onPress={() => registerUser()}>
             <View style={styles.btn}>
               <Text
-                style={{ color: "white", fontSize: 19, fontWeight: "bold" }}
+                style={{ color: "#383c4a", fontSize: 19, fontWeight: "bold" }}
               >
                 Sign Up
               </Text>
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   },
   loginText: {
-    color: "black",
+    color: "white",
     marginTop: 20,
     textAlign: "center",
     fontWeight: "bold",
@@ -159,14 +159,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff"
+    backgroundColor: "#383c4a"
   },
   container: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "#fff"
+    backgroundColor: "#383c4a"
   },
   tcontainer: {
     flex: 1,
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     flexDirection: "column"
   },
   tHeading: {
-    color: "black",
+    color: "white",
     fontWeight: "bold",
     fontSize: 25,
     paddingTop: 20
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: 30,
     width: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "#383c4a",
     borderRadius: 26
   },
   activemenu: {
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   aText: {
-    color: "#FFFFFF",
+    color: "#383c4a",
     fontSize: 20,
     marginTop: 5
   },

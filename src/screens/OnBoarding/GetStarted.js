@@ -39,7 +39,7 @@ export default function App({ ...props }) {
         </View>
 
         <View>
-          <Text style={styles.Stockchat}> Stock Chat</Text>
+          <Text style={styles.Stockchat}> stockchat</Text>
         </View>
 
         <View>
@@ -55,7 +55,7 @@ export default function App({ ...props }) {
             style={{
               fontSize: 18,
               textAlign: "center",
-              color: "white",
+              color: "#FFF",
               fontWeight: "600"
             }}
           >
@@ -65,10 +65,10 @@ export default function App({ ...props }) {
 
         <View style={{ marginTop: 20 }}>
           <Text
-            style={styles.loginText}
+            style={styles.subtext2}
             onPress={() => props.navigation.push("Login")}
           >
-            Already Registered? Sign In
+            Already have an account? Sign In
           </Text>
         </View>
         {/* <View>
@@ -86,10 +86,8 @@ export default function App({ ...props }) {
 const styles = StyleSheet.create({
   getstartedButton: {
     backgroundColor: "#147efb",
-
     padding: 15,
-    borderRadius: 30,
-    width: 220
+    borderRadius: 30
   },
   getStarted: {
     flex: 1,
@@ -97,30 +95,36 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     //backgroundColor: "#1E2429",
-    backgroundColor: "white",
+    backgroundColor: "#383c4a",
 
     width: Dimensions.get("screen").width
   },
 
   HaveAccount: {
-    color: "black",
+    color: "white",
     textAlign: "center",
     top: 35,
     fontSize: 15
   },
   Stockchat: {
-    color: "#1E2429",
+    color: "#FFF",
     textAlign: "center",
     fontSize: 50,
     fontWeight: "800"
     //fontFamily: "Montserrat_700Bold"
   },
   subtext: {
-    color: "black",
+    color: "white",
     textAlign: "center",
     top: 35,
     fontSize: 20,
     marginHorizontal: 40
+  },
+  subtext2: {
+    color: "white",
+    textAlign: "center",
+
+    fontSize: 18
   },
   loginText: {
     fontSize: 18

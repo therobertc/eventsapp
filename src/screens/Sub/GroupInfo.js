@@ -103,13 +103,13 @@ export default function AddMember({ route, navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={{ flex: 1, backgroundColor: "#383c4a" }}>
       <View
         style={{
           flexDirection: "row",
           height: 80,
           width: "100%",
-          //backgroundColor: "white",
+          //backgroundColor: "#383c4a",
           alignItems: "center",
           justifyContent: "space-around",
           paddingTop: 30,
@@ -123,17 +123,24 @@ export default function AddMember({ route, navigation }) {
           <AntDesign
             name="left"
             size={30}
-            color="black"
+            color="white"
             style={{ marginTop: 20 }}
           />
         </TouchableOpacity>
-        <Text style={{ fontSize: 22, fontWeight: "bold", marginTop: 20 }}>
+        <Text
+          style={{
+            fontSize: 22,
+            fontWeight: "bold",
+            marginTop: 20,
+            color: "#FFF"
+          }}
+        >
           {groupName}
         </Text>
         <Entypo
           name="info"
           size={24}
-          color="white"
+          color="#383c4a"
           style={{ marginTop: 20 }}
           //   onPress={() =>
           //     navigation.navigate("GroupInfo", { groupName: groupName })
@@ -169,13 +176,13 @@ export default function AddMember({ route, navigation }) {
                   alignItems: "center",
                   justifyContent: "center",
                   borderWidth: 2,
-                  borderColor: "white"
+                  borderColor: "#383c4a"
                 }}
               >
-                <Feather name="user-plus" size={20} color="white" />
+                <Feather name="user-plus" size={20} color="#383c4a" />
               </View>
               <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              <Text style={{ fontSize: 18, fontWeight: "bold", color: "#FFF" }}>
                 Add Members
               </Text>
             </View>
@@ -201,13 +208,13 @@ export default function AddMember({ route, navigation }) {
                   alignItems: "center",
                   justifyContent: "center",
                   borderWidth: 2,
-                  borderColor: "white"
+                  borderColor: "#383c4a"
                 }}
               >
-                <Feather name="link" size={20} color="white" />
+                <Feather name="link" size={20} color="#383c4a" />
               </View>
               <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
-              <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+              <Text style={{ fontSize: 18, fontWeight: "bold", color: "#FFF" }}>
                 Share Invite Link
               </Text>
             </View>
@@ -249,10 +256,10 @@ export default function AddMember({ route, navigation }) {
                 alignItems: "center",
                 justifyContent: "center",
                 borderWidth: 2,
-                borderColor: "white"
+                borderColor: "#383c4a"
               }}
             >
-              <Feather name="user" size={20} color="white" />
+              <Feather name="user" size={20} color="#383c4a" />
             </View>
             <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
             <Text style={{ fontSize: 18, fontWeight: "bold" }}>@StockChat</Text>
@@ -266,7 +273,8 @@ export default function AddMember({ route, navigation }) {
             fontSize: 20,
             fontWeight: "bold",
             paddingLeft: 20,
-            marginBottom: 20
+            marginBottom: 20,
+            color: "#FFF"
           }}
         >
           Members
@@ -311,7 +319,13 @@ export default function AddMember({ route, navigation }) {
                       }}
                     />
                     <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
-                    <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: "bold",
+                        color: "#FFF"
+                      }}
+                    >
                       @{item.Name}
                     </Text>
                   </View>
@@ -329,15 +343,15 @@ export default function AddMember({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF"
+    backgroundColor: "#383c4a"
   },
   viewseparator: {
-    borderColor: "lightgrey",
+    borderColor: "#7c818c",
     borderWidth: 0.5,
     marginBottom: 20
   },
   listseparator: {
-    borderColor: "lightgrey",
+    borderColor: "#7c818c",
     borderWidth: 0.5
     //marginVertical: 30
   }

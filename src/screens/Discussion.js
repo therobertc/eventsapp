@@ -16,7 +16,8 @@ import {
   GiftedChat,
   Send,
   Bubble,
-  InputToolbar
+  InputToolbar,
+  Time
 } from "react-native-gifted-chat";
 import {
   AntDesign,
@@ -274,17 +275,25 @@ function Discussion({ route, navigation }) {
 
   renderBubble = props => {
     return (
-      <Bubble
-        {...props}
-        wrapperStyle={{
-          right: {
-            backgroundColor: "#147efb"
-          },
-          left: {
-            backgroundColor: "#F5F8FA"
-          }
-        }}
-      />
+      <View>
+        <Text style={styles.username}>{props.currentMessage.user.name}</Text>
+        <Bubble
+          {...props}
+          wrapperStyle={{
+            right: {
+              backgroundColor: "#147efb"
+            },
+            left: {
+              backgroundColor: "#7c818c"
+            }
+          }}
+          textStyle={{
+            left: {
+              color: "white"
+            }
+          }}
+        />
+      </View>
     );
   };
 
@@ -304,10 +313,10 @@ function Discussion({ route, navigation }) {
             //marginRight: 15
           }}
         >
-          {/* <Feather name="arrow-up" color="white" size={28} fontWeight={900} /> */}
+          {/* <Feather name="arrow-up" color="#383c4a" size={28} fontWeight={900} /> */}
           <FontAwesome5
             name="arrow-up"
-            color="white"
+            color="#383c4a"
             size={20}
             fontWeight={900}
           />
@@ -321,11 +330,31 @@ function Discussion({ route, navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "white",
+          backgroundColor: "#383c4a",
           borderTopColor: "#E8E8E8",
           borderTopWidth: 1
 
           //padding: 8
+        }}
+      />
+    );
+  };
+
+  /** render the time labels in the bubble */
+  const renderTime = () => {
+    return (
+      <Time
+        textStyle={{
+          right: {
+            //color: Colors.snow,
+            fontFamily: "Montserrat-Light",
+            fontSize: 14
+          },
+          left: {
+            ///color: Colors.snow,
+            fontFamily: "Montserrat-Light",
+            fontSize: 14
+          }
         }}
       />
     );
@@ -369,9 +398,9 @@ function Discussion({ route, navigation }) {
     <View style={styles.main}>
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Icon name="left" color="#000119" size={24} />
+          <Icon name="left" color="#FFF" size={24} />
         </TouchableOpacity>
-        <Text style={styles.username}> {item.groupName}</Text>
+        <Text style={styles.header}> {item.groupName}</Text>
         {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
         <TouchableOpacity
         // onPress={() =>
@@ -393,16 +422,18 @@ function Discussion({ route, navigation }) {
         isAnimated={true}
         renderAccessory={CustomView}
         //onPressActionButton={() => _navigateToStockDetails}
-        //showUserAvatar={false}
+        //showUserAvatar={true}
         //showAvatarForEveryMessage={true}
         inverted={true}
-        renderAvatar={null}
+        timeTextStyle={{ left: { color: "white" } }}
+        //renderTime={renderTime}
+        //renderAvatar={true}
         messages={messages}
         renderSend={renderSend}
         renderBubble={renderBubble}
         textInputStyle={styles.textInput}
         isTyping={true}
-        renderUsernameOnMessage={true}
+        //renderUsernameOnMessage={true}
         renderInputToolbar={props => customtInputToolbar(props)}
         multiline
         placeholder={"Enter a message..."}
@@ -421,7 +452,7 @@ function Discussion({ route, navigation }) {
             pattern: /#(\w+)/,
             style: {
               ...linkStyle,
-              color: "black",
+              color: "white",
               fontWeight: "bold",
               textDecorationLine: "underline"
             }
@@ -432,7 +463,7 @@ function Discussion({ route, navigation }) {
 
             style: {
               ...linkStyle,
-              color: "black",
+              color: "#33CC00",
               fontWeight: "bold",
               textDecorationLine: "underline"
             },
@@ -442,7 +473,7 @@ function Discussion({ route, navigation }) {
             pattern: /\@(\w+)/,
             style: {
               ...linkStyle,
-              color: "black",
+              color: "#33CC00",
               fontWeight: "bold",
               textDecorationLine: "underline"
             }
@@ -457,7 +488,8 @@ export default Discussion;
 
 const styles = StyleSheet.create({
   input: {
-    width: 80
+    width: 80,
+    height: 100
   },
   ImageStyle: {
     height: 25,
@@ -476,11 +508,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    marginRight: 15
+    marginRight: 15,
+    color: "white"
   },
 
   main: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#383c4a",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
@@ -493,26 +526,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   username: {
-    color: "#000119",
+    color: "#147efb",
     fontFamily: "Montserrat_700Bold",
-    fontSize: 20,
+    fontSize: 14,
     flex: 1,
-    textAlign: "center"
+    paddingVertical: 5
+    //textAlign: "center"
   },
 
   textInput: {
-    //backgroundColor: "lightgrey",
-    borderColor: "lightgrey",
-    borderWidth: 1,
+    backgroundColor: "#4b5162",
     borderRadius: 30,
     marginRight: 20,
     marginLeft: 20,
-    lineHeight: 20,
-    //fontSize: 20,
-    //paddingTop: 8,
-    paddingLeft: 20
-    //justifyContent: "center",
-    //alignItems: "center"
+
+    fontSize: 20,
+    color: "#FFF",
+    paddingLeft: 20,
+    paddingVertical: 50,
+    marginVertical: 50
   },
 
   avatar: {
@@ -526,5 +558,12 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: "100%"
+  },
+  header: {
+    color: "#FFF",
+    fontFamily: "Montserrat_700Bold",
+    fontSize: 20,
+    flex: 1,
+    textAlign: "center"
   }
 });

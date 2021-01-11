@@ -265,7 +265,7 @@ class UserScreener extends Component {
                           styles.stocktext,
                           {
                             color:
-                              parseFloat(data[0].d[2]) < 0 ? "#CF2727" : "green"
+                              parseFloat(data[0].d[2]) < 0 ? "#CF2727" : "#33CC00"
                           }
                         ]}
                       >
@@ -298,7 +298,7 @@ class UserScreener extends Component {
                           styles.stocktext,
                           {
                             color:
-                              parseFloat(data[1].d[2]) < 0 ? "#CF2727" : "green"
+                              parseFloat(data[1].d[2]) < 0 ? "#CF2727" : "#33CC00"
                           }
                         ]}
                       >
@@ -331,7 +331,7 @@ class UserScreener extends Component {
                           styles.stocktext,
                           {
                             color:
-                              parseFloat(data[2].d[2]) < 0 ? "#CF2727" : "green"
+                              parseFloat(data[2].d[2]) < 0 ? "#CF2727" : "#33CC00"
                           }
                         ]}
                       >
@@ -363,7 +363,7 @@ class UserScreener extends Component {
                           styles.stocktext,
                           {
                             color:
-                              parseFloat(data[3].d[2]) < 0 ? "#CF2727" : "green"
+                              parseFloat(data[3].d[2]) < 0 ? "#CF2727" : "#33CC00"
                           }
                         ]}
                       >
@@ -434,7 +434,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //backgroundColor: "#e8eef1"
     backgroundColor: "#F5F8FA"
-    //backgroundColor: "black",
+    //backgroundColor: "white",
     //height: 1000
   },
   text: {
@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderBottomColor: "#F5FCFF",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#383c4a",
     borderRadius: 30,
     borderBottomWidth: 1,
     height: 45,
@@ -476,10 +476,10 @@ const styles = StyleSheet.create({
   inputs: {
     height: 50,
     marginLeft: 10,
-    borderBottomColor: "#FFFFFF",
+    borderBottomColor: "#383c4a",
     //flex: 1,
     width: 300,
-    backgroundColor: "white",
+    backgroundColor: "#383c4a",
     marginBottom: 50
   },
   inputIcon: {
@@ -498,7 +498,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   saveButtonText: {
-    color: "white"
+    color: "#383c4a"
   },
   notificationList: {
     marginTop: 20,
@@ -508,7 +508,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#383c4a",
     flexDirection: "row",
     borderRadius: 10
   },
@@ -534,7 +534,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     justifyContent: "center",
-    color: "black"
+    color: "white"
   },
 
   offerCard: {
@@ -554,7 +554,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 2.0,
     marginHorizontal: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#fff",
+    backgroundColor: "#383c4a",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20,

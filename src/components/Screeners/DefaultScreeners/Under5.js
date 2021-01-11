@@ -49,7 +49,7 @@ class Under5 extends Component {
               rating: service.rating,
               volume: service.volume,
               label: service.name,
-              backgroundColor: "white",
+              backgroundColor: "#383c4a",
               marginTop: 1
             }))
           },
@@ -176,7 +176,7 @@ class Under5 extends Component {
                   style={{
                     fontWeight: "600",
                     fontSize: 20,
-                    color: parseFloat(item.change) < 0 ? "red" : "green"
+                    color: parseFloat(item.change) < 0 ? "red" : "#33CC00"
                   }}
                 >
                   {" "}
@@ -195,7 +195,7 @@ class Under5 extends Component {
       return (
         <View style={styles.loadCon}>
           <Text style={styles.loadTitle}>Finding Stocks...</Text>
-          <ActivityIndicator color="black" size="large" />
+          <ActivityIndicator color="white" size="large" />
         </View>
       );
     }
@@ -206,7 +206,7 @@ class Under5 extends Component {
           <Left>
             <Icon
               style={{
-                color: "black",
+                color: "white",
                 paddingHorizontal: 20,
                 fontSize: 24,
                 fontWeight: "bold"
@@ -226,7 +226,7 @@ class Under5 extends Component {
               onPress={() => props.navigation.navigate("Home")}
             >
               <Text
-                style={{ fontSize: 18, fontWeight: "bold", color: "black" }}
+                style={{ fontSize: 18, fontWeight: "bold", color: "white" }}
               >
                 Under $5
               </Text>
@@ -236,7 +236,7 @@ class Under5 extends Component {
           <Right>
             <Feather
               style={{
-                color: "black",
+                color: "white",
                 fontWeight: "bold",
                 paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
                 fontSize: 30
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     shadowColor: "lightgrey",
     shadowOpacity: 1.0,
     shadowRadius: 2,
-    backgroundColor: "#FFF",
+    backgroundColor: "#383c4a",
     borderRadius: 10,
     padding: 10,
     height: 80,
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff"
+    backgroundColor: "#383c4a"
   },
   loadTitle: {
     color: "#000000",

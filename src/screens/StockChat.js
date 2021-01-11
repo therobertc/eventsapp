@@ -33,11 +33,11 @@ const StockChat = ({ route, navigation }) => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-      <LinearGradient colors={["#657786", "#FFF"]} style={styles.container}>
+      <LinearGradient colors={["#657786", "#383c4a"]} style={styles.container}>
         <View style={styles.main}>
           <View style={styles.headerContainer}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon name="left" color="#000119" size={24} />
+              <Icon name="left" color="#FFF" size={24} />
             </TouchableOpacity>
             <Text style={styles.username}>{itemName}</Text>
 
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   main: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#383c4a",
     height: "88%",
     paddingHorizontal: 20,
     borderBottomLeftRadius: 35,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   username: {
-    color: "#000119",
+    color: "#FFF",
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
     flex: 1,
@@ -113,6 +113,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "black"
+    backgroundColor: "white"
   }
 });

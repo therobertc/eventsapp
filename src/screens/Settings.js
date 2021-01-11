@@ -53,7 +53,7 @@ class Settings extends Component {
       <View style={styles.container}>
         <View style={styles.col}>
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-            <Feather name="chevron-left" size={30} color="black" />
+            <Feather name="chevron-left" size={30} color="white" />
           </TouchableOpacity>
           <Text style={styles.header}>Settings</Text>
         </View>
@@ -61,7 +61,7 @@ class Settings extends Component {
         <View>
           <View
             style={{
-              backgroundColor: "white",
+              backgroundColor: "#383c4a",
 
               flexDirection: "column",
               width: "100%",
@@ -181,7 +181,7 @@ class Settings extends Component {
           //     });
           // }}
         >
-          <Text style={{ color: "white", fontSize: 19, fontWeight: "bold" }}>
+          <Text style={{ color: "#383c4a", fontSize: 19, fontWeight: "bold" }}>
             Logout
           </Text>
         </TouchableOpacity>
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "white",
+    backgroundColor: "#383c4a",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
     fontSize: 24,
     textAlign: "center"
@@ -294,7 +294,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#FFF",
+    // backgroundColor: "#383c4a",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },
@@ -312,13 +312,13 @@ const styles = StyleSheet.create({
   },
   day: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000119",
+    color: "#FFF",
     flex: 1,
     fontSize: 20
   },
   Stockchat: {
     marginTop: 50,
-    color: "black",
+    color: "white",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
@@ -327,7 +327,7 @@ const styles = StyleSheet.create({
   },
   switch: {
     //marginTop: 5,
-    color: "black",
+    color: "white",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
 
   switchtitle: {
     //marginTop: 5,
-    color: "black",
+    color: "white",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "500",

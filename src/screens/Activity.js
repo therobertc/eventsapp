@@ -11,66 +11,59 @@ import {
 } from "react-native";
 import StockGroupCard from "../components/StockGroupCard";
 import firebase, { firestore } from "../database/firebase";
+import { Icon, Header, Left, Right, Body, Button } from "native-base";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
-const Profile = props => {
+const Activity = props => {
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <View style={styles.col}>
-        <Text style={styles.header}>Portfolio</Text>
-        <TouchableOpacity
-          style={{
-            paddingHorizontal: 10,
-            marginRight: 20,
-            flexDirection: "row",
-            alignItems: "center",
-            backgroundColor: "#F5F8FA",
-            borderRadius: 20,
-            paddingVertical: 5,
-            borderWidth: 1,
-            borderColor: "lightgrey"
-          }}
-          onPress={() => props.navigation.navigate("Wallet")}
-        >
-          <Feather name="stop-circle" size={20} color="orange" />
-
-          <Text style={{ fontWeight: "bold", paddingLeft: 5, fontSize: 16 }}>
-            0
-          </Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={{ paddingHorizontal: 20 }}
-          onPress={() => props.navigation.navigate("Wallet")}
-        >
-          <Feather name="credit-card" size={30} color="white" />
-        </TouchableOpacity> */}
-        <TouchableOpacity onPress={() => props.navigation.navigate("Settings")}>
-          <Feather name="settings" size={30} color="white" />
-        </TouchableOpacity>
-      </View>
-      <View style={{ paddingVertical: 20, marginHorizontal: 10 }}></View>
-
-      <TouchableOpacity
-        style={styles.btn}
-        onPress={() => {
-          firebase
-            .auth()
-            .signOut()
-            .then(function() {
-              props.navigation.navigate("GetStarted");
-            });
+    <View style={styles.container}>
+      <Header
+        style={{
+          backgroundColor: "#383c4a",
+          borderBottomWidth: 0.2,
+          borderBottomColor: "#383c4a"
         }}
       >
-        <Text style={{ color: "#383c4a", fontSize: 19, fontWeight: "bold" }}>
-          Logout
-        </Text>
-      </TouchableOpacity>
-    </ScrollView>
+        <Left>
+          <Feather
+            style={{
+              color: "white",
+              paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
+              fontSize: 30,
+              fontWeight: "bold"
+            }}
+            name="chevron-left"
+            onPress={() => props.navigation.goBack()}
+          />
+        </Left>
+
+        <Body style={{ width: "100%" }}>
+          <Text style={styles.header}>Notifications</Text>
+        </Body>
+
+        <Right>
+          <Feather
+            style={{
+              color: "white",
+              fontWeight: "bold",
+              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+              fontSize: 30
+            }}
+            name="settings"
+            onPress={() => props.navigation.navigate("Settings")}
+          />
+        </Right>
+      </Header>
+
+      <View style={styles.feed}>
+        <Text style={styles.text}>No new notifications</Text>
+      </View>
+    </View>
   );
 };
-export default Profile;
+export default Activity;
 
 const styles = StyleSheet.create({
   list: {
@@ -119,13 +112,20 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingTop: 30,
+    //paddingTop: 30,
     paddingHorizontal: 20
   },
   header: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
-    flex: 1,
+    width: "105%",
+    //flex: 1,
+    fontSize: 20
+  },
+  text: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#FFF",
+    textAlign: "center",
     fontSize: 20
   },
   header2: {

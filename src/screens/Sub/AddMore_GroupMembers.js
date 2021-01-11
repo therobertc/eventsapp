@@ -159,13 +159,13 @@ export default function AddMoreMember({ route, navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={{ flex: 1, backgroundColor: "#383c4a" }}>
       <View
         style={{
           flexDirection: "row",
           height: 80,
           width: "100%",
-          backgroundColor: "white",
+          backgroundColor: "#383c4a",
           alignItems: "center",
           justifyContent: "space-around",
           paddingTop: 30,
@@ -179,18 +179,25 @@ export default function AddMoreMember({ route, navigation }) {
           <AntDesign
             name="left"
             size={30}
-            color="black"
+            color="white"
             style={{ marginTop: 20 }}
           />
         </TouchableOpacity>
-        <Text style={{ fontSize: 22, fontWeight: "bold", marginTop: 20 }}>
+        <Text
+          style={{
+            fontSize: 22,
+            fontWeight: "bold",
+            marginTop: 20,
+            color: "#FFF"
+          }}
+        >
           {/* {groupName} */}
           Add Members
         </Text>
         <Entypo
           name="info"
           size={24}
-          color="white"
+          color="#383c4a"
           style={{ marginTop: 20 }}
           //   onPress={() =>
           //     navigation.navigate("GroupInfo", { groupName: groupName })
@@ -246,7 +253,7 @@ export default function AddMoreMember({ route, navigation }) {
                           position: "absolute",
                           bottom: 4,
                           right: 7,
-                          //backgroundColor: "white",
+                          //backgroundColor: "#383c4a",
                           borderRadius: 20
                         }}
                         onPress={() =>
@@ -329,7 +336,7 @@ export default function AddMoreMember({ route, navigation }) {
           style={{
             height: 70,
             width: 70,
-            backgroundColor: "black",
+            backgroundColor: "white",
             position: "absolute",
             bottom: 45,
             right: 30,
@@ -338,7 +345,7 @@ export default function AddMoreMember({ route, navigation }) {
             alignItems: "center"
           }}
         >
-          <AntDesign name="check" size={20} color="white" />
+          <AntDesign name="check" size={20} color="#383c4a" />
         </TouchableOpacity>
       ) : null}
     </View>
@@ -348,6 +355,6 @@ export default function AddMoreMember({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF"
+    backgroundColor: "#383c4a"
   }
 });

@@ -45,7 +45,7 @@ class MostVolatile extends Component {
               rating: service.rating,
               volume: service.volume,
               label: service.name,
-              backgroundColor: "white",
+              backgroundColor: "#383c4a",
               marginTop: 1
             }))
           },
@@ -172,7 +172,7 @@ class MostVolatile extends Component {
                   style={{
                     fontWeight: "600",
                     fontSize: 20,
-                    color: parseFloat(item.change) < 0 ? "red" : "green"
+                    color: parseFloat(item.change) < 0 ? "red" : "#33CC00"
                   }}
                 >
                   {" "}
@@ -191,7 +191,7 @@ class MostVolatile extends Component {
       return (
         <View style={styles.loadCon}>
           <Text style={styles.loadTitle}>Finding Stocks...</Text>
-          <ActivityIndicator color="black" size="large" />
+          <ActivityIndicator color="white" size="large" />
         </View>
       );
     }
@@ -202,7 +202,7 @@ class MostVolatile extends Component {
           <Left>
             <Icon
               style={{
-                color: "black",
+                color: "white",
                 paddingHorizontal: 20,
                 fontSize: 24,
                 fontWeight: "bold"
@@ -223,7 +223,7 @@ class MostVolatile extends Component {
               onPress={() => this.props.navigation.navigate("Home")}
             >
               <Text
-                style={{ fontSize: 18, fontWeight: "bold", color: "black" }}
+                style={{ fontSize: 18, fontWeight: "bold", color: "white" }}
               >
                 Most Active
               </Text>
@@ -233,7 +233,7 @@ class MostVolatile extends Component {
           <Right>
             <Feather
               style={{
-                color: "black",
+                color: "white",
                 fontWeight: "bold",
                 paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
                 fontSize: 30
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     shadowColor: "lightgrey",
     shadowOpacity: 1.0,
     shadowRadius: 2,
-    backgroundColor: "#FFF",
+    backgroundColor: "#383c4a",
     borderRadius: 10,
     padding: 10,
     height: 80,
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#fff"
+    backgroundColor: "#383c4a"
   },
   loadTitle: {
     color: "#000000",

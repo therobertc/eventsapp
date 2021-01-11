@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Feather } from "@expo/vector-icons";
+
 import Home from "../screens/Home";
 import Discussion from "../screens/Discussion";
 import StockChat from "../screens/StockChat";
@@ -38,6 +40,7 @@ import StockDetails from "../components/StockDetails";
 import TrendingStocks from "../components/TrendingStocks";
 import Wallet from "../screens/Wallet";
 import GroupProfile from "../screens/Sub/GroupProfile";
+import Activity from "../screens/Activity";
 
 import LargeCap from "../components/Screeners/DefaultScreeners/LargeCap";
 import MostVolatile from "../components/Screeners/DefaultScreeners/MostVolatile";
@@ -58,13 +61,14 @@ const BottomTabNavigator = () => {
           //justifyContent: "center",
           //alignItems: "center",
           paddingTop: 15,
-          backgroundColor: "#FFF",
-          //elevation: 2
-          alignContent: "center"
+          backgroundColor: "#383c4a",
+
+          alignContent: "center",
+          borderTopColor: "#383c4a"
         }
       }}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Home"
         component={Home}
         options={{
@@ -74,7 +78,7 @@ const BottomTabNavigator = () => {
             <Icon name="ios-trending-up" color={color} size={30} />
           )
         }}
-      />
+      /> */}
 
       <Tab.Screen
         name="Chat"
@@ -296,6 +300,11 @@ const ChatStackNavigator = () => {
       <Stack.Screen
         name="TopGainers"
         component={TopGainers}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Activity"
+        component={Activity}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
