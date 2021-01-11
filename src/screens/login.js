@@ -51,7 +51,7 @@ export default function Login({ navigation }) {
         .signInWithEmailAndPassword(email, password)
         .then(res => {
           console.log(res);
-          Alert.alert("User logged-in successfully!");
+          // Alert.alert("User logged-in successfully!");
           setLoading(false);
           setEmail("");
           setPass("");
@@ -70,7 +70,7 @@ export default function Login({ navigation }) {
           source={require("../../assets/logo-outline.png")}
         ></Image>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={styles.Stockchat}> Stock Chat</Text>
+          <Text style={styles.Stockchat}> stockchat</Text>
         </View>
         <Text style={styles.tHeading}>Welcome Back</Text>
 
@@ -88,6 +88,7 @@ export default function Login({ navigation }) {
             placeholder="Email"
             value={email}
             onChangeText={val => setEmail(val)}
+            placeholderTextColor="white"
           />
           <TextInput
             style={styles.inputStyle}
@@ -96,6 +97,7 @@ export default function Login({ navigation }) {
             onChangeText={val => setPass(val)}
             maxLength={15}
             secureTextEntry={true}
+            placeholderTextColor="white"
           />
           <TouchableOpacity onPress={() => userLogin()}>
             <View style={styles.btn}>
@@ -103,7 +105,7 @@ export default function Login({ navigation }) {
                 style={{
                   fontSize: 18,
                   textAlign: "center",
-                  color: "#383c4a",
+                  color: "#FFF",
                   fontWeight: "600"
                 }}
               >
@@ -170,7 +172,8 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderBottomWidth: 1,
     margin: 20,
-    fontSize: 20
+    fontSize: 20,
+    color: "white"
   },
   loginText: {
     color: "white",
@@ -266,7 +269,7 @@ const styles = StyleSheet.create({
     marginTop: 30
   },
   Stockchat: {
-    color: "#1E2429",
+    color: "#FFF",
     textAlign: "center",
     fontSize: 40,
     fontWeight: "bold"

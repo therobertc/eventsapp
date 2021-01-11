@@ -10,13 +10,81 @@ import {
   Image
 } from "react-native";
 import StockGroupCard from "../components/StockGroupCard";
+import Messages from "../components/Messages";
+import { useIsFocused } from "@react-navigation/native";
+
 import firebase, { firestore } from "../database/firebase";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
-const Activity = props => {
+const DirectMessages = props => {
+  const isVisible = useIsFocused();
+  const [groups, setGroups] = useState([]);
+  const [publicgroups, setpublicgroups] = useState([]);
+
+  const [Chatheads, setChatheads] = useState([]);
+
+  useEffect(() => {
+    // props.navigation.push("StockDetails", {symbol:"TSLA"})
+    if (isVisible) {
+      getChats();
+    }
+  }, [isVisible]);
+
+  function getChats() {
+    const db = firestore;
+    var groupArray = [];
+    var pubgroupArray = [];
+
+    var ChatHeadsArr = [];
+    var UserId = fire.auth().currentUser.uid;
+
+    db.collection("publicgroups").onSnapshot(function(snapshot) {
+      snapshot.docChanges().forEach(function(change) {
+        if (change.type == "added") {
+          console.log("New Group: ", change.doc.data());
+          pubgroupArray.push(change.doc.data());
+        }
+        if (change.type === "modified") {
+          console.log("Modified Group: ", change.doc.data());
+        }
+        if (change.type === "removed") {
+          console.log("Removed Group", change.doc.data());
+        }
+        setpublicgroups(pubgroupArray);
+      });
+    });
+
+    db.collection("users")
+      .doc(UserId)
+      .collection("Groups")
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+          groupArray.push(change.doc.data());
+          setGroups(groupArray);
+        });
+      });
+
+    db.collection("users")
+      .doc(UserId)
+      .collection("ChatHeads")
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(anotherSnapshot) {
+          console.log("anotherSnapshot.doc.data()", anotherSnapshot.doc.data());
+
+          // ChatHeadsArr.push(anotherSnapshot.doc.data())
+          for (var i = 0; i < anotherSnapshot.doc.data.length; i++) {
+            ChatHeadsArr.push({
+              name: anotherSnapshot.doc.data().name,
+              uid: anotherSnapshot.doc.data().uid
+            });
+          }
+          setChatheads(ChatHeadsArr);
+        });
+      });
+  }
   return (
     <View style={styles.container}>
       <Header
@@ -39,8 +107,8 @@ const Activity = props => {
           />
         </Left>
 
-        <Body style={{ width: "100%" }}>
-          <Text style={styles.header}>Notifications</Text>
+        <Body>
+          <Text style={styles.header}>Messages</Text>
         </Body>
 
         <Right>
@@ -51,19 +119,43 @@ const Activity = props => {
               paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
               fontSize: 30
             }}
-            name="settings"
-            onPress={() => props.navigation.navigate("Settings")}
+            name="plus"
+            onPress={() => props.navigation.navigate("CreateChat")}
           />
         </Right>
       </Header>
 
-      <View style={styles.feed}>
-        <Text style={styles.text}>No new notifications</Text>
-      </View>
+      {/* <View style={styles.feed}>
+        <Text style={styles.text}>No new messages</Text>
+      </View> */}
+
+      <ScrollView style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+        <FlatList
+          data={Chatheads}
+          keyExtractor={(item, index) => "key" + index}
+          renderItem={({ item }) => {
+            console.log("FLAAAAAAAAAATIST ==>", item);
+            const name = item.name;
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("ChatRoom", {
+                    name: item.name,
+                    uid: item.uid,
+                    title: item.name
+                  });
+                }}
+              >
+                <Messages item={name}></Messages>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      </ScrollView>
     </View>
   );
 };
-export default Activity;
+export default DirectMessages;
 
 const styles = StyleSheet.create({
   list: {
@@ -120,7 +212,8 @@ const styles = StyleSheet.create({
     color: "#FFF",
     width: "105%",
     //flex: 1,
-    fontSize: 20
+    fontSize: 20,
+    textAlign: "center"
   },
   text: {
     //fontFamily: "Montserrat_400Regular",

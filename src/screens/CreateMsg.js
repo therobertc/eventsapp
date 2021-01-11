@@ -59,7 +59,12 @@ export default function CreateMsg({ navigation }) {
 
   return (
     <View
-      style={{ flex: 1, width: "100%", padding: 18, backgroundColor: "#383c4a" }}
+      style={{
+        flex: 1,
+        width: "100%",
+        padding: 18,
+        backgroundColor: "#383c4a"
+      }}
     >
       <View
         style={{
@@ -89,11 +94,12 @@ export default function CreateMsg({ navigation }) {
             fontSize: 22,
             fontWeight: "bold",
             marginTop: 20,
-            paddingLeft: 30
+            paddingLeft: 30,
+            color: "#FFF"
           }}
         >
           {/* {groupName} */}
-          Direct Messages
+          New Chat
         </Text>
         <Entypo
           name="info"

@@ -41,7 +41,7 @@ import TrendingStocks from "../components/TrendingStocks";
 import Wallet from "../screens/Wallet";
 import GroupProfile from "../screens/Sub/GroupProfile";
 import Activity from "../screens/Activity";
-
+import DirectMessages from "../screens/DirectMessages";
 import LargeCap from "../components/Screeners/DefaultScreeners/LargeCap";
 import MostVolatile from "../components/Screeners/DefaultScreeners/MostVolatile";
 import Overbought from "../components/Screeners/DefaultScreeners/Overbought";
@@ -305,6 +305,11 @@ const ChatStackNavigator = () => {
       <Stack.Screen
         name="Activity"
         component={Activity}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="DirectMessages"
+        component={DirectMessages}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

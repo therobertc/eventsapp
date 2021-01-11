@@ -172,14 +172,14 @@ class Settings extends Component {
 
         <TouchableOpacity
           style={styles.btn}
-          // onPress={() => {
-          //   firebase
-          //     .auth()
-          //     .signOut()
-          //     .then(function() {
-          //       this.props.navigate("GetStarted");
-          //     });
-          // }}
+          //   onPress={() => {
+          //     firebase
+          //       .auth()
+          //       .signOut()
+          //       .then(function() {
+          //         this.props.navigation.navigate("GetStarted");
+          //       });
+          //   }}
         >
           <Text style={{ color: "#383c4a", fontSize: 19, fontWeight: "bold" }}>
             Logout

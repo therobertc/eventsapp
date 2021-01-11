@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   Image,
@@ -9,94 +9,93 @@ import {
   TouchableWithoutFeedback,
   View
 } from "react-native";
-import {Input} from "react-native-elements";
-import {AntDesign} from "@expo/vector-icons";
-import {firestore} from "../../database/firebase";
+import { Input } from "react-native-elements";
+import { AntDesign } from "@expo/vector-icons";
+import { firestore } from "../../database/firebase";
 
 const DismissKeyboard = ({ children }) => (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      {" "}
-      {children}
-    </TouchableWithoutFeedback>
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {" "}
+    {children}
+  </TouchableWithoutFeedback>
 );
 
 export default function App({ ...props }) {
-
-  const [username, setUsername] = useState("")
+  const [username, setUsername] = useState("");
 
   const createUserInFirestore = () => {
-
-    if(username === undefined || username === null || username.trim() === ""){
+    if (username === undefined || username === null || username.trim() === "") {
       alert("Username can't be blank!!");
-      return false
+      return false;
     }
 
     let user_name = username.trim().toLowerCase();
     firestore
-        .collection('profile').doc(user_name)
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            alert("Username already exists!!");
-            return false;
-          }else{
-            props.navigation.push("Email", {username:user_name})
-          }
-        })
-        .catch((error) => alert(error.message))
-  }
+      .collection("profile")
+      .doc(user_name)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          alert("Username already exists!!");
+          return false;
+        } else {
+          props.navigation.push("Email", { username: user_name });
+        }
+      })
+      .catch(error => alert(error.message));
+  };
 
   return (
-      <View style={styles.getStarted}>
-        <TouchableOpacity
-            style={{ position: "absolute", top: 50, left: 20 }}
-            onPress={() => props.navigation.goBack()}
-        >
-          <AntDesign style={styles.back} name="left" size={30} color="white" />
-        </TouchableOpacity>
-        <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
-          <Image
-              source={require("../../../assets/logo-outline.png")}
-              style={{ width: 150, height: 150 }}
+    <View style={styles.getStarted}>
+      <TouchableOpacity
+        style={{ position: "absolute", top: 50, left: 20 }}
+        onPress={() => props.navigation.goBack()}
+      >
+        <AntDesign style={styles.back} name="left" size={30} color="white" />
+      </TouchableOpacity>
+      <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
+        <Image
+          source={require("../../../assets/logo-outline.png")}
+          style={{ width: 150, height: 150 }}
+        />
+      </View>
+
+      <View>
+        <Text style={styles.Stockchat}>CREATE YOUR USERNAME</Text>
+      </View>
+      <View>
+        <Text style={styles.username}>
+          Usernames will be tagged in messages and shown inside your chats.
+        </Text>
+      </View>
+
+      <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
+        <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
+          <Input
+            //einputContainerStyle={{ borderBottomWidth: 0 }}
+            style={styles.Input}
+            placeholder="Username"
+            placeholderTextColor="lightgrey"
+            onChangeText={username => setUsername(username)}
           />
-        </View>
-
-        <View>
-          <Text style={styles.Stockchat}>CREATE YOUR USERNAME</Text>
-        </View>
-        <View>
-          <Text style={styles.username}>
-            Usernames will be tagged in messages and shown inside your chats.
-          </Text>
-        </View>
-
-        <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
-          <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
-            <Input
-                //einputContainerStyle={{ borderBottomWidth: 0 }}
-                style={styles.Input}
-                placeholder="Username"
-                placeholderTextColor="lightgrey"
-                onChangeText={(username)=> setUsername(username)}
-            />
-            {/* <TextInput
+          {/* <TextInput
               style={styles.inputStyle}
               placeholder="Enter Group Name"
               value={groupName}
               // onValidateTextField = {validateField}
               onChangeText={val => setGroupName(val)}
             /> */}
-          </View>
+        </View>
 
-          <View
-              style={{
-                paddingHorizontal: 10,
-                top: 50,
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-          >
-            {/* <TouchableOpacity
+        <View
+          style={{
+            paddingHorizontal: 10,
+            top: 50,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {/* <TouchableOpacity
               onPress={performCreateGroup}
               isLoading={isLoading}
             >
@@ -108,25 +107,24 @@ export default function App({ ...props }) {
                 </Text>
               </View>
             </TouchableOpacity> */}
-            <TouchableOpacity
-                style={styles.Button}
-                onPress={()=>createUserInFirestore()}
-
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => createUserInFirestore()}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                textAlign: "center",
+                color: "#FFF",
+                fontWeight: "600"
+              }}
             >
-              <Text
-                  style={{
-                    fontSize: 18,
-                    textAlign: "center",
-                    color: "#383c4a",
-                    fontWeight: "600"
-                  }}
-              >
-                Continue
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </KeyboardAvoidingView>
-      </View>
+              Continue
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </View>
   );
 }
 

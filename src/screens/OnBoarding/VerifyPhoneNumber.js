@@ -77,7 +77,7 @@ export default function App({ route, navigation }) {
               style={{
                 fontSize: 18,
                 textAlign: "center",
-                color: "#383c4a",
+                color: "#FFF",
                 fontWeight: "600"
               }}
             >

@@ -99,7 +99,7 @@ export default function App({ ...props }) {
               style={{
                 fontSize: 18,
                 textAlign: "center",
-                color: "#383c4a",
+                color: "#FFF",
                 fontWeight: "600"
               }}
             >

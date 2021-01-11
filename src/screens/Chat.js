@@ -123,7 +123,7 @@ const Chat = props => {
         }}
       >
         <Left>
-          <Feather
+          {/* <Feather
             style={{
               color: "white",
               paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
@@ -131,8 +131,10 @@ const Chat = props => {
               fontWeight: "bold"
             }}
             name="search"
-            onPress={() => this.props.navigation.navigate("Profile")}
-          />
+            onPress={() => props.navigation.navigate("Profile")}
+          /> */}
+
+          <Text style={styles.logotext}>#STOCKCHAT</Text>
         </Left>
 
         <Body>
@@ -179,8 +181,17 @@ const Chat = props => {
               fontSize: 30
             }}
             name="send"
-            onPress={() => props.navigation.navigate("Activity")}
+            onPress={() => props.navigation.navigate("DirectMessages")}
           />
+          {/* <TouchableOpacity
+            onPress={() => props.navigation.navigate("Profile")}
+          >
+            <Image
+              source={require("../../assets/icon.png")}
+              // source={{ uri: itemPic }}
+              style={styles.avatar}
+            />
+          </TouchableOpacity> */}
         </Right>
       </Header>
 
@@ -341,39 +352,46 @@ const Chat = props => {
             }}
           />
         </View>
-
-        <View style={styles.col}>
-          <Text style={styles.header}>Direct Messages</Text>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("CreateChat")}
-          >
-            <AntDesign name="pluscircleo" size={24} color="white" />
-          </TouchableOpacity>
-        </View>
-        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
-          <FlatList
-            data={Chatheads}
-            keyExtractor={(item, index) => "key" + index}
-            renderItem={({ item }) => {
-              console.log("FLAAAAAAAAAATIST ==>", item);
-              const name = item.name;
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    props.navigation.navigate("ChatRoom", {
-                      name: item.name,
-                      uid: item.uid,
-                      title: item.name
-                    });
-                  }}
-                >
-                  <Messages item={name}></Messages>
-                </TouchableOpacity>
-              );
-            }}
-          />
-        </View>
       </ScrollView>
+
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate("AddGroup")}
+        style={{
+          borderWidth: 1,
+          borderColor: "rgba(0,0,0,0.2)",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 200,
+          position: "absolute",
+          bottom: 10,
+          right: 110,
+          height: 50,
+          backgroundColor: "#147efb",
+          borderRadius: 100,
+          flexDirection: "row"
+        }}
+      >
+        <Feather
+          style={{
+            color: "white",
+            fontWeight: "bold",
+            //paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+            fontSize: 20
+          }}
+          name="plus"
+        />
+        <Text
+          style={{
+            textAlign: "center",
+            fontSize: 18,
+            fontWeight: "600",
+            color: "white",
+            paddingLeft: 10
+          }}
+        >
+          Start Group
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -416,12 +434,19 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#383c4a",
+    backgroundColor: "#383c4a"
     // left: 0,
     // right: 0,
     // top: 0,
+    //paddingBottom: 30
     //paddingHorizontal: 20,
-    paddingTop: 30
+    //paddingTop: 10
+  },
+  avatar: {
+    width: 35,
+    height: 35,
+    borderRadius: 20,
+    marginHorizontal: 10
   },
   headerContainer: {
     flexDirection: "row",
@@ -434,6 +459,13 @@ const styles = StyleSheet.create({
     color: "#FFF",
     flex: 1,
     fontSize: 20
+  },
+  logotext: {
+    fontFamily: "Montserrat_700Bold",
+    color: "#FFF",
+    fontSize: 22,
+    paddingLeft: 10,
+    width: 300
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",

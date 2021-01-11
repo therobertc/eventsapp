@@ -154,8 +154,8 @@ class StockDetails extends Component {
 
     renderError = () => {
         return (
-            <View style={{ paddingTop: 50 }}>
-                <Text style={{ color: "#000", textAlign: "center", fontSize: 20 }}>
+            <View style={{ paddingTop: 50, height: '100%', backgroundColor: '#383c4a'}}>
+                <Text style={{ color: "#FFF", textAlign: "center", fontSize: 20 }}>
                     This stock is currently unavailable.
                 </Text>
             </View>
@@ -164,8 +164,7 @@ class StockDetails extends Component {
 
     renderLoading = () => {
         return (
-            <View style={styles.loadCon}>
-                <Text style={styles.loadTitle}>Loading Chart...</Text>
+            <View style={{ paddingTop: 50, height: '100%', backgroundColor: '#383c4a'}}>
                 <ActivityIndicator color="white" size="large" />
             </View>
         );

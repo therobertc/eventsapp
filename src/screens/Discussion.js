@@ -152,30 +152,6 @@ function Discussion({ route, navigation }) {
     });
   };
 
-  // function onLongPress() {
-  //   if (this.props.onLongPress) {
-  //     this.props.onLongPress(this.context, this.props.currentMessage);
-  //   } else {
-  //     if (this.props.currentMessage.text) {
-  //       const options = ["Copy Text", "Cancel"];
-  //       const cancelButtonIndex = options.length - 1;
-  //       this.context.actionSheet().showActionSheetWithOptions(
-  //         {
-  //           options,
-  //           cancelButtonIndex
-  //         },
-  //         buttonIndex => {
-  //           switch (buttonIndex) {
-  //             case 0:
-  //               Clipboard.setString(this.props.currentMessage.text);
-  //               break;
-  //           }
-  //         }
-  //       );
-  //     }
-  //   }
-  // }
-
   const lastMessage = async message => {
     await firestore
       .collection("publicgroups")
@@ -303,20 +279,21 @@ function Discussion({ route, navigation }) {
         <View
           //source={SendIcon}
           style={{
-            width: 30,
-            height: 30,
-            borderRadius: 15,
+            width: 40,
+            height: 40,
+            borderRadius: 20,
             backgroundColor: "#147efb",
             justifyContent: "center",
             alignItems: "center",
-            alignSelf: "center"
+            alignSelf: "center",
+            marginBottom: -25
             //marginRight: 15
           }}
         >
           {/* <Feather name="arrow-up" color="#383c4a" size={28} fontWeight={900} /> */}
           <FontAwesome5
             name="arrow-up"
-            color="#383c4a"
+            color="#FFF"
             size={20}
             fontWeight={900}
           />
@@ -331,10 +308,8 @@ function Discussion({ route, navigation }) {
         {...props}
         containerStyle={{
           backgroundColor: "#383c4a",
-          borderTopColor: "#E8E8E8",
-          borderTopWidth: 1
-
-          //padding: 8
+          borderTopWidth: 0,
+          marginBottom: -10
         }}
       />
     );
@@ -366,7 +341,9 @@ function Discussion({ route, navigation }) {
         style={{
           flexDirection: "row",
           justifyContent: "space-around",
-          alignItems: "center"
+          alignItems: "center",
+          marginVertical: 40,
+          backgroundColor: "white"
         }}
       >
         <TouchableOpacity>
@@ -424,6 +401,21 @@ function Discussion({ route, navigation }) {
         //onPressActionButton={() => _navigateToStockDetails}
         //showUserAvatar={true}
         //showAvatarForEveryMessage={true}
+        textInputProps={{
+          style: {
+            backgroundColor: "#4b5162",
+            borderRadius: 30,
+            fontSize: 20,
+            color: "#FFF",
+            paddingLeft: 20,
+            width: "100%",
+            marginHorizontal: 30,
+            flex: 1,
+            paddingVertical: 20,
+            marginTop: 10,
+            marginBottom: -10
+          }
+        }}
         inverted={true}
         timeTextStyle={{ left: { color: "white" } }}
         //renderTime={renderTime}
@@ -431,7 +423,7 @@ function Discussion({ route, navigation }) {
         messages={messages}
         renderSend={renderSend}
         renderBubble={renderBubble}
-        textInputStyle={styles.textInput}
+        //textInputStyle={styles.textInput}
         isTyping={true}
         //renderUsernameOnMessage={true}
         renderInputToolbar={props => customtInputToolbar(props)}
@@ -488,8 +480,7 @@ export default Discussion;
 
 const styles = StyleSheet.create({
   input: {
-    width: 80,
-    height: 100
+    width: 80
   },
   ImageStyle: {
     height: 25,
@@ -502,7 +493,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: "80%"
+    height: "100%"
   },
   sendContainer: {
     justifyContent: "center",
@@ -539,12 +530,9 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginRight: 20,
     marginLeft: 20,
-
     fontSize: 20,
     color: "#FFF",
-    paddingLeft: 20,
-    paddingVertical: 50,
-    marginVertical: 50
+    paddingLeft: 20
   },
 
   avatar: {
@@ -553,7 +541,7 @@ const styles = StyleSheet.create({
     borderRadius: 20
   },
   container: {
-    position: "absolute",
+    //position: "absolute",
     left: 0,
     right: 0,
     top: 0,

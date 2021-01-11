@@ -26,17 +26,24 @@ const Profile = props => {
             marginRight: 20,
             flexDirection: "row",
             alignItems: "center",
-            backgroundColor: "#F5F8FA",
+            backgroundColor: "#4b5162",
             borderRadius: 20,
             paddingVertical: 5,
             borderWidth: 1,
-            borderColor: "lightgrey"
+            borderColor: "#7c818c"
           }}
-          onPress={() => props.navigation.navigate("Wallet")}
+          // onPress={() => props.navigation.navigate("Wallet")}
         >
-          <Feather name="stop-circle" size={20} color="orange" />
+          <Feather name="stop-circle" size={20} color="#5294e2" />
 
-          <Text style={{ fontWeight: "bold", paddingLeft: 5, fontSize: 16 }}>
+          <Text
+            style={{
+              fontWeight: "bold",
+              paddingLeft: 5,
+              fontSize: 16,
+              color: "#7c818c"
+            }}
+          >
             0
           </Text>
         </TouchableOpacity>
