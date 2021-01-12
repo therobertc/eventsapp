@@ -173,7 +173,7 @@ const Chat = props => {
             name="bell"
             onPress={() => props.navigation.navigate("Activity")}
           />
-          <Feather
+          {/* <Feather
             style={{
               color: "white",
               fontWeight: "bold",
@@ -182,7 +182,7 @@ const Chat = props => {
             }}
             name="send"
             onPress={() => props.navigation.navigate("DirectMessages")}
-          />
+          /> */}
           {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("Profile")}
           >

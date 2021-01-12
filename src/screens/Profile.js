@@ -57,21 +57,25 @@ const Profile = props => {
           <Feather name="settings" size={30} color="white" />
         </TouchableOpacity>
       </View>
-      <View style={{ paddingVertical: 20, marginHorizontal: 10 }}></View>
+      <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+        <View style={styles.feed}>
+          <Text style={styles.text}>Your portfolio is not connected.</Text>
+        </View>
+      </View>
 
       <TouchableOpacity
         style={styles.btn}
-        onPress={() => {
-          firebase
-            .auth()
-            .signOut()
-            .then(function() {
-              props.navigation.navigate("GetStarted");
-            });
-        }}
+        // onPress={() => {
+        //   firebase
+        //     .auth()
+        //     .signOut()
+        //     .then(function() {
+        //       props.navigation.navigate("GetStarted");
+        //     });
+        // }}
       >
-        <Text style={{ color: "#383c4a", fontSize: 19, fontWeight: "bold" }}>
-          Logout
+        <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
+          Connect Portfolio
         </Text>
       </TouchableOpacity>
     </ScrollView>
@@ -105,14 +109,17 @@ const styles = StyleSheet.create({
     paddingTop: 30
   },
   btn: {
-    borderRadius: 16,
-    //borderTopRightRadius: 0,
-    backgroundColor: "#147efb",
-    height: 80,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20,
-    marginHorizontal: 20
+    width: 200,
+    position: "absolute",
+    bottom: 10,
+    right: 110,
+    top: 300,
+    height: 50,
+    backgroundColor: "#147efb",
+    borderRadius: 100,
+    flexDirection: "row"
   },
   container: {
     height: "100%",
@@ -145,6 +152,12 @@ const styles = StyleSheet.create({
   proContainer: {
     marginRight: -20,
     alignSelf: "center"
+  },
+  text: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#FFF",
+    textAlign: "center",
+    fontSize: 20
   },
   ops: {
     // borderTopLeftRadius: 40,

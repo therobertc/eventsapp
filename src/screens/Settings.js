@@ -1,235 +1,164 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Text,
   View,
-  Image,
+  Text,
+  FlatList,
+  StyleSheet,
+  Animated,
+  TouchableOpacity,
   ScrollView,
-  Dimensions,
-  Linking,
-  KeyboardAvoidingView,
-  FlatList
+  Image
 } from "react-native";
-import firebase, { firestore } from "../database/firebase";
-
-import { Header, Left, Right, Body, Icon, Button } from "native-base";
-import { Feather } from "@expo/vector-icons";
 import StockGroupCard from "../components/StockGroupCard";
+import firebase, { firestore } from "../database/firebase";
 import ToggleSwitch from "../components/ToggleSwitch";
 
-class Settings extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: false,
-      hide: true,
-      query: "",
-      name: "",
-      searchResults: [],
-      results: false,
-      isLoading: true,
-      stockSelected: false,
-      stock: null
-    };
-    this.arrayholder = [];
-  }
+import { AntDesign } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
-  ShowHideComponent = () => {
-    if (this.state.show == true) {
-      this.setState({ show: false });
-      this.setState({ hide: true });
-    } else {
-      this.setState({ show: true });
-      this.setState({ hide: false });
-    }
-  };
-
-  render() {
-    const { searchResults, query } = this.state;
-    const { navigation: navigate } = this.props;
-    return (
-      <View style={styles.container}>
+const Settings = props => {
+  return (
+    <View>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.col}>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+          <TouchableOpacity onPress={() => props.navigation.goBack()}>
             <Feather name="chevron-left" size={30} color="white" />
           </TouchableOpacity>
           <Text style={styles.header}>Settings</Text>
         </View>
 
-        <View>
-          <View
-            style={{
-              backgroundColor: "#383c4a",
+        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+          <View>
+            <View
+              style={{
+                backgroundColor: "#383c4a",
 
-              flexDirection: "column",
-              width: "100%",
+                flexDirection: "column",
+                width: "100%",
 
-              paddingHorizontal: 10
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingTop: 20,
-                paddingHorizontal: 20
+                paddingHorizontal: 10
               }}
             >
-              <Text style={styles.switch}>Portfolio</Text>
-            </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingTop: 20,
+                  paddingHorizontal: 20
+                }}
+              >
+                <Text style={styles.switch}>Portfolio</Text>
+              </View>
 
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingVertical: 20,
-                paddingHorizontal: 20
-              }}
-            >
-              <Text style={styles.switchtitle}>Private</Text>
-              <ToggleSwitch></ToggleSwitch>
-            </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingVertical: 20,
+                  paddingHorizontal: 20
+                }}
+              >
+                <Text style={styles.switchtitle}>Private</Text>
+                <ToggleSwitch></ToggleSwitch>
+              </View>
 
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingTop: 20,
-                paddingHorizontal: 20
-              }}
-            >
-              <Text style={styles.switch}>Notifications</Text>
-            </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingTop: 20,
+                  paddingHorizontal: 20
+                }}
+              >
+                <Text style={styles.switch}>Notifications</Text>
+              </View>
 
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingVertical: 20,
-                paddingHorizontal: 20
-              }}
-            >
-              <Text style={styles.switchtitle}>Mentions</Text>
-              <ToggleSwitch></ToggleSwitch>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingVertical: 20,
-                paddingHorizontal: 20
-              }}
-            >
-              <Text style={styles.switchtitle}>New Messages</Text>
-              <ToggleSwitch></ToggleSwitch>
-            </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingVertical: 20,
+                  paddingHorizontal: 20
+                }}
+              >
+                <Text style={styles.switchtitle}>Mentions</Text>
+                <ToggleSwitch></ToggleSwitch>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingVertical: 20,
+                  paddingHorizontal: 20
+                }}
+              >
+                <Text style={styles.switchtitle}>New Messages</Text>
+                <ToggleSwitch></ToggleSwitch>
+              </View>
 
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingTop: 20,
-                paddingHorizontal: 20
-              }}
-            >
-              <Text style={styles.switch}>Stock Alerts</Text>
-            </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingTop: 20,
+                  paddingHorizontal: 20
+                }}
+              >
+                <Text style={styles.switch}>Stock Alerts</Text>
+              </View>
 
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingVertical: 20,
-                paddingHorizontal: 20
-              }}
-            >
-              <Text style={styles.switchtitle}>Price Movements</Text>
-              <ToggleSwitch></ToggleSwitch>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingVertical: 20,
-                paddingHorizontal: 20
-              }}
-            >
-              <Text style={styles.switchtitle}>Trending Stocks</Text>
-              <ToggleSwitch></ToggleSwitch>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingVertical: 20,
+                  paddingHorizontal: 20
+                }}
+              >
+                <Text style={styles.switchtitle}>Price Movements</Text>
+                <ToggleSwitch></ToggleSwitch>
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingVertical: 20,
+                  paddingHorizontal: 20
+                }}
+              >
+                <Text style={styles.switchtitle}>Trending Stocks</Text>
+                <ToggleSwitch></ToggleSwitch>
+              </View>
             </View>
           </View>
         </View>
-
-        <TouchableOpacity
-          style={styles.btn}
-          //   onPress={() => {
-          //     firebase
-          //       .auth()
-          //       .signOut()
-          //       .then(function() {
-          //         this.props.navigation.navigate("GetStarted");
-          //       });
-          //   }}
-        >
-          <Text style={{ color: "#383c4a", fontSize: 19, fontWeight: "bold" }}>
-            Logout
-          </Text>
-        </TouchableOpacity>
-
-        {/* {this.state.hide ? (
-          <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
-            <StockGroupCard
-              ticker="$TSLA"
-              pctchange="+1.02%"
-              onPress={() => {
-                props.navigation.navigate("StockChat", {
-                  //itemId: "TSLA",
-                  itemName: "$TSLA",
-                  itemPic: "https://i.stack.imgur.com/l60Hf.png"
-                });
-              }}
-            ></StockGroupCard>
-            <StockGroupCard
-              ticker="$SQ"
-              pctchange="+4.55%"
-              onPress={() => {
-                props.navigation.navigate("StockChat", {
-                  // itemId: item.id,
-                  // itemName: item.login,
-                  itemPic: "https://i.stack.imgur.com/l60Hf.png",
-                  itemName: "$SQ"
-                });
-              }}
-            ></StockGroupCard>
-            <StockGroupCard
-              ticker="$NET"
-              pctchange="+3.521%"
-              onPress={() => {
-                props.navigation.navigate("StockChat", {
-                  itemName: "$NET",
-                  // itemId: item.id,
-                  // itemName: item.login,
-                  itemPic: "https://i.stack.imgur.com/l60Hf.png"
-                });
-              }}
-            ></StockGroupCard>
-          </View>
-        ) : null} */}
-      </View>
-    );
-  }
-}
-
+      </ScrollView>
+      <TouchableOpacity
+        style={styles.btn}
+        onPress={() => {
+          firebase
+            .auth()
+            .signOut()
+            .then(function() {
+              props.navigation.navigate("GetStarted");
+            });
+        }}
+      >
+        <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
+          Logout
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 export default Settings;
 
 const styles = StyleSheet.create({
@@ -345,13 +274,18 @@ const styles = StyleSheet.create({
     //fontFamily: "Montserrat_700Bold"
   },
   btn: {
-    borderRadius: 16,
-    //borderTopRightRadius: 0,
-    backgroundColor: "#147efb",
-    height: 80,
+    borderWidth: 1,
+    borderColor: "rgba(0,0,0,0.2)",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20,
-    marginHorizontal: 20
+    width: 200,
+    position: "absolute",
+    bottom: 100,
+
+    right: 110,
+    height: 50,
+    backgroundColor: "#147efb",
+    borderRadius: 100,
+    flexDirection: "row"
   }
 });

@@ -44,9 +44,9 @@ function Discussion({ route, navigation }) {
 
   console.log("current user ", userid, userEmail);
 
-  useEffect(() => {
-    getUserJoinedAlreadyOrNot();
-  }, []);
+  // useEffect(() => {
+  //   getUserJoinedAlreadyOrNot();
+  // }, []);
 
   useEffect(() => {
     getUserJoinedAlreadyOrNot();
@@ -66,7 +66,7 @@ function Discussion({ route, navigation }) {
           const data = {
             _id: doc.id,
             text: "",
-            createdAt: new Date().toUTCString(),
+            createdAt: new Date().getTime(),
             ...firebaseData
           };
 

@@ -99,7 +99,7 @@ export default function CreateMsg({ navigation }) {
           }}
         >
           {/* {groupName} */}
-          New Chat
+          Send a DM
         </Text>
         <Entypo
           name="info"
@@ -157,7 +157,13 @@ export default function CreateMsg({ navigation }) {
                       }}
                     />
                     <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
-                    <Text style={{ fontSize: 18, fontWeight: "bold" }}>
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: "bold",
+                        color: "#FFF"
+                      }}
+                    >
                       {item.Name}
                     </Text>
                   </View>
