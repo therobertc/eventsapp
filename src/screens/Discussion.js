@@ -31,7 +31,6 @@ import {
 } from "@expo/vector-icons";
 
 function Discussion({ route, navigation }) {
-  const [messageList, setMessageList] = useState([]);
   const [message, setMessage] = useState("");
   const [isJoined, setIsJoined] = useState(false);
   const [username, setUsername] = useState(
@@ -42,11 +41,6 @@ function Discussion({ route, navigation }) {
   const [userEmail, setUserEmail] = useState(firebase.auth().currentUser.email);
   const { item, itemPic } = route.params;
 
-  console.log("current user ", userid, userEmail);
-
-  // useEffect(() => {
-  //   getUserJoinedAlreadyOrNot();
-  // }, []);
 
   useEffect(() => {
     getUserJoinedAlreadyOrNot();
@@ -58,6 +52,9 @@ function Discussion({ route, navigation }) {
       .onSnapshot(querySnapshot => {
         const messages = querySnapshot.docs.map(doc => {
           let firebaseData = doc.data();
+          firebaseData.createdAt = firebaseData.createdAt
+              .toDate()
+              .toUTCString();
           console.log("userid is", userid);
           console.log("mainid is", firebaseData["user"]["_id"]);
           firebaseData["user"]["_id"] =
@@ -144,12 +141,14 @@ function Discussion({ route, navigation }) {
       });
   }
 
-  onPressCashtag = cashtag => {
+  const onPressCashtag = cashtag => {
     let symbol = cashtag.replace("$", "");
-    navigation.navigate("StockDetails", {
-      symbol: symbol,
-      screen: "StockDetails"
-    });
+    if(isNaN(symbol)){
+      navigation.navigate("StockDetails", {
+        symbol: symbol,
+        screen: "StockDetails"
+      });
+    }
   };
 
   const lastMessage = async message => {
@@ -159,12 +158,6 @@ function Discussion({ route, navigation }) {
       .update({
         lastmessage: message
       });
-    // inc
-    //   .update({
-    //     lastmessage: message,
-    //   })
-    //   .then(() => {})
-    //   .catch(() => {});
   };
 
   function sendMessagesToChat() {
@@ -212,7 +205,7 @@ function Discussion({ route, navigation }) {
         .set({
           _id: newMessage[i]._id,
           messageID: messageRef.id,
-          createdAt: newMessage[i].createdAt.toUTCString(),
+          createdAt: newMessage[i].createdAt,
           senderEmail: userEmail,
           text: newMessage[i].text,
           user: {
@@ -224,9 +217,10 @@ function Discussion({ route, navigation }) {
           setMessages(GiftedChat.append(messages, newMessage));
           let message = newMessage[i].text;
           lastMessage(message);
-          if (message.includes("$") && isNaN(message.slice(1))) {
-            let s = message.slice(1);
-            navigation.push("StockDetails", { symbol: s.trim().toUpperCase() });
+          let symbol = /\$(\w+)/.exec(message);
+
+          if (symbol !== null && symbol !== "null" && symbol.length > 0 && isNaN(symbol[1])) {
+            navigation.push("StockDetails", { symbol: symbol[1].trim().toUpperCase() });
           }
         })
         .catch(function(error) {
@@ -249,7 +243,7 @@ function Discussion({ route, navigation }) {
     }
   };
 
-  renderBubble = props => {
+  const renderBubble = props => {
     return (
       <View>
         <Text style={styles.username}>{props.currentMessage.user.name}</Text>
@@ -273,7 +267,7 @@ function Discussion({ route, navigation }) {
     );
   };
 
-  renderSend = props => {
+  const renderSend = props => {
     return (
       <Send {...props} containerStyle={styles.sendContainer}>
         <View
