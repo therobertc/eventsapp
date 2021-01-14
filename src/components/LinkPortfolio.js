@@ -9,7 +9,7 @@ import {
   Animated
 } from "react-native";
 import { WebView } from "react-native-webview";
-const Feedback = () => {
+const LinkPortfolio = () => {
   const [showModal, setModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {}, [isLoading]);
@@ -19,11 +19,10 @@ const Feedback = () => {
 
   return (
     <>
-      <TouchableOpacity
-        onPress={() => setModal(true)}
-        style={styles.buttonContainer}
-      >
-        <Text>Subscribe</Text>
+      <TouchableOpacity style={styles.btn} onPress={() => setModal(true)}>
+        <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
+          Connect Portfolio
+        </Text>
       </TouchableOpacity>
 
       <Modal
@@ -38,7 +37,7 @@ const Feedback = () => {
               onPress={() => setModal(false)}
               style={styles.close}
             >
-              <Text style={{ fontWeight: "bold" }}>╳</Text>
+              <Text style={{ fontWeight: "bold", color: "#FFF" }}>╳</Text>
             </TouchableOpacity>
             {isLoading && <ActivityIndicator size={"large"} color={"grey"} />}
             <WebView
@@ -46,7 +45,7 @@ const Feedback = () => {
               onLoadEnd={() => setLoading(false)}
               style={styles.webViewContainer}
               source={{
-                uri: `https://stockchatapp.com`
+                uri: `https://robinhood.com/login`
               }}
             />
           </View>
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "100%",
-    height: "93%",
+    height: "90%",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -86,6 +85,19 @@ const styles = StyleSheet.create({
     height: "90%",
     width: "100%"
   },
+  btn: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 200,
+    //position: "absolute",
+    //bottom: 10,
+    //right: 110,
+    //top: 300,
+    height: 50,
+    backgroundColor: "#147efb",
+    borderRadius: 100,
+    flexDirection: "row"
+  },
   close: {
     alignSelf: "flex-end",
     padding: 6,
@@ -94,4 +106,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Feedback;
+export default LinkPortfolio;

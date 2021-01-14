@@ -108,7 +108,7 @@ export default function AddGroup(props) {
         />
       </View>
       <View>
-        <Text style={styles.Stockchat}> CREATE A GROUP</Text>
+        <Text style={styles.Stockchat}> START A GROUP</Text>
       </View>
 
       <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>

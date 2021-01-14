@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
 import { Feather } from "@expo/vector-icons";
 
 import Home from "../screens/Home";
@@ -103,6 +105,17 @@ const BottomTabNavigator = () => {
     </Tab.Navigator>
   );
 };
+
+const Drawer = createDrawerNavigator();
+
+const SideDrawerNavigator = () => {
+  return (
+    <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Screen name="Chat" component={Chat} />
+    </Drawer.Navigator>
+  );
+};
+
 const Stack = createStackNavigator();
 // const screenOptionStyle = {
 //   headerShown: false

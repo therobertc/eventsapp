@@ -12,8 +12,11 @@ import {
 import StockGroupCard from "../components/StockGroupCard";
 import firebase, { firestore } from "../database/firebase";
 
+import LinkPortfolio from "../components/LinkPortfolio";
+
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { Link } from "@react-navigation/native";
 
 const Profile = props => {
   return (
@@ -63,21 +66,15 @@ const Profile = props => {
         </View>
       </View>
 
-      <TouchableOpacity
-        style={styles.btn}
-        // onPress={() => {
-        //   firebase
-        //     .auth()
-        //     .signOut()
-        //     .then(function() {
-        //       props.navigation.navigate("GetStarted");
-        //     });
-        // }}
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: 200
+        }}
       >
-        <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
-          Connect Portfolio
-        </Text>
-      </TouchableOpacity>
+        <LinkPortfolio></LinkPortfolio>
+      </View>
     </ScrollView>
   );
 };
