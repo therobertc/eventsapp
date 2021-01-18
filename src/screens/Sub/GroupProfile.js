@@ -23,49 +23,53 @@ const GroupProfile = props => {
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
             <Feather name="chevron-left" size={30} color="white" />
           </TouchableOpacity>
-
-          <Text style={styles.header}>#STOCKCHAT</Text>
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Image
           style={{
-            paddingVertical: 20,
+            //paddingVertical: 20,
             marginHorizontal: 10,
             backgroundColor: "lightgrey",
             height: 100,
             width: 100,
-            borderRadius: 50
+            borderRadius: 50,
+            alignSelf: "center"
           }}
-          source={{
-            uri: "https://i.stack.imgur.com/l60Hf.png"
-          }}
+          source={require("../../../assets/icon.png")}
         ></Image>
 
-        <View style={{ marginVertical: 20 }}>
-          <View style={styles.stats}>
-            <Text style={styles.members}>100</Text>
-            <Text style={styles.volume}>+56.89%</Text>
-          </View>
+        <Text style={styles.header}>#STOCKCHAT</Text>
 
-          <View style={styles.stats}>
-            <Text style={styles.title}>Members</Text>
-            <Text style={styles.title}>Message Volume</Text>
-          </View>
+        <View style={styles.stats}>
+          <Text style={styles.members}>7,157 members</Text>
         </View>
 
         <View style={styles.col}>
-          <Text style={styles.title}>Description</Text>
+          <Text style={styles.title}>Share Link</Text>
+          <Text style={styles.about}>https://stockchatapp.com/stockchat</Text>
         </View>
 
-        <View style={styles.stats}>
-          <Text style={styles.title}>Popular Stocks</Text>
+        <View style={styles.col}>
+          <Text style={styles.title}>About</Text>
+          <Text style={styles.about}>
+            Connect with investors from around the world
+          </Text>
+        </View>
+        <View style={styles.col}>
+          <Text style={styles.title}>Upgrades</Text>
+          <Text style={styles.about}>
+            ChartBot Stock Alerts{"\n"}News Bot {"\n"}5 Pro Screeners {"\n"}
+            Group Trending Stocks{"\n"}
+            Voice Chat{"\n"}Connect with 7000+ members{"\n"}10 Videos{"\n"}
+            Weekly Newsletter
+          </Text>
         </View>
       </ScrollView>
       <View
         style={{
           height: 100,
-          backgroundColor: "lightgrey",
+          backgroundColor: "#4b5162",
           flexDirection: "row"
         }}
       >
@@ -89,7 +93,7 @@ const GroupProfile = props => {
             });
           }}
         >
-          <Feather name="send" size={25} color="#383c4a" />
+          <Feather name="send" size={25} color="#FFF" />
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -105,17 +109,17 @@ const GroupProfile = props => {
           }}
           onPress={() => props.navigation.navigate("Wallet")}
         >
-          <Feather name="stop-circle" size={25} color="#383c4a" />
+          <Feather name="stop-circle" size={25} color="#FFF" />
           <Text
             style={{
-              color: "#383c4a",
+              color: "#FFF",
               fontWeight: "800",
               paddingRight: 5,
               fontSize: 20,
               paddingLeft: 10
             }}
           >
-            25 / Month
+            125 / Month
           </Text>
         </TouchableOpacity>
       </View>
@@ -176,20 +180,18 @@ const styles = StyleSheet.create({
   },
   header: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
     fontSize: 20,
-    paddingLeft: 10
-    //textAlign: "center"
+    paddingLeft: 10,
+    textAlign: "center",
+    paddingTop: 20
   },
 
   title: {
-    fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
-    fontSize: 20
-
-    //textAlign: "center"
+    fontSize: 18
   },
   volume: {
     fontFamily: "Montserrat_800ExtraBold",
@@ -198,10 +200,18 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   members: {
-    fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
-    flex: 1,
-    fontSize: 30
+    //fontFamily: "Montserrat_800ExtraBold",
+    color: "#FFF",
+    fontSize: 14,
+    fontWeight: "600",
+    textAlign: "center",
+    marginHorizontal: 10
+  },
+  about: {
+    color: "#FFF",
+    fontSize: 14,
+    fontWeight: "700",
+    paddingVertical: 20
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
@@ -223,17 +233,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20
   },
   col: {
-    flexDirection: "row",
-    marginBottom: 50,
-    marginHorizontal: 20,
-    alignItems: "center"
+    flexDirection: "column",
+
+    marginHorizontal: 20
+    //alignItems: "center"
   },
 
   stats: {
     flexDirection: "row",
-    marginVertical: 5,
+    marginVertical: 10,
     marginHorizontal: 20,
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center"
   },
   bio: {
     flexDirection: "row",

@@ -15,6 +15,8 @@ import {
 } from "react-native";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
 
+import DropDownPicker from "react-native-dropdown-picker";
+
 import { LinearGradient } from "expo-linear-gradient";
 import Entypo from "@expo/vector-icons/Entypo";
 import Profiles from "../components/Profiles";
@@ -32,6 +34,10 @@ const Chat = props => {
   const [publicgroups, setpublicgroups] = useState([]);
 
   const [Chatheads, setChatheads] = useState([]);
+
+  this.state = {
+    country: "#STOCKCHAT"
+  };
 
   useEffect(() => {
     // props.navigation.push("StockDetails", {symbol:"TSLA"})
@@ -92,7 +98,6 @@ const Chat = props => {
         });
       });
   }
-
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -115,15 +120,16 @@ const Chat = props => {
 
   return (
     <View style={styles.container}>
-      <Header
-        style={{
-          backgroundColor: "#383c4a",
-          borderBottomWidth: 0.2,
-          borderBottomColor: "#383c4a"
-        }}
-      >
-        <Left>
-          {/* <Feather
+      <View style={{ zIndex: 999 }}>
+        <Header
+          style={{
+            backgroundColor: "#383c4a",
+            borderBottomWidth: 0.2,
+            borderBottomColor: "#383c4a"
+          }}
+        >
+          <Left>
+            {/* <Feather
             style={{
               color: "white",
               paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
@@ -134,11 +140,53 @@ const Chat = props => {
             onPress={() => props.navigation.navigate("Profile")}
           /> */}
 
-          <Text style={styles.logotext}>#STOCKCHAT</Text>
-        </Left>
+            <View style={{ zIndex: 999 }}>
+              <DropDownPicker
+                items={[
+                  {
+                    label: "#STOCKCHAT",
+                    value: "#STOCKCHAT"
+                    // icon: () => <Icon name="flag" size={18} color="#900" />
+                  },
+                  {
+                    label: "#BLACKINKECON",
+                    value: "#BLACKINKECON"
+                    // icon: () => <Icon name="flag" size={18} color="#900" />
+                  }
+                ]}
+                defaultValue={this.state.country}
+                containerStyle={{
+                  height: 40,
+                  width: 250,
+                  borderWidth: 0
+                }}
+                arrowColor="#FFF"
+                arrowSize={20}
+                style={{ backgroundColor: "transparent", borderWidth: 0 }}
+                itemStyle={{
+                  justifyContent: "flex-start",
+                  color: "#FFF"
+                }}
+                labelStyle={{
+                  fontFamily: "Montserrat_700Bold",
+                  color: "#FFF",
+                  flex: 1,
+                  fontSize: 20
+                }}
+                dropDownStyle={{ backgroundColor: "#383c4a", borderWidth: 0 }}
+                // onChangeItem={item =>
+                //   this.setState({
+                //     country: item.value
+                //   })
+                // }
+              />
 
-        <Body>
-          {/* <Image
+              {/* <Text style={styles.logotext}>#STOCKCHAT</Text> */}
+            </View>
+          </Left>
+
+          <Body>
+            {/* <Image
             style={{
               flex: 1,
               aspectRatio: Platform.OS === "ios" ? 3.0 : 4.0,
@@ -146,34 +194,34 @@ const Chat = props => {
             }}
             source={require("../../assets/stockchattext.png")}
           /> */}
-          {/* <View style={{ justifyContent: "center", alignItems: "center" }}>
+            {/* <View style={{ justifyContent: "center", alignItems: "center" }}>
             <Text style={styles.header2}>#stockchat</Text>
           </View> */}
-        </Body>
+          </Body>
 
-        <Right>
-          <Feather
-            style={{
-              color: "white",
-              fontWeight: "bold",
-              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-              fontSize: 30
-            }}
-            name="user-plus"
-            onPress={onShare}
-          />
+          <Right>
+            <Feather
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                fontSize: 30
+              }}
+              name="user-plus"
+              onPress={onShare}
+            />
 
-          <Feather
-            style={{
-              color: "white",
-              fontWeight: "bold",
-              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-              fontSize: 30
-            }}
-            name="bell"
-            onPress={() => props.navigation.navigate("Activity")}
-          />
-          {/* <Feather
+            <Feather
+              style={{
+                color: "white",
+                fontWeight: "bold",
+                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                fontSize: 30
+              }}
+              name="bell"
+              onPress={() => props.navigation.navigate("Activity")}
+            />
+            {/* <Feather
             style={{
               color: "white",
               fontWeight: "bold",
@@ -183,7 +231,7 @@ const Chat = props => {
             name="send"
             onPress={() => props.navigation.navigate("DirectMessages")}
           /> */}
-          {/* <TouchableOpacity
+            {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("Profile")}
           >
             <Image
@@ -192,8 +240,9 @@ const Chat = props => {
               style={styles.avatar}
             />
           </TouchableOpacity> */}
-        </Right>
-      </Header>
+          </Right>
+        </Header>
+      </View>
 
       <ScrollView style={styles.col2}>
         <View style={styles.headerContainer}>

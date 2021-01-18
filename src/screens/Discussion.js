@@ -41,7 +41,6 @@ function Discussion({ route, navigation }) {
   const [userEmail, setUserEmail] = useState(firebase.auth().currentUser.email);
   const { item, itemPic } = route.params;
 
-
   useEffect(() => {
     getUserJoinedAlreadyOrNot();
     const unsubscribeListener = firestore
@@ -53,8 +52,8 @@ function Discussion({ route, navigation }) {
         const messages = querySnapshot.docs.map(doc => {
           let firebaseData = doc.data();
           firebaseData.createdAt = firebaseData.createdAt
-              .toDate()
-              .toUTCString();
+            .toDate()
+            .toUTCString();
           console.log("userid is", userid);
           console.log("mainid is", firebaseData["user"]["_id"]);
           firebaseData["user"]["_id"] =
@@ -143,7 +142,7 @@ function Discussion({ route, navigation }) {
 
   const onPressCashtag = cashtag => {
     let symbol = cashtag.replace("$", "");
-    if(isNaN(symbol)){
+    if (isNaN(symbol)) {
       navigation.navigate("StockDetails", {
         symbol: symbol,
         screen: "StockDetails"
@@ -219,8 +218,15 @@ function Discussion({ route, navigation }) {
           lastMessage(message);
           let symbol = /\$(\w+)/.exec(message);
 
-          if (symbol !== null && symbol !== "null" && symbol.length > 0 && isNaN(symbol[1])) {
-            navigation.push("StockDetails", { symbol: symbol[1].trim().toUpperCase() });
+          if (
+            symbol !== null &&
+            symbol !== "null" &&
+            symbol.length > 0 &&
+            isNaN(symbol[1])
+          ) {
+            navigation.push("StockDetails", {
+              symbol: symbol[1].trim().toUpperCase()
+            });
           }
         })
         .catch(function(error) {
@@ -279,8 +285,8 @@ function Discussion({ route, navigation }) {
             backgroundColor: "#147efb",
             justifyContent: "center",
             alignItems: "center",
-            alignSelf: "center",
-            marginBottom: -25
+            alignSelf: "center"
+            //marginBottom: -25
             //marginRight: 15
           }}
         >
@@ -374,12 +380,12 @@ function Discussion({ route, navigation }) {
         <Text style={styles.header}> {item.groupName}</Text>
         {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
         <TouchableOpacity
-        // onPress={() =>
-        //   navigation.push("StockDetails", {
-        //     symbol: "SQ"
-        //   })
-        // }
-        //onPress={() => navigation.navigate("StockProfile")}
+          // onPress={() =>
+          //   navigation.push("StockDetails", {
+          //     symbol: "SQ"
+          //   })
+          // }
+          onPress={() => navigation.navigate("GroupProfile")}
         >
           <Image
             source={require("../../assets/icon.png")}
@@ -402,14 +408,16 @@ function Discussion({ route, navigation }) {
             fontSize: 20,
             color: "#FFF",
             paddingLeft: 20,
+            paddingRight: 20,
             width: "100%",
             marginHorizontal: 30,
             flex: 1,
-            paddingVertical: 20,
-            marginTop: 10,
-            marginBottom: -10
+            height: "auto",
+            paddingTop: 10,
+            paddingBottom: 10
           }
         }}
+        scrollToBottom
         inverted={true}
         timeTextStyle={{ left: { color: "white" } }}
         //renderTime={renderTime}
@@ -519,15 +527,15 @@ const styles = StyleSheet.create({
     //textAlign: "center"
   },
 
-  textInput: {
-    backgroundColor: "#4b5162",
-    borderRadius: 30,
-    marginRight: 20,
-    marginLeft: 20,
-    fontSize: 20,
-    color: "#FFF",
-    paddingLeft: 20
-  },
+  // textInput: {
+  //   backgroundColor: "#4b5162",
+  //   borderRadius: 30,
+  //   marginRight: 20,
+  //   marginLeft: 20,
+  //   fontSize: 20,
+  //   color: "#FFF",
+  //   paddingLeft: 20
+  // },
 
   avatar: {
     width: 40,

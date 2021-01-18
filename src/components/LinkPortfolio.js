@@ -9,6 +9,7 @@ import {
   Animated
 } from "react-native";
 import { WebView } from "react-native-webview";
+
 const LinkPortfolio = () => {
   const [showModal, setModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     display: "flex",
+    paddingVertical: 20,
     height: 50,
     justifyContent: "center",
     alignItems: "center"

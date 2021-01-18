@@ -13,6 +13,7 @@ import { Feather } from "@expo/vector-icons";
 import { Icon, Header, Left, Right, Body, Button} from "native-base";
 // import UserAdvanceScreener from "./UserAdvanceScreener";
 import UserScreener from "../components/Screeners/UserScreener";
+
 import * as Linking from "expo-linking";
 import URL from '../../Constant/Constant';
 import Analytics from '../../Constant/ExpoMixpanelConstant';
@@ -36,7 +37,8 @@ class Home extends Component {
             overbought: [],
             oversold: [],
             mostvolatile:[],
-            isSubscribed: false
+            isSubscribed: false,
+           
         };
     }
 
