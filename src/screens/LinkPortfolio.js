@@ -18,51 +18,26 @@ import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { Link } from "@react-navigation/native";
 
-const Profile = props => {
+const LinkPortfolio = props => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.col}>
-        <Text style={styles.header}>Portfolio</Text>
-        <TouchableOpacity
-          style={{
-            paddingHorizontal: 10,
-            marginRight: 20,
-            flexDirection: "row",
-            alignItems: "center",
-            backgroundColor: "#4b5162",
-            borderRadius: 20,
-            paddingVertical: 5,
-            borderWidth: 1,
-            borderColor: "#7c818c"
-          }}
-          // onPress={() => props.navigation.navigate("Wallet")}
-        >
-          <Feather name="stop-circle" size={20} color="#5294e2" />
-
-          <Text
-            style={{
-              fontWeight: "bold",
-              paddingLeft: 5,
-              fontSize: 16,
-              color: "#7c818c"
-            }}
-          >
-            0
-          </Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={{ paddingHorizontal: 20 }}
-          onPress={() => props.navigation.navigate("Wallet")}
-        >
-          <Feather name="credit-card" size={30} color="white" />
-        </TouchableOpacity> */}
-        <TouchableOpacity onPress={() => props.navigation.navigate("Settings")}>
-          <Feather name="settings" size={30} color="white" />
+        <TouchableOpacity onPress={() => props.navigation.goBack()}>
+          <Feather name="chevron-left" size={30} color="white" />
         </TouchableOpacity>
       </View>
       <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
         <View style={styles.feed}>
-          <Text style={styles.text}>Your portfolio is not connected.</Text>
+          <Image
+            source={require("../../assets/icon.png")}
+            // source={{ uri: itemPic }}
+            style={styles.avatar}
+          />
+          <Text style={styles.header}> Link your broker</Text>
+          <Text style={styles.text}>
+            Account and trade values will be private
+          </Text>
+          <Text style={styles.link}>Why link an account?</Text>
         </View>
       </View>
 
@@ -73,21 +48,12 @@ const Profile = props => {
           paddingTop: 200
         }}
       >
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => props.navigation.navigate("LinkPortfolio")}
-          // onPress={() => setModal(true)}
-        >
-          <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
-            Connect Portfolio
-          </Text>
-        </TouchableOpacity>
-        {/* <LinkPortfolioButton></LinkPortfolioButton> */}
+        <LinkPortfolioButton></LinkPortfolioButton>
       </View>
     </ScrollView>
   );
 };
-export default Profile;
+export default LinkPortfolio;
 
 const styles = StyleSheet.create({
   list: {
@@ -146,7 +112,9 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
-    fontSize: 20
+    fontSize: 20,
+    textAlign: "center",
+    paddingVertical: 20
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
@@ -165,6 +133,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20
   },
+  link: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#147efb",
+    textAlign: "center",
+    fontSize: 20,
+    paddingVertical: 10
+  },
   ops: {
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
@@ -172,6 +147,12 @@ const styles = StyleSheet.create({
     // backgroundColor: "#383c4a",
     // marginHorizontal: -20,
     paddingHorizontal: 20
+  },
+  avatar: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignSelf: "center"
   },
   col: {
     flexDirection: "row",

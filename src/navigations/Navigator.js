@@ -26,7 +26,7 @@ import GetStarted from "../screens/OnBoarding/GetStarted";
 import ChoosingUsername from "../screens/OnBoarding/ChoosingUsername";
 import VerifyPhoneNumber from "../screens/OnBoarding/VerifyPhoneNumber";
 import PhoneNumber from "../screens/OnBoarding/PhoneNumber";
-import LinkPortfolio from "../screens/OnBoarding/LinkPortfolio";
+import LinkPortfolio from "../screens/LinkPortfolio";
 import InviteFriends from "../screens/OnBoarding/InviteFriends";
 import Notification from "../screens/OnBoarding/Notification";
 import Success from "../screens/OnBoarding/Success";

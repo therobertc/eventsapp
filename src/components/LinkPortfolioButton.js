@@ -6,11 +6,12 @@ import {
   StyleSheet,
   View,
   ActivityIndicator,
-  Animated
+  Animated,
+  Image
 } from "react-native";
 import { WebView } from "react-native-webview";
 
-const LinkPortfolio = () => {
+const LinkPortfolioButton = () => {
   const [showModal, setModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {}, [isLoading]);
@@ -20,10 +21,19 @@ const LinkPortfolio = () => {
 
   return (
     <>
-      <TouchableOpacity style={styles.btn} onPress={() => setModal(true)}>
-        <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
-          Connect Portfolio
-        </Text>
+      <TouchableOpacity
+        style={styles.btn}
+        //onPress={() => navigation.navigate("LinkPortfolio")}
+        onPress={() => setModal(true)}
+      >
+        {/* <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
+          Robinhood
+        </Text> */}
+        <Image
+          source={require("../../assets/robinhoodlogo.png")}
+          // source={{ uri: itemPic }}
+          style={styles.avatar}
+        />
       </TouchableOpacity>
 
       <Modal
@@ -96,7 +106,7 @@ const styles = StyleSheet.create({
     //right: 110,
     //top: 300,
     height: 50,
-    backgroundColor: "#147efb",
+    backgroundColor: "#FFF",
     borderRadius: 100,
     flexDirection: "row"
   },
@@ -105,7 +115,12 @@ const styles = StyleSheet.create({
     padding: 6,
     marginRight: 20,
     marginTop: 10
+  },
+  avatar: {
+    width: 130,
+    height: 31
+    //borderRadius: 20
   }
 });
 
-export default LinkPortfolio;
+export default LinkPortfolioButton;

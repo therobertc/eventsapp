@@ -20,7 +20,7 @@ const TOKEN = "pk_0db8d87dbdde49c5b215cd4ec559ed13";
 export const TEST_URL = "sandbox.iexapis.com/stable";
 const PROD_URL = "cloud.iexapis.com/stable";
 import ChartComp from "./ChartComp";
-import LinkPortfolio from "./LinkPortfolio";
+import LinkPortfolioButton from "./LinkPortfolioButton";
 import {
     Ionicons,
     Entypo,
