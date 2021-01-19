@@ -27,7 +27,7 @@ const Activity = props => {
         }}
       >
         <Left>
-          <Feather
+          {/* <Feather
             style={{
               color: "white",
               paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
@@ -36,12 +36,11 @@ const Activity = props => {
             }}
             name="chevron-left"
             onPress={() => props.navigation.goBack()}
-          />
+          /> */}
+          <Text style={styles.header}>Notifications</Text>
         </Left>
 
-        <Body style={{ width: "100%" }}>
-          <Text style={styles.header}>Notifications</Text>
-        </Body>
+        <Body style={{ width: "100%" }}></Body>
 
         <Right>
           <Feather
@@ -120,7 +119,8 @@ const styles = StyleSheet.create({
     color: "#FFF",
     width: "105%",
     //flex: 1,
-    fontSize: 20
+    fontSize: 20,
+    marginLeft: 10
   },
   text: {
     //fontFamily: "Montserrat_400Regular",

@@ -211,16 +211,6 @@ const Chat = props => {
               onPress={onShare}
             />
 
-            <Feather
-              style={{
-                color: "white",
-                fontWeight: "bold",
-                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                fontSize: 30
-              }}
-              name="bell"
-              onPress={() => props.navigation.navigate("Activity")}
-            />
             {/* <Feather
             style={{
               color: "white",

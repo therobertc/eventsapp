@@ -22,7 +22,7 @@ const Profile = props => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.col}>
-        <Text style={styles.header}>Portfolio</Text>
+        <Text style={styles.header}>Profile</Text>
         <TouchableOpacity
           style={{
             paddingHorizontal: 10,
@@ -60,30 +60,44 @@ const Profile = props => {
           <Feather name="settings" size={30} color="white" />
         </TouchableOpacity>
       </View>
-      <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+      <View style={{ paddingVertical: 20, marginHorizontal: 20 }}>
+        <View>
+          <Image
+            source={require("../../assets/icon.png")}
+            // source={{ uri: itemPic }}
+            style={styles.avatar}
+          />
+
+          <Text style={styles.biotext}>Rob Calderon</Text>
+          <Text style={styles.biotext}>@rob</Text>
+
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.biotext}>100 followers</Text>
+            <Text style={styles.biotext}>10 following</Text>
+          </View>
+
+          <Text style={styles.biotext}>Building apps for traders</Text>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.linktext}>link twitter</Text>
+            <Text style={styles.linktext}>link instagram</Text>
+          </View>
+        </View>
         <View style={styles.feed}>
+          <Text style={styles.header}>Portfolio</Text>
           <Text style={styles.text}>Your portfolio is not connected.</Text>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => props.navigation.navigate("LinkPortfolio")}
+            // onPress={() => setModal(true)}
+          >
+            <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
+              Connect Portfolio
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
 
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          paddingTop: 200
-        }}
-      >
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => props.navigation.navigate("LinkPortfolio")}
-          // onPress={() => setModal(true)}
-        >
-          <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
-            Connect Portfolio
-          </Text>
-        </TouchableOpacity>
-        {/* <LinkPortfolioButton></LinkPortfolioButton> */}
-      </View>
+      {/* <LinkPortfolioButton></LinkPortfolioButton> */}
     </ScrollView>
   );
 };
@@ -118,14 +132,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: 200,
-    position: "absolute",
-    bottom: 10,
-    right: 110,
-    top: 300,
+    //position: "absolute",
+    //bottom: 10,
+    //right: 110,
+    //top: 200,
     height: 50,
     backgroundColor: "#147efb",
     borderRadius: 100,
-    flexDirection: "row"
+    flexDirection: "row",
+    alignSelf: "center",
+    marginTop: 30
   },
   container: {
     height: "100%",
@@ -163,22 +179,37 @@ const styles = StyleSheet.create({
     //fontFamily: "Montserrat_400Regular",
     color: "#FFF",
     textAlign: "center",
-    fontSize: 20
+    fontSize: 20,
+    paddingTop: 20
   },
-  ops: {
-    // borderTopLeftRadius: 40,
-    // borderTopRightRadius: 40,
-    //height: "75%",
-    // backgroundColor: "#383c4a",
-    // marginHorizontal: -20,
-    paddingHorizontal: 20
+  biotext: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#FFF",
+    textAlign: "left",
+    fontSize: 20,
+    marginVertical: 5,
+    paddingRight: 10
   },
+  linktext: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#147efb",
+    textAlign: "left",
+    fontSize: 20,
+    marginVertical: 5,
+    paddingRight: 10
+  },
+
+  feed: {
+    paddingTop: 20
+  },
+
   col: {
     flexDirection: "row",
     //marginTop: 25,
     marginHorizontal: 20,
     alignItems: "center"
   },
+
   stockchats: {
     //flexDirection: "row"
     marginVertical: 10,
@@ -190,5 +221,11 @@ const styles = StyleSheet.create({
     color: "#FFF",
     flex: 1,
     fontSize: 20
+  },
+  avatar: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    marginBottom: 10
   }
 });

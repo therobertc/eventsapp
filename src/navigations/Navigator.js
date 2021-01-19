@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 import Home from "../screens/Home";
 import Discussion from "../screens/Discussion";
@@ -70,7 +71,7 @@ const BottomTabNavigator = () => {
         }
       }}
     >
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Home"
         component={Home}
         options={{
@@ -80,7 +81,7 @@ const BottomTabNavigator = () => {
             <Icon name="ios-trending-up" color={color} size={30} />
           )
         }}
-      /> */}
+      />
 
       <Tab.Screen
         name="Chat"
@@ -89,6 +90,17 @@ const BottomTabNavigator = () => {
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
             <Icon2 name="chat" color={color} size={30} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Alerts"
+        component={Activity}
+        options={{
+          headerShown: false,
+          tabBarLabel: "",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="ios-notifications" color={color} size={35} />
           )
         }}
       />
