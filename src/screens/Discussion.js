@@ -55,18 +55,14 @@ function Discussion({ route, navigation }) {
           firebaseData.createdAt = firebaseData.createdAt
               .toDate()
               .toUTCString();
-          console.log("userid is", userid);
-          console.log("mainid is", firebaseData["user"]["_id"]);
           firebaseData["user"]["_id"] =
-            firebaseData["user"]["_id"] == userid ? 1 : 2;
-          console.log("message is ", firebaseData["user"]["_id"]);
+              (firebaseData["user"]["_id"] == userid) ? 1 : 2;
           const data = {
             _id: doc.id,
             text: "",
             createdAt: new Date().getTime(),
             ...firebaseData
           };
-
           return data;
         });
         setMessages(messages);
@@ -160,40 +156,8 @@ function Discussion({ route, navigation }) {
       });
   };
 
-  function sendMessagesToChat() {
-    const messageRef = firestore
-      .collection("message")
-      .doc(item.groupID)
-      .collection("messages")
-      .doc();
-
-    messageRef
-      .set({
-        _id: newMessage[i]._id,
-        messageID: messageRef.id,
-        createdAt: newMessage[i].createdAt.toUTCString(),
-        senderEmail: userEmail,
-        text: newMessage[i].text,
-        user: {
-          _id: userId,
-          name: username
-        }
-      })
-      .then(function(docRef) {
-        if (message.includes("$") && isNaN(message.slice(1))) {
-          let s = message.slice(1);
-          navigation.push("StockDetails", { symbol: s.trim().toUpperCase() });
-        }
-        setMessage("");
-      })
-      .catch(function(error) {
-        Alert.alert(error.message);
-        console.log("Error:", error);
-      });
-  }
 
   function onSend(newMessage = []) {
-    console.log("message is ", newMessage);
 
     const messageRef = firestore
       .collection("message")
@@ -231,17 +195,7 @@ function Discussion({ route, navigation }) {
     setMessages(GiftedChat.append(messages, newMessage));
   }
 
-  const _navigateToStockDetails = item => {
-    console.log(item);
-    let message = item.message;
-    message = message.split(" ");
-    for (let i = 0; i < message.length; ++i) {
-      if (message[i].includes("$") && isNaN(message[i].slice(1))) {
-        let s = message[i].slice(1);
-        navigation.push("StockDetails", { symbol: s.trim().toUpperCase() });
-      }
-    }
-  };
+
 
   const renderBubble = props => {
     return (
@@ -347,17 +301,9 @@ function Discussion({ route, navigation }) {
           <Feather name="at-sign" size={22} color="#3e7af0" />
         </TouchableOpacity>
         <TouchableOpacity
-        // onPress={() => pickImage()}
         >
           <Ionicons name="md-images" size={26} color="#3e7af0" />
         </TouchableOpacity>
-        {/* <TouchableOpacity>
-          <EvilIcons name="location" size={29} color="#3e7af0" />
-        </TouchableOpacity> */}
-        {/* <TouchableOpacity>
-          <FontAwesome name="microphone" size={24} color="#3e7af0" />
-        </TouchableOpacity> */}
-
         <TouchableOpacity>
           <MaterialCommunityIcons name="gif" size={35} color="#3e7af0" />
         </TouchableOpacity>
@@ -372,14 +318,8 @@ function Discussion({ route, navigation }) {
           <Icon name="left" color="#FFF" size={24} />
         </TouchableOpacity>
         <Text style={styles.header}> {item.groupName}</Text>
-        {/* <Image source={{ uri: itemPic }} style={styles.avatar} /> */}
         <TouchableOpacity
-        // onPress={() =>
-        //   navigation.push("StockDetails", {
-        //     symbol: "SQ"
-        //   })
-        // }
-        //onPress={() => navigation.navigate("StockProfile")}
+
         >
           <Image
             source={require("../../assets/icon.png")}

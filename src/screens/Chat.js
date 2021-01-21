@@ -30,14 +30,26 @@ const Chat = props => {
   const isVisible = useIsFocused();
   const [groups, setGroups] = useState([]);
   const [publicgroups, setpublicgroups] = useState([]);
-
   const [Chatheads, setChatheads] = useState([]);
 
   useEffect(() => {
-    // props.navigation.push("StockDetails", {symbol:"TSLA"})
+    firestore.collection("profile").where("email", "==", fire.auth().currentUser.email).get().then(snapshot =>{
+      console.log("snapshot is ", snapshot);
+      snapshot.forEach(function(change) {
+          console.log("data is", change);
+          console.log(change.id);
+      })
+
+    }).catch(error=>{
+      console.log("erros is ", error);
+    })
+    console.log("current user is ", fire.auth().currentUser
+
+    )
     if (isVisible) {
       getChats();
     }
+
   }, [isVisible]);
 
   function getChats() {
