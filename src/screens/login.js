@@ -88,7 +88,7 @@ export default function Login({ navigation }) {
             placeholder="Email"
             value={email}
             onChangeText={val => setEmail(val)}
-            placeholderTextColor="white"
+            placeholderTextColor="#FFF"
           />
           <TextInput
             style={styles.inputStyle}
@@ -97,7 +97,7 @@ export default function Login({ navigation }) {
             onChangeText={val => setPass(val)}
             maxLength={15}
             secureTextEntry={true}
-            placeholderTextColor="white"
+            placeholderTextColor="#FFF"
           />
           <TouchableOpacity onPress={() => userLogin()}>
             <View style={styles.btn}>
@@ -139,7 +139,7 @@ export default function Login({ navigation }) {
         />
         <TouchableOpacity onPress={() => userLogin()}>
           <View style={styles.btn}>
-            <Text style={{ color: "#383c4a", fontSize: 19, fontWeight: "bold" }}>
+            <Text style={{ color: "#F5F8FA", fontSize: 19, fontWeight: "bold" }}>
               Sign In
             </Text>
           </View>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "#383c4a"
+    backgroundColor: "#35383F"
   },
   inputStyle: {
     width: "100%",
@@ -173,10 +173,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     margin: 20,
     fontSize: 20,
-    color: "white"
+    color: "#FFF"
   },
   loginText: {
-    color: "white",
+    color: "#FFF",
     marginTop: 40,
     textAlign: "center"
   },
@@ -188,10 +188,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#383c4a"
+    backgroundColor: "#35383F"
   },
   tcontainer: {
-    //backgroundColor: "#000",
+    //backgroundColor: "#FFF",
     flex: 1,
     paddingTop: 100,
     //justifyContent: "center"
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
   },
 
   tHeading: {
-    color: "white",
+    color: "#FFF",
     fontWeight: "bold",
     fontSize: 25,
     paddingTop: 20
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: 30,
     width: "100%",
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     borderRadius: 26
   },
   activemenu: {
@@ -242,11 +242,11 @@ const styles = StyleSheet.create({
   },
   activemenuText: {
     fontSize: 20,
-    color: "#000000",
+    color: "#FFF000",
     marginTop: 5
   },
   aText: {
-    color: "#383c4a",
+    color: "#F5F8FA",
     fontSize: 20,
     marginTop: 5
   },

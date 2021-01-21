@@ -433,8 +433,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //backgroundColor: "#e8eef1"
-    backgroundColor: "#F5F8FA"
-    //backgroundColor: "white",
+    backgroundColor: "#35383F"
+    //backgroundColor: "#FFF",
     //height: 1000
   },
   text: {
@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderBottomColor: "#F5FCFF",
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     borderRadius: 30,
     borderBottomWidth: 1,
     height: 45,
@@ -476,10 +476,10 @@ const styles = StyleSheet.create({
   inputs: {
     height: 50,
     marginLeft: 10,
-    borderBottomColor: "#383c4a",
+    borderBottomColor: "#F5F8FA",
     //flex: 1,
     width: 300,
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     marginBottom: 50
   },
   inputIcon: {
@@ -498,7 +498,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   saveButtonText: {
-    color: "#383c4a"
+    color: "#F5F8FA"
   },
   notificationList: {
     marginTop: 20,
@@ -508,7 +508,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     flexDirection: "row",
     borderRadius: 10
   },
@@ -534,7 +534,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     justifyContent: "center",
-    color: "white"
+    color: "#FFF"
   },
 
   offerCard: {
@@ -554,7 +554,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 2.0,
     marginHorizontal: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20,

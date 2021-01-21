@@ -32,7 +32,7 @@ const StockProfile = ({ route, navigation }) => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-      <LinearGradient colors={["#657786", "#383c4a"]} style={styles.container}>
+      <LinearGradient colors={["#657786", "#F5F8FA"]} style={styles.container}>
         <View style={styles.main}>
           <View style={styles.headerContainer}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -110,7 +110,7 @@ const StockProfile = ({ route, navigation }) => {
                   borderRadius: 10,
                   marginTop: 10,
 
-                  backgroundColor: "white",
+                  backgroundColor: "#FFF",
                   margin: 20
                 }}
                 //onPress={() => this.props.navigation.navigate("ThankYou")}
@@ -119,7 +119,7 @@ const StockProfile = ({ route, navigation }) => {
                   style={{
                     flex: 2,
                     fontSize: 18,
-                    color: "#383c4a",
+                    color: "#F5F8FA",
                     fontWeight: "bold",
                     textAlign: "center"
                   }}
@@ -137,7 +137,7 @@ const StockProfile = ({ route, navigation }) => {
                   borderRadius: 10,
                   marginTop: 10,
 
-                  backgroundColor: "white",
+                  backgroundColor: "#FFF",
                   margin: 20
                 }}
                 // onPress={() => this.props.navigation.navigate("GroupFeed")}
@@ -147,7 +147,7 @@ const StockProfile = ({ route, navigation }) => {
                   style={{
                     flex: 2,
                     fontSize: 18,
-                    color: "#383c4a",
+                    color: "#F5F8FA",
                     fontWeight: "bold",
                     textAlign: "center"
                   }}
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   main: {
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     height: "88%",
     paddingHorizontal: 20,
     borderBottomLeftRadius: 35,
@@ -213,6 +213,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "white"
+    backgroundColor: "#FFF"
   }
 });

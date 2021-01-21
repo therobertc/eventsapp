@@ -154,7 +154,7 @@ class StockDetails extends Component {
 
     renderError = () => {
         return (
-            <View style={{ paddingTop: 50, height: '100%', backgroundColor: '#383c4a'}}>
+            <View style={{ paddingTop: 50, height: '100%', backgroundColor: '#35383F'}}>
                 <Text style={{ color: "#FFF", textAlign: "center", fontSize: 20 }}>
                     This stock is currently unavailable.
                 </Text>
@@ -164,8 +164,8 @@ class StockDetails extends Component {
 
     renderLoading = () => {
         return (
-            <View style={{ paddingTop: 50, height: '100%', backgroundColor: '#383c4a'}}>
-                <ActivityIndicator color="white" size="large" />
+            <View style={{ paddingTop: 50, height: '100%', backgroundColor: '#35383F'}}>
+                <ActivityIndicator color="#FFF" size="large" />
             </View>
         );
     };
@@ -372,7 +372,7 @@ class StockDetails extends Component {
                                 <TouchableOpacity
                                     onPress={() => WebBrowser.openBrowserAsync(data.url)}
                                 >
-                                    <Text style={{ fontSize: 12, paddingBottom: 5, color: '#7c818c' }}>
+                                    <Text style={{ fontSize: 12, paddingBottom: 5, color: '#F5F8FA' }}>
                                         {data.source}
                                     </Text>
                                     <Text style={styles.subheading}>{data.headline}</Text>
@@ -416,7 +416,7 @@ class StockDetails extends Component {
           <AntDesign
             name="left"
             size={30}
-            color="white"
+            color="#FFF"
             //style={{ marginTop: 20, marginLeft: 20 }}
           />
         </TouchableOpacity>
@@ -442,8 +442,8 @@ class StockDetails extends Component {
               }}
            
             >
-              <Feather name="message-circle" size={20} color="#383c4a" />
-              <Text style={{ color: "#383c4a", fontWeight: '500' }}> Join Chat </Text>
+              <Feather name="message-circle" size={20} color="#F5F8FA" />
+              <Text style={{ color: "#F5F8FA", fontWeight: '500' }}> Join Chat </Text>
             </TouchableOpacity> */}
       </View>
                 <ScrollView
@@ -498,7 +498,7 @@ class StockDetails extends Component {
                                         <Feather
                                             name="copy"
                                             size={24}
-                                            color={"white"}
+                                            color={"#FFF"}
                                             onPress={() => {
                                                 Clipboard.setString(
                                                     this.state.news.length > 0 ? this.state.news[0] : ""
@@ -555,7 +555,7 @@ class StockDetails extends Component {
                                         })
                                     }
                                 >
-                                    <Feather name="heart" size={20} color={"white"} />
+                                    <Feather name="heart" size={20} color={"#FFF"} />
                                     <Text
                                         style={{
                                             fontSize: 20,
@@ -582,7 +582,7 @@ class StockDetails extends Component {
                                             : this.props.navigation.navigate("Subscribe");
                                     }}
                                 >
-                                    <Feather name="bell" size={24} color={"white"} />
+                                    <Feather name="bell" size={24} color={"#FFF"} />
                                     <Text
                                         style={{
                                             fontSize: 20,
@@ -624,7 +624,7 @@ class StockDetails extends Component {
                                         )
                                     }
                                 >
-                                    <Feather name="send" size={24} color={"white"} />
+                                    <Feather name="send" size={24} color={"#FFF"} />
                                     <Text
                                         style={{
                                             fontSize: 20,
@@ -835,23 +835,23 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#F5F8FA"
+        backgroundColor: "#35383F"
     },
     container: {
         flex: 1,
-        backgroundColor: "#383c4a",
+        backgroundColor: "#35383F",
         //paddingHorizontal: 20
     },
     card: {
         shadowOffset: { width: 0.5, height: 0.5 },
         shadowRadius: 5,
-        shadowColor: "#000",
+        //shadowColor: "#657786",
         marginHorizontal: 10,
-        shadowOpacity: 0.5,
+            shadowOpacity: 0.2,
         marginVertical: 10,
         elevation: 1,
         //backgroundColor: "#e8eef1",
-        backgroundColor: "#4b5162",
+        backgroundColor: "#35383F",
         borderRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 20
@@ -865,7 +865,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         elevation: 1,
         //backgroundColor: "#e8eef1",
-        //backgroundColor: "#383c4a",
+        //backgroundColor: "#35383F",
         borderRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 20
@@ -879,7 +879,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,
         elevation: 1,
         //backgroundColor: "#e8eef1",
-        backgroundColor: "#383c4a",
+        backgroundColor: "#35383F",
         borderRadius: 20,
         paddingHorizontal: 20,
         paddingVertical: 10
@@ -918,7 +918,7 @@ const styles = StyleSheet.create({
         color: '#FFF'
     },
     loadTitle: {
-        color: "white",
+        color: "#FFF",
         fontSize: 16,
         //margin: 8,
         fontWeight: "700"
@@ -937,7 +937,7 @@ const styles = StyleSheet.create({
     chartdetails: {
         flexDirection: "row",
         justifyContent: "space-between",
-        backgroundColor: "#F5F8FA",
+        backgroundColor: "#35383F",
         padding: 10
     },
     company: {
@@ -947,7 +947,7 @@ const styles = StyleSheet.create({
     },
     seperator: {
         marginVertical: 10,
-        borderColor: "#7c818c",
+        borderColor: "#F5F8FA",
         borderWidth: 0.5
     },
     stats: {
@@ -957,7 +957,7 @@ const styles = StyleSheet.create({
     },
     button: {
         borderRadius: 2,
-        backgroundColor: "white",
+        backgroundColor: "#FFF",
         width: 80,
         textAlign: "center",
         marginVertical: 30
@@ -970,7 +970,7 @@ const styles = StyleSheet.create({
         paddingTop: 20
     },
     icon: {
-        color: "white",
+        color: "#FFF",
         fontSize: 25,
         fontWeight: "bold"
         //alignSelf: "left"

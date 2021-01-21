@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     flexDirection: "row",
     borderRadius: 10
   },
@@ -183,14 +183,14 @@ const styles = StyleSheet.create({
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 2,
-    shadowColor: "#000",
+    //shadowColor: "#657786",
     marginLeft: 10,
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.2,
     marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
-    //backgroundColor: "#F5F8FA"
-    backgroundColor: "#4b5162",
+    //backgroundColor: "#35383F"
+    backgroundColor: "#35383F",
     borderRadius: 20,
     //paddingHorizontal: 20,
     paddingVertical: 10,
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 2.0,
     margin: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20
@@ -297,7 +297,7 @@ const styles = StyleSheet.create({
   },
   seperator: {
     marginVertical: 10,
-    borderColor: "#E1E8ED",
+    borderColor: "#F5F8FA",
     borderWidth: 0.5
   },
   textview: {

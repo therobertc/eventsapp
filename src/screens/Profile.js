@@ -29,11 +29,11 @@ const Profile = props => {
             marginRight: 20,
             flexDirection: "row",
             alignItems: "center",
-            backgroundColor: "#4b5162",
+            backgroundColor: "#35383F",
             borderRadius: 20,
             paddingVertical: 5,
             borderWidth: 1,
-            borderColor: "#7c818c"
+            borderColor: "#F5F8FA"
           }}
           // onPress={() => props.navigation.navigate("Wallet")}
         >
@@ -44,7 +44,7 @@ const Profile = props => {
               fontWeight: "bold",
               paddingLeft: 5,
               fontSize: 16,
-              color: "#7c818c"
+              color: "#F5F8FA"
             }}
           >
             0
@@ -54,10 +54,10 @@ const Profile = props => {
           style={{ paddingHorizontal: 20 }}
           onPress={() => props.navigation.navigate("Wallet")}
         >
-          <Feather name="credit-card" size={30} color="white" />
+          <Feather name="credit-card" size={30} color="#FFF" />
         </TouchableOpacity> */}
         <TouchableOpacity onPress={() => props.navigation.navigate("Settings")}>
-          <Feather name="settings" size={30} color="white" />
+          <Feather name="settings" size={30} color="#FFF" />
         </TouchableOpacity>
       </View>
       <View style={{ paddingVertical: 20, marginHorizontal: 20 }}>
@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
     fontSize: 24,
     paddingBottom: 10

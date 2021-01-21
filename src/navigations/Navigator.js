@@ -64,14 +64,14 @@ const BottomTabNavigator = () => {
           //justifyContent: "center",
           //alignItems: "center",
           paddingTop: 15,
-          backgroundColor: "#383c4a",
+          backgroundColor: "#35383F",
 
           alignContent: "center",
-          borderTopColor: "#383c4a"
+          borderTopColor: "#35383F"
         }
       }}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Home"
         component={Home}
         options={{
@@ -81,7 +81,7 @@ const BottomTabNavigator = () => {
             <Icon name="ios-trending-up" color={color} size={30} />
           )
         }}
-      />
+      /> */}
 
       <Tab.Screen
         name="Chat"
@@ -100,7 +100,7 @@ const BottomTabNavigator = () => {
           headerShown: false,
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="ios-notifications" color={color} size={35} />
+            <Feather name="trending-up" color={color} size={30} />
           )
         }}
       />

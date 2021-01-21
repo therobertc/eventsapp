@@ -103,13 +103,13 @@ export default function AddMember({ route, navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#383c4a" }}>
+    <View style={{ flex: 1, backgroundColor: "#35383F" }}>
       <View
         style={{
           flexDirection: "row",
           height: 80,
           width: "100%",
-          //backgroundColor: "#383c4a",
+          //backgroundColor: "#35383F",
           alignItems: "center",
           justifyContent: "space-around",
           paddingTop: 30,
@@ -123,7 +123,7 @@ export default function AddMember({ route, navigation }) {
           <AntDesign
             name="left"
             size={30}
-            color="white"
+            color="#FFF"
             style={{ marginTop: 20 }}
           />
         </TouchableOpacity>
@@ -140,7 +140,7 @@ export default function AddMember({ route, navigation }) {
         <Entypo
           name="info"
           size={24}
-          color="#383c4a"
+          color="#F5F8FA"
           style={{ marginTop: 20 }}
           //   onPress={() =>
           //     navigation.navigate("GroupInfo", { groupName: groupName })
@@ -176,10 +176,10 @@ export default function AddMember({ route, navigation }) {
                   alignItems: "center",
                   justifyContent: "center",
                   borderWidth: 2,
-                  borderColor: "#383c4a"
+                  borderColor: "#F5F8FA"
                 }}
               >
-                <Feather name="user-plus" size={20} color="#383c4a" />
+                <Feather name="user-plus" size={20} color="#F5F8FA" />
               </View>
               <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
               <Text style={{ fontSize: 18, fontWeight: "bold", color: "#FFF" }}>
@@ -208,10 +208,10 @@ export default function AddMember({ route, navigation }) {
                   alignItems: "center",
                   justifyContent: "center",
                   borderWidth: 2,
-                  borderColor: "#383c4a"
+                  borderColor: "#F5F8FA"
                 }}
               >
-                <Feather name="link" size={20} color="#383c4a" />
+                <Feather name="link" size={20} color="#F5F8FA" />
               </View>
               <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
               <Text style={{ fontSize: 18, fontWeight: "bold", color: "#FFF" }}>
@@ -256,10 +256,10 @@ export default function AddMember({ route, navigation }) {
                 alignItems: "center",
                 justifyContent: "center",
                 borderWidth: 2,
-                borderColor: "#383c4a"
+                borderColor: "#F5F8FA"
               }}
             >
-              <Feather name="user" size={20} color="#383c4a" />
+              <Feather name="user" size={20} color="#F5F8FA" />
             </View>
             <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
             <Text style={{ fontSize: 18, fontWeight: "bold" }}>@StockChat</Text>
@@ -343,15 +343,15 @@ export default function AddMember({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#383c4a"
+    backgroundColor: "#35383F"
   },
   viewseparator: {
-    borderColor: "#7c818c",
+    borderColor: "#F5F8FA",
     borderWidth: 0.5,
     marginBottom: 20
   },
   listseparator: {
-    borderColor: "#7c818c",
+    borderColor: "#F5F8FA",
     borderWidth: 0.5
     //marginVertical: 30
   }

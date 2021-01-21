@@ -21,7 +21,7 @@ const GroupProfile = props => {
       <View style={styles.bio}>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Feather name="chevron-left" size={30} color="white" />
+            <Feather name="chevron-left" size={30} color="#FFF" />
           </TouchableOpacity>
         </View>
       </View>
@@ -69,7 +69,7 @@ const GroupProfile = props => {
       <View
         style={{
           height: 100,
-          backgroundColor: "#4b5162",
+          backgroundColor: "#35383F",
           flexDirection: "row"
         }}
       >
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   },
   volume: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
     fontSize: 30
   },
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
     fontSize: 24,
     paddingBottom: 10
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#383c4a",
+    // backgroundColor: "#35383F",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },

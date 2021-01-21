@@ -26,14 +26,14 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "500",
     fontSize: 14,
-    color: "white"
+    color: "#FFF"
     //marginRight: 20
   },
   stocktext: {
     fontSize: 14,
     fontWeight: "bold",
     justifyContent: "center",
-    color: "white"
+    color: "#FFF"
   }
 });
 

@@ -69,7 +69,7 @@ export default function App({ ...props }) {
         style={{ position: "absolute", top: 50, left: 20 }}
         onPress={() => props.navigation.goBack()}
       >
-        <AntDesign style={styles.back} name="left" size={30} color="white" />
+        <AntDesign style={styles.back} name="left" size={30} color="#FFF" />
       </TouchableOpacity> */}
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
@@ -105,7 +105,7 @@ export default function App({ ...props }) {
               style={{
                 fontSize: 18,
                 textAlign: "center",
-                color: "#383c4a",
+                color: "#F5F8FA",
                 fontWeight: "600"
               }}
             >
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     width: Dimensions.get("screen").width
   },
   Button: {
@@ -139,13 +139,13 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   HaveAccount: {
-    color: "#383c4a",
+    color: "#F5F8FA",
     textAlign: "center",
     fontSize: 15
   },
   Stockchat: {
     marginTop: 50,
-    color: "white",
+    color: "#FFF",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
@@ -154,21 +154,21 @@ const styles = StyleSheet.create({
   },
   username: {
     marginTop: 10,
-    color: "white",
+    color: "#FFF",
     textAlign: "center",
     fontSize: 15,
     padding: 18
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     //backgroundColor: "red",
-    //borderBottomColor: "white",
+    //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
-    borderColor: "white",
+    borderColor: "#FFF",
     padding: 12,
     paddingLeft: 30,
-    color: "white",
+    color: "#FFF",
     height: 50,
     fontSize: 21,
     borderRadius: 30

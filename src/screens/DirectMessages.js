@@ -89,15 +89,15 @@ const DirectMessages = props => {
     <View style={styles.container}>
       <Header
         style={{
-          backgroundColor: "#383c4a",
+          backgroundColor: "#35383F",
           borderBottomWidth: 0.2,
-          borderBottomColor: "#383c4a"
+          borderBottomColor: "#F5F8FA"
         }}
       >
         <Left>
           <Feather
             style={{
-              color: "white",
+              color: "#FFF",
               paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
               fontSize: 30,
               fontWeight: "bold"
@@ -114,7 +114,7 @@ const DirectMessages = props => {
         <Right>
           <Feather
             style={{
-              color: "white",
+              color: "#FFF",
               fontWeight: "bold",
               paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
               fontSize: 30
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#383c4a"
+    backgroundColor: "#35383F"
     // left: 0,
     // right: 0,
     // top: 0,
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
     fontSize: 24,
     paddingBottom: 10
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#383c4a",
+    // backgroundColor: "#35383F",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },

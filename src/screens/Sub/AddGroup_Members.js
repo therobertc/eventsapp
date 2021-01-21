@@ -135,7 +135,7 @@ export default function AddMember({ route, navigation }) {
             {/* <View style={{ flexDirection: "row", justifyContent: "space-between", width: "100%" }}>
                 <Text style={{ fontSize: 22, marginBottom: 15, fontWeight: "bold" }}>Select Receipent</Text>
                 <TouchableOpacity>
-                    <Feather name="search" size={30} color="white" />
+                    <Feather name="search" size={30} color="#FFF" />
                 </TouchableOpacity>
             </View> */}
             {selectedReceipents.length ? <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -144,8 +144,8 @@ export default function AddMember({ route, navigation }) {
                         return <TouchableOpacity key={index}>
                             <View style={{ flexDirection: "column", justifyContent: "flex-start", margin: 5, alignItems: "center", width: 80 }}>
                                 <View style={{ width: 62, height: 62 }}>
-                                    <Image style={{ borderRadius: 100, backgroundColor: 'white', width: 50, height: 50, alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "#383c4a" }} />
-                                    <Entypo name="circle-with-cross" size={25} style={{ position: "absolute", bottom: 4, right: 7, backgroundColor: "#383c4a", borderRadius: 20 }} onPress={() => RemoveReceipent(data.name, data.uid, index)} />
+                                    <Image style={{ borderRadius: 100, backgroundColor: '#FFF', width: 50, height: 50, alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "#F5F8FA" }} />
+                                    <Entypo name="circle-with-cross" size={25} style={{ position: "absolute", bottom: 4, right: 7, backgroundColor: "#35383F", borderRadius: 20 }} onPress={() => RemoveReceipent(data.name, data.uid, index)} />
                                 </View>
                                 <Text style={{ fontSize: 14, marginLeft: -7, fontWeight: "bold" }}>{data.name}</Text>
                             </View>
@@ -166,7 +166,7 @@ export default function AddMember({ route, navigation }) {
                                 <TouchableOpacity onPress={() => AddReciepents(item.Name, item.id)}>
                                     <View style={{ flexDirection: "column" }} >
                                         <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "flex-start", height: 60, marginBottom: 10 }}>
-                                            <Image style={{ borderRadius: 100, backgroundColor: 'white', width: 50, height: 50, alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "#383c4a" }} />
+                                            <Image style={{ borderRadius: 100, backgroundColor: '#FFF', width: 50, height: 50, alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "#F5F8FA" }} />
                                             <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
                                             <Text style={{ fontSize: 18, fontWeight: "bold" }}>{item.Name}</Text>
                                         </View>
@@ -177,9 +177,9 @@ export default function AddMember({ route, navigation }) {
                     />
                 </View>
             </ScrollView>
-            {selectedReceipents.length ? <TouchableOpacity onPress={() => CreateGroup()} style={{ height: 70, width: 70, backgroundColor: "white", position: "absolute", bottom: 45, right: 30, borderRadius: 100, justifyContent: "center", alignItems: "center" }}>
-                <AntDesign name="arrowright" size={20} color="#383c4a" />
-                {/* <Text style={{ color: "#383c4a", fontWeight: "bold" }}>Create</Text> */}
+            {selectedReceipents.length ? <TouchableOpacity onPress={() => CreateGroup()} style={{ height: 70, width: 70, backgroundColor: "#FFF", position: "absolute", bottom: 45, right: 30, borderRadius: 100, justifyContent: "center", alignItems: "center" }}>
+                <AntDesign name="arrowright" size={20} color="#F5F8FA" />
+                {/* <Text style={{ color: "#F5F8FA", fontWeight: "bold" }}>Create</Text> */}
             </TouchableOpacity> : null}
         </View>
 
@@ -189,6 +189,6 @@ export default function AddMember({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#383c4a"
+        backgroundColor: "#35383F"
     }
 });

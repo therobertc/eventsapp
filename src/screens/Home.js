@@ -629,7 +629,7 @@ class Home extends Component {
                 >
                     <View
                         style={{
-                            backgroundColor: "#383c4a",
+                            backgroundColor: "#35383F",
                             justifyContent: "center",
                             alignItems: "center",
                             borderRadius: 20,
@@ -644,7 +644,7 @@ class Home extends Component {
                                 height: 70,
                                 width: 100,
                                 borderWidth: 2.5,
-                                borderColor: "#E1E8ED",
+                                borderColor: "#F5F8FA",
                                 justifyContent: "space-between",
                                 alignItems: "center",
                                 paddingVertical: 12,
@@ -687,7 +687,7 @@ class Home extends Component {
                         flex: 1,
                         justifyContent: "center",
                         alignItems: "center",
-                        backgroundColor: "#383c4a"
+                        backgroundColor: "#35383F"
                     }}
                 >
                     <ActivityIndicator />
@@ -700,15 +700,15 @@ class Home extends Component {
                  <View style={{ zIndex: 999 }}>
         <Header
           style={{
-            backgroundColor: "#383c4a",
+            backgroundColor: "#35383F",
             borderBottomWidth: 0.2,
-            borderBottomColor: "#383c4a"
+            borderBottomColor: "#35383F"
           }}
         >
           <Left>
             {/* <Feather
             style={{
-              color: "white",
+              color: "#FFF",
               paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
               fontSize: 30,
               fontWeight: "bold"
@@ -726,8 +726,8 @@ class Home extends Component {
                     // icon: () => <Icon name="flag" size={18} color="#900" />
                   },
                   {
-                    label: "#BLACKINKECON",
-                    value: "#BLACKINKECON"
+                    label: "+ ADD GROUP",
+                    value: "+ ADD GROUP"
                     // icon: () => <Icon name="flag" size={18} color="#900" />
                   }
                 ]}
@@ -750,7 +750,7 @@ class Home extends Component {
                   flex: 1,
                   fontSize: 20
                 }}
-                dropDownStyle={{ backgroundColor: "#383c4a", borderWidth: 0 }}
+                dropDownStyle={{ backgroundColor: "#35383F", borderWidth: 0 }}
                 // onChangeItem={item =>
                 //   this.setState({
                 //     country: item.value
@@ -779,7 +779,7 @@ class Home extends Component {
           <Right>
             <Feather
               style={{
-                color: "white",
+                color: "#FFF",
                 fontWeight: "bold",
                 paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
                 fontSize: 30
@@ -790,7 +790,7 @@ class Home extends Component {
 
             {/* <Feather
             style={{
-              color: "white",
+              color: "#FFF",
               fontWeight: "bold",
               paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
               fontSize: 30
@@ -879,7 +879,7 @@ class Home extends Component {
                         >
                             <Text
                                 style={{
-                                    color: "#383c4a",
+                                    color: "#F5F8FA",
                                     fontWeight: "bold",
                                     fontSize: 16,
                                     //paddingLeft: 20
@@ -903,8 +903,8 @@ export default Home;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#383c4a",
-        //backgroundColor: "#F5F8FA",
+        backgroundColor: "#35383F",
+        //backgroundColor: "#35383F",
         //paddingTop: 30,
         
 
@@ -929,7 +929,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         borderBottomColor: "#F5FCFF",
-        backgroundColor: "#383c4a",
+        backgroundColor: "#35383F",
         borderRadius: 30,
         borderBottomWidth: 1,
         height: 45,
@@ -945,7 +945,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#147efb"
     },
     offercard: {
-        backgroundColor: "#383c4a",
+        backgroundColor: "#35383F",
         borderRadius: 10,
         padding: 10,
         //height: 100,
@@ -967,10 +967,10 @@ const styles = StyleSheet.create({
     inputs: {
         height: 50,
         marginLeft: 10,
-        borderBottomColor: "#383c4a",
+        borderBottomColor: "#F5F8FA",
         //flex: 1,
         width: 300,
-        backgroundColor: "#383c4a",
+        backgroundColor: "#35383F",
         marginBottom: 50
     },
     inputIcon: {
@@ -989,7 +989,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     saveButtonText: {
-        color: "#383c4a"
+        color: "#F5F8FA"
     },
     notificationList: {
         marginTop: 20,
@@ -999,13 +999,13 @@ const styles = StyleSheet.create({
         height: 30,
         marginTop: 10,
         borderRadius: 10,
-        backgroundColor: "#4b5162",
+        backgroundColor: "#35383F",
     },
     notificationBox: {
         padding: 20,
         marginTop: 5,
         marginBottom: 5,
-        backgroundColor: "#383c4a",
+        backgroundColor: "#35383F",
         flexDirection: "row",
         borderRadius: 10
     },
@@ -1055,12 +1055,12 @@ const styles = StyleSheet.create({
     screenContainer: {
         shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 2,
-    shadowColor: "#000",
+    shadowColor: "#657786",
     margin: 10,
-    shadowOpacity: 0.5,
+        shadowOpacity: 0.2,
     margin: 10,
     elevation: 1,
-    backgroundColor: "#4b5162",
+    backgroundColor: "#35383F",
     borderRadius: 20,
    padding: 10,
    paddingTop: 20
@@ -1068,12 +1068,12 @@ const styles = StyleSheet.create({
     topContainer: {
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 2,
-    shadowColor: "#000",
+    shadowColor: "#657786",
     margin: 10,
-    shadowOpacity: 0.5,
+        shadowOpacity: 0.2,
     margin: 10,
     elevation: 1,
-    backgroundColor: "#4b5162",
+    backgroundColor: "#35383F",
     borderRadius: 20,
    padding: 10,
    paddingTop: 20
@@ -1122,7 +1122,7 @@ const styles = StyleSheet.create({
     },
     seperator: {
         marginVertical: 10,
-        borderColor: "#E1E8ED",
+        borderColor: "#F5F8FA",
         borderWidth: 0.5
     },
     headerContainer: {

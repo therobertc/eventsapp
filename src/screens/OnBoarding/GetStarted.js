@@ -95,13 +95,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     //backgroundColor: "#1E2429",
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
 
     width: Dimensions.get("screen").width
   },
 
   HaveAccount: {
-    color: "white",
+    color: "#FFF",
     textAlign: "center",
     top: 35,
     fontSize: 15
@@ -114,14 +114,14 @@ const styles = StyleSheet.create({
     //fontFamily: "Montserrat_700Bold"
   },
   subtext: {
-    color: "white",
+    color: "#FFF",
     textAlign: "center",
     top: 35,
     fontSize: 20,
     marginHorizontal: 40
   },
   subtext2: {
-    color: "white",
+    color: "#FFF",
     textAlign: "center",
 
     fontSize: 18

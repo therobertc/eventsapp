@@ -33,7 +33,7 @@ const StockChat = ({ route, navigation }) => {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-      <LinearGradient colors={["#657786", "#383c4a"]} style={styles.container}>
+      <LinearGradient colors={["#657786", "#F5F8FA"]} style={styles.container}>
         <View style={styles.main}>
           <View style={styles.headerContainer}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   main: {
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     height: "88%",
     paddingHorizontal: 20,
     borderBottomLeftRadius: 35,
@@ -113,6 +113,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "white"
+    backgroundColor: "#FFF"
   }
 });

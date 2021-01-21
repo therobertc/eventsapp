@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   modalView: {
     width: "100%",
     height: "90%",
-    shadowColor: "#000",
+    shadowColor: "#657786",
     shadowOffset: {
       width: 0,
       height: 2
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    backgroundColor: "#383c4a"
+    backgroundColor: "#35383F"
   },
   webViewContainer: {
     height: "90%",

@@ -21,15 +21,15 @@ const Activity = props => {
     <View style={styles.container}>
       <Header
         style={{
-          backgroundColor: "#383c4a",
+          backgroundColor: "#35383F",
           borderBottomWidth: 0.2,
-          borderBottomColor: "#383c4a"
+          borderBottomColor: "#35383F"
         }}
       >
         <Left>
           {/* <Feather
             style={{
-              color: "white",
+              color: "#FFF",
               paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
               fontSize: 30,
               fontWeight: "bold"
@@ -37,15 +37,17 @@ const Activity = props => {
             name="chevron-left"
             onPress={() => props.navigation.goBack()}
           /> */}
-          <Text style={styles.header}>Notifications</Text>
+          {/* <Text style={styles.header}>Activity</Text> */}
         </Left>
 
-        <Body style={{ width: "100%" }}></Body>
+        <Body style={{ width: "100%" }}>
+          <Text style={styles.header}>Activity</Text>
+        </Body>
 
         <Right>
           <Feather
             style={{
-              color: "white",
+              color: "#FFF",
               fontWeight: "bold",
               paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
               fontSize: 30
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#383c4a"
+    backgroundColor: "#35383F"
     // left: 0,
     // right: 0,
     // top: 0,
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
   header: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
-    width: "105%",
+    //width: "105%",
     //flex: 1,
     fontSize: 20,
     marginLeft: 10
@@ -126,11 +128,12 @@ const styles = StyleSheet.create({
     //fontFamily: "Montserrat_400Regular",
     color: "#FFF",
     textAlign: "center",
-    fontSize: 20
+    fontSize: 20,
+    paddingVertical: 30
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
     fontSize: 24,
     paddingBottom: 10
@@ -143,7 +146,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#383c4a",
+    // backgroundColor: "#35383F",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },

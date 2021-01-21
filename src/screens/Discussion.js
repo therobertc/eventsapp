@@ -17,7 +17,8 @@ import {
   Send,
   Bubble,
   InputToolbar,
-  Time
+  Time,
+  SystemMessage
 } from "react-native-gifted-chat";
 import {
   AntDesign,
@@ -97,6 +98,16 @@ function Discussion({ route, navigation }) {
       .catch(function(error) {
         console.log("Error getting documents: ", error);
       });
+  }
+
+  function renderSystemMessage(props) {
+    return (
+      <SystemMessage
+        {...props}
+        wrapperStyle={styles.systemMessageWrapper}
+        textStyle={styles.systemMessageText}
+      />
+    );
   }
 
   function showAlertToJoinGroup() {
@@ -257,15 +268,18 @@ function Discussion({ route, navigation }) {
           {...props}
           wrapperStyle={{
             right: {
-              backgroundColor: "#147efb"
+              backgroundColor: "transparent"
             },
             left: {
-              backgroundColor: "#7c818c"
+              backgroundColor: "transparent"
             }
           }}
           textStyle={{
             left: {
-              color: "white"
+              color: "#FFF"
+            },
+            right: {
+              color: "#FFF"
             }
           }}
         />
@@ -290,7 +304,7 @@ function Discussion({ route, navigation }) {
             //marginRight: 15
           }}
         >
-          {/* <Feather name="arrow-up" color="#383c4a" size={28} fontWeight={900} /> */}
+          {/* <Feather name="arrow-up" color="#F5F8FA" size={28} fontWeight={900} /> */}
           <FontAwesome5
             name="arrow-up"
             color="#FFF"
@@ -307,7 +321,7 @@ function Discussion({ route, navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "#383c4a",
+          backgroundColor: "#35383F",
           borderTopWidth: 0,
           marginBottom: -10
         }}
@@ -343,7 +357,7 @@ function Discussion({ route, navigation }) {
           justifyContent: "space-around",
           alignItems: "center",
           marginVertical: 40,
-          backgroundColor: "white"
+          backgroundColor: "#FFF"
         }}
       >
         <TouchableOpacity>
@@ -398,12 +412,13 @@ function Discussion({ route, navigation }) {
       <GiftedChat
         isAnimated={true}
         renderAccessory={CustomView}
+        renderSystemMessage={renderSystemMessage}
         //onPressActionButton={() => _navigateToStockDetails}
         //showUserAvatar={true}
         //showAvatarForEveryMessage={true}
         textInputProps={{
           style: {
-            backgroundColor: "#4b5162",
+            backgroundColor: "#303135",
             borderRadius: 30,
             fontSize: 20,
             color: "#FFF",
@@ -419,14 +434,14 @@ function Discussion({ route, navigation }) {
         }}
         scrollToBottom
         inverted={true}
-        timeTextStyle={{ left: { color: "white" } }}
+        timeTextStyle={{ left: { color: "#FFF" }, right: { color: "#FFF" } }}
         //renderTime={renderTime}
-        //renderAvatar={true}
+        renderAvatar={null}
         messages={messages}
         renderSend={renderSend}
         renderBubble={renderBubble}
         //textInputStyle={styles.textInput}
-        isTyping={true}
+        //isTyping={true}
         //renderUsernameOnMessage={true}
         renderInputToolbar={props => customtInputToolbar(props)}
         multiline
@@ -446,7 +461,7 @@ function Discussion({ route, navigation }) {
             pattern: /#(\w+)/,
             style: {
               ...linkStyle,
-              color: "white",
+              color: "#FFF",
               fontWeight: "bold",
               textDecorationLine: "underline"
             }
@@ -502,11 +517,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     marginRight: 15,
-    color: "white"
+    color: "#FFF"
   },
 
   main: {
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
@@ -517,18 +532,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20
+    //backgroundColor: "#303135"
   },
   username: {
     color: "#147efb",
     fontFamily: "Montserrat_700Bold",
     fontSize: 14,
     flex: 1,
-    paddingVertical: 5
-    //textAlign: "center"
+    paddingVertical: 5,
+    position: "relative"
   },
 
   // textInput: {
-  //   backgroundColor: "#4b5162",
+  //   backgroundColor: "#35383F",
   //   borderRadius: 30,
   //   marginRight: 20,
   //   marginLeft: 20,
@@ -555,5 +571,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     flex: 1,
     textAlign: "center"
+  },
+  systemMessageText: {
+    fontSize: 14,
+    color: "#FFF",
+    fontWeight: "bold"
   }
 });

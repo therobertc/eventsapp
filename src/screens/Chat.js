@@ -123,15 +123,15 @@ const Chat = props => {
       <View style={{ zIndex: 999 }}>
         <Header
           style={{
-            backgroundColor: "#383c4a",
+            backgroundColor: "#35383F",
             borderBottomWidth: 0.2,
-            borderBottomColor: "#383c4a"
+            borderBottomColor: "#35383F"
           }}
         >
           <Left>
             {/* <Feather
             style={{
-              color: "white",
+              color: "#FFF",
               paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
               fontSize: 30,
               fontWeight: "bold"
@@ -149,8 +149,8 @@ const Chat = props => {
                     // icon: () => <Icon name="flag" size={18} color="#900" />
                   },
                   {
-                    label: "#BLACKINKECON",
-                    value: "#BLACKINKECON"
+                    label: "+ ADD GROUP",
+                    value: "+ ADD GROUP"
                     // icon: () => <Icon name="flag" size={18} color="#900" />
                   }
                 ]}
@@ -173,7 +173,7 @@ const Chat = props => {
                   flex: 1,
                   fontSize: 20
                 }}
-                dropDownStyle={{ backgroundColor: "#383c4a", borderWidth: 0 }}
+                dropDownStyle={{ backgroundColor: "#35383F", borderWidth: 0 }}
                 // onChangeItem={item =>
                 //   this.setState({
                 //     country: item.value
@@ -202,7 +202,7 @@ const Chat = props => {
           <Right>
             <Feather
               style={{
-                color: "white",
+                color: "#FFF",
                 fontWeight: "bold",
                 paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
                 fontSize: 30
@@ -213,7 +213,7 @@ const Chat = props => {
 
             {/* <Feather
             style={{
-              color: "white",
+              color: "#FFF",
               fontWeight: "bold",
               paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
               fontSize: 30
@@ -244,8 +244,8 @@ const Chat = props => {
               title="Share"
               //onPress={() => props.navigation.navigate("InviteFriends")}
             >
-              <Feather name="user-plus" size={20} color="#383c4a" />
-              <Text style={{ color: "#383c4a", fontWeight: "500" }}>
+              <Feather name="user-plus" size={20} color="#F5F8FA" />
+              <Text style={{ color: "#F5F8FA", fontWeight: "500" }}>
                 {" "}
                 Invite{" "}
               </Text>
@@ -267,7 +267,7 @@ const Chat = props => {
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
-            <AntDesign name="pluscircleo" size={24} color="white" />
+            <AntDesign name="pluscircleo" size={24} color="#FFF" />
           </TouchableOpacity>
         </View>
         <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
@@ -284,7 +284,7 @@ const Chat = props => {
           >
             <Text
               style={{
-                color: "#383c4a",
+                color: "#F5F8FA",
                 fontSize: 19,
                 fontFamily: "Montserrat_700Bold"
               }}
@@ -338,7 +338,7 @@ const Chat = props => {
           {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
-            <AntDesign name="pluscircleo" size={24} color="white" />
+            <AntDesign name="pluscircleo" size={24} color="#FFF" />
           </TouchableOpacity> */}
         </View>
         <View style={{ paddingVertical: 10, marginHorizontal: 10 }}>
@@ -412,7 +412,7 @@ const Chat = props => {
       >
         <Feather
           style={{
-            color: "white",
+            color: "#FFF",
             fontWeight: "bold",
             //paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
             fontSize: 20
@@ -424,7 +424,7 @@ const Chat = props => {
             textAlign: "center",
             fontSize: 18,
             fontWeight: "600",
-            color: "white",
+            color: "#FFF",
             paddingLeft: 10
           }}
         >
@@ -448,7 +448,7 @@ const styles = StyleSheet.create({
   btn: {
     borderRadius: 16,
     //borderTopRightRadius: 0,
-    backgroundColor: "white",
+    backgroundColor: "#FFF",
     height: 80,
     alignItems: "center",
     justifyContent: "center",
@@ -473,7 +473,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#383c4a"
+    backgroundColor: "#35383F"
     // left: 0,
     // right: 0,
     // top: 0,
@@ -508,7 +508,7 @@ const styles = StyleSheet.create({
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
     fontSize: 20
     //paddingVertical: 10
@@ -521,7 +521,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#383c4a",
+    // backgroundColor: "#35383F",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },
@@ -559,7 +559,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingRight: 20,
     fontSize: 20,
-    backgroundColor: "#F5F8FA",
+    backgroundColor: "#35383F",
     flex: 1
   },
   day: {
