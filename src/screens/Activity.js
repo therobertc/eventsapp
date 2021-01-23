@@ -15,6 +15,7 @@ import { Icon, Header, Left, Right, Body, Button } from "native-base";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import InsiderTrades from "../components/InsiderTrades";
 
 const Activity = props => {
   return (
@@ -59,7 +60,8 @@ const Activity = props => {
       </Header>
 
       <View style={styles.feed}>
-        <Text style={styles.text}>No new notifications</Text>
+        {/* <Text style={styles.text}>No new notifications</Text> */}
+        <InsiderTrades {...props} />
       </View>
     </View>
   );
