@@ -22,7 +22,7 @@ const Settings = props => {
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <View style={styles.col}>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Feather name="chevron-left" size={30} color="white" />
+            <Feather name="chevron-left" size={30} color="#FFF" />
           </TouchableOpacity>
           <Text style={styles.header}>Settings</Text>
         </View>
@@ -31,7 +31,7 @@ const Settings = props => {
           <View>
             <View
               style={{
-                backgroundColor: "#383c4a",
+                backgroundColor: "#35383F",
 
                 flexDirection: "column",
                 width: "100%",
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
-    color: "#000",
+    color: "#FFF",
     flex: 1,
     fontSize: 24,
     paddingBottom: 10
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#383c4a",
+    // backgroundColor: "#35383F",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   },
   Stockchat: {
     marginTop: 50,
-    color: "white",
+    color: "#FFF",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
@@ -256,7 +256,7 @@ const styles = StyleSheet.create({
   },
   switch: {
     //marginTop: 5,
-    color: "white",
+    color: "#FFF",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
 
   switchtitle: {
     //marginTop: 5,
-    color: "white",
+    color: "#FFF",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "500",

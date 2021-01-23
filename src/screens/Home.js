@@ -13,10 +13,13 @@ import { Feather } from "@expo/vector-icons";
 import { Icon, Header, Left, Right, Body, Button} from "native-base";
 // import UserAdvanceScreener from "./UserAdvanceScreener";
 import UserScreener from "../components/Screeners/UserScreener";
+
 import * as Linking from "expo-linking";
 import URL from '../../Constant/Constant';
 import Analytics from '../../Constant/ExpoMixpanelConstant';
 import TrendingStocks from "../components/TrendingStocks";
+import DropDownPicker from "react-native-dropdown-picker";
+
 
 
 
@@ -36,7 +39,11 @@ class Home extends Component {
             overbought: [],
             oversold: [],
             mostvolatile:[],
-            isSubscribed: false
+            isSubscribed: false,
+          
+                country: "#STOCKCHAT"
+           
+           
         };
     }
 
@@ -73,6 +80,27 @@ class Home extends Component {
         this.getTrandingData();
     }
 
+   onShare = async () => {
+        try {
+          const result = await Share.share({
+            message:
+              "Download Stock Chat and join my trading group! https://stockchatapp.com"
+          });
+          if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+              // shared with activity type of result.activityType
+            } else {
+              // shared
+            }
+          } else if (result.action === Share.dismissedAction) {
+            // dismissed
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      };
+    
+
     _getAllDefaultScreener = () => {
         return fetch(URL.HOST_URL+'api/getAllDefualt', {
             method: "GET"
@@ -103,12 +131,7 @@ class Home extends Component {
                 <View style={styles.topContainer}>
                     <Text
                         numberOfLines={1}
-                        style={{
-                            fontSize: 18,
-                            fontWeight: "700",
-                            paddingLeft: 10,
-                            width: "80%"
-                        }}
+                        style={styles.screenername}
                     >
                         Popular Stocks
                     </Text>
@@ -169,12 +192,7 @@ class Home extends Component {
                 <View style={styles.screenContainer}>
                     <Text
                         numberOfLines={1}
-                        style={{
-                            fontSize: 18,
-                            fontWeight: "700",
-                            paddingLeft: 10,
-                            width: "80%"
-                        }}
+                        style={styles.screenername}
                     >
                         Large Cap Stocks
                     </Text>
@@ -242,12 +260,7 @@ class Home extends Component {
                 <View style={styles.screenContainer}>
                     <Text
                         numberOfLines={1}
-                        style={{
-                            fontSize: 18,
-                            fontWeight: "700",
-                            paddingLeft: 10,
-                            width: "80%"
-                        }}
+                        style={styles.screenername}
                     >
                         Under $5 Stocks
                     </Text>
@@ -309,12 +322,7 @@ class Home extends Component {
                 <View style={styles.screenContainer}>
                     <Text
                         numberOfLines={1}
-                        style={{
-                            fontSize: 18,
-                            fontWeight: "700",
-                            paddingLeft: 10,
-                            width: "80%"
-                        }}
+                        style={styles.screenername}
                     >
                         Under $5 Winners
                     </Text>
@@ -375,19 +383,12 @@ class Home extends Component {
             const data = this.state.mostvolatile;
             return (
                 <View style={styles.screenContainer}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10}}>
                         <Text
                             numberOfLines={1}
-                            style={{
-                                fontSize: 18,
-                                fontWeight: "700",
-
-                                width: "80%"
-                            }}
-                        >
-                            Most Active
+                            style={styles.screenername}
+                        >Most Active
                         </Text>
-                    </View>
+                  
                     <View style={styles.tickerbox}>
                         <View style={styles.stockcard}>
                             <TouchableOpacity style={styles.ticker}>
@@ -452,12 +453,7 @@ class Home extends Component {
                 <View style={styles.screenContainer}>
                     <Text
                         numberOfLines={1}
-                        style={{
-                            fontSize: 18,
-                            fontWeight: "700",
-                            paddingLeft: 10,
-                            width: "80%"
-                        }}
+                        style={styles.screenername}
                     >
                         Overbought Stocks
                     </Text>
@@ -526,12 +522,7 @@ class Home extends Component {
                 <View style={styles.screenContainer}>
                     <Text
                         numberOfLines={1}
-                        style={{
-                            fontSize: 18,
-                            fontWeight: "700",
-                            paddingLeft: 10,
-                            width: "80%"
-                        }}
+                        style={styles.screenername}
                     >
                         Oversold Stocks
                     </Text>
@@ -588,25 +579,7 @@ class Home extends Component {
         }
     };
 
-    onShare = async () => {
-        try {
-          const result = await Share.share({
-            message:
-              "Download Stock Chat and join my trading group! https://stockchatapp.com"
-          });
-          if (result.action === Share.sharedAction) {
-            if (result.activityType) {
-              // shared with activity type of result.activityType
-            } else {
-              // shared
-            }
-          } else if (result.action === Share.dismissedAction) {
-            // dismissed
-          }
-        } catch (error) {
-          alert(error.message);
-        }
-      };
+   
 
 
     handleRefresh = () => {
@@ -656,7 +629,7 @@ class Home extends Component {
                 >
                     <View
                         style={{
-                            backgroundColor: "#383c4a",
+                            backgroundColor: "#35383F",
                             justifyContent: "center",
                             alignItems: "center",
                             borderRadius: 20,
@@ -671,7 +644,7 @@ class Home extends Component {
                                 height: 70,
                                 width: 100,
                                 borderWidth: 2.5,
-                                borderColor: "#E1E8ED",
+                                borderColor: "#F5F8FA",
                                 justifyContent: "space-between",
                                 alignItems: "center",
                                 paddingVertical: 12,
@@ -714,7 +687,7 @@ class Home extends Component {
                         flex: 1,
                         justifyContent: "center",
                         alignItems: "center",
-                        backgroundColor: "#383c4a"
+                        backgroundColor: "#35383F"
                     }}
                 >
                     <ActivityIndicator />
@@ -724,46 +697,120 @@ class Home extends Component {
 
         return (
             <View style={styles.container}>
-                {/* <Header style={{ backgroundColor: "#F5F8FA", borderBottomWidth: 0.2, borderBottomColor: "#E1E8ED"}}>
-                    <Left>
-                        <Feather
-                            style={{
-                                color: "white",
-                                paddingHorizontal: Platform.OS === 'ios'? 20 : 15,
-                                fontSize: 30,
-                                fontWeight: "bold"
-                            }}
-                            name="menu"
-                            onPress={() => this.props.navigation.navigate("Profile")}
-                        />
-                    </Left>
+                 <View style={{ zIndex: 999 }}>
+        <Header
+          style={{
+            backgroundColor: "#35383F",
+            borderBottomWidth: 0.2,
+            borderBottomColor: "#35383F"
+          }}
+        >
+          <Left>
+            {/* <Feather
+            style={{
+              color: "#FFF",
+              paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
+              fontSize: 30,
+              fontWeight: "bold"
+            }}
+            name="search"
+            onPress={() => props.navigation.navigate("Profile")}
+          /> */}
 
-                    <Body>
-                        
-                            <Image
-                                style={{
-                                    flex: 1,
-                                    aspectRatio:  Platform.OS === 'ios'? 3.0:4.0,
-                                    resizeMode: "contain"
-                                }}
-                                source={require("../../assets/stockchattext.png")}
-                            />
-                      
-                    </Body>
+            <View style={{ zIndex: 999 }}>
+              <DropDownPicker
+                items={[
+                  {
+                    label: "#STOCKCHAT",
+                    value: "#STOCKCHAT"
+                    // icon: () => <Icon name="flag" size={18} color="#900" />
+                  },
+                  {
+                    label: "+ ADD GROUP",
+                    value: "+ ADD GROUP"
+                    // icon: () => <Icon name="flag" size={18} color="#900" />
+                  }
+                ]}
+                defaultValue={this.state.country}
+                containerStyle={{
+                  height: 40,
+                  width: 250,
+                  borderWidth: 0
+                }}
+                arrowColor="#FFF"
+                arrowSize={20}
+                style={{ backgroundColor: "transparent", borderWidth: 0 }}
+                itemStyle={{
+                  justifyContent: "flex-start",
+                  color: "#FFF"
+                }}
+                labelStyle={{
+                  fontFamily: "Montserrat_700Bold",
+                  color: "#FFF",
+                  flex: 1,
+                  fontSize: 20
+                }}
+                dropDownStyle={{ backgroundColor: "#35383F", borderWidth: 0 }}
+                // onChangeItem={item =>
+                //   this.setState({
+                //     country: item.value
+                //   })
+                // }
+              />
 
-                    <Right>
-                        <Feather
-                            style={{
-                                color: "white",
-                                fontWeight: "bold",
-                                paddingHorizontal: Platform.OS === 'ios'? 10 : 10,
-                                fontSize: 30
-                            }}
-                            name="search"
-                            onPress={() => this.props.navigation.navigate("Search_page")}
-                        />
-                    </Right>
-                </Header> */}
+              {/* <Text style={styles.logotext}>#STOCKCHAT</Text> */}
+            </View>
+          </Left>
+
+          <Body>
+            {/* <Image
+            style={{
+              flex: 1,
+              aspectRatio: Platform.OS === "ios" ? 3.0 : 4.0,
+              resizeMode: "contain"
+            }}
+            source={require("../../assets/stockchattext.png")}
+          /> */}
+            {/* <View style={{ justifyContent: "center", alignItems: "center" }}>
+            <Text style={styles.header2}>#stockchat</Text>
+          </View> */}
+          </Body>
+
+          <Right>
+            <Feather
+              style={{
+                color: "#FFF",
+                fontWeight: "bold",
+                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                fontSize: 30
+              }}
+              name="user-plus"
+              //onPress={onShare}
+            />
+
+            {/* <Feather
+            style={{
+              color: "#FFF",
+              fontWeight: "bold",
+              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+              fontSize: 30
+            }}
+            name="send"
+            onPress={() => props.navigation.navigate("DirectMessages")}
+          /> */}
+            {/* <TouchableOpacity
+            onPress={() => props.navigation.navigate("Profile")}
+          >
+            <Image
+              source={require("../../assets/icon.png")}
+              // source={{ uri: itemPic }}
+              style={styles.avatar}
+            />
+          </TouchableOpacity> */}
+          </Right>
+        </Header>
+      </View>
+               
 
                 <ScrollView showsVerticalScrollIndicator={false}
                             // refreshControl={
@@ -780,20 +827,7 @@ class Home extends Component {
                  
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Trending Stocks</Text>
-          <View>
-            <TouchableOpacity
-              style={styles.invite}
-            //   onPress={onShare}
-              title="Share"
-              //onPress={() => props.navigation.navigate("InviteFriends")}
-            >
-              <Feather name="user-plus" size={20} color="#383c4a" />
-              <Text style={{ color: "#383c4a", fontWeight: "500" }}>
-                {" "}
-                Invite{" "}
-              </Text>
-            </TouchableOpacity>
-          </View>
+        
         </View>
 
         <TrendingStocks />
@@ -845,7 +879,7 @@ class Home extends Component {
                         >
                             <Text
                                 style={{
-                                    color: "#383c4a",
+                                    color: "#F5F8FA",
                                     fontWeight: "bold",
                                     fontSize: 16,
                                     //paddingLeft: 20
@@ -869,9 +903,11 @@ export default Home;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //backgroundColor: "#383c4a"
-        backgroundColor: "#F5F8FA",
-        paddingTop: 30
+        backgroundColor: "#35383F",
+        //backgroundColor: "#35383F",
+        //paddingTop: 30,
+        
+
     },
     text: {
         marginHorizontal: 8,
@@ -893,7 +929,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         borderBottomColor: "#F5FCFF",
-        backgroundColor: "#383c4a",
+        backgroundColor: "#35383F",
         borderRadius: 30,
         borderBottomWidth: 1,
         height: 45,
@@ -909,7 +945,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#147efb"
     },
     offercard: {
-        backgroundColor: "#383c4a",
+        backgroundColor: "#35383F",
         borderRadius: 10,
         padding: 10,
         //height: 100,
@@ -931,10 +967,10 @@ const styles = StyleSheet.create({
     inputs: {
         height: 50,
         marginLeft: 10,
-        borderBottomColor: "#383c4a",
+        borderBottomColor: "#F5F8FA",
         //flex: 1,
         width: 300,
-        backgroundColor: "#383c4a",
+        backgroundColor: "#35383F",
         marginBottom: 50
     },
     inputIcon: {
@@ -953,7 +989,7 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     saveButtonText: {
-        color: "#383c4a"
+        color: "#F5F8FA"
     },
     notificationList: {
         marginTop: 20,
@@ -963,13 +999,13 @@ const styles = StyleSheet.create({
         height: 30,
         marginTop: 10,
         borderRadius: 10,
-        backgroundColor: "#383c4a"
+        backgroundColor: "#35383F",
     },
     notificationBox: {
         padding: 20,
         marginTop: 5,
         marginBottom: 5,
-        backgroundColor: "#383c4a",
+        backgroundColor: "#35383F",
         flexDirection: "row",
         borderRadius: 10
     },
@@ -1018,44 +1054,52 @@ const styles = StyleSheet.create({
     },
     screenContainer: {
         shadowOffset: { width: 0.5, height: 0.5 },
-        shadowColor: "lightgrey",
-        shadowOpacity: 2.0,
-        margin: 10,
-        //backgroundColor: "#e8eef1",
-        backgroundColor: "#383c4a",
-        borderRadius: 20,
-        padding: 10,
-        paddingTop: 20
+    shadowRadius: 2,
+    shadowColor: "#657786",
+    margin: 10,
+        shadowOpacity: 0.2,
+    margin: 10,
+    elevation: 1,
+    backgroundColor: "#35383F",
+    borderRadius: 20,
+   padding: 10,
+   paddingTop: 20
     },
     topContainer: {
-        shadowOffset: { width: 0.5, height: 0.5 },
-        shadowColor: "lightgrey",
-        shadowOpacity: 2.0,
-        marginHorizontal: 10,
-        marginBottom: 10,
-        //backgroundColor: "#e8eef1",
-        backgroundColor: "#383c4a",
-        borderRadius: 20,
-        padding: 10,
-        paddingTop: 20
+    shadowOffset: { width: 0.5, height: 0.5 },
+    shadowRadius: 2,
+    shadowColor: "#657786",
+    margin: 10,
+        shadowOpacity: 0.2,
+    margin: 10,
+    elevation: 1,
+    backgroundColor: "#35383F",
+    borderRadius: 20,
+   padding: 10,
+   paddingTop: 20
+   
+   
     },
     heading: {
         fontSize: 24,
         fontWeight: "700",
         //textAlign: "center"
-        marginHorizontal: 20
+        marginHorizontal: 20,
+        color: '#FFF'
     },
     subheading: {
         fontSize: 14,
         fontWeight: "400",
         //textAlign: "center",
         marginTop: 10,
-        marginHorizontal: 20
+        marginHorizontal: 20,
+        color: '#FFF'
     },
     ticker: {
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        color: '#FFF'
     },
     tickertext: {
         //paddingLeft: 20,
@@ -1063,37 +1107,39 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "500",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        color: '#FFF'
     },
     viewmore: {
-        color: "#282C34",
+        //color: "#282C34",
         fontWeight: "500",
         textAlign: "center",
-        paddingTop: 10
+        paddingTop: 10,
+        color: '#FFF'
     },
     tickerbox: {
         padding: 10
     },
     seperator: {
         marginVertical: 10,
-        borderColor: "#E1E8ED",
+        borderColor: "#F5F8FA",
         borderWidth: 0.5
     },
     headerContainer: {
         flexDirection: "row",
         alignItems: "center",
-        paddingTop: 30,
+        //paddingTop: 30,
         paddingHorizontal: 20
       },
       header: {
         fontFamily: "Montserrat_700Bold",
-        color: "#000",
         flex: 1,
-        fontSize: 20
+        fontSize: 20,
+        color: '#FFF'
       },
       header2: {
         fontFamily: "Montserrat_800ExtraBold",
-        color: "#000",
+        color: '#FFF',
         flex: 1,
         fontSize: 20
         //paddingVertical: 10
@@ -1116,4 +1162,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 5
       },
+      screenername:{
+        fontSize: 18,
+        fontWeight: "700",
+        paddingLeft: 10,
+        width: "80%",
+        color: '#FFF'
+      }
 });

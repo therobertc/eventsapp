@@ -17,7 +17,8 @@ import {
   Send,
   Bubble,
   InputToolbar,
-  Time
+  Time,
+  SystemMessage
 } from "react-native-gifted-chat";
 import {
   AntDesign,
@@ -41,7 +42,6 @@ function Discussion({ route, navigation }) {
   const [userEmail, setUserEmail] = useState(firebase.auth().currentUser.email);
   const { item, itemPic } = route.params;
 
-
   useEffect(() => {
     getUserJoinedAlreadyOrNot();
     const unsubscribeListener = firestore
@@ -53,8 +53,10 @@ function Discussion({ route, navigation }) {
         const messages = querySnapshot.docs.map(doc => {
           let firebaseData = doc.data();
           firebaseData.createdAt = firebaseData.createdAt
-              .toDate()
-              .toUTCString();
+            .toDate()
+            .toUTCString();
+          console.log("userid is", userid);
+          console.log("mainid is", firebaseData["user"]["_id"]);
           firebaseData["user"]["_id"] =
               (firebaseData["user"]["_id"] == userid) ? 1 : 2;
           const data = {
@@ -94,6 +96,16 @@ function Discussion({ route, navigation }) {
       .catch(function(error) {
         console.log("Error getting documents: ", error);
       });
+  }
+
+  function renderSystemMessage(props) {
+    return (
+      <SystemMessage
+        {...props}
+        wrapperStyle={styles.systemMessageWrapper}
+        textStyle={styles.systemMessageText}
+      />
+    );
   }
 
   function showAlertToJoinGroup() {
@@ -139,7 +151,7 @@ function Discussion({ route, navigation }) {
 
   const onPressCashtag = cashtag => {
     let symbol = cashtag.replace("$", "");
-    if(isNaN(symbol)){
+    if (isNaN(symbol)) {
       navigation.navigate("StockDetails", {
         symbol: symbol,
         screen: "StockDetails"
@@ -183,8 +195,15 @@ function Discussion({ route, navigation }) {
           lastMessage(message);
           let symbol = /\$(\w+)/.exec(message);
 
-          if (symbol !== null && symbol !== "null" && symbol.length > 0 && isNaN(symbol[1])) {
-            navigation.push("StockDetails", { symbol: symbol[1].trim().toUpperCase() });
+          if (
+            symbol !== null &&
+            symbol !== "null" &&
+            symbol.length > 0 &&
+            isNaN(symbol[1])
+          ) {
+            navigation.push("StockDetails", {
+              symbol: symbol[1].trim().toUpperCase()
+            });
           }
         })
         .catch(function(error) {
@@ -205,15 +224,18 @@ function Discussion({ route, navigation }) {
           {...props}
           wrapperStyle={{
             right: {
-              backgroundColor: "#147efb"
+              backgroundColor: "transparent"
             },
             left: {
-              backgroundColor: "#7c818c"
+              backgroundColor: "transparent"
             }
           }}
           textStyle={{
             left: {
-              color: "white"
+              color: "#FFF"
+            },
+            right: {
+              color: "#FFF"
             }
           }}
         />
@@ -233,12 +255,12 @@ function Discussion({ route, navigation }) {
             backgroundColor: "#147efb",
             justifyContent: "center",
             alignItems: "center",
-            alignSelf: "center",
-            marginBottom: -25
+            alignSelf: "center"
+            //marginBottom: -25
             //marginRight: 15
           }}
         >
-          {/* <Feather name="arrow-up" color="#383c4a" size={28} fontWeight={900} /> */}
+          {/* <Feather name="arrow-up" color="#F5F8FA" size={28} fontWeight={900} /> */}
           <FontAwesome5
             name="arrow-up"
             color="#FFF"
@@ -255,7 +277,7 @@ function Discussion({ route, navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "#383c4a",
+          backgroundColor: "#35383F",
           borderTopWidth: 0,
           marginBottom: -10
         }}
@@ -291,7 +313,7 @@ function Discussion({ route, navigation }) {
           justifyContent: "space-around",
           alignItems: "center",
           marginVertical: 40,
-          backgroundColor: "white"
+          backgroundColor: "#FFF"
         }}
       >
         <TouchableOpacity>
@@ -319,7 +341,12 @@ function Discussion({ route, navigation }) {
         </TouchableOpacity>
         <Text style={styles.header}> {item.groupName}</Text>
         <TouchableOpacity
-
+          // onPress={() =>
+          //   navigation.push("StockDetails", {
+          //     symbol: "SQ"
+          //   })
+          // }
+          onPress={() => navigation.navigate("GroupProfile")}
         >
           <Image
             source={require("../../assets/icon.png")}
@@ -332,33 +359,36 @@ function Discussion({ route, navigation }) {
       <GiftedChat
         isAnimated={true}
         renderAccessory={CustomView}
+        renderSystemMessage={renderSystemMessage}
         //onPressActionButton={() => _navigateToStockDetails}
         //showUserAvatar={true}
         //showAvatarForEveryMessage={true}
         textInputProps={{
           style: {
-            backgroundColor: "#4b5162",
+            backgroundColor: "#303135",
             borderRadius: 30,
             fontSize: 20,
             color: "#FFF",
             paddingLeft: 20,
+            paddingRight: 20,
             width: "100%",
             marginHorizontal: 30,
             flex: 1,
-            paddingVertical: 20,
-            marginTop: 10,
-            marginBottom: -10
+            height: "auto",
+            paddingTop: 10,
+            paddingBottom: 10
           }
         }}
+        scrollToBottom
         inverted={true}
-        timeTextStyle={{ left: { color: "white" } }}
+        timeTextStyle={{ left: { color: "#FFF" }, right: { color: "#FFF" } }}
         //renderTime={renderTime}
-        //renderAvatar={true}
+        renderAvatar={null}
         messages={messages}
         renderSend={renderSend}
         renderBubble={renderBubble}
         //textInputStyle={styles.textInput}
-        isTyping={true}
+        //isTyping={true}
         //renderUsernameOnMessage={true}
         renderInputToolbar={props => customtInputToolbar(props)}
         multiline
@@ -378,7 +408,7 @@ function Discussion({ route, navigation }) {
             pattern: /#(\w+)/,
             style: {
               ...linkStyle,
-              color: "white",
+              color: "#FFF",
               fontWeight: "bold",
               textDecorationLine: "underline"
             }
@@ -434,11 +464,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     marginRight: 15,
-    color: "white"
+    color: "#FFF"
   },
 
   main: {
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
@@ -449,25 +479,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20
+    //backgroundColor: "#303135"
   },
   username: {
     color: "#147efb",
     fontFamily: "Montserrat_700Bold",
     fontSize: 14,
     flex: 1,
-    paddingVertical: 5
-    //textAlign: "center"
+    paddingVertical: 5,
+    position: "relative"
   },
 
-  textInput: {
-    backgroundColor: "#4b5162",
-    borderRadius: 30,
-    marginRight: 20,
-    marginLeft: 20,
-    fontSize: 20,
-    color: "#FFF",
-    paddingLeft: 20
-  },
+  // textInput: {
+  //   backgroundColor: "#35383F",
+  //   borderRadius: 30,
+  //   marginRight: 20,
+  //   marginLeft: 20,
+  //   fontSize: 20,
+  //   color: "#FFF",
+  //   paddingLeft: 20
+  // },
 
   avatar: {
     width: 40,
@@ -487,5 +518,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     flex: 1,
     textAlign: "center"
+  },
+  systemMessageText: {
+    fontSize: 14,
+    color: "#FFF",
+    fontWeight: "bold"
   }
 });

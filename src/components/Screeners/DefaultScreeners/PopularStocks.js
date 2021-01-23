@@ -46,7 +46,7 @@ class PopularStocks extends Component {
               rating: service["analyst rating"],
               volume: service.volume,
               label: service.name,
-              backgroundColor: "#383c4a",
+              backgroundColor: "#35383F",
               marginTop: 1
             }))
           },
@@ -192,18 +192,18 @@ class PopularStocks extends Component {
       return (
         <View style={styles.loadCon}>
           <Text style={styles.loadTitle}>Finding Stocks...</Text>
-          <ActivityIndicator color="white" size="large" />
+          <ActivityIndicator color="#FFF" size="large" />
         </View>
       );
     }
 
     return (
       <View style={styles.container}>
-        <Header style={{ backgroundColor: "#F5F8FA", borderBottomWidth: 0 }}>
+        <Header style={{ backgroundColor: "#35383F", borderBottomWidth: 0 }}>
           <Left>
             <Icon
               style={{
-                color: "white",
+                color: "#FFF",
                 paddingHorizontal: 20,
                 fontSize: 24,
                 fontWeight: "bold"
@@ -224,7 +224,7 @@ class PopularStocks extends Component {
               onPress={() => this.props.navigation.navigate("Home")}
             >
               <Text
-                style={{ fontSize: 18, fontWeight: "bold", color: "white" }}
+                style={{ fontSize: 18, fontWeight: "bold", color: "#FFF" }}
               >
                 Popular Stocks
               </Text>
@@ -234,7 +234,7 @@ class PopularStocks extends Component {
           <Right>
             <Feather
               style={{
-                color: "white",
+                color: "#FFF",
                 fontWeight: "bold",
                 paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
                 fontSize: 30
@@ -261,7 +261,7 @@ export default PopularStocks;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#F5F8FA",
+    backgroundColor: "#35383F",
     flex: 1
   },
   card: {
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     shadowColor: "lightgrey",
     shadowOpacity: 1.0,
     shadowRadius: 2,
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     borderRadius: 10,
     padding: 10,
     height: 80,
@@ -286,10 +286,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#383c4a"
+    backgroundColor: "#35383F"
   },
   loadTitle: {
-    color: "#000000",
+    color: "#FFF000",
     fontSize: 16,
     margin: 8,
     fontWeight: "700"

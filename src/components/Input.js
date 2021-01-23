@@ -7,7 +7,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 const Input = ({ term, onSendPress, onTermChange, onValidateTextField }) => {
   return (
-    <View style={{ backgroundColor: "#383c4a", height: 80 }}>
+    <View style={{ backgroundColor: "#35383F", height: 80 }}>
       <View style={styles.container}>
         {/* <Ionicons name="ios-add" color="#147efb" size={30} /> */}
         <TextInput
@@ -28,11 +28,11 @@ const Input = ({ term, onSendPress, onTermChange, onValidateTextField }) => {
               alignItems: "center"
             }}
           >
-            {/* <Ionicons name="ios-arrow-up" color="#383c4a" size={30} /> */}
-            {/* <Feather name="arrow-up" color="#383c4a" size={28} fontWeight={900} /> */}
+            {/* <Ionicons name="ios-arrow-up" color="#F5F8FA" size={30} /> */}
+            {/* <Feather name="arrow-up" color="#F5F8FA" size={28} fontWeight={900} /> */}
             <FontAwesome5
               name="arrow-up"
-              color="#383c4a"
+              color="#F5F8FA"
               size={20}
               fontWeight={900}
             />
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   input: {
     fontFamily: "Montserrat_600SemiBold",
     fontSize: 14,
-    color: "#000",
+    color: "#FFF",
     paddingHorizontal: 10,
     flex: 1
   }

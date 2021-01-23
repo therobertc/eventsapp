@@ -11,62 +11,49 @@ import {
 } from "react-native";
 import StockGroupCard from "../components/StockGroupCard";
 import firebase, { firestore } from "../database/firebase";
-import { Icon, Header, Left, Right, Body, Button } from "native-base";
+
+import LinkPortfolioButton from "../components/LinkPortfolioButton";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import InsiderTrades from "../components/InsiderTrades";
+import { Link } from "@react-navigation/native";
 
-const Activity = props => {
+const LinkPortfolio = props => {
   return (
-    <View style={styles.container}>
-      <Header
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <View style={styles.col}>
+        <TouchableOpacity onPress={() => props.navigation.goBack()}>
+          <Feather name="chevron-left" size={30} color="#FFF" />
+        </TouchableOpacity>
+      </View>
+      <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+        <View style={styles.feed}>
+          <Image
+            source={require("../../assets/icon.png")}
+            // source={{ uri: itemPic }}
+            style={styles.avatar}
+          />
+          <Text style={styles.header}> Link your broker</Text>
+          <Text style={styles.text}>
+            Account and trade values will be private
+          </Text>
+          <Text style={styles.link}>Why link an account?</Text>
+        </View>
+      </View>
+
+      <View
         style={{
-          backgroundColor: "#35383F",
-          borderBottomWidth: 0.2,
-          borderBottomColor: "#35383F"
+          justifyContent: "center",
+          alignItems: "center",
+          paddingTop: 200
         }}
       >
-        <Left>
-          {/* <Feather
-            style={{
-              color: "#FFF",
-              paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
-              fontSize: 30,
-              fontWeight: "bold"
-            }}
-            name="chevron-left"
-            onPress={() => props.navigation.goBack()}
-          /> */}
-          {/* <Text style={styles.header}>Activity</Text> */}
-        </Left>
-
-        <Body style={{ width: "100%" }}>
-          <Text style={styles.header}>Activity</Text>
-        </Body>
-
-        <Right>
-          <Feather
-            style={{
-              color: "#FFF",
-              fontWeight: "bold",
-              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-              fontSize: 30
-            }}
-            name="settings"
-            onPress={() => props.navigation.navigate("Settings")}
-          />
-        </Right>
-      </Header>
-
-      <View style={styles.feed}>
-        {/* <Text style={styles.text}>No new notifications</Text> */}
-        <InsiderTrades {...props} />
+        <LinkPortfolioButton></LinkPortfolioButton>
       </View>
-    </View>
+    </ScrollView>
   );
 };
-export default Activity;
+export default LinkPortfolio;
 
 const styles = StyleSheet.create({
   list: {
@@ -94,44 +81,40 @@ const styles = StyleSheet.create({
     paddingTop: 30
   },
   btn: {
-    borderRadius: 16,
-    //borderTopRightRadius: 0,
-    backgroundColor: "#147efb",
-    height: 80,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20,
-    marginHorizontal: 20
+    width: 200,
+    position: "absolute",
+    bottom: 10,
+    right: 110,
+    top: 300,
+    height: 50,
+    backgroundColor: "#147efb",
+    borderRadius: 100,
+    flexDirection: "row"
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F"
+    backgroundColor: "#35383F",
     // left: 0,
     // right: 0,
     // top: 0,
     //paddingHorizontal: 20,
-    //paddingTop: 60
+    paddingTop: 60
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    //paddingTop: 30,
+    paddingTop: 30,
     paddingHorizontal: 20
   },
   header: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
-    //width: "105%",
-    //flex: 1,
+    flex: 1,
     fontSize: 20,
-    marginLeft: 10
-  },
-  text: {
-    //fontFamily: "Montserrat_400Regular",
-    color: "#FFF",
     textAlign: "center",
-    fontSize: 20,
-    paddingVertical: 30
+    paddingVertical: 20
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
@@ -144,6 +127,19 @@ const styles = StyleSheet.create({
     marginRight: -20,
     alignSelf: "center"
   },
+  text: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#FFF",
+    textAlign: "center",
+    fontSize: 20
+  },
+  link: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#147efb",
+    textAlign: "center",
+    fontSize: 20,
+    paddingVertical: 10
+  },
   ops: {
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
@@ -151,6 +147,12 @@ const styles = StyleSheet.create({
     // backgroundColor: "#35383F",
     // marginHorizontal: -20,
     paddingHorizontal: 20
+  },
+  avatar: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignSelf: "center"
   },
   col: {
     flexDirection: "row",

@@ -132,15 +132,15 @@ export default function GroupChat({ route, navigation }) {
             //marginRight: 15
           }}
         >
-          {/* <Feather name="arrow-up" color="#383c4a" size={28} fontWeight={900} /> */}
+          {/* <Feather name="arrow-up" color="#F5F8FA" size={28} fontWeight={900} /> */}
           <FontAwesome5
             name="arrow-up"
-            color="#383c4a"
+            color="#F5F8FA"
             size={20}
             fontWeight={900}
           />
 
-          {/* <Text style={{ fontWEight: "700", color: "#383c4a" }}>Send</Text> */}
+          {/* <Text style={{ fontWEight: "700", color: "#F5F8FA" }}>Send</Text> */}
         </View>
       </Send>
     );
@@ -155,7 +155,7 @@ export default function GroupChat({ route, navigation }) {
             backgroundColor: "#147efb"
           },
           left: {
-            backgroundColor: "#F5F8FA"
+            backgroundColor: "#35383F"
           }
         }}
       />
@@ -167,7 +167,7 @@ export default function GroupChat({ route, navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "#383c4a",
+          backgroundColor: "#35383F",
           borderTopColor: "#E8E8E8",
           borderTopWidth: 1,
           paddingTop: 10
@@ -399,7 +399,7 @@ export default function GroupChat({ route, navigation }) {
               pattern: /#(\w+)/,
               style: {
                 ...linkStyle,
-                color: "white",
+                color: "#FFF",
                 fontWeight: "bold",
                 textDecorationLine: "underline"
               }
@@ -409,7 +409,7 @@ export default function GroupChat({ route, navigation }) {
               pattern: /\$(\w+)/,
               style: {
                 ...linkStyle,
-                color: "white",
+                color: "#FFF",
                 fontWeight: "bold",
                 textDecorationLine: "underline"
               }
@@ -419,7 +419,7 @@ export default function GroupChat({ route, navigation }) {
               pattern: /\@(\w+)/,
               style: {
                 ...linkStyle,
-                color: "white",
+                color: "#FFF",
                 fontWeight: "bold",
                 textDecorationLine: "underline"
               }
@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "#383c4a"
+    backgroundColor: "#35383F"
   },
 
   ImageStyle: {
@@ -468,7 +468,7 @@ const styles = StyleSheet.create({
   },
 
   main: {
-    backgroundColor: "#383c4a",
+    backgroundColor: "#35383F",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,

@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     marginRight: 20
   },
   count: {
-    color: "#383c4a",
+    color: "#F5F8FA",
     fontFamily: "Montserrat_700Bold"
   },
   image: {
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     borderRadius: 30
   },
   text: {
-    color: "white",
+    color: "#FFF",
     fontFamily: "Montserrat_600SemiBold",
     fontSize: 11
   },
@@ -114,14 +114,14 @@ const styles = StyleSheet.create({
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 2,
-    shadowColor: "#000",
+    //shadowColor: "#B9BABD",
     marginHorizontal: 10,
-    shadowOpacity: 0.5,
+    shadowOpacity: 0.2,
     marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
-    //backgroundColor: "#F5F8FA"
-    backgroundColor: "#4b5162",
+    //backgroundColor: "#35383F"
+    backgroundColor: "#35383F",
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,

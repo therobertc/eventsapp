@@ -6,10 +6,12 @@ import {
   StyleSheet,
   View,
   ActivityIndicator,
-  Animated
+  Animated,
+  Image
 } from "react-native";
 import { WebView } from "react-native-webview";
-const Feedback = () => {
+
+const LinkPortfolioButton = () => {
   const [showModal, setModal] = useState(false);
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {}, [isLoading]);
@@ -20,10 +22,18 @@ const Feedback = () => {
   return (
     <>
       <TouchableOpacity
+        style={styles.btn}
+        //onPress={() => navigation.navigate("LinkPortfolio")}
         onPress={() => setModal(true)}
-        style={styles.buttonContainer}
       >
-        <Text>Subscribe</Text>
+        {/* <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
+          Robinhood
+        </Text> */}
+        <Image
+          source={require("../../assets/robinhoodlogo.png")}
+          // source={{ uri: itemPic }}
+          style={styles.avatar}
+        />
       </TouchableOpacity>
 
       <Modal
@@ -38,7 +48,7 @@ const Feedback = () => {
               onPress={() => setModal(false)}
               style={styles.close}
             >
-              <Text style={{ fontWeight: "bold" }}>╳</Text>
+              <Text style={{ fontWeight: "bold", color: "#FFF" }}>╳</Text>
             </TouchableOpacity>
             {isLoading && <ActivityIndicator size={"large"} color={"grey"} />}
             <WebView
@@ -46,7 +56,7 @@ const Feedback = () => {
               onLoadEnd={() => setLoading(false)}
               style={styles.webViewContainer}
               source={{
-                uri: `https://stockchatapp.com`
+                uri: `https://robinhood.com/login`
               }}
             />
           </View>
@@ -65,14 +75,15 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     display: "flex",
+    paddingVertical: 20,
     height: 50,
     justifyContent: "center",
     alignItems: "center"
   },
   modalView: {
     width: "100%",
-    height: "93%",
-    shadowColor: "#000",
+    height: "90%",
+    shadowColor: "#657786",
     shadowOffset: {
       width: 0,
       height: 2
@@ -80,18 +91,36 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    backgroundColor: "#383c4a"
+    backgroundColor: "#35383F"
   },
   webViewContainer: {
     height: "90%",
     width: "100%"
+  },
+  btn: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 200,
+    //position: "absolute",
+    //bottom: 10,
+    //right: 110,
+    //top: 300,
+    height: 50,
+    backgroundColor: "#FFF",
+    borderRadius: 100,
+    flexDirection: "row"
   },
   close: {
     alignSelf: "flex-end",
     padding: 6,
     marginRight: 20,
     marginTop: 10
+  },
+  avatar: {
+    width: 130,
+    height: 31
+    //borderRadius: 20
   }
 });
 
-export default Feedback;
+export default LinkPortfolioButton;

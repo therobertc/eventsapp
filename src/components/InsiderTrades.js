@@ -8,7 +8,8 @@ import {
   ActivityIndicator
 } from "react-native";
 
-class TrendingStocks extends Component {
+
+class InsiderTrades extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,9 +29,12 @@ class TrendingStocks extends Component {
   }
 
   async getTrandingData() {
-    return fetch("https://sharestock.io/api/trendingStock", {
-      method: "GET"
-    })
+    return fetch(
+      "https://sharestock.io/api/insider-trades/?token=e10272b94c36ea1ccb217b30028b2e7e4756c9c7",
+      {
+        method: "GET"
+      }
+    )
       .then(response => response.json())
       .then(responseJson => {
         this.setState(
@@ -51,58 +55,59 @@ class TrendingStocks extends Component {
     // CheckGroupExistsOrNot("SQ").then((snapshot))
     if (this.state.data.length) {
       return this.state.data.map((service, index) => (
-        // <TouchableOpacity
-        //   key={index}
-        //   onPress={() =>
-        //     this.props.navigation.push("StockDetails", {
-        //       symbol: service.symbol
-        //     })
-        //   }
-        //   style={{ marginLeft: 10, borderRadius: 35 }}
-        // >
         <TouchableOpacity
           key={index}
           onPress={() =>
             this.props.navigation.push("StockDetails", {
-              symbol: service.symbol
+              symbol: service.Ticker
             })
           }
-          style={styles.card}
+          //style={styles.card}
         >
           <View
             style={{
-              height: 80,
-              width: 100,
-
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingVertical: 20
+              paddingVertical: 10,
+              marginHorizontal: 10,
+              borderBottomColor: "#7c818c",
+              borderBottomWidth: 0.5
             }}
           >
             <Text
               style={{
-                fontWeight: "600",
+                fontWeight: "500",
                 fontSize: 18,
-                //textAlign: "left"
-                color: "#FFF"
+                //textAlign: "center",
+                color: parseFloat(service.Qty) < 0 ? "#ff3636" : "#33CC00"
               }}
             >
-              {service.symbol}
+              ${service.Ticker} {service.Qty} shares @ {service.Price}
             </Text>
+            <Text
+              style={{
+                fontWeight: "400",
+                fontSize: 16,
+                textAlign: "left",
+                color: "#FFF",
+                paddingTop: 5
+              }}
+            >
+              {service.Title} {service["Insider Name"]} {service["Trade Type"] === "S - Sale" ? "Sold":"Bought"}{" "}
+              {service.Qty} shares of {service["Company Name"]} at{" "}
+              {service.Price} per share for a total value of {service.Value} on{" "}
+              {service["Trade Date"]}.
+            </Text>
+
 
             <Text
               style={{
-                fontWeight: "500",
-                fontSize: 14,
-                textAlign: "center",
-                color:
-                  parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00"
+                fontWeight: "400",
+                fontSize: 16,
+                textAlign: "left",
+                color: "#7c818c",
+                paddingTop: 5
               }}
             >
-              {parseFloat(service.changePercent) < 0
-                ? (parseFloat(service.changePercent) * 100).toFixed(2)
-                : "+" + (parseFloat(service.changePercent) * 100).toFixed(2)}
-              %
+              Insider Trades by Stock Chat
             </Text>
           </View>
         </TouchableOpacity>
@@ -128,11 +133,8 @@ class TrendingStocks extends Component {
     return (
       <View style={styles.container}>
         <ScrollView
-          horizontal={true}
+          //horizontal={true}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            alignItems: "center"
-          }}
         >
           {this.TrendingComponent()}
         </ScrollView>
@@ -141,7 +143,7 @@ class TrendingStocks extends Component {
   }
 }
 
-export default TrendingStocks;
+export default InsiderTrades;
 
 const styles = StyleSheet.create({
   container: {
@@ -206,7 +208,7 @@ const styles = StyleSheet.create({
   datacard: {
     //backgroundColor: "#147efb",
     //height: 40,
-    width: 100,
+    //width: 100,
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,
     justifyContent: "center",

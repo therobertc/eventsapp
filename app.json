@@ -2,7 +2,7 @@
   "expo": {
     "name": "StockChat",
     "slug": "StockChat",
-    "version": "0.2",
+    "version": "0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

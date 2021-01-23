@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+
 import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 import Home from "../screens/Home";
 import Discussion from "../screens/Discussion";
@@ -24,7 +27,7 @@ import GetStarted from "../screens/OnBoarding/GetStarted";
 import ChoosingUsername from "../screens/OnBoarding/ChoosingUsername";
 import VerifyPhoneNumber from "../screens/OnBoarding/VerifyPhoneNumber";
 import PhoneNumber from "../screens/OnBoarding/PhoneNumber";
-import LinkPortfolio from "../screens/OnBoarding/LinkPortfolio";
+import LinkPortfolio from "../screens/LinkPortfolio";
 import InviteFriends from "../screens/OnBoarding/InviteFriends";
 import Notification from "../screens/OnBoarding/Notification";
 import Success from "../screens/OnBoarding/Success";
@@ -61,10 +64,10 @@ const BottomTabNavigator = () => {
           //justifyContent: "center",
           //alignItems: "center",
           paddingTop: 15,
-          backgroundColor: "#383c4a",
+          backgroundColor: "#35383F",
 
           alignContent: "center",
-          borderTopColor: "#383c4a"
+          borderTopColor: "#35383F"
         }
       }}
     >
@@ -91,6 +94,17 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
+        name="Alerts"
+        component={Activity}
+        options={{
+          headerShown: false,
+          tabBarLabel: "",
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="trending-up" color={color} size={30} />
+          )
+        }}
+      />
+      <Tab.Screen
         name="Profile"
         component={Profile}
         options={{
@@ -103,6 +117,17 @@ const BottomTabNavigator = () => {
     </Tab.Navigator>
   );
 };
+
+const Drawer = createDrawerNavigator();
+
+const SideDrawerNavigator = () => {
+  return (
+    <Drawer.Navigator initialRouteName="Home">
+      <Drawer.Screen name="Chat" component={Chat} />
+    </Drawer.Navigator>
+  );
+};
+
 const Stack = createStackNavigator();
 // const screenOptionStyle = {
 //   headerShown: false
