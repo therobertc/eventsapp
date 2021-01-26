@@ -515,7 +515,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   logotext: {
-    fontFamily: "Montserrat_700Bold",
+    fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     fontSize: 22,
     paddingLeft: 10,

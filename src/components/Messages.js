@@ -109,13 +109,14 @@ const styles = StyleSheet.create({
     color: "#7c818c",
     //fontFamily: "Montserrat_300SemiBold",
     fontSize: 15,
-    paddingLeft: 10
+    paddingLeft: 10,
+    marginRight: 10
   },
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 2,
-    borderBottomColor: "grey",
-    //borderBottomWidth: 1,
+    borderBottomColor: "#7c818c",
+    borderBottomWidth: 1,
     //shadowColor: "#B9BABD",
     //marginHorizontal: 10,
     shadowOpacity: 0.2,
