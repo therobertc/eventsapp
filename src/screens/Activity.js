@@ -9,63 +9,64 @@ import {
   ScrollView,
   Image
 } from "react-native";
-import StockGroupCard from "../components/StockGroupCard";
-import firebase, { firestore } from "../database/firebase";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
-
-import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import InsiderTrades from "../components/InsiderTrades";
+import Notifications from "../components/Notifications";
 
-const Activity = props => {
-  return (
-    <View style={styles.container}>
-      <Header
-        style={{
-          backgroundColor: "#35383F",
-          borderBottomWidth: 0.2,
-          borderBottomColor: "#35383F"
-        }}
-      >
-        <Left>
-          {/* <Feather
-            style={{
-              color: "#FFF",
-              paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
-              fontSize: 30,
-              fontWeight: "bold"
-            }}
-            name="chevron-left"
-            onPress={() => props.navigation.goBack()}
-          /> */}
-          {/* <Text style={styles.header}>Activity</Text> */}
-        </Left>
+class Activity  extends React.Component{
 
-        <Body style={{ width: "100%" }}>
-          <Text style={styles.header}>Activity</Text>
-        </Body>
+  constructor(props) {
+    super(props);
 
-        <Right>
-          <Feather
-            style={{
-              color: "#FFF",
-              fontWeight: "bold",
-              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-              fontSize: 30
-            }}
-            name="settings"
-            onPress={() => props.navigation.navigate("Settings")}
-          />
-        </Right>
-      </Header>
+  }
 
-      <View style={styles.feed}>
-        {/* <Text style={styles.text}>No new notifications</Text> */}
-        <InsiderTrades {...props} />
-      </View>
-    </View>
-  );
-};
+  render (){
+
+    return (
+        <View style={styles.container}>
+          <Header
+              style={{
+                backgroundColor: "#35383F",
+                borderBottomWidth: 0.2,
+                borderBottomColor: "#35383F"
+              }}
+          >
+            <Left>
+
+            </Left>
+            <Body style={{ width: "100%" }}>
+              <Text style={styles.header}>Activity</Text>
+            </Body>
+            <Right>
+              <Feather
+                  style={{
+                    color: "#FFF",
+                    fontWeight: "bold",
+                    paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                    fontSize: 30
+                  }}
+                  name="settings"
+                  onPress={() => props.navigation.navigate("Settings")}
+              />
+            </Right>
+          </Header>
+
+          <View style={styles.feed}>
+            {/* <Text style={styles.text}>No new notifications</Text> */}
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                style={{ paddingHorizontal: 10 }}
+            >
+              <Notifications  {...this.props}/>
+            </ScrollView>
+            {/*<InsiderTrades {...props} />*/}
+
+          </View>
+        </View>
+    );
+  }
+}
 export default Activity;
 
 const styles = StyleSheet.create({
@@ -139,6 +140,9 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 24,
     paddingBottom: 10
+  },
+  feed:{
+    flex:1,
   },
   proContainer: {
     marginRight: -20,
