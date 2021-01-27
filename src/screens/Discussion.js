@@ -57,8 +57,7 @@ function Discussion({ route, navigation }) {
             .toUTCString();
           console.log("userid is", userid);
           console.log("mainid is", firebaseData["user"]["_id"]);
-          firebaseData["user"]["_id"] =
-              (firebaseData["user"]["_id"] == userid) ? 1 : 2;
+          firebaseData["user"]["_id"] = 2;
           const data = {
             _id: doc.id,
             text: "",
@@ -177,6 +176,7 @@ function Discussion({ route, navigation }) {
       .collection("messages")
       .doc();
     for (let i = 0; i < newMessage.length; i++) {
+      newMessage[i]['user']['_id'] = 2;
       messageRef
         .set({
           _id: newMessage[i]._id,
@@ -190,6 +190,7 @@ function Discussion({ route, navigation }) {
           }
         })
         .then(function(docRef) {
+
           setMessages(GiftedChat.append(messages, newMessage));
           let message = newMessage[i].text;
           lastMessage(message);

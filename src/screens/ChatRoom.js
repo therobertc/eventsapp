@@ -18,13 +18,10 @@ import {
 import { GiftedChat } from "react-native-gifted-chat";
 import fire, { firestore } from "../database/firebase";
 import * as ImagePicker from "expo-image-picker";
-const screen = Dimensions.get("window");
-var itm = [];
+
 
 export default function ChatRoom({ route, navigation }) {
-  console.log(
-    "We Are In Private Chat \n<------------------------------------------------------------------------------------------------>\n"
-  );
+
   const [messages, setMessages] = useState([]);
   const [image, setImage] = useState(null);
   const [username, setUsername] = useState(fire.auth().currentUser.displayName);
@@ -90,7 +87,7 @@ export default function ChatRoom({ route, navigation }) {
             image: url,
             createdAt: new Date(),
             user: {
-              _id: 1,
+              _id: 2,
               name: username,
               avatar: "https://placeimg.com/140/140/any"
             }
@@ -132,7 +129,7 @@ export default function ChatRoom({ route, navigation }) {
                 createdAt: message[i].createdAt.toUTCString(),
                 image: message[i].image,
                 user: {
-                  _id: 1,
+                  _id: 2,
                   name: username
                 }
               });
@@ -293,7 +290,7 @@ export default function ChatRoom({ route, navigation }) {
           messages={messages}
           onSend={newMessages => onSend(newMessages)}
           user={{
-            _id: 1,
+            _id: 2,
             name: username
           }}
         />
