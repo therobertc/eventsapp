@@ -22,7 +22,7 @@ const Profile = props => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.col}>
-        <Text style={styles.header}>Profile</Text>
+        <Text style={styles.header}>Portfolio</Text>
         <TouchableOpacity
           style={{
             paddingHorizontal: 10,
@@ -61,7 +61,7 @@ const Profile = props => {
         </TouchableOpacity>
       </View>
       <View style={{ paddingVertical: 20, marginHorizontal: 20 }}>
-        <View>
+        {/* <View>
           <Image
             source={require("../../assets/icon.png")}
             // source={{ uri: itemPic }}
@@ -81,11 +81,26 @@ const Profile = props => {
             <Text style={styles.linktext}>link twitter</Text>
             <Text style={styles.linktext}>link instagram</Text>
           </View>
-        </View>
+        </View> */}
         <View style={styles.feed}>
-          <Text style={styles.header}>Portfolio</Text>
+          {/* <Text style={styles.header}>Portfolio</Text> */}
           <Text style={styles.text}>Your portfolio is not connected.</Text>
-          <TouchableOpacity
+
+          <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+            <View style={styles.feed}>
+              <Image
+                source={require("../../assets/icon.png")}
+                // source={{ uri: itemPic }}
+                style={styles.avatar}
+              />
+              <Text style={styles.header2}> Link your broker</Text>
+              <Text style={styles.text}>
+                Account values will always be private.
+              </Text>
+              <Text style={styles.link}>Why link an account?</Text>
+            </View>
+          </View>
+          {/* <TouchableOpacity
             style={styles.btn}
             onPress={() => props.navigation.navigate("LinkPortfolio")}
             // onPress={() => setModal(true)}
@@ -93,11 +108,19 @@ const Profile = props => {
             <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
               Connect Portfolio
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
 
-      {/* <LinkPortfolioButton></LinkPortfolioButton> */}
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center"
+          //paddingTop: 50
+        }}
+      >
+        <LinkPortfolioButton></LinkPortfolioButton>
+      </View>
     </ScrollView>
   );
 };
@@ -168,8 +191,9 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
-    fontSize: 24,
-    paddingBottom: 10
+    fontSize: 20,
+    paddingBottom: 10,
+    textAlign: "center"
   },
   proContainer: {
     marginRight: -20,
@@ -226,6 +250,20 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    marginBottom: 10
+    marginBottom: 30,
+    alignSelf: "center"
+  },
+  text: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#FFF",
+    textAlign: "center",
+    fontSize: 20
+  },
+  link: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#147efb",
+    textAlign: "center",
+    fontSize: 20,
+    paddingVertical: 10
   }
 });

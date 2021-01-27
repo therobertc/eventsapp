@@ -43,7 +43,7 @@ export default function AddMember({ route, navigation }) {
     try {
       const result = await Share.share({
         message:
-          "Let's talk about stocks, join my Stock Chat  https://stockchatapp.com"
+          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

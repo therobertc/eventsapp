@@ -39,23 +39,24 @@ const Chat = props => {
   };
 
   useEffect(() => {
-    firestore.collection("profile").where("email", "==", fire.auth().currentUser.email).get().then(snapshot =>{
-      console.log("snapshot is ", snapshot);
-      snapshot.forEach(function(change) {
+    firestore
+      .collection("profile")
+      .where("email", "==", fire.auth().currentUser.email)
+      .get()
+      .then(snapshot => {
+        console.log("snapshot is ", snapshot);
+        snapshot.forEach(function(change) {
           console.log("data is", change);
           console.log(change.id);
+        });
       })
-
-    }).catch(error=>{
-      console.log("erros is ", error);
-    })
-    console.log("current user is ", fire.auth().currentUser
-
-    )
+      .catch(error => {
+        console.log("erros is ", error);
+      });
+    console.log("current user is ", fire.auth().currentUser);
     if (isVisible) {
       getChats();
     }
-
   }, [isVisible]);
 
   function getChats() {
@@ -114,7 +115,7 @@ const Chat = props => {
     try {
       const result = await Share.share({
         message:
-          "Download Stock Chat and join my trading group! https://stockchatapp.com"
+          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -132,7 +133,7 @@ const Chat = props => {
 
   return (
     <View style={styles.container}>
-      <View style={{ zIndex: 999 }}>
+      <View>
         <Header
           style={{
             backgroundColor: "#35383F",
@@ -152,7 +153,7 @@ const Chat = props => {
             onPress={() => props.navigation.navigate("Profile")}
           /> */}
 
-            <View style={{ zIndex: 999 }}>
+            {/* <View style={{ zIndex: 999 }}>
               <DropDownPicker
                 items={[
                   {
@@ -194,11 +195,13 @@ const Chat = props => {
               />
 
               {/* <Text style={styles.logotext}>#STOCKCHAT</Text> */}
-            </View>
+            {/* </View>  */}
+
+            <Text style={styles.logotext}>#STOCKCHAT</Text>
           </Left>
 
-          <Body>
-            {/* <Image
+          {/* <Body> */}
+          {/* <Image
             style={{
               flex: 1,
               aspectRatio: Platform.OS === "ios" ? 3.0 : 4.0,
@@ -206,10 +209,10 @@ const Chat = props => {
             }}
             source={require("../../assets/stockchattext.png")}
           /> */}
-            {/* <View style={{ justifyContent: "center", alignItems: "center" }}>
+          {/* <View style={{ justifyContent: "center", alignItems: "center" }}>
             <Text style={styles.header2}>#stockchat</Text>
           </View> */}
-          </Body>
+          {/* </Body> */}
 
           <Right>
             <Feather
@@ -346,7 +349,7 @@ const Chat = props => {
           /> */}
         {/* </View>  */}
         <View style={styles.col}>
-          <Text style={styles.header}>Trading Groups</Text>
+          <Text style={styles.logotext}>Groups</Text>
           {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
@@ -512,7 +515,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   logotext: {
-    fontFamily: "Montserrat_700Bold",
+    fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     fontSize: 22,
     paddingLeft: 10,
@@ -549,7 +552,7 @@ const styles = StyleSheet.create({
   col: {
     flexDirection: "row",
     //marginTop: 25,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     alignItems: "center"
   },
   stockchats: {

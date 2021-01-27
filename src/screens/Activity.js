@@ -14,56 +14,52 @@ import { Feather } from "@expo/vector-icons";
 import InsiderTrades from "../components/InsiderTrades";
 import Notifications from "../components/Notifications";
 
-class Activity  extends React.Component{
-
+class Activity extends React.Component {
   constructor(props) {
     super(props);
-
   }
 
-  render (){
-
+  render() {
     return (
-        <View style={styles.container}>
-          <Header
+      <View style={styles.container}>
+        <Header
+          style={{
+            backgroundColor: "#35383F",
+            borderBottomWidth: 0.2,
+            borderBottomColor: "#35383F"
+          }}
+        >
+          <Left>
+            <Text style={styles.header}>Activity</Text>
+          </Left>
+          <Body style={{ width: "100%" }}>
+            {/* <Text style={styles.header}>Activity</Text> */}
+          </Body>
+          <Right>
+            <Feather
               style={{
-                backgroundColor: "#35383F",
-                borderBottomWidth: 0.2,
-                borderBottomColor: "#35383F"
+                color: "#FFF",
+                fontWeight: "bold",
+                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                fontSize: 30
               }}
+              name="settings"
+              onPress={() => this.props.navigation.navigate("Settings")}
+            />
+          </Right>
+        </Header>
+
+        <View style={styles.feed}>
+          {/* <Text style={styles.text}>No new notifications</Text> */}
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            //style={{ paddingHorizontal: 10 }}
           >
-            <Left>
-
-            </Left>
-            <Body style={{ width: "100%" }}>
-              <Text style={styles.header}>Activity</Text>
-            </Body>
-            <Right>
-              <Feather
-                  style={{
-                    color: "#FFF",
-                    fontWeight: "bold",
-                    paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                    fontSize: 30
-                  }}
-                  name="settings"
-                  onPress={() => props.navigation.navigate("Settings")}
-              />
-            </Right>
-          </Header>
-
-          <View style={styles.feed}>
-            {/* <Text style={styles.text}>No new notifications</Text> */}
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-                style={{ paddingHorizontal: 10 }}
-            >
-              <Notifications  {...this.props}/>
-            </ScrollView>
-            {/*<InsiderTrades {...props} />*/}
-
-          </View>
+            <Notifications {...this.props} />
+          </ScrollView>
+          {/*<InsiderTrades {...props} />*/}
         </View>
+      </View>
     );
   }
 }
@@ -125,7 +121,7 @@ const styles = StyleSheet.create({
     //width: "105%",
     //flex: 1,
     fontSize: 20,
-    marginLeft: 10
+    marginLeft: 20
   },
   text: {
     //fontFamily: "Montserrat_400Regular",
@@ -141,8 +137,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     paddingBottom: 10
   },
-  feed:{
-    flex:1,
+  feed: {
+    flex: 1
   },
   proContainer: {
     marginRight: -20,

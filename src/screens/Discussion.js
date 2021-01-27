@@ -55,8 +55,6 @@ function Discussion({ route, navigation }) {
           firebaseData.createdAt = firebaseData.createdAt
             .toDate()
             .toUTCString();
-          console.log("userid is", userid);
-          console.log("mainid is", firebaseData["user"]["_id"]);
           firebaseData["user"]["_id"] = 2;
           const data = {
             _id: doc.id,
@@ -167,9 +165,7 @@ function Discussion({ route, navigation }) {
       });
   };
 
-
   function onSend(newMessage = []) {
-
     const messageRef = firestore
       .collection("message")
       .doc(item.groupID)
@@ -214,8 +210,6 @@ function Discussion({ route, navigation }) {
     }
     setMessages(GiftedChat.append(messages, newMessage));
   }
-
-
 
   const renderBubble = props => {
     return (
@@ -323,8 +317,7 @@ function Discussion({ route, navigation }) {
         <TouchableOpacity>
           <Feather name="at-sign" size={22} color="#3e7af0" />
         </TouchableOpacity>
-        <TouchableOpacity
-        >
+        <TouchableOpacity>
           <Ionicons name="md-images" size={26} color="#3e7af0" />
         </TouchableOpacity>
         <TouchableOpacity>
@@ -342,12 +335,12 @@ function Discussion({ route, navigation }) {
         </TouchableOpacity>
         <Text style={styles.header}> {item.groupName}</Text>
         <TouchableOpacity
-          // onPress={() =>
-          //   navigation.push("StockDetails", {
-          //     symbol: "SQ"
-          //   })
-          // }
-          onPress={() => navigation.navigate("GroupProfile")}
+        // onPress={() =>
+        //   navigation.push("StockDetails", {
+        //     symbol: "SQ"
+        //   })
+        // }
+        // onPress={() => navigation.navigate("GroupProfile")}
         >
           <Image
             source={require("../../assets/icon.png")}
