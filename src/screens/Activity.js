@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     //width: "105%",
     //flex: 1,
     fontSize: 20,
-    marginLeft: 20
+    marginLeft: 10
   },
   text: {
     //fontFamily: "Montserrat_400Regular",
