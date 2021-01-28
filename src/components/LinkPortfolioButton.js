@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
   },
   webViewContainer: {
     height: "90%",

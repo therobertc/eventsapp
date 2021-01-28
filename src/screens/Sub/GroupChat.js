@@ -149,7 +149,7 @@ export default function GroupChat({ route, navigation }) {
             backgroundColor: "#147efb"
           },
           left: {
-            backgroundColor: "#35383F"
+            backgroundColor: "#282c34"
           }
         }}
       />
@@ -161,7 +161,7 @@ export default function GroupChat({ route, navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "#35383F",
+          backgroundColor: "#282c34",
           borderTopColor: "#E8E8E8",
           borderTopWidth: 1,
           paddingTop: 10
@@ -439,7 +439,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
   },
 
   ImageStyle: {
@@ -462,7 +462,7 @@ const styles = StyleSheet.create({
   },
 
   main: {
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,

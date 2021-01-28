@@ -84,7 +84,7 @@ class Home extends Component {
         try {
           const result = await Share.share({
             message:
-              "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
+              "Hey - I have an invite to StockChat and want you to join. Here is the link! https://testflight.apple.com/join/EbkJK1RL"
           });
           if (result.action === Share.sharedAction) {
             if (result.activityType) {
@@ -629,7 +629,7 @@ class Home extends Component {
                 >
                     <View
                         style={{
-                            backgroundColor: "#35383F",
+                            backgroundColor: "#282c34",
                             justifyContent: "center",
                             alignItems: "center",
                             borderRadius: 20,
@@ -687,7 +687,7 @@ class Home extends Component {
                         flex: 1,
                         justifyContent: "center",
                         alignItems: "center",
-                        backgroundColor: "#35383F"
+                        backgroundColor: "#282c34"
                     }}
                 >
                     <ActivityIndicator />
@@ -700,9 +700,9 @@ class Home extends Component {
                  <View style={{ zIndex: 999 }}>
         <Header
           style={{
-            backgroundColor: "#35383F",
+            backgroundColor: "#282c34",
             borderBottomWidth: 0.2,
-            borderBottomColor: "#35383F"
+            borderBottomColor: "#282c34"
           }}
         >
           <Left>
@@ -750,7 +750,7 @@ class Home extends Component {
                   flex: 1,
                   fontSize: 20
                 }}
-                dropDownStyle={{ backgroundColor: "#35383F", borderWidth: 0 }}
+                dropDownStyle={{ backgroundColor: "#282c34", borderWidth: 0 }}
                 // onChangeItem={item =>
                 //   this.setState({
                 //     country: item.value
@@ -903,8 +903,8 @@ export default Home;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#35383F",
-        //backgroundColor: "#35383F",
+        backgroundColor: "#282c34",
+        //backgroundColor: "#282c34",
         //paddingTop: 30,
         
 
@@ -929,7 +929,7 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         borderBottomColor: "#F5FCFF",
-        backgroundColor: "#35383F",
+        backgroundColor: "#282c34",
         borderRadius: 30,
         borderBottomWidth: 1,
         height: 45,
@@ -945,7 +945,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#147efb"
     },
     offercard: {
-        backgroundColor: "#35383F",
+        backgroundColor: "#282c34",
         borderRadius: 10,
         padding: 10,
         //height: 100,
@@ -970,7 +970,7 @@ const styles = StyleSheet.create({
         borderBottomColor: "#F5F8FA",
         //flex: 1,
         width: 300,
-        backgroundColor: "#35383F",
+        backgroundColor: "#282c34",
         marginBottom: 50
     },
     inputIcon: {
@@ -999,13 +999,13 @@ const styles = StyleSheet.create({
         height: 30,
         marginTop: 10,
         borderRadius: 10,
-        backgroundColor: "#35383F",
+        backgroundColor: "#282c34",
     },
     notificationBox: {
         padding: 20,
         marginTop: 5,
         marginBottom: 5,
-        backgroundColor: "#35383F",
+        backgroundColor: "#282c34",
         flexDirection: "row",
         borderRadius: 10
     },
@@ -1060,7 +1060,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
     margin: 10,
     elevation: 1,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 20,
    padding: 10,
    paddingTop: 20
@@ -1073,7 +1073,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
     margin: 10,
     elevation: 1,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 20,
    padding: 10,
    paddingTop: 20

@@ -43,7 +43,7 @@ export default function AddMember({ route, navigation }) {
     try {
       const result = await Share.share({
         message:
-          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
+          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://testflight.apple.com/join/EbkJK1RL"
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -103,13 +103,13 @@ export default function AddMember({ route, navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#35383F" }}>
+    <View style={{ flex: 1, backgroundColor: "#282c34" }}>
       <View
         style={{
           flexDirection: "row",
           height: 80,
           width: "100%",
-          //backgroundColor: "#35383F",
+          //backgroundColor: "#282c34",
           alignItems: "center",
           justifyContent: "space-around",
           paddingTop: 30,
@@ -343,7 +343,7 @@ export default function AddMember({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
   },
   viewseparator: {
     borderColor: "#F5F8FA",

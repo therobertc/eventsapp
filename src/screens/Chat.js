@@ -34,10 +34,6 @@ const Chat = props => {
   const [publicgroups, setpublicgroups] = useState([]);
   const [Chatheads, setChatheads] = useState([]);
 
-  this.state = {
-    country: "#STOCKCHAT"
-  };
-
   useEffect(() => {
     firestore
       .collection("profile")
@@ -115,7 +111,7 @@ const Chat = props => {
     try {
       const result = await Share.share({
         message:
-          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
+          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://testflight.apple.com/join/EbkJK1RL"
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -136,9 +132,9 @@ const Chat = props => {
       <View>
         <Header
           style={{
-            backgroundColor: "#35383F",
+            backgroundColor: "#282c34",
             borderBottomWidth: 0.2,
-            borderBottomColor: "#35383F"
+            borderBottomColor: "#282c34"
           }}
         >
           <Left>
@@ -186,7 +182,7 @@ const Chat = props => {
                   flex: 1,
                   fontSize: 20
                 }}
-                dropDownStyle={{ backgroundColor: "#35383F", borderWidth: 0 }}
+                dropDownStyle={{ backgroundColor: "#282c34", borderWidth: 0 }}
                 // onChangeItem={item =>
                 //   this.setState({
                 //     country: item.value
@@ -215,16 +211,28 @@ const Chat = props => {
           {/* </Body> */}
 
           <Right>
-            <Feather
-              style={{
-                color: "#FFF",
-                fontWeight: "bold",
-                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                fontSize: 30
-              }}
-              name="user-plus"
-              onPress={onShare}
-            />
+            <TouchableOpacity style={styles.invite} onPress={onShare}>
+              <Feather
+                style={{
+                  color: "#FFF",
+                  fontWeight: "bold",
+                  paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                  fontSize: 20
+                }}
+                name="user-plus"
+              />
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 18,
+                  fontWeight: "600",
+                  color: "#FFF"
+                  //paddingLeft: 10
+                }}
+              >
+                Invite
+              </Text>
+            </TouchableOpacity>
 
             {/* <Feather
             style={{
@@ -251,7 +259,7 @@ const Chat = props => {
 
       <ScrollView style={styles.col2}>
         <View style={styles.headerContainer}>
-          <Text style={styles.header}>Trending Stocks</Text>
+          <Text style={styles.header2}>Trending Stocks</Text>
           {/* <View>
             <TouchableOpacity
               style={styles.invite}
@@ -349,7 +357,7 @@ const Chat = props => {
           /> */}
         {/* </View>  */}
         <View style={styles.col}>
-          <Text style={styles.logotext}>Groups</Text>
+          <Text style={styles.logotext}>Group Chats</Text>
           {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
@@ -488,7 +496,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
     // left: 0,
     // right: 0,
     // top: 0,
@@ -536,7 +544,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#35383F",
+    // backgroundColor: "#282c34",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },
@@ -547,7 +555,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#147efb",
     borderRadius: 30,
     paddingHorizontal: 20,
-    paddingVertical: 5
+    paddingVertical: 3
   },
   col: {
     flexDirection: "row",
@@ -574,7 +582,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingRight: 20,
     fontSize: 20,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     flex: 1
   },
   day: {

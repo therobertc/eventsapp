@@ -28,7 +28,7 @@ const Messages = ({ item, totalmembers, lastmessage, uri }) => {
           alignItems: "center"
         }}
       >
-        <Image
+        {/* <Image
           source={{ uri: uri }}
           style={{
             //flex: 1,
@@ -45,8 +45,8 @@ const Messages = ({ item, totalmembers, lastmessage, uri }) => {
           source={{
             uri: "https://i.stack.imgur.com/l60Hf.png"
           }}
-        />
-        <View style={{ marginLeft: 5 }}>
+        /> */}
+        <View>
           <Text style={styles.username}>#{item}</Text>
           {/* <Text style={styles.preview}>{totalmembers} members </Text> */}
           <Text style={styles.preview}>
@@ -101,35 +101,37 @@ const styles = StyleSheet.create({
   username: {
     color: "#FFF",
     fontFamily: "Montserrat_700Bold",
-    fontSize: 15,
-    paddingLeft: 10
+    fontSize: 15
+    //paddingLeft: 10
   },
   preview: {
     //color: "#657786",
     color: "#7c818c",
     //fontFamily: "Montserrat_300SemiBold",
     fontSize: 15,
-    paddingLeft: 10,
+    //paddingLeft: 10,
     marginRight: 10
   },
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 2,
-    borderBottomColor: "#7c818c",
-    borderBottomWidth: 1,
+    borderBottomColor: "#60646C",
+    borderBottomWidth: 0.5,
+
     //shadowColor: "#B9BABD",
     //marginHorizontal: 10,
     shadowOpacity: 0.2,
     //marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
-    //backgroundColor: "#35383F"
+    //backgroundColor: "#282c34"
     //backgroundColor: "#4b5162",
-    //backgroundColor: "#35383F",
+    //backgroundColor: "#282c34",
     //borderRadius: 20,
-    paddingHorizontal: 20,
+    paddingRight: 20,
     paddingVertical: 5,
     flexDirection: "row",
+    marginLeft: 10,
     //paddingHorizontal: 40,
     alignItems: "center",
     //marginTop: 15,

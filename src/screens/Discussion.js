@@ -172,7 +172,7 @@ function Discussion({ route, navigation }) {
       .collection("messages")
       .doc();
     for (let i = 0; i < newMessage.length; i++) {
-      newMessage[i]['user']['_id'] = 2;
+      newMessage[i]["user"]["_id"] = 2;
       messageRef
         .set({
           _id: newMessage[i]._id,
@@ -186,22 +186,21 @@ function Discussion({ route, navigation }) {
           }
         })
         .then(function(docRef) {
-
           setMessages(GiftedChat.append(messages, newMessage));
           let message = newMessage[i].text;
           lastMessage(message);
           let symbol = /\$(\w+)/.exec(message);
 
-          if (
-            symbol !== null &&
-            symbol !== "null" &&
-            symbol.length > 0 &&
-            isNaN(symbol[1])
-          ) {
-            navigation.push("StockDetails", {
-              symbol: symbol[1].trim().toUpperCase()
-            });
-          }
+          // if (
+          //   symbol !== null &&
+          //   symbol !== "null" &&
+          //   symbol.length > 0 &&
+          //   isNaN(symbol[1])
+          // ) {
+          //   navigation.push("StockDetails", {
+          //     symbol: symbol[1].trim().toUpperCase()
+          //   });
+          // }
         })
         .catch(function(error) {
           Alert.alert(error.message);
@@ -272,8 +271,8 @@ function Discussion({ route, navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "#35383F",
-          borderTopWidth: 0,
+          backgroundColor: "#282c34",
+          borderTopWidth: null,
           marginBottom: -10
         }}
       />
@@ -353,13 +352,14 @@ function Discussion({ route, navigation }) {
       <GiftedChat
         isAnimated={true}
         renderAccessory={CustomView}
-        renderSystemMessage={renderSystemMessage}
+        //renderSystemMessage={renderSystemMessage}
         //onPressActionButton={() => _navigateToStockDetails}
         //showUserAvatar={true}
         //showAvatarForEveryMessage={true}
+
         textInputProps={{
           style: {
-            backgroundColor: "#303135",
+            backgroundColor: "#60646C",
             borderRadius: 30,
             fontSize: 20,
             color: "#FFF",
@@ -373,9 +373,10 @@ function Discussion({ route, navigation }) {
             paddingBottom: 10
           }
         }}
+        placeholderTextColor="#7c818c"
         scrollToBottom
         inverted={true}
-        timeTextStyle={{ left: { color: "#FFF" }, right: { color: "#FFF" } }}
+        timeTextStyle={{ left: { color: "#7c818c" }, right: { color: "#FFF" } }}
         //renderTime={renderTime}
         renderAvatar={null}
         messages={messages}
@@ -386,7 +387,7 @@ function Discussion({ route, navigation }) {
         //renderUsernameOnMessage={true}
         renderInputToolbar={props => customtInputToolbar(props)}
         multiline
-        placeholder={"Enter a message..."}
+        placeholder={"Message (Tag a stock with $)"}
         onSend={newMessages => onSend(newMessages)}
         user={{
           _id: 1,
@@ -448,9 +449,9 @@ const styles = StyleSheet.create({
   },
   flatList: {
     //position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
+    left: null,
+    right: null,
+    top: null,
     height: "100%"
   },
   sendContainer: {
@@ -462,7 +463,7 @@ const styles = StyleSheet.create({
   },
 
   main: {
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
@@ -481,11 +482,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     flex: 1,
     paddingVertical: 5,
-    position: "relative"
+    position: "relative",
+    paddingLeft: 10
   },
 
   // textInput: {
-  //   backgroundColor: "#35383F",
+  //   backgroundColor: "#282c34",
   //   borderRadius: 30,
   //   marginRight: 20,
   //   marginLeft: 20,
@@ -501,9 +503,9 @@ const styles = StyleSheet.create({
   },
   container: {
     //position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
+    left: null,
+    right: null,
+    top: null,
     height: "100%"
   },
   header: {

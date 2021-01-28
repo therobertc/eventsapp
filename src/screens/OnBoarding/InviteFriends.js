@@ -25,7 +25,7 @@ const onShare = async () => {
   try {
     const result = await Share.share({
       message:
-        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
+        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://testflight.apple.com/join/EbkJK1RL"
     });
     if (result.action === Share.sharedAction) {
       if (result.activityType) {
@@ -63,7 +63,7 @@ export default function App({ ...props }) {
       <View>
         <TouchableOpacity>
           <Text style={styles.username}>
-            https://share.stockchatapp.com/invite=usernamefdhh5
+            https://testflight.apple.com/join/EbkJK1RL
           </Text>
         </TouchableOpacity>
       </View>
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     width: Dimensions.get("screen").width
   },
   Button: {
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     //backgroundColor: "red",
     //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",

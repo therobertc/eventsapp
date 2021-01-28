@@ -13,41 +13,39 @@ import { Icon, Header, Left, Right, Body, Button } from "native-base";
 import { Feather } from "@expo/vector-icons";
 import InsiderTrades from "../components/InsiderTrades";
 import Notifications from "../components/Notifications";
+import DropDownPicker from "react-native-dropdown-picker";
 
 class Activity extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      country: "Stock Alerts"
+    };
   }
 
-  render() {
+  render(props) {
     return (
       <View style={styles.container}>
-        <Header
+        <View
           style={{
-            backgroundColor: "#35383F",
-            borderBottomWidth: 0.2,
-            borderBottomColor: "#35383F"
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginHorizontal: 10,
+            zIndex: 999
           }}
         >
-          <Left>
-            <Text style={styles.header}>Activity</Text>
-          </Left>
-          <Body style={{ width: "100%" }}>
-            {/* <Text style={styles.header}>Activity</Text> */}
-          </Body>
-          <Right>
-            <Feather
-              style={{
-                color: "#FFF",
-                fontWeight: "bold",
-                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                fontSize: 30
-              }}
-              name="settings"
-              onPress={() => this.props.navigation.navigate("Settings")}
-            />
-          </Right>
-        </Header>
+          <Text style={styles.header}>Activity</Text>
+          <Feather
+            style={{
+              color: "#FFF",
+              fontWeight: "bold",
+              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+              fontSize: 30
+            }}
+            name="settings"
+            //onPress={onShare}
+          />
+        </View>
 
         <View style={styles.feed}>
           {/* <Text style={styles.text}>No new notifications</Text> */}
@@ -57,7 +55,7 @@ class Activity extends React.Component {
           >
             <Notifications {...this.props} />
           </ScrollView>
-          {/*<InsiderTrades {...props} />*/}
+          {/* <InsiderTrades {...props} /> */}
         </View>
       </View>
     );
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   seperator: {
-    borderColor: "lightgrey",
+    borderColor: "#303135",
     borderWidth: 0.5,
     marginLeft: 30,
     marginVertical: 10,
@@ -102,12 +100,12 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34",
     // left: 0,
     // right: 0,
     // top: 0,
     //paddingHorizontal: 20,
-    //paddingTop: 60
+    paddingTop: 60
   },
   headerContainer: {
     flexDirection: "row",
@@ -148,7 +146,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#35383F",
+    // backgroundColor: "#282c34",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },

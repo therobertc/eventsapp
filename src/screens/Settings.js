@@ -31,7 +31,7 @@ const Settings = props => {
           <View>
             <View
               style={{
-                backgroundColor: "#35383F",
+                backgroundColor: "#282c34",
 
                 flexDirection: "column",
                 width: "100%",
@@ -60,7 +60,7 @@ const Settings = props => {
                   paddingHorizontal: 20
                 }}
               >
-                <Text style={styles.switchtitle}>Private</Text>
+                <Text style={styles.switchtitle}>Go Public</Text>
                 <ToggleSwitch></ToggleSwitch>
               </View>
 
@@ -188,7 +188,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#35383F",
+    // backgroundColor: "#282c34",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },

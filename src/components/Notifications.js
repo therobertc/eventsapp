@@ -86,7 +86,7 @@ class Notifications extends Component {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "#35383F"
+            backgroundColor: "#282c34"
           }}
         >
           <ActivityIndicator />
@@ -102,7 +102,7 @@ export default Notifications;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
   },
   text: {
     marginHorizontal: 8,
@@ -144,11 +144,11 @@ const styles = StyleSheet.create({
     //backgroundColor: "#F5F8FA",
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowColor: "#4b5162",
-    shadowOpacity: 2.0,
+    //shadowOpacity: 2.0,
     //backgroundColor: "#4b5162",
-    borderRadius: 10,
+    //borderRadius: 10,
     padding: 10,
-    borderBottomColor: "#7c818c",
+    borderBottomColor: "#60646C",
     borderBottomWidth: 1,
     // height: 500,
     marginTop: 10,

@@ -32,7 +32,7 @@ const onShare = async () => {
   try {
     const result = await Share.share({
       message:
-        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
+        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://testflight.apple.com/join/EbkJK1RL"
     });
     if (result.action === Share.sharedAction) {
       if (result.activityType) {
@@ -53,7 +53,7 @@ const Bank = props => {
     <View style={styles.container}>
       <Header
         style={{
-          backgroundColor: "#35383F",
+          backgroundColor: "#282c34",
           borderBottomWidth: 0,
           flexDirection: "row",
           //marginTop: 25,
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#35383F",
+    // backgroundColor: "#282c34",
     // marginHorizontal: -20,
     //paddingHorizontal: 20
   },
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 5,
     marginHorizontal: 20,
     marginTop: -10,

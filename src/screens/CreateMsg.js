@@ -63,7 +63,7 @@ export default function CreateMsg({ navigation }) {
         flex: 1,
         width: "100%",
         padding: 18,
-        backgroundColor: "#35383F"
+        backgroundColor: "#282c34"
       }}
     >
       <View
@@ -71,7 +71,7 @@ export default function CreateMsg({ navigation }) {
           flexDirection: "row",
           height: 80,
           //width: "100%",
-          //backgroundColor: "#35383F",
+          //backgroundColor: "#282c34",
           alignItems: "center",
           //justifyContent: "space-around",
           paddingTop: 30,

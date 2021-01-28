@@ -29,7 +29,7 @@ const Profile = props => {
             marginRight: 20,
             flexDirection: "row",
             alignItems: "center",
-            backgroundColor: "#35383F",
+            backgroundColor: "#282c34",
             borderRadius: 20,
             paddingVertical: 5,
             borderWidth: 1,
@@ -97,7 +97,7 @@ const Profile = props => {
               <Text style={styles.text}>
                 Account values will always be private.
               </Text>
-              <Text style={styles.link}>Why link an account?</Text>
+              {/* <Text style={styles.link}>Why link an account?</Text> */}
             </View>
           </View>
           {/* <TouchableOpacity
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     // left: 0,
     // right: 0,
     // top: 0,
