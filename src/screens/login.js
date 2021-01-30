@@ -17,8 +17,8 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import firebase from "../database/firebase";
 
 export default function Login({ navigation }) {
-  const [email, setEmail] = useState();
-  const [password, setPass] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPass] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState();
 
@@ -31,8 +31,8 @@ export default function Login({ navigation }) {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(res => {
-          console.log(res);
-          console.log("User logged-in successfully!");
+          // console.log(res);
+          // console.log("User logged-in successfully!");
           setLoading(false);
           setEmail("");
           setPass("");

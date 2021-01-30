@@ -29,7 +29,7 @@ const StockChat = ({ route, navigation }) => {
   for (var i = 5; i < Data.length; i++) {
     txt.push(<Sent key={Data[i].id} message={Data[i].message} />);
   }
-  console.log(Data);
+  // console.log(Data);
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>

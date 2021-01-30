@@ -4,7 +4,7 @@ import {
   Text,
   Image,
   StyleSheet,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
@@ -28,7 +28,7 @@ const Discussion = ({ route, navigation }) => {
   for (var i = 5; i < Data.length; i++) {
     txt.push(<Sent key={Data[i].id} message={Data[i].message} />);
   }
-  console.log(Data);
+  console.log("route.params",route.params);
 
   return (
     <LinearGradient colors={["#657786", "#FFF"]} style={styles.container}>
@@ -38,8 +38,12 @@ const Discussion = ({ route, navigation }) => {
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Icon name="left" color="#000119" size={24} />
             </TouchableOpacity>
-            <Text style={styles.username}>{itemName}</Text>
-            <Image source={{ uri: itemPic }} style={styles.avatar} />
+            {/* <TouchableOpacity onPress={() => navigation.goBack()}> */}
+              <Text onPress={()=> navigation.push("Profile")} style={styles.username}>{itemName}</Text>
+            {/* </TouchableOpacity> */}
+            {/* <TouchableOpacity onPress={() => navigation.goBack()}> */}
+              <Image source={{ uri: itemPic }} style={styles.avatar} />
+            {/* </TouchableOpacity> */}
           </View>
           <ScrollView showsVerticalScrollIndicator={false}>
             <LastWatch checkedOn="Yesterday" />
@@ -54,7 +58,7 @@ const Discussion = ({ route, navigation }) => {
           </ScrollView>
           <Input
             inputMessage={inputMessage}
-            setMessage={inputMessage => setMessage(inputMessage)}
+            setMessage={(inputMessage) => setMessage(inputMessage)}
             onSendPress={send}
           />
         </View>
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: "100%"
+    height: "100%",
   },
   main: {
     backgroundColor: "#FFF",
@@ -78,22 +82,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderBottomLeftRadius: 35,
     borderBottomRightRadius: 35,
-    paddingTop: 40
+    paddingTop: 40,
   },
   headerContainer: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   username: {
     color: "#000119",
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
     flex: 1,
-    textAlign: "center"
+    textAlign: "center",
   },
   avatar: {
     width: 40,
     height: 40,
-    borderRadius: 20
-  }
+    borderRadius: 20,
+  },
 });

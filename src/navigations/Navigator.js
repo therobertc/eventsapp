@@ -22,6 +22,7 @@ import Notification from "../screens/OnBoarding/Notification";
 import Success from "../screens/OnBoarding/Success";
 import Login from "../screens/login";
 import SignUp from "../screens/signup";
+import Editprofile from "../screens/Editprofile";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -129,6 +130,8 @@ const ChatStackNavigator = () => {
       <Stack.Screen name="AddGroup" component={AddGroup} />
       <Stack.Screen name="StockChat" component={StockChat} />
       <Stack.Screen name="StockProfile" component={StockProfile} />
+      <Stack.Screen name="Editprofile" component={Editprofile} />
+      <Stack.Screen name="Profile" component={Profile} />
     </Stack.Navigator>
   );
 };

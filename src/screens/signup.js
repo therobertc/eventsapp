@@ -7,7 +7,7 @@ import {
   TextInput,
   Button,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 import firebase from "../database/firebase";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
@@ -27,19 +27,42 @@ export default function Signup({ navigation }) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(res => {
+        .then((res) => {
           res.user.updateProfile({
-            displayName: displayName
+            displayName: displayName,
           });
           console.log("User registered successfully!");
           setLoading(false);
           setdisplay("");
           setEmail("");
           setPass("");
-          navigation.navigate("Login");
+          addIntoDb(firebase.default.auth().currentUser.uid);
+          // navigation.navigate("Login");
         })
-        .catch(error => this.setState({ errorMessage: error.message }));
+        .catch(
+          (error) => {
+            console.log("error", error);
+          }
+          // this.setState({ errorMessage: error.message })
+        );
     }
+  };
+
+  const addIntoDb = (id) => {
+    firebase.default
+      .firestore()
+      .collection("users")
+      .doc()
+      .set({
+        Name: displayName,
+        email: email,
+        id: id,
+        phoneNo: "",
+        followers: [],
+      })
+      .then(function () {
+        navigation.navigate("Login");
+      });
   };
 
   return (
@@ -58,19 +81,19 @@ export default function Signup({ navigation }) {
           style={styles.inputStyle}
           placeholder="Name"
           value={displayName}
-          onChangeText={val => setdisplay(val)}
+          onChangeText={(val) => setdisplay(val)}
         />
         <TextInput
           style={styles.inputStyle}
           placeholder="Email"
           value={email}
-          onChangeText={val => setEmail(val)}
+          onChangeText={(val) => setEmail(val)}
         />
         <TextInput
           style={styles.inputStyle}
           placeholder="Password"
           value={password}
-          onChangeText={val => setPass(val)}
+          onChangeText={(val) => setPass(val)}
           maxLength={15}
           secureTextEntry={true}
         />
@@ -103,12 +126,12 @@ const styles = StyleSheet.create({
     marginEnd: 20,
     alignSelf: "center",
     borderColor: "#ccc",
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   loginText: {
     color: "black",
     marginTop: 70,
-    textAlign: "center"
+    textAlign: "center",
   },
   preloader: {
     left: 0,
@@ -118,11 +141,11 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
   },
   container: {
     flex: 1,
-    backgroundColor: "#FFF"
+    backgroundColor: "#FFF",
   },
   tcontainer: {
     //backgroundColor: "#000",
@@ -130,7 +153,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 50,
     borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30
+    borderBottomRightRadius: 30,
   },
   bcontainer: {
     flex: 8,
@@ -138,13 +161,13 @@ const styles = StyleSheet.create({
     padding: 30,
     width: "100%",
     justifyContent: "center",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   tHeading: {
     color: "black",
     fontWeight: "bold",
     fontSize: 25,
-    paddingLeft: "25%"
+    paddingLeft: "25%",
   },
   toptcontainer: {
     //backgroundColor: "#3498db",
@@ -153,12 +176,12 @@ const styles = StyleSheet.create({
   topbcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   bottombcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   menuContainer: {
     justifyContent: "space-around",
@@ -167,7 +190,7 @@ const styles = StyleSheet.create({
     padding: 30,
     width: "100%",
     backgroundColor: "#fff",
-    borderRadius: 26
+    borderRadius: 26,
   },
   activemenu: {
     justifyContent: "center",
@@ -175,17 +198,17 @@ const styles = StyleSheet.create({
     height: "80%",
     width: "45%",
     backgroundColor: "#17C37B",
-    borderRadius: 10
+    borderRadius: 10,
   },
   activemenuText: {
     fontSize: 20,
     color: "#000000",
-    marginTop: 5
+    marginTop: 5,
   },
   aText: {
     color: "#FFFFFF",
     fontSize: 20,
-    marginTop: 5
+    marginTop: 5,
   },
 
   inputs: {
@@ -195,7 +218,7 @@ const styles = StyleSheet.create({
     width: "90%",
     height: "10%",
     borderWidth: 1,
-    borderColor: "grey"
+    borderColor: "grey",
   },
   btn: {
     borderRadius: 16,
@@ -204,6 +227,6 @@ const styles = StyleSheet.create({
     height: 60,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });

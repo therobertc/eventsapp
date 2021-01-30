@@ -41,7 +41,7 @@ class TrendingStocks extends Component {
     })
       .then(response => response.json())
       .then(responseJson => {
-        console.log("responseJson", responseJson);
+        // console.log("responseJson", responseJson);
         this.setState(
           {
             data: responseJson.data,
@@ -129,7 +129,7 @@ class TrendingStocks extends Component {
   };
 
   callBack = () => {
-    console.log("hello");
+    // console.log("hello");
   };
 
   render() {

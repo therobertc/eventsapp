@@ -48,7 +48,7 @@ const Chat = props => {
     }).start();
   }, []);
 
-  console.log(data.login);
+  // console.log(data.login);
 
   return (
     <LinearGradient colors={["#657786", "#FFF"]} style={styles.gradient}>
@@ -162,11 +162,12 @@ const Chat = props => {
                   uri={item.avatar_url}
                   count={Math.floor(Math.random() * 3)}
                   onPress={() => {
-                    props.navigation.navigate("Discussion", {
-                      itemId: item.id,
-                      itemName: item.login,
-                      itemPic: item.avatar_url
-                    });
+                    console.log("item",item)
+                    // props.navigation.navigate("Discussion", {
+                    //   itemId: item.id,
+                    //   itemName: item.login,
+                    //   itemPic: item.avatar_url
+                    // });
                   }}
                 />
               ))}
