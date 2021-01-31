@@ -5,21 +5,17 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
-  AsyncStorage
+  ActivityIndicator
 } from "react-native";
-
-import * as Linking from "expo-linking";
 
 class TrendingStocks extends Component {
   constructor(props) {
     super(props);
-    // Analytics.ANALYTICS.track("Hompage", { Visited: "Currently on home page" });
     this.state = {
       data: [],
       isLoading: true,
       final_data: [],
-      isSubscribed: false
+      isSubscribed: true
     };
   }
 
@@ -31,17 +27,12 @@ class TrendingStocks extends Component {
     this.getTrandingData();
   }
 
-  handleRefresh = () => {
-    this.loadPage();
-  };
-
   async getTrandingData() {
     return fetch("https://sharestock.io/api/trendingStock", {
       method: "GET"
     })
       .then(response => response.json())
       .then(responseJson => {
-        // console.log("responseJson", responseJson);
         this.setState(
           {
             data: responseJson.data,
@@ -52,84 +43,71 @@ class TrendingStocks extends Component {
       })
       .catch(error => {
         this.setState({ isLoading: false });
-        console.error(error);
+        console.log(error);
       });
   }
 
-  shuffleData() {
-    this.setState({
-      data: this.state.data.sort(() => Math.random() - 0.5)
-    });
-  }
-
-  TrendingComponent = (props, onPress) => {
+  TrendingComponent = () => {
+    // CheckGroupExistsOrNot("SQ").then((snapshot))
     if (this.state.data.length) {
       return this.state.data.map((service, index) => (
+        // <TouchableOpacity
+        //   key={index}
+        //   onPress={() =>
+        //     this.props.navigation.push("StockDetails", {
+        //       symbol: service.symbol
+        //     })
+        //   }
+        //   style={{ marginLeft: 10, borderRadius: 35 }}
+        // >
         <TouchableOpacity
           key={index}
-          onPress={onPress}
-          // onPress={() =>
-          //   props.navigation.navigate("StockChat", {
-          //     // symbol: service.symbol
-          //   })
-          // }
-          style={{ marginLeft: 5, borderRadius: 35 }}
+          onPress={() =>
+            this.props.navigation.push("StockDetails", {
+              symbol: service.symbol
+            })
+          }
+          style={styles.card}
         >
           <View
             style={{
-              backgroundColor: "#fff",
-              justifyContent: "center",
+              height: 80,
+              width: 100,
+
+              justifyContent: "space-between",
               alignItems: "center",
-              borderRadius: 30,
-              //   shadowOffset: { width: 0.05, height: 0.05 },
-              //   shadowColor: "lightgrey",
-              //   shadowOpacity: 0.05,
-              borderWidth: 2.5,
-              borderColor: "#E1E8ED"
+              paddingVertical: 20
             }}
           >
-            <View
+            <Text
               style={{
-                height: 100,
-                width: 100,
-
-                justifyContent: "space-between",
-                alignItems: "center",
-                paddingVertical: 20
+                fontWeight: "600",
+                fontSize: 18,
+                //textAlign: "left"
+                color: "#FFF"
               }}
             >
-              <Text
-                style={{
-                  fontWeight: "600",
-                  fontSize: 18
-                  //textAlign: "left"
-                }}
-              >
-                {service.symbol}
-              </Text>
+              {service.symbol}
+            </Text>
 
-              <Text
-                style={{
-                  fontWeight: "500",
-                  fontSize: 14,
-                  textAlign: "center",
-                  color: parseFloat(service.changePercent) < 0 ? "red" : "green"
-                }}
-              >
-                {parseFloat(service.changePercent) < 0
-                  ? (parseFloat(service.changePercent) * 100).toFixed(2)
-                  : "+" + (parseFloat(service.changePercent) * 100).toFixed(2)}
-                %
-              </Text>
-            </View>
+            <Text
+              style={{
+                fontWeight: "500",
+                fontSize: 14,
+                textAlign: "center",
+                color:
+                  parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00"
+              }}
+            >
+              {parseFloat(service.changePercent) < 0
+                ? (parseFloat(service.changePercent) * 100).toFixed(2)
+                : "+" + (parseFloat(service.changePercent) * 100).toFixed(2)}
+              %
+            </Text>
           </View>
         </TouchableOpacity>
       ));
     }
-  };
-
-  callBack = () => {
-    // console.log("hello");
   };
 
   render() {
@@ -149,21 +127,14 @@ class TrendingStocks extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{ flex: 1 }}>
-            <ScrollView
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              contentContainerStyle={{
-                alignItems: "center",
-                // paddingStart: 5,
-                // paddingEnd: 5,
-                paddingTop: 10
-              }}
-            >
-              {this.TrendingComponent()}
-            </ScrollView>
-          </View>
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            alignItems: "center"
+          }}
+        >
+          {this.TrendingComponent()}
         </ScrollView>
       </View>
     );
@@ -174,77 +145,20 @@ export default TrendingStocks;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    paddingVertical: 10
+    //marginLeft: 20
   },
   text: {
     marginHorizontal: 8,
     marginVertical: 10
   },
-  deleteScreener: {
-    color: "#F32013",
-    fontWeight: "800",
-    textAlign: "center",
-    paddingTop: 20
-  },
+
   bottom: {
     flex: 1,
-    justifyContent: "flex-end",
-    marginBottom: 36
+    justifyContent: "flex-end"
+    //marginBottom: 36
   },
-  searchbar: {
-    marginTop: 0
-  },
-  inputContainer: {
-    borderBottomColor: "#F5FCFF",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 30,
-    borderBottomWidth: 1,
-    height: 45,
-    flexDirection: "row",
-    alignItems: "center",
-    flex: 1,
-    margin: 0,
-    marginTop: 0
-  },
-  formContent: {
-    flexDirection: "row",
-    //marginTop:30,
-    backgroundColor: "#147efb"
-  },
-  icon: {
-    width: 30,
-    height: 30
-  },
-  iconBtnSearch: {
-    alignSelf: "center"
-  },
-  inputs: {
-    height: 50,
-    marginLeft: 10,
-    borderBottomColor: "#FFFFFF",
-    //flex: 1,
-    width: 300,
-    backgroundColor: "white",
-    marginBottom: 50
-  },
-  inputIcon: {
-    marginLeft: 15,
-    justifyContent: "center"
-  },
-  saveButton: {
-    height: 45,
-    justifyContent: "center",
-    alignItems: "center",
-    //margin:10,
-    width: 50,
-    alignSelf: "flex-end",
-    backgroundColor: "#147efb",
-    borderRadius: 100,
-    marginBottom: 10
-  },
-  saveButtonText: {
-    color: "white"
-  },
+
   notificationList: {
     marginTop: 20,
     padding: 10
@@ -253,7 +167,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#35383F",
     flexDirection: "row",
     borderRadius: 10
   },
@@ -265,6 +179,29 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#3498db",
     marginLeft: 10
+  },
+  card: {
+    shadowOffset: { width: 0.5, height: 0.5 },
+    shadowRadius: 2,
+    //shadowColor: "#657786",
+    marginLeft: 10,
+    shadowOpacity: 0.2,
+    marginVertical: 5,
+    elevation: 1,
+    //backgroundColor: "#e8eef1",
+    //backgroundColor: "#35383F"
+    backgroundColor: "#35383F",
+    borderRadius: 20,
+    //paddingHorizontal: 20,
+    paddingVertical: 10,
+    flexDirection: "row",
+    //paddingHorizontal: 40,
+    alignItems: "center",
+    //marginTop: 15,
+    //marginBottom: 20,
+    justifyContent: "space-between",
+    height: 80,
+    start: 10
   },
   datacard: {
     //backgroundColor: "#147efb",
@@ -279,7 +216,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     justifyContent: "center"
-    // color: 'green'
+    // color: '#33CC00'
   },
 
   stocktextred: {
@@ -306,7 +243,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 2.0,
     margin: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#fff",
+    backgroundColor: "#35383F",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20
@@ -318,7 +255,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#fff",
+    backgroundColor: "#35383F",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20
@@ -360,7 +297,7 @@ const styles = StyleSheet.create({
   },
   seperator: {
     marginVertical: 10,
-    borderColor: "#E1E8ED",
+    borderColor: "#F5F8FA",
     borderWidth: 0.5
   },
   textview: {

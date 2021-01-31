@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     nameStyle:{
         marginTop:10,
         fontSize:11,
-        color:'#fff',
+        color:'#F5F8FA',
         fontFamily:'Montserrat_700Bold'
     }
 })

@@ -1,23 +1,23 @@
 {
   "expo": {
-    "name": "ChatApp",
-    "slug": "chatapp",
-    "version": "1.0.0",
+    "name": "StockChat",
+    "slug": "StockChat",
+    "version": "0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./assets/icon.png",
+      "bundleIdentifier": "com.tradechat.tradechatapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

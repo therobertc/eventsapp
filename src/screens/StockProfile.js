@@ -28,15 +28,15 @@ const StockProfile = ({ route, navigation }) => {
   for (var i = 5; i < Data.length; i++) {
     txt.push(<Sent key={Data[i].id} message={Data[i].message} />);
   }
-  // console.log(Data);
+  console.log(Data);
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-      <LinearGradient colors={["#657786", "#FFF"]} style={styles.container}>
+      <LinearGradient colors={["#657786", "#F5F8FA"]} style={styles.container}>
         <View style={styles.main}>
           <View style={styles.headerContainer}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon name="left" color="#000119" size={24} />
+              <Icon name="left" color="#FFF" size={24} />
             </TouchableOpacity>
             {/* <Text style={styles.username}>{itemName}</Text> */}
           </View>
@@ -110,7 +110,7 @@ const StockProfile = ({ route, navigation }) => {
                   borderRadius: 10,
                   marginTop: 10,
 
-                  backgroundColor: "black",
+                  backgroundColor: "#FFF",
                   margin: 20
                 }}
                 //onPress={() => this.props.navigation.navigate("ThankYou")}
@@ -119,7 +119,7 @@ const StockProfile = ({ route, navigation }) => {
                   style={{
                     flex: 2,
                     fontSize: 18,
-                    color: "white",
+                    color: "#F5F8FA",
                     fontWeight: "bold",
                     textAlign: "center"
                   }}
@@ -137,7 +137,7 @@ const StockProfile = ({ route, navigation }) => {
                   borderRadius: 10,
                   marginTop: 10,
 
-                  backgroundColor: "black",
+                  backgroundColor: "#FFF",
                   margin: 20
                 }}
                 // onPress={() => this.props.navigation.navigate("GroupFeed")}
@@ -147,7 +147,7 @@ const StockProfile = ({ route, navigation }) => {
                   style={{
                     flex: 2,
                     fontSize: 18,
-                    color: "white",
+                    color: "#F5F8FA",
                     fontWeight: "bold",
                     textAlign: "center"
                   }}
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   main: {
-    backgroundColor: "#FFF",
+    backgroundColor: "#35383F",
     height: "88%",
     paddingHorizontal: 20,
     borderBottomLeftRadius: 35,
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   username: {
-    color: "#000119",
+    color: "#FFF",
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
     flex: 1,
@@ -213,6 +213,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "black"
+    backgroundColor: "#FFF"
   }
 });

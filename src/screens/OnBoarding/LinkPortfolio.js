@@ -20,28 +20,30 @@ const DismissKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
-export default function App({ ...props }) {
+export default function App({ route, navigation }) {
+  const { username, phoneNo } = route.params;
   return (
     <View style={styles.getStarted}>
       <TouchableOpacity
         style={{ position: "absolute", top: 50, left: 20 }}
-        onPress={() => props.navigation.goBack()}
+        onPress={() => navigation.goBack()}
       >
-        <AntDesign style={styles.back} name="left" size={30} color="black" />
+        <AntDesign style={styles.back} name="left" size={30} color="#FFF" />
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/icondark.png")}
-          style={{ width: 80, height: 80 }}
+          source={require("../../../assets/logo-outline.png")}
+          style={{ width: 150, height: 150 }}
         />
       </View>
 
       <View>
-        <Text style={styles.Stockchat}> LINK PORTFOLIO</Text>
+        <Text style={styles.Stockchat}> CONNECT PORTFOLIO</Text>
       </View>
       <View>
         <Text style={styles.username}>
-          Usernames will be tagged in messages and shown inside your chats.
+          Connect your portfolio to get matched with investors that own the same
+          stocks as you.
         </Text>
       </View>
 
@@ -56,22 +58,36 @@ export default function App({ ...props }) {
         >
           <TouchableOpacity
             style={styles.Button}
-            onPress={() => props.navigation.push("Notification")}
+            onPress={() =>
+              navigation.navigate("SignUp", {
+                username: username,
+                phoneNo: phoneNo
+              })
+            }
           >
             <Text
               style={{
                 fontSize: 18,
                 textAlign: "center",
-                color: "white",
+                color: "#F5F8FA",
                 fontWeight: "600"
               }}
             >
-              Connect Brokerage
+              Link Brokerage
             </Text>
           </TouchableOpacity>
 
           <View>
-            <Text style={styles.username}>Skip</Text>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("SignUp", {
+                  username: username,
+                  phoneNo: phoneNo
+                })
+              }
+            >
+              <Text style={styles.username}>Skip</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </KeyboardAvoidingView>
@@ -84,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "white",
+    backgroundColor: "#35383F",
     width: Dimensions.get("screen").width
   },
   Button: {
@@ -94,13 +110,13 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   HaveAccount: {
-    color: "white",
+    color: "#F5F8FA",
     textAlign: "center",
     fontSize: 15
   },
   Stockchat: {
     marginTop: 50,
-    color: "black",
+    color: "#FFF",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
@@ -109,21 +125,21 @@ const styles = StyleSheet.create({
   },
   username: {
     marginTop: 10,
-    color: "black",
+    color: "#FFF",
     textAlign: "center",
     fontSize: 15,
     padding: 18
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "white",
+    backgroundColor: "#35383F",
     //backgroundColor: "red",
-    //borderBottomColor: "black",
+    //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
-    borderColor: "black",
+    borderColor: "#FFF",
     padding: 12,
     paddingLeft: 30,
-    color: "black",
+    color: "#FFF",
     height: 50,
     fontSize: 21,
     borderRadius: 30

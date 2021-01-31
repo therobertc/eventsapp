@@ -6,7 +6,6 @@ import Discussion from "../screens/Discussion";
 import StockChat from "../screens/StockChat";
 import StockProfile from "../screens/StockProfile";
 
-import Profile from "../screens/Profile";
 import Chat from "../screens/Chat";
 import Icon from "@expo/vector-icons/Ionicons";
 import Icon2 from "@expo/vector-icons/Entypo";
@@ -22,6 +21,7 @@ import Notification from "../screens/OnBoarding/Notification";
 import Success from "../screens/OnBoarding/Success";
 import Login from "../screens/login";
 import SignUp from "../screens/signup";
+import Profile from "../screens/Profile";
 import Editprofile from "../screens/Editprofile";
 
 const Tab = createBottomTabNavigator();
@@ -38,8 +38,8 @@ const BottomTabNavigator = () => {
           paddingTop: 15,
           backgroundColor: "#FFF",
           //elevation: 2
-          alignContent: "center"
-        }
+          alignContent: "center",
+        },
       }}
     >
       {/* <Tab.Screen
@@ -59,7 +59,7 @@ const BottomTabNavigator = () => {
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
             <Icon2 name="chat" color={color} size={30} />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -69,7 +69,7 @@ const BottomTabNavigator = () => {
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
             <Icon name="ios-person" color={color} size={30} />
-          )
+          ),
         }}
       />
     </Tab.Navigator>
@@ -77,7 +77,7 @@ const BottomTabNavigator = () => {
 };
 const Stack = createStackNavigator();
 const screenOptionStyle = {
-  headerShown: false
+  headerShown: false,
 };
 
 const ChatStackNavigator = () => {

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -6,97 +6,270 @@ import {
   Platform,
   StyleSheet,
   TextInput,
+  Dimensions,
   SafeAreaView,
+  TouchableOpacity,
   ScrollView,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TextInputComponent,
+  Alert
 } from "react-native";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
+import fire, { firestore } from "../../database/firebase";
+import { Input } from "react-native-elements";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import CustomTextField from "../../components/CustomTextField";
 
 export default function AddGroup(props) {
+  const [groupName, setGroupName] = useState();
+  const [errorState, setErrorState] = useState("");
+  const [isLoading, setisLoading] = useState(false);
+
+  function createGroupToFirebaseGroup() {
+    setisLoading(true);
+    const groupRef = firestore.collection("publicgroups").doc();
+    const userID = fire.auth().currentUser.uid;
+
+    groupRef
+      .set({
+        groupID: groupRef.id,
+        groupName: groupName,
+        userID: userID
+      })
+      .then(function(docRef) {
+        setisLoading(false);
+        console.log("Document Written with ID", groupRef.id);
+        addMemberOfChatInFirebase(groupRef.id, userID);
+      })
+      .catch(function(error) {
+        Alert.alert(error.message);
+        setisLoading(false);
+        console.log("error adding Doc", error);
+      });
+  }
+  function addMemberOfChatInFirebase(groupID, userID) {
+    const memberRefs = firestore
+      .collection("members")
+      .doc(groupID)
+      .collection("member")
+      .doc();
+    memberRefs
+      .set({
+        userID: userID
+      })
+      .then(function(docRef) {
+        props.navigation.goBack();
+      })
+      .catch(function(error) {
+        setisLoading(false);
+        console.error("Error adding Document", error);
+      });
+  }
+
+  function createPublicGroup() {
+    createGroupToFirebaseGroup();
+  }
+
+  function createPrivateGroup() {
+    if (groupName !== undefined && groupName !== "") {
+      var UserId = fire.auth().currentUser.uid;
+      firestore
+        .collection("users")
+        .doc(UserId)
+        .collection("Groups")
+        .doc(groupName)
+        .get()
+        .then(function(snapshot) {
+          if (snapshot.exists) {
+            Alert.alert("Group already exists with same name..");
+          } else {
+            props.navigation.push("AddMember", { groupName: groupName });
+          }
+        });
+    } else {
+      Alert.alert("Enter a group name");
+    }
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS == "ios" ? "padding" : "height"}
-        style={styles.container}
+    <View style={styles.getStarted}>
+      <TouchableOpacity
+        style={{ position: "absolute", top: 50, left: 20 }}
+        onPress={() => props.navigation.goBack()}
       >
-        <View style={styles.tcontainer}>
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <View>
-              <Ionicons name="ios-arrow-back" size={30} color="black" />
+        <AntDesign style={styles.back} name="left" size={30} color="#FFF" />
+      </TouchableOpacity>
+      <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
+        <Image
+          source={require("../../../assets/logo-outline.png")}
+          style={{ width: 150, height: 150 }}
+        />
+      </View>
+      <View>
+        <Text style={styles.Stockchat}> START A GROUP</Text>
+      </View>
+
+      <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
+        <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
+          <Input
+            style={styles.Input}
+            placeholderTextColor="lightgrey"
+            placeholder="Enter Group Name"
+            value={groupName}
+            onChangeText={val => setGroupName(val)}
+          />
+        </View>
+
+        <View
+          style={{
+            paddingHorizontal: 10,
+            top: 50,
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          <TouchableOpacity
+            style={styles.Button}
+            onPress={() => createPublicGroup()}
+            isLoading={isLoading}
+          >
+            <Text
+              style={{
+                fontSize: 18,
+                textAlign: "center",
+                color: "#F5F8FA",
+                fontWeight: "600"
+              }}
+            >
+              Public Group
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.lockedButton}
+            // onPress={() => createPrivateGroup()}
+            isLoading={isLoading}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center"
+              }}
+            >
+              <Feather name="lock" size={20} color="lightgrey" />
+              <Text
+                style={{
+                  fontSize: 18,
+                  textAlign: "center",
+                  color: "lightgrey",
+                  fontWeight: "600",
+                  paddingLeft: 20
+                }}
+              >
+                Private Group
+              </Text>
             </View>
           </TouchableOpacity>
-
-          <Text style={styles.tHeading}>Add Groups</Text>
-          <TouchableOpacity
-            onPress={() => props.navigation.goBack()}
-          ></TouchableOpacity>
-        </View>
-        <View style={styles.bcontainer}>
-          <View style={styles.menuContainer}>
-            <Text style={styles.activemenuText}>Create Group</Text>
-            <Image
-              style={{ height: 90, width: 89 }}
-              source={{
-                uri:
-                  "https://static.vecteezy.com/system/resources/thumbnails/001/191/814/small/circle-abstract.png"
-              }}
-            />
-            <TextInput
-              placeholder="Enter Group Name"
-              placeholderTextColor="#666666"
-              style={styles.inputs}
-              onChangeText={text => onChangeText(text)}
-            />
-            <TextInput
-              placeholder="Enter Hashtag"
-              placeholderTextColor="#666666"
-              style={styles.inputs}
-              onChangeText={text => onChangeText(text)}
-            />
-            <TextInput
-              style={{ height: 4 }}
-              placeholder="Enter Group Description"
-              placeholderTextColor="#666666"
-              style={styles.inputs}
-              onChangeText={text => onChangeText(text)}
-            />
-          </View>
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#FFF"
+    backgroundColor: "#35383F"
+  },
+  getStarted: {
+    flex: 1,
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    backgroundColor: "#35383F",
+    width: Dimensions.get("screen").width
+  },
+  Button: {
+    backgroundColor: "#147efb",
+    paddingVertical: 15,
+    borderRadius: 30,
+    width: "100%",
+    marginVertical: 20
+  },
+  lockedButton: {
+    backgroundColor: "grey",
+    paddingVertical: 15,
+    borderRadius: 30,
+    width: "100%",
+    marginVertical: 20
+  },
+  HaveAccount: {
+    color: "#F5F8FA",
+    textAlign: "center",
+    fontSize: 15
+  },
+  Stockchat: {
+    marginTop: 50,
+    color: "#FFF",
+    fontSize: 18,
+    //width: Dimensions.get("screen").width,
+    fontWeight: "bold",
+    textAlign: "center",
+    fontFamily: "Montserrat_700Bold"
+  },
+  username: {
+    marginTop: 10,
+    color: "#FFF",
+    textAlign: "center",
+    fontSize: 15,
+    padding: 18
+  },
+  Input: {
+    borderBottomWidth: 0,
+    backgroundColor: "#35383F",
+    //backgroundColor: "red",
+    //borderBottomColor: "#FFF",
+    //borderColor: "#3C4956",
+    borderColor: "#FFF",
+    padding: 12,
+    //paddingLeft: 30,
+    color: "#FFF",
+    height: 50,
+    fontSize: 21,
+    borderRadius: 30,
+    textAlign: "center"
   },
   tcontainer: {
-    backgroundColor: "white",
-    flex: 1,
+    //backgroundColor: "#FFF",
+    //flex: 1,
     flexDirection: "row",
-    padding: 0,
-    paddingLeft: 30,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30
+    padding: 50
+    // borderBottomLeftRadius: 30,
+    // borderBottomRightRadius: 30
   },
   bcontainer: {
-    flex: 8,
+    flex: 1,
     borderTopLeftRadius: 90,
     width: "100%",
     justifyContent: "center",
     flexDirection: "column"
   },
   tHeading: {
-    color: "black",
+    color: "#F5F8FA",
     fontWeight: "bold",
     fontSize: 20,
     paddingLeft: "30%"
+  },
+
+  inputStyle: {
+    width: "100%",
+    marginBottom: 15,
+    paddingBottom: 15,
+    alignSelf: "center",
+    borderColor: "#ccc",
+    borderBottomWidth: 1,
+    margin: 20
   },
   toptcontainer: {
     backgroundColor: "#3498db"
@@ -110,15 +283,15 @@ const styles = StyleSheet.create({
   bottombcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around"
+    justifyContent: "space-between"
   },
   menuContainer: {
-    justifyContent: "space-around",
+    //justifyContent: "space-around",
     alignItems: "center",
-    height: "100%",
-    padding: 30,
+    //height: "100%",
+    padding: 50,
     width: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "#35383F",
     borderRadius: 26
   },
   activemenu: {
@@ -130,12 +303,13 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   activemenuText: {
-    fontSize: 20,
-    color: "#000000",
-    marginTop: 5
+    fontSize: 30,
+    color: "#FFF000",
+    marginTop: 50,
+    marginBottom: 50
   },
   aText: {
-    color: "#FFFFFF",
+    color: "#F5F8FA",
     fontSize: 20,
     marginTop: 5
   },
@@ -148,5 +322,15 @@ const styles = StyleSheet.create({
     height: "10%",
     borderWidth: 1,
     borderColor: "grey"
+  },
+  btn: {
+    width: 300,
+    borderRadius: 16,
+    //borderTopRightRadius: 0,
+    backgroundColor: "#147efb",
+    height: 60,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20
   }
 });

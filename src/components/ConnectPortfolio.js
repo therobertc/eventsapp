@@ -71,7 +71,11 @@ class ConnectPortfolio extends Component {
 
               <View style={{ flexDirection: "row" }}>
                 <TouchableOpacity style={{ paddingLeft: 20 }}>
+<<<<<<< HEAD
                   <Text style={{ color: "green", fontWeight: "bold" }}>
+=======
+                  <Text style={{ color: "#33CC00", fontWeight: "bold" }}>
+>>>>>>> stockchat-launch
                     $TSLA{" "}
                   </Text>
                 </TouchableOpacity>
@@ -112,8 +116,13 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
+<<<<<<< HEAD
     //backgroundColor: "#F5F8FA"
     backgroundColor: "#fff",
+=======
+    //backgroundColor: "#35383F"
+    backgroundColor: "#35383F",
+>>>>>>> stockchat-launch
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 10

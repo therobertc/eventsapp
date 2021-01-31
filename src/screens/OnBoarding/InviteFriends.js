@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   Dimensions,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Share
 } from "react-native";
 import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
@@ -20,6 +21,26 @@ const DismissKeyboard = ({ children }) => (
   </TouchableWithoutFeedback>
 );
 
+const onShare = async () => {
+  try {
+    const result = await Share.share({
+      message:
+        "Let's talk about stocks, join my Stock Chat  https://stockchatapp.com"
+    });
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // shared with activity type of result.activityType
+      } else {
+        // shared
+      }
+    } else if (result.action === Share.dismissedAction) {
+      // dismissed
+    }
+  } catch (error) {
+    alert(error.message);
+  }
+};
+
 export default function App({ ...props }) {
   return (
     <View style={styles.getStarted}>
@@ -27,12 +48,12 @@ export default function App({ ...props }) {
         style={{ position: "absolute", top: 50, left: 20 }}
         onPress={() => props.navigation.goBack()}
       >
-        <AntDesign style={styles.back} name="left" size={30} color="black" />
+        <AntDesign style={styles.back} name="left" size={30} color="#FFF" />
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/icondark.png")}
-          style={{ width: 80, height: 80 }}
+          source={require("../../../assets/logo-outline.png")}
+          style={{ width: 150, height: 150 }}
         />
       </View>
 
@@ -40,46 +61,39 @@ export default function App({ ...props }) {
         <Text style={styles.Stockchat}> INVITE FRIENDS</Text>
       </View>
       <View>
-        <Text style={styles.username}>
-          Usernames will be tagged in messages and shown inside your chats.
-        </Text>
+        <TouchableOpacity>
+          <Text style={styles.username}>
+            https://share.stockchatapp.com/invite=usernamefdhh5
+          </Text>
+        </TouchableOpacity>
       </View>
 
-      <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
-        <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
-          <Input
-            //einputContainerStyle={{ borderBottomWidth: 0 }}
-            style={styles.Input}
-            placeholder="Username"
-            placeholderTextColor="lightgrey"
-          />
-        </View>
-
-        <View
-          style={{
-            paddingHorizontal: 10,
-            top: 50,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
+      <View
+        style={{
+          paddingHorizontal: 10,
+          top: 50,
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <TouchableOpacity
+          style={styles.Button}
+          onPress={onShare}
+          title="Share"
+          //onPress={() => props.navigation.push("Notification")}
         >
-          <TouchableOpacity
-            style={styles.Button}
-            onPress={() => props.navigation.push("Notification")}
+          <Text
+            style={{
+              fontSize: 18,
+              textAlign: "center",
+              color: "#F5F8FA",
+              fontWeight: "600"
+            }}
           >
-            <Text
-              style={{
-                fontSize: 18,
-                textAlign: "center",
-                color: "white",
-                fontWeight: "600"
-              }}
-            >
-              Continue
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
+            Share Link
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -89,7 +103,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "white",
+    backgroundColor: "#35383F",
     width: Dimensions.get("screen").width
   },
   Button: {
@@ -99,13 +113,13 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   HaveAccount: {
-    color: "white",
+    color: "#F5F8FA",
     textAlign: "center",
     fontSize: 15
   },
   Stockchat: {
     marginTop: 50,
-    color: "black",
+    color: "#FFF",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
@@ -114,21 +128,22 @@ const styles = StyleSheet.create({
   },
   username: {
     marginTop: 10,
-    color: "black",
+    color: "#FFF",
     textAlign: "center",
-    fontSize: 15,
-    padding: 18
+    fontSize: 20,
+    padding: 18,
+    fontWeight: "800"
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "white",
+    backgroundColor: "#35383F",
     //backgroundColor: "red",
-    //borderBottomColor: "black",
+    //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
-    borderColor: "black",
+    borderColor: "#FFF",
     padding: 12,
     paddingLeft: 30,
-    color: "black",
+    color: "#FFF",
     height: 50,
     fontSize: 21,
     borderRadius: 30

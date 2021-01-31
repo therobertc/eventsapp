@@ -1,5 +1,12 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import React, { useEffect } from "react";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  SnapshotViewIOS
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const randomTime = () => {
@@ -11,46 +18,66 @@ const randomTime = () => {
   return String(hFormat + hrs + ":" + mFormat + mins + " " + amPm);
 };
 
-const Messages = ({ username, uri, count, onPress }) => {
+const Messages = ({ item, totalmembers, lastmessage, uri }) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
-      {count > 0 ? (
-        <LinearGradient
-          colors={["#147efb", "#147efb"]}
-          style={styles.gradientStyle}
-        >
-          {/* <Text style={styles.count}>{count}</Text> */}
-        </LinearGradient>
-      ) : null}
-
-      <Image source={{ uri: uri }} style={styles.image} />
-      <View style={{ marginLeft: 10 }}>
-        <Text style={styles.username}>{username}</Text>
-        <Text style={styles.text}>Hello, How are you</Text>
+    <View style={styles.card}>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        {/* <Image
+          source={{ uri: uri }}
+          style={{
+            //flex: 1,
+            height: 40,
+            width: 40,
+            borderRadius: 20,
+            //borderWidth: 2,
+            marginBottom: 0,
+            marginRight: 5,
+            borderColor: "#147efb"
+            //alignSelf: "center",
+            //marginTop: 15
+          }}
+          source={{
+            uri: "https://i.stack.imgur.com/l60Hf.png"
+          }}
+        /> */}
+        <View style={{ marginLeft: 10 }}>
+          <Text style={styles.username}>#{item}</Text>
+          {/* <Text style={styles.preview}>{totalmembers} members </Text> */}
+          <Text style={styles.preview}>
+            {lastmessage > 10 ? `${lastmessage.slice(0, 40)}...` : lastmessage}
+          </Text>
+          {/* <Text style={styles.text}>{item.groupMembers}</Text> */}
+        </View>
       </View>
-      <Text style={styles.duration}>{randomTime()}</Text>
-    </TouchableOpacity>
+
+      {/* <View>
+        <Text style={styles.duration}>{randomTime()}</Text>
+      </View> */}
+    </View>
   );
 };
 export default Messages;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    paddingHorizontal: 20,
-    alignItems: "center",
-    marginTop: 30
+    paddingHorizontal: 10
   },
   gradientStyle: {
-    height: 15,
-    width: 15,
-    borderRadius: 7.5,
+    height: 20,
+    width: 20,
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
     marginRight: 20
   },
   count: {
-    color: "#fff",
+    color: "#F5F8FA",
     fontFamily: "Montserrat_700Bold"
   },
   image: {
@@ -59,20 +86,51 @@ const styles = StyleSheet.create({
     borderRadius: 30
   },
   text: {
-    color: "#b6b6b6",
+    color: "#FFF",
     fontFamily: "Montserrat_600SemiBold",
     fontSize: 11
   },
   duration: {
-    color: "#000119",
+    color: "#FFF",
     fontSize: 12,
-    flex: 1,
-    marginLeft: 280,
-    position: "absolute",
+    //flex: 1,
+
+    //position: "absolute",
     fontFamily: "Montserrat_600SemiBold"
   },
   username: {
-    color: "#000119",
-    fontFamily: "Montserrat_700Bold"
+    color: "#FFF",
+    fontFamily: "Montserrat_700Bold",
+    fontSize: 15,
+    paddingLeft: 10
+  },
+  preview: {
+    //color: "#657786",
+    color: "#7c818c",
+    //fontFamily: "Montserrat_300SemiBold",
+    fontSize: 15,
+    paddingLeft: 10
+  },
+  card: {
+    shadowOffset: { width: 0.5, height: 0.5 },
+    shadowRadius: 2,
+    //shadowColor: "#B9BABD",
+    marginHorizontal: 10,
+    shadowOpacity: 0.2,
+    marginVertical: 5,
+    elevation: 1,
+    //backgroundColor: "#e8eef1",
+    //backgroundColor: "#35383F"
+    backgroundColor: "#35383F",
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    flexDirection: "row",
+    //paddingHorizontal: 40,
+    alignItems: "center",
+    //marginTop: 15,
+    //marginBottom: 20,
+    justifyContent: "space-between",
+    height: 80
   }
 });

@@ -16,6 +16,8 @@ class _Profile extends Component {
     userDetails: {},
     userKey: "",
     user: "",
+    following: false,
+    blockedusers: [],
   };
 
   componentDidMount() {
@@ -24,28 +26,33 @@ class _Profile extends Component {
         {
           user: this.props.route.params.uid,
         },
-        () => this.fetchPosts()
+        () => this.fetchUsers()
       );
     } else {
       this.setState(
         {
           user: firebase.default.auth().currentUser.uid,
         },
-        () => this.fetchPosts()
+        () => this.fetchUsers()
       );
     }
   }
 
-  fetchPosts = async () => {
+  fetchUsers = async () => {
     const db = firebase.default.firestore();
     var users = db.collection("users");
     users
       .where("id", "==", this.state.user)
       .get()
       .then((s) => {
-        alert();
         s.docs.forEach((doc) => {
-          this.setState({ userDetails: doc.data(), userKey: doc.id });
+          console.log(doc.data().followers["YaNfxIeJSLRAZNSOPH39nnuaEIt2"]);
+          this.setState({
+            userDetails: doc.data(),
+            userKey: doc.id,
+            following: doc.data().followers,
+            blockedusers: doc.data().blockedusers,
+          });
         });
       })
       .catch((e) => {
@@ -54,7 +61,7 @@ class _Profile extends Component {
   };
 
   follow = async () => {
-    const uid = firebase.default.auth().currentUser.uid;
+    const uid = this.state.user;
     let udetails = this.state.userDetails;
     udetails.followers = [{ id: true }];
 
@@ -63,55 +70,80 @@ class _Profile extends Component {
       .collection("users")
       .doc(this.state.userKey)
       .update({
-        followers: firebase.firestore.FieldValue.arrayUnion({
-          [uid]: true,
-        }),
+        followers: firebase.firestore.FieldValue.arrayUnion(uid),
       })
 
-      .then((s) => console.log("s", s))
+      .then((s) => this.fetchUsers())
       .catch((e) => console.log("e", e));
-
-    // await firebase.default
-    //   .firestore()
-    //   .collection("users")
-    //   .doc()
-    //   //   .set(udetails)
-    //   .set({
-    // //     followers: firebase.firestore.FieldValue.arrayUnion({
-    // id: true,
-    // //     }),
-    //   })
-    //   .then((s) => {
-    //     console.log(s);
-    //   })
-    //   .catch((e) => console.log("e", e));
   };
 
-  fetchUserDetails = async () => {
-    try {
-      const userDetails = await this.props.firebase.getUserDetails();
-      // console.log('USER DETAILS ===========>>', userDetails)
-      this.setState({ userDetails });
-    } catch (error) {
-      console.log(error);
-    }
+  unFollow = async () => {
+    const uid = this.state.user;
+    let udetails = this.state.userDetails;
+    udetails.followers = [{ id: true }];
+
+    firebase.default
+      .firestore()
+      .collection("users")
+      .doc(this.state.userKey)
+      .update({
+        followers: firebase.firestore.FieldValue.arrayRemove(uid),
+      })
+
+      .then((s) => {
+        console.log(s);
+        this.fetchUsers();
+      })
+      .catch((e) => console.log("e", e));
   };
 
-  handleSignout = async () => {
-    try {
-      await this.props.firebase.signOut();
-      this.props.navigation.navigate("Auth");
-    } catch (error) {
-      console.log(error);
-    }
+  block = async () => {
+    const uid = this.state.user;
+
+    firebase.default
+      .firestore()
+      .collection("users")
+      .doc(this.state.userKey)
+      .update({
+        blockedusers: firebase.firestore.FieldValue.arrayUnion(uid),
+      })
+
+      .then((s) => this.fetchUsers())
+      .catch((e) => console.log("e", e));
   };
 
-  handleEditAvatarNavigation = () => {
-    this.props.navigation.navigate("EditAvatar");
+  unBlock = async () => {
+    const uid = this.state.user;
+    let udetails = this.state.userDetails;
+    udetails.followers = [{ id: true }];
+
+    firebase.default
+      .firestore()
+      .collection("users")
+      .doc(this.state.userKey)
+      .update({
+        blockedusers: firebase.firestore.FieldValue.arrayRemove(uid),
+      })
+
+      .then((s) => {
+        this.fetchUsers();
+      })
+      .catch((e) => console.log("e", e));
   };
 
   render() {
-    const { userKey, userDetails } = this.state;
+    const { userKey, userDetails, following, blockedusers, user } = this.state;
+    let isFollowing = false;
+    let isBlocked = false;
+
+    if (following && following.includes(user)) {
+      isFollowing = true;
+    }
+
+    if (blockedusers && blockedusers.includes(user)) {
+      isBlocked = true;
+    }
+
     return (
       <View
         style={{
@@ -156,57 +188,103 @@ class _Profile extends Component {
           {userDetails.id &&
           userDetails.id !== firebase.default.auth().currentUser.uid ? (
             <View>
-              <TouchableOpacity
-                style={{
-                  borderWidth: 1,
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  width: "90%",
-                  padding: 10,
-                  left: 10,
-                  borderColor: "silver",
-                  borderRadius: 3,
-                }}
-                onPress={() => this.follow()}
-              >
-                <Text
-                  style={{
-                    fontSize: 13,
-                    fontWeight: "500",
-                    textAlign: "center",
-                  }}
+              {/* {this.state.following ? ( */}
+              {!isFollowing ? (
+                <TouchableOpacity
+                  style={styles.follow}
+                  onPress={() => this.follow()}
                 >
-                  Follow
-                </Text>
-              </TouchableOpacity>
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      fontWeight: "bold",
+                      textAlign: "center",
+                    }}
+                  >
+                    Follow
+                  </Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.unfollow}
+                  onPress={() => this.unFollow()}
+                >
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      color: "white",
+                    }}
+                  >
+                    Following
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
           ) : null}
         </View>
-
-        <View style={{ marginTop: 20 }}>
-          <TouchableOpacity
-            style={{
-              borderWidth: 1,
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              width: "100%",
-              padding: 5,
-              borderColor: "silver",
-              borderRadius: 3,
-            }}
-            onPress={() =>
-              this.props.navigation.push("Editprofile", { userkey: userKey })
-            }
-          >
-            <Text
-              style={{ fontSize: 12, fontWeight: "500", textAlign: "center" }}
+        {userDetails.id &&
+        userDetails.id !== firebase.default.auth().currentUser.uid ? (
+          <View style={{ marginTop: 20 }}>
+            {!isBlocked ? (
+              <TouchableOpacity
+                style={[
+                  styles.editprofile,
+                  { backgroundColor: "red", borderColor: "white" },
+                ]}
+                onPress={() => this.block()}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "500",
+                    textAlign: "center",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Block User
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={styles.editprofile}
+                onPress={() => this.unBlock()}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "500",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    color: "red",
+                  }}
+                >
+                  Unblock User
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        ) : (
+          <View style={{ marginTop: 20 }}>
+            <TouchableOpacity
+              style={styles.editprofile}
+              onPress={() =>
+                this.props.navigation.push("Editprofile", {
+                  userkey: userKey,
+                  fetchUsers: this.fetchUsers,
+                })
+              }
             >
-              Edit Profile
-            </Text>
-          </TouchableOpacity>
-        </View>
+              <Text
+                style={{ fontSize: 12, fontWeight: "500", textAlign: "center" }}
+              >
+                Edit Profile
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
         <View
           style={{
@@ -240,7 +318,7 @@ class _Profile extends Component {
           >
             <Image
               source={require("../../assets/email.png")}
-              style={{ width: 30, height: 20 }}
+              style={{ width: 30, height: 22 }}
             />
             <Text style={{ fontSize: 13, marginLeft: 10 }}>
               {userDetails.email ? userDetails.email : ""}
@@ -272,29 +350,20 @@ class _Profile extends Component {
               alignItems: "center",
             }}
           >
-            <Image
-              source={require("../../assets/phone2.png")}
-              style={{ width: 30, height: 30 }}
-            />
+            <Text
+              style={{
+                width: 30,
+                height: 30,
+                textAlign: "center",
+                marginTop:5
+              }}
+            >
+              *
+            </Text>
             <Text style={{ fontSize: 13, marginLeft: 10 }}>
               {userDetails.bio ? userDetails.bio : "no bio present"}
             </Text>
           </View>
-
-          {/* <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              marginTop: 10,
-              alignItems: "center",
-            }}
-          >
-            <Image
-              source={require("../../assets/website.png")}
-              style={{ width: 30, height: 30 }}
-            />
-            <Text style={{ fontSize: 13, marginLeft: 10 }}> www.Here.com</Text>
-          </View> */}
         </View>
       </View>
     );
@@ -358,5 +427,38 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: "center",
     justifyContent: "center",
+  },
+  unfollow: {
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "80%",
+    padding: 10,
+    left: 10,
+    borderColor: "white",
+    borderRadius: 5,
+    backgroundColor: "#3b5998",
+  },
+  follow: {
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "80%",
+    padding: 10,
+    left: 10,
+    borderColor: "silver",
+    borderRadius: 5,
+  },
+  editprofile: {
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+    padding: 5,
+    borderColor: "silver",
+    borderRadius: 3,
   },
 });

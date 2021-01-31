@@ -1,17 +1,17 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import {
-  StyleSheet,
-  Image,
-  Text,
-  View,
-  TouchableOpacity,
   Dimensions,
+  Image,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
 } from "react-native";
 import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
+import { firestore } from "../../database/firebase";
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -21,23 +21,47 @@ const DismissKeyboard = ({ children }) => (
 );
 
 export default function App({ ...props }) {
+  const [username, setUsername] = useState("");
+
+  const createUserInFirestore = () => {
+    if (username === undefined || username === null || username.trim() === "") {
+      alert("Username can't be blank!!");
+      return false;
+    }
+
+    let user_name = username.trim().toLowerCase();
+    firestore
+      .collection("profile")
+      .doc(user_name)
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          alert("Username already exists!!");
+          return false;
+        } else {
+          props.navigation.push("Email", { username: user_name });
+        }
+      })
+      .catch(error => alert(error.message));
+  };
+
   return (
     <View style={styles.getStarted}>
       <TouchableOpacity
         style={{ position: "absolute", top: 50, left: 20 }}
         onPress={() => props.navigation.goBack()}
       >
-        <AntDesign style={styles.back} name="left" size={30} color="black" />
+        <AntDesign style={styles.back} name="left" size={30} color="#FFF" />
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/icondark.png")}
-          style={{ width: 80, height: 80 }}
+          source={require("../../../assets/logo-outline.png")}
+          style={{ width: 150, height: 150 }}
         />
       </View>
 
       <View>
-        <Text style={styles.Stockchat}> START BY CREATING A USERNAME</Text>
+        <Text style={styles.Stockchat}>CREATE YOUR USERNAME</Text>
       </View>
       <View>
         <Text style={styles.username}>
@@ -52,7 +76,15 @@ export default function App({ ...props }) {
             style={styles.Input}
             placeholder="Username"
             placeholderTextColor="lightgrey"
+            onChangeText={username => setUsername(username)}
           />
+          {/* <TextInput
+              style={styles.inputStyle}
+              placeholder="Enter Group Name"
+              value={groupName}
+              // onValidateTextField = {validateField}
+              onChangeText={val => setGroupName(val)}
+            /> */}
         </View>
 
         <View
@@ -63,15 +95,27 @@ export default function App({ ...props }) {
             alignItems: "center"
           }}
         >
+          {/* <TouchableOpacity
+              onPress={performCreateGroup}
+              isLoading={isLoading}
+            >
+              <View style={styles.btn}>
+                <Text
+                  style={{ color: "#F5F8FA", fontSize: 19, fontWeight: "bold" }}
+                >
+                  Create Group
+                </Text>
+              </View>
+            </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.Button}
-            onPress={() => props.navigation.push("PhoneNumber")}
+            onPress={() => createUserInFirestore()}
           >
             <Text
               style={{
                 fontSize: 18,
                 textAlign: "center",
-                color: "white",
+                color: "#FFF",
                 fontWeight: "600"
               }}
             >
@@ -89,7 +133,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "white",
+    backgroundColor: "#35383F",
     width: Dimensions.get("screen").width
   },
   Button: {
@@ -99,13 +143,13 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   HaveAccount: {
-    color: "white",
+    color: "#F5F8FA",
     textAlign: "center",
     fontSize: 15
   },
   Stockchat: {
     marginTop: 50,
-    color: "black",
+    color: "#FFF",
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
@@ -114,21 +158,21 @@ const styles = StyleSheet.create({
   },
   username: {
     marginTop: 10,
-    color: "black",
+    color: "#FFF",
     textAlign: "center",
     fontSize: 15,
     padding: 18
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "white",
+    backgroundColor: "#35383F",
     //backgroundColor: "red",
-    //borderBottomColor: "black",
+    //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
-    borderColor: "black",
+    borderColor: "#FFF",
     padding: 12,
     paddingLeft: 30,
-    color: "black",
+    color: "#FFF",
     height: 50,
     fontSize: 21,
     borderRadius: 30

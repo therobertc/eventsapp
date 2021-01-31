@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -8,110 +8,128 @@ import {
   Button,
   Alert,
   ActivityIndicator,
+  Image,
 } from "react-native";
-import firebase from "../database/firebase";
+import fire, { firestore } from "../database/firebase";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { useIsFocused } from "@react-navigation/native";
 
-export default function Signup({ navigation }) {
-  const [displayName, setdisplay] = useState();
+export default function Signup({ route, navigation }) {
+  // const [displayName, setdisplay] = useState();
   const [email, setEmail] = useState();
   const [password, setPass] = useState();
   const [isLoading, setLoading] = useState(false);
+  const { username, phoneNo } = route.params;
+  const isVisible = useIsFocused();
+
+  useEffect(() => {
+    if (isVisible) {
+      AuthUser();
+    }
+  }, [isVisible]);
+
+  function AuthUser() {
+    fire.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        navigation.navigate("Chat");
+      } else {
+      }
+    });
+  }
 
   const registerUser = () => {
-    if (email === "" && password === "") {
-      Alert.alert("Enter details to signup!");
-    } else {
+    console.log(email);
+    if (
+      email !== "" &&
+      email !== undefined &&
+      password !== "" &&
+      password !== undefined
+    ) {
       setLoading(true);
-      firebase
+      fire
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((res) => {
-          res.user.updateProfile({
-            displayName: displayName,
-          });
-          console.log("User registered successfully!");
-          setLoading(false);
-          setdisplay("");
-          setEmail("");
-          setPass("");
-          addIntoDb(firebase.default.auth().currentUser.uid);
-          // navigation.navigate("Login");
+          firestore
+            .collection("users")
+            .doc(res.user.uid)
+            .set({
+              id: res.user.uid,
+              Name: username,
+              email: email,
+              phoneNo: phoneNo,
+              followers: [],
+              blockedusers: [],
+            })
+            .then(() => {
+              res.user.updateProfile({
+                displayName: username,
+              });
+              alert("User registered succesfully");
+              navigation.navigate("Chat");
+            })
+            .catch((error) => alert(error.message));
         })
-        .catch(
-          (error) => {
-            console.log("error", error);
-          }
-          // this.setState({ errorMessage: error.message })
-        );
+        .catch((error) => alert(error.message));
+    } else {
+      alert("please fill all fields!!!");
     }
-  };
-
-  const addIntoDb = (id) => {
-    firebase.default
-      .firestore()
-      .collection("users")
-      .doc()
-      .set({
-        Name: displayName,
-        email: email,
-        id: id,
-        phoneNo: "",
-        followers: [],
-      })
-      .then(function () {
-        navigation.navigate("Login");
-      });
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.tcontainer}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <View>
-            <Ionicons name="ios-arrow-back" size={30} color="black" />
-          </View>
-        </TouchableOpacity>
+        <View style={{ flexDirection: "row" }}>
+          <Image
+            style={{ height: 100, width: 100 }}
+            source={require("../../assets/logo-outline.png")}
+          ></Image>
+
+          <Text style={styles.Stockchat}> Stock Chat</Text>
+        </View>
 
         <Text style={styles.tHeading}>Create Account</Text>
-      </View>
-      <View style={styles.bcontainer}>
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Name"
-          value={displayName}
-          onChangeText={(val) => setdisplay(val)}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Email"
-          value={email}
-          onChangeText={(val) => setEmail(val)}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Password"
-          value={password}
-          onChangeText={(val) => setPass(val)}
-          maxLength={15}
-          secureTextEntry={true}
-        />
 
-        <TouchableOpacity onPress={() => registerUser()}>
-          <View style={styles.btn}>
-            <Text style={{ color: "white", fontSize: 19, fontWeight: "bold" }}>
-              Sign Up
-            </Text>
-          </View>
-        </TouchableOpacity>
+        <View style={{ width: "100%", alignItems: "center", padding: 5 }}>
+          {/* <TextInput
+            style={styles.inputStyle}
+            placeholder="Name"
+            value={displayName}
+            onChangeText={val => setdisplay(val)}
+          /> */}
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Email"
+            value={email}
+            onChangeText={(val) => setEmail(val)}
+          />
+          <TextInput
+            style={styles.inputStyle}
+            placeholder="Password"
+            value={password}
+            onChangeText={(val) => setPass(val)}
+            maxLength={15}
+            secureTextEntry={true}
+          />
 
-        <Text
-          style={styles.loginText}
-          onPress={() => navigation.navigate("Login")}
-        >
-          Already Registered? Click here to login
-        </Text>
+          <TouchableOpacity onPress={() => registerUser()}>
+            <View style={styles.btn}>
+              <Text
+                style={{ color: "#F5F8FA", fontSize: 19, fontWeight: "bold" }}
+              >
+                Sign Up
+              </Text>
+            </View>
+          </TouchableOpacity>
+
+          <Text
+            style={styles.loginText}
+            onPress={() => navigation.navigate("Login")}
+          >
+            Already Registered? Sign In
+          </Text>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -129,9 +147,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   loginText: {
-    color: "black",
-    marginTop: 70,
+    color: "#FFF",
+    marginTop: 20,
     textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 17,
   },
   preloader: {
     left: 0,
@@ -141,33 +161,33 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "#35383F",
   },
   container: {
     flex: 1,
-    backgroundColor: "#FFF",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    backgroundColor: "#35383F",
   },
   tcontainer: {
-    //backgroundColor: "#000",
     flex: 1,
-    flexDirection: "row",
-    padding: 50,
-    borderBottomLeftRadius: 30,
-    borderBottomRightRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
   },
   bcontainer: {
-    flex: 8,
-    borderTopLeftRadius: 90,
+    flex: 5,
     padding: 30,
     width: "100%",
     justifyContent: "center",
     flexDirection: "column",
   },
   tHeading: {
-    color: "black",
+    color: "#FFF",
     fontWeight: "bold",
     fontSize: 25,
-    paddingLeft: "25%",
+    paddingTop: 20,
   },
   toptcontainer: {
     //backgroundColor: "#3498db",
@@ -189,7 +209,7 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: 30,
     width: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "#35383F",
     borderRadius: 26,
   },
   activemenu: {
@@ -202,11 +222,11 @@ const styles = StyleSheet.create({
   },
   activemenuText: {
     fontSize: 20,
-    color: "#000000",
+    color: "#FFF000",
     marginTop: 5,
   },
   aText: {
-    color: "#FFFFFF",
+    color: "#F5F8FA",
     fontSize: 20,
     marginTop: 5,
   },
@@ -228,5 +248,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
+    width: 120,
+  },
+  Stockchat: {
+    color: "#1E2429",
+    textAlign: "center",
+    fontSize: 40,
+    fontWeight: "bold",
   },
 });
