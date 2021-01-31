@@ -181,13 +181,13 @@ export default function AddGroup(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
   },
   getStarted: {
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     width: Dimensions.get("screen").width
   },
   Button: {
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     //backgroundColor: "red",
     //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
     //height: "100%",
     padding: 50,
     width: "100%",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 26
   },
   activemenu: {

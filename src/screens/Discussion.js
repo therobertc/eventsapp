@@ -174,7 +174,7 @@ function Discussion({ route, navigation }) {
         .collection("messages")
         .doc();
     for (let i = 0; i < newMessage.length; i++) {
-      newMessage[i]['user']['_id'] = 2;
+      newMessage[i]["user"]["_id"] = 2;
       messageRef
           .set({
             _id: newMessage[i]._id,
@@ -271,14 +271,14 @@ function Discussion({ route, navigation }) {
 
   const customtInputToolbar = props => {
     return (
-        <InputToolbar
-            {...props}
-            containerStyle={{
-              backgroundColor: "#35383F",
-              borderTopWidth: 0,
-              marginBottom: -10
-            }}
-        />
+      <InputToolbar
+        {...props}
+        containerStyle={{
+          backgroundColor: "#282c34",
+          borderTopWidth: null,
+          marginBottom: -10
+        }}
+      />
     );
   };
 
@@ -498,9 +498,9 @@ const styles = StyleSheet.create({
   },
   flatList: {
     //position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
+    left: null,
+    right: null,
+    top: null,
     height: "100%"
   },
   sendContainer: {
@@ -512,7 +512,7 @@ const styles = StyleSheet.create({
   },
 
   main: {
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
@@ -531,11 +531,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     flex: 1,
     paddingVertical: 5,
-    position: "relative"
+    position: "relative",
+    paddingLeft: 10
   },
 
   // textInput: {
-  //   backgroundColor: "#35383F",
+  //   backgroundColor: "#282c34",
   //   borderRadius: 30,
   //   marginRight: 20,
   //   marginLeft: 20,
@@ -551,9 +552,9 @@ const styles = StyleSheet.create({
   },
   container: {
     //position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
+    left: null,
+    right: null,
+    top: null,
     height: "100%"
   },
   header: {

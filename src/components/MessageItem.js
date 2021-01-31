@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     //width: "auto"
   },
   recievedBubble: {
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 10,

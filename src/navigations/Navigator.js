@@ -64,10 +64,10 @@ const BottomTabNavigator = () => {
           //justifyContent: "center",
           //alignItems: "center",
           paddingTop: 15,
-          backgroundColor: "#35383F",
+          backgroundColor: "#282c34",
 
           alignContent: "center",
-          borderTopColor: "#35383F"
+          borderTopColor: "#282c34"
         }
       }}
     >

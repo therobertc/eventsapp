@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     //backgroundColor: "#1E2429",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
 
     width: Dimensions.get("screen").width
   },

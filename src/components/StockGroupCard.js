@@ -131,8 +131,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
-    //backgroundColor: "#35383F"
-    backgroundColor: "#35383F",
+    //backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,

@@ -185,10 +185,10 @@ export default class ChartComp extends Component {
           yAxisInterval={1} // optional, defaults to 1
           chartConfig={{
             strokeWidth: 2,
-            backgroundColor: "#35383F",
+            backgroundColor: "#282c34",
             //backgroundGradientFromOpacity: "100%",
-            backgroundGradientFrom: "#35383F",
-            backgroundGradientTo: "#35383F",
+            backgroundGradientFrom: "#282c34",
+            backgroundGradientTo: "#282c34",
             decimalPlaces: 2, // optional, defaults to 2dp
             // fillShadowGradient="red",
             //color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    //backgroundColor: "#35383F",
+    //backgroundColor: "#282c34",
     marginBottom: 10
   },
   item: {
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
   },
   chartStyle: {
     alignItems: "center",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     padding: 0
   }
 });

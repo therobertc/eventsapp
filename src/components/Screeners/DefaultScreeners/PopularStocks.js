@@ -46,7 +46,7 @@ class PopularStocks extends Component {
               rating: service["analyst rating"],
               volume: service.volume,
               label: service.name,
-              backgroundColor: "#35383F",
+              backgroundColor: "#282c34",
               marginTop: 1
             }))
           },
@@ -199,7 +199,7 @@ class PopularStocks extends Component {
 
     return (
       <View style={styles.container}>
-        <Header style={{ backgroundColor: "#35383F", borderBottomWidth: 0 }}>
+        <Header style={{ backgroundColor: "#282c34", borderBottomWidth: 0 }}>
           <Left>
             <Icon
               style={{
@@ -261,7 +261,7 @@ export default PopularStocks;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     flex: 1
   },
   card: {
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     shadowColor: "lightgrey",
     shadowOpacity: 1.0,
     shadowRadius: 2,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 10,
     padding: 10,
     height: 80,
@@ -286,7 +286,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
   },
   loadTitle: {
     color: "#FFF000",

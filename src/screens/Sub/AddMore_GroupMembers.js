@@ -159,13 +159,13 @@ export default function AddMoreMember({ route, navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#35383F" }}>
+    <View style={{ flex: 1, backgroundColor: "#282c34" }}>
       <View
         style={{
           flexDirection: "row",
           height: 80,
           width: "100%",
-          backgroundColor: "#35383F",
+          backgroundColor: "#282c34",
           alignItems: "center",
           justifyContent: "space-around",
           paddingTop: 30,
@@ -253,7 +253,7 @@ export default function AddMoreMember({ route, navigation }) {
                           position: "absolute",
                           bottom: 4,
                           right: 7,
-                          //backgroundColor: "#35383F",
+                          //backgroundColor: "#282c34",
                           borderRadius: 20
                         }}
                         onPress={() =>
@@ -355,6 +355,6 @@ export default function AddMoreMember({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
   }
 });

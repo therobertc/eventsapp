@@ -58,7 +58,7 @@ export default function App({ ...props }) {
     >
       <Header
         style={{
-          backgroundColor: "#35383F",
+          backgroundColor: "#282c34",
           borderBottomWidth: 0,
           flexDirection: "row",
           //marginTop: 25,
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     width: Dimensions.get("screen").width
   },
   header: {
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     //backgroundColor: "red",
     //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",

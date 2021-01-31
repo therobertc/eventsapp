@@ -145,7 +145,7 @@ export default function AddMember({ route, navigation }) {
                             <View style={{ flexDirection: "column", justifyContent: "flex-start", margin: 5, alignItems: "center", width: 80 }}>
                                 <View style={{ width: 62, height: 62 }}>
                                     <Image style={{ borderRadius: 100, backgroundColor: '#FFF', width: 50, height: 50, alignItems: "center", justifyContent: "center", borderWidth: 2, borderColor: "#F5F8FA" }} />
-                                    <Entypo name="circle-with-cross" size={25} style={{ position: "absolute", bottom: 4, right: 7, backgroundColor: "#35383F", borderRadius: 20 }} onPress={() => RemoveReceipent(data.name, data.uid, index)} />
+                                    <Entypo name="circle-with-cross" size={25} style={{ position: "absolute", bottom: 4, right: 7, backgroundColor: "#282c34", borderRadius: 20 }} onPress={() => RemoveReceipent(data.name, data.uid, index)} />
                                 </View>
                                 <Text style={{ fontSize: 14, marginLeft: -7, fontWeight: "bold" }}>{data.name}</Text>
                             </View>
@@ -189,6 +189,6 @@ export default function AddMember({ route, navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#35383F"
+        backgroundColor: "#282c34"
     }
 });
