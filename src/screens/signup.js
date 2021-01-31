@@ -161,14 +161,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34"
   },
   container: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34"
   },
   tcontainer: {
     flex: 1,
@@ -209,8 +209,8 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: 30,
     width: "100%",
-    backgroundColor: "#35383F",
-    borderRadius: 26,
+    backgroundColor: "#282c34",
+    borderRadius: 26
   },
   activemenu: {
     justifyContent: "center",

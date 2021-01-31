@@ -9,24 +9,13 @@ import {
   TouchableOpacity,
   ScrollView,
   Share,
-  Image,
-  AsyncStorage,
-  TextInput
 } from "react-native";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
-
-import DropDownPicker from "react-native-dropdown-picker";
-
-import { LinearGradient } from "expo-linear-gradient";
-import Entypo from "@expo/vector-icons/Entypo";
-import Profiles from "../components/Profiles";
 import Messages from "../components/Messages";
 import TrendingStocks from "../components/TrendingStocks";
-import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import AddGroup from "./Sub/AddGroup";
 import fire, { firestore } from "../database/firebase";
-import StockGroupCard from "../components/StockGroupCard";
 
 const Chat = props => {
   const isVisible = useIsFocused();
@@ -34,28 +23,21 @@ const Chat = props => {
   const [publicgroups, setpublicgroups] = useState([]);
   const [Chatheads, setChatheads] = useState([]);
 
-  this.state = {
-    country: "#STOCKCHAT"
-  };
-
   useEffect(() => {
-    firestore.collection("profile").where("email", "==", fire.auth().currentUser.email).get().then(snapshot =>{
-      console.log("snapshot is ", snapshot);
-      snapshot.forEach(function(change) {
-          console.log("data is", change);
-          console.log(change.id);
-      })
-
-    }).catch(error=>{
-      console.log("erros is ", error);
-    })
-    console.log("current user is ", fire.auth().currentUser
-
-    )
+    // firestore
+    //   .collection("profile")
+    //   .where("email", "==", fire.auth().currentUser.email)
+    //   .get()
+    //   .then(snapshot => {
+    //     snapshot.forEach(function(change) {
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.log("erros is ", error);
+    //   });
     if (isVisible) {
       getChats();
     }
-
   }, [isVisible]);
 
   function getChats() {
@@ -97,8 +79,6 @@ const Chat = props => {
       .collection("ChatHeads")
       .onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(anotherSnapshot) {
-          console.log("anotherSnapshot.doc.data()", anotherSnapshot.doc.data());
-
           // ChatHeadsArr.push(anotherSnapshot.doc.data())
           for (var i = 0; i < anotherSnapshot.doc.data.length; i++) {
             ChatHeadsArr.push({
@@ -114,7 +94,7 @@ const Chat = props => {
     try {
       const result = await Share.share({
         message:
-          "Download Stock Chat and join my trading group! https://stockchatapp.com"
+          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://testflight.apple.com/join/EbkJK1RL"
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -132,12 +112,12 @@ const Chat = props => {
 
   return (
     <View style={styles.container}>
-      <View style={{ zIndex: 999 }}>
+      <View>
         <Header
           style={{
-            backgroundColor: "#35383F",
+            backgroundColor: "#282c34",
             borderBottomWidth: 0.2,
-            borderBottomColor: "#35383F"
+            borderBottomColor: "#282c34"
           }}
         >
           <Left>
@@ -152,7 +132,7 @@ const Chat = props => {
             onPress={() => props.navigation.navigate("Profile")}
           /> */}
 
-            <View style={{ zIndex: 999 }}>
+            {/* <View style={{ zIndex: 999 }}>
               <DropDownPicker
                 items={[
                   {
@@ -185,7 +165,7 @@ const Chat = props => {
                   flex: 1,
                   fontSize: 20
                 }}
-                dropDownStyle={{ backgroundColor: "#35383F", borderWidth: 0 }}
+                dropDownStyle={{ backgroundColor: "#282c34", borderWidth: 0 }}
                 // onChangeItem={item =>
                 //   this.setState({
                 //     country: item.value
@@ -194,11 +174,13 @@ const Chat = props => {
               />
 
               {/* <Text style={styles.logotext}>#STOCKCHAT</Text> */}
-            </View>
+            {/* </View>  */}
+
+            <Text style={styles.logotext}>#STOCKCHAT</Text>
           </Left>
 
-          <Body>
-            {/* <Image
+          {/* <Body> */}
+          {/* <Image
             style={{
               flex: 1,
               aspectRatio: Platform.OS === "ios" ? 3.0 : 4.0,
@@ -206,22 +188,34 @@ const Chat = props => {
             }}
             source={require("../../assets/stockchattext.png")}
           /> */}
-            {/* <View style={{ justifyContent: "center", alignItems: "center" }}>
+          {/* <View style={{ justifyContent: "center", alignItems: "center" }}>
             <Text style={styles.header2}>#stockchat</Text>
           </View> */}
-          </Body>
+          {/* </Body> */}
 
           <Right>
-            <Feather
-              style={{
-                color: "#FFF",
-                fontWeight: "bold",
-                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                fontSize: 30
-              }}
-              name="user-plus"
-              onPress={onShare}
-            />
+            <TouchableOpacity style={styles.invite} onPress={onShare}>
+              <Feather
+                style={{
+                  color: "#FFF",
+                  fontWeight: "bold",
+                  paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                  fontSize: 20
+                }}
+                name="user-plus"
+              />
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontSize: 18,
+                  fontWeight: "600",
+                  color: "#FFF"
+                  //paddingLeft: 10
+                }}
+              >
+                Invite
+              </Text>
+            </TouchableOpacity>
 
             {/* <Feather
             style={{
@@ -248,7 +242,7 @@ const Chat = props => {
 
       <ScrollView style={styles.col2}>
         <View style={styles.headerContainer}>
-          <Text style={styles.header}>Trending Stocks</Text>
+          <Text style={styles.header2}>Trending Stocks</Text>
           {/* <View>
             <TouchableOpacity
               style={styles.invite}
@@ -346,7 +340,7 @@ const Chat = props => {
           /> */}
         {/* </View>  */}
         <View style={styles.col}>
-          <Text style={styles.header}>Trading Groups</Text>
+          <Text style={styles.logotext}>Group Chats</Text>
           {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
@@ -485,7 +479,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
     // left: 0,
     // right: 0,
     // top: 0,
@@ -512,7 +506,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   logotext: {
-    fontFamily: "Montserrat_700Bold",
+    fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     fontSize: 22,
     paddingLeft: 10,
@@ -533,7 +527,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#35383F",
+    // backgroundColor: "#282c34",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },
@@ -549,7 +543,7 @@ const styles = StyleSheet.create({
   col: {
     flexDirection: "row",
     //marginTop: 25,
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     alignItems: "center"
   },
   stockchats: {
@@ -571,7 +565,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingRight: 20,
     fontSize: 20,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     flex: 1
   },
   day: {

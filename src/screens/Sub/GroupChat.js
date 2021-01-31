@@ -65,18 +65,12 @@ export default function GroupChat({ route, navigation }) {
       .doc("IDsofParticipants")
       .get()
       .then(function(snapshot) {
-        console.log(
-          "PARTICIPENTS FROM GROUP CHAT",
-          snapshot.data().PartcipentsList
-        );
+
         for (var i = 0; i < snapshot.data().PartcipentsList.length; i++) {
           if (
             snapshot.data().PartcipentsList[i] === fire.auth().currentUser.uid
           ) {
-            console.log(
-              "CURRENT USER IN PARTICIPENTS",
-              snapshot.data().PartcipentsList[i]
-            );
+            console.log("CURRENT USER IN PARTICIPENTS");
           } else {
             data.push(snapshot.data().PartcipentsList[i]);
           }
@@ -155,7 +149,7 @@ export default function GroupChat({ route, navigation }) {
             backgroundColor: "#147efb"
           },
           left: {
-            backgroundColor: "#35383F"
+            backgroundColor: "#282c34"
           }
         }}
       />
@@ -167,7 +161,7 @@ export default function GroupChat({ route, navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "#35383F",
+          backgroundColor: "#282c34",
           borderTopColor: "#E8E8E8",
           borderTopWidth: 1,
           paddingTop: 10
@@ -238,7 +232,7 @@ export default function GroupChat({ route, navigation }) {
                   createdAt: message[i].createdAt,
                   image: message[i].image,
                   user: {
-                    _id: 1,
+                    _id: 2,
                     name: fire.auth().currentUser.displayName
                   }
                 });
@@ -295,7 +289,7 @@ export default function GroupChat({ route, navigation }) {
           createdAt: newMessage[i].createdAt,
           text: newMessage[i].text,
           user: {
-            _id: 1,
+            _id: 2,
             name: fire.auth().currentUser.displayName
           }
         });
@@ -386,7 +380,7 @@ export default function GroupChat({ route, navigation }) {
           placeholder={"Enter a message..."}
           onSend={newMessages => onSend(newMessages)}
           user={{
-            _id: 1,
+            _id: 2,
             name: fire.auth().currentUser.displayName
           }}
           parsePatterns={linkStyle => [
@@ -445,7 +439,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
   },
 
   ImageStyle: {
@@ -468,7 +462,7 @@ const styles = StyleSheet.create({
   },
 
   main: {
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,

@@ -433,7 +433,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //backgroundColor: "#e8eef1"
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
     //backgroundColor: "#FFF",
     //height: 1000
   },
@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     borderBottomColor: "#F5FCFF",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 30,
     borderBottomWidth: 1,
     height: 45,
@@ -479,7 +479,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#F5F8FA",
     //flex: 1,
     width: 300,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     marginBottom: 50
   },
   inputIcon: {
@@ -508,7 +508,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     flexDirection: "row",
     borderRadius: 10
   },
@@ -554,7 +554,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 2.0,
     marginHorizontal: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20,

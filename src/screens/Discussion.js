@@ -3,10 +3,12 @@ import {
   Alert,
   KeyboardAvoidingView,
   StyleSheet,
+  Clipboard,
   Text,
   TouchableOpacity,
   View,
   Image,
+  Share
 } from "react-native";
 import firebase, { firestore } from "./../database/firebase";
 import * as ImagePicker from "expo-image-picker";
@@ -175,6 +177,7 @@ function Discussion({ route, navigation }) {
       .collection("messages")
       .doc();
     for (let i = 0; i < newMessage.length; i++) {
+      newMessage[i]["user"]["_id"] = 2;
       messageRef
         .set({
           _id: newMessage[i]._id,
@@ -217,7 +220,6 @@ function Discussion({ route, navigation }) {
       <View>
         <TouchableOpacity
           onPress={() =>
-            // console.log(props.navigation)
             navigation.push("Profile", {
               uid: props.currentMessage.user.userid,
             })
@@ -282,9 +284,9 @@ function Discussion({ route, navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "#35383F",
-          borderTopWidth: 0,
-          marginBottom: -10,
+          backgroundColor: "#282c34",
+          borderTopWidth: null,
+          marginBottom: -10
         }}
       />
     );
@@ -308,6 +310,48 @@ function Discussion({ route, navigation }) {
         }}
       />
     );
+  };
+
+  const report = async message => {
+    try {
+      const result = await Share.share({
+        message: "Hey, I'd like to report this message --> " + message + "."
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const onLongPress = (context, currentMessage) => {
+    if (currentMessage.text) {
+      const options = ["Report", "Copy Text", "Cancel"];
+      const cancelButtonIndex = options.length - 1;
+      context.actionSheet().showActionSheetWithOptions(
+        {
+          options,
+          cancelButtonIndex
+        },
+        buttonIndex => {
+          switch (buttonIndex) {
+            case 0:
+              report(currentMessage.text);
+              break;
+            case 1:
+              Clipboard.setString(currentMessage.text);
+              break;
+          }
+        }
+      );
+    }
   };
 
   const CustomView = () => {
@@ -336,7 +380,6 @@ function Discussion({ route, navigation }) {
       </View>
     );
   };
-  console.log("item is ", messages);
   return (
     <View style={styles.main}>
       <View style={styles.headerContainer}>
@@ -345,12 +388,12 @@ function Discussion({ route, navigation }) {
         </TouchableOpacity>
         <Text style={styles.header}> {item.groupName}</Text>
         <TouchableOpacity
-          // onPress={() =>
-          //   navigation.push("StockDetails", {
-          //     symbol: "SQ"
-          //   })
-          // }
-          onPress={() => navigation.navigate("GroupProfile")}
+        // onPress={() =>
+        //   navigation.push("StockDetails", {
+        //     symbol: "SQ"
+        //   })
+        // }
+        // onPress={() => navigation.navigate("GroupProfile")}
         >
           <Image
             source={require("../../assets/icon.png")}
@@ -385,6 +428,7 @@ function Discussion({ route, navigation }) {
         }}
         scrollToBottom
         inverted={true}
+        onLongPress={onLongPress}
         timeTextStyle={{ left: { color: "#FFF" }, right: { color: "#FFF" } }}
         //renderTime={renderTime}
         renderAvatar={null}
@@ -458,10 +502,10 @@ const styles = StyleSheet.create({
   },
   flatList: {
     //position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: "100%",
+    left: null,
+    right: null,
+    top: null,
+    height: "100%"
   },
   sendContainer: {
     justifyContent: "center",
@@ -472,7 +516,7 @@ const styles = StyleSheet.create({
   },
 
   main: {
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
@@ -492,10 +536,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 5,
     position: "relative",
+    paddingLeft: 10
   },
 
   // textInput: {
-  //   backgroundColor: "#35383F",
+  //   backgroundColor: "#282c34",
   //   borderRadius: 30,
   //   marginRight: 20,
   //   marginLeft: 20,
@@ -511,10 +556,10 @@ const styles = StyleSheet.create({
   },
   container: {
     //position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: "100%",
+    left: null,
+    right: null,
+    top: null,
+    height: "100%"
   },
   header: {
     color: "#FFF",

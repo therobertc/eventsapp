@@ -36,13 +36,14 @@ const BottomTabNavigator = () => {
           //justifyContent: "center",
           //alignItems: "center",
           paddingTop: 15,
-          backgroundColor: "#FFF",
-          //elevation: 2
+          backgroundColor: "#282c34",
+
           alignContent: "center",
-        },
+          borderTopColor: "#282c34"
+        }
       }}
     >
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Home"
         component={Home}
         options={{
@@ -51,7 +52,7 @@ const BottomTabNavigator = () => {
             <Icon name="ios-compass" color={color} size={30} />
           )
         }}
-      /> */}
+      />
       <Tab.Screen
         name="Chat"
         component={Chat}

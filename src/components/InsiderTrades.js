@@ -8,7 +8,6 @@ import {
   ActivityIndicator
 } from "react-native";
 
-
 class InsiderTrades extends Component {
   constructor(props) {
     super(props);
@@ -91,12 +90,12 @@ class InsiderTrades extends Component {
                 paddingTop: 5
               }}
             >
-              {service.Title} {service["Insider Name"]} {service["Trade Type"] === "S - Sale" ? "Sold":"Bought"}{" "}
+              {service.Title} {service["Insider Name"]}{" "}
+              {service["Trade Type"] === "S - Sale" ? "Sold" : "Bought"}{" "}
               {service.Qty} shares of {service["Company Name"]} at{" "}
               {service.Price} per share for a total value of {service.Value} on{" "}
               {service["Trade Date"]}.
             </Text>
-
 
             <Text
               style={{
@@ -169,7 +168,7 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     flexDirection: "row",
     borderRadius: 10
   },
@@ -191,8 +190,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
-    //backgroundColor: "#35383F"
-    backgroundColor: "#35383F",
+    //backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
     borderRadius: 20,
     //paddingHorizontal: 20,
     paddingVertical: 10,
@@ -245,7 +244,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 2.0,
     margin: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20
@@ -257,7 +256,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20

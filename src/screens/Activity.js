@@ -9,43 +9,32 @@ import {
   ScrollView,
   Image
 } from "react-native";
-import StockGroupCard from "../components/StockGroupCard";
-import firebase, { firestore } from "../database/firebase";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
-
-import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import InsiderTrades from "../components/InsiderTrades";
+import Notifications from "../components/Notifications";
+import DropDownPicker from "react-native-dropdown-picker";
 
-const Activity = props => {
-  return (
-    <View style={styles.container}>
-      <Header
-        style={{
-          backgroundColor: "#35383F",
-          borderBottomWidth: 0.2,
-          borderBottomColor: "#35383F"
-        }}
-      >
-        <Left>
-          {/* <Feather
-            style={{
-              color: "#FFF",
-              paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
-              fontSize: 30,
-              fontWeight: "bold"
-            }}
-            name="chevron-left"
-            onPress={() => props.navigation.goBack()}
-          /> */}
-          {/* <Text style={styles.header}>Activity</Text> */}
-        </Left>
+class Activity extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      country: "Stock Alerts"
+    };
+  }
 
-        <Body style={{ width: "100%" }}>
+  render(props) {
+    return (
+      <View style={styles.container}>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            marginHorizontal: 10,
+            zIndex: 999
+          }}
+        >
           <Text style={styles.header}>Activity</Text>
-        </Body>
-
-        <Right>
           <Feather
             style={{
               color: "#FFF",
@@ -54,18 +43,24 @@ const Activity = props => {
               fontSize: 30
             }}
             name="settings"
-            onPress={() => props.navigation.navigate("Settings")}
+            //onPress={onShare}
           />
-        </Right>
-      </Header>
+        </View>
 
-      <View style={styles.feed}>
-        {/* <Text style={styles.text}>No new notifications</Text> */}
-        <InsiderTrades {...props} />
+        <View style={styles.feed}>
+          {/* <Text style={styles.text}>No new notifications</Text> */}
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            //style={{ paddingHorizontal: 10 }}
+          >
+            <Notifications {...this.props} />
+          </ScrollView>
+          {/* <InsiderTrades {...props} /> */}
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+}
 export default Activity;
 
 const styles = StyleSheet.create({
@@ -78,7 +73,7 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   },
   seperator: {
-    borderColor: "lightgrey",
+    borderColor: "#303135",
     borderWidth: 0.5,
     marginLeft: 30,
     marginVertical: 10,
@@ -105,12 +100,12 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34",
     // left: 0,
     // right: 0,
     // top: 0,
     //paddingHorizontal: 20,
-    //paddingTop: 60
+    paddingTop: 60
   },
   headerContainer: {
     flexDirection: "row",
@@ -140,6 +135,9 @@ const styles = StyleSheet.create({
     fontSize: 24,
     paddingBottom: 10
   },
+  feed: {
+    flex: 1
+  },
   proContainer: {
     marginRight: -20,
     alignSelf: "center"
@@ -148,7 +146,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#35383F",
+    // backgroundColor: "#282c34",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },

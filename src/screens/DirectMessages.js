@@ -89,7 +89,7 @@ const DirectMessages = props => {
     <View style={styles.container}>
       <Header
         style={{
-          backgroundColor: "#35383F",
+          backgroundColor: "#282c34",
           borderBottomWidth: 0.2,
           borderBottomColor: "#F5F8FA"
         }}
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
     // left: 0,
     // right: 0,
     // top: 0,
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#35383F",
+    // backgroundColor: "#282c34",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },
