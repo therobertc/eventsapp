@@ -9,24 +9,13 @@ import {
   TouchableOpacity,
   ScrollView,
   Share,
-  Image,
-  AsyncStorage,
-  TextInput
 } from "react-native";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
-
-import DropDownPicker from "react-native-dropdown-picker";
-
-import { LinearGradient } from "expo-linear-gradient";
-import Entypo from "@expo/vector-icons/Entypo";
-import Profiles from "../components/Profiles";
 import Messages from "../components/Messages";
 import TrendingStocks from "../components/TrendingStocks";
-import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import AddGroup from "./Sub/AddGroup";
 import fire, { firestore } from "../database/firebase";
-import StockGroupCard from "../components/StockGroupCard";
 
 const Chat = props => {
   const isVisible = useIsFocused();
@@ -39,21 +28,17 @@ const Chat = props => {
   };
 
   useEffect(() => {
-    firestore
-      .collection("profile")
-      .where("email", "==", fire.auth().currentUser.email)
-      .get()
-      .then(snapshot => {
-        console.log("snapshot is ", snapshot);
-        snapshot.forEach(function(change) {
-          console.log("data is", change);
-          console.log(change.id);
-        });
-      })
-      .catch(error => {
-        console.log("erros is ", error);
-      });
-    console.log("current user is ", fire.auth().currentUser);
+    // firestore
+    //   .collection("profile")
+    //   .where("email", "==", fire.auth().currentUser.email)
+    //   .get()
+    //   .then(snapshot => {
+    //     snapshot.forEach(function(change) {
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.log("erros is ", error);
+    //   });
     if (isVisible) {
       getChats();
     }
@@ -98,8 +83,6 @@ const Chat = props => {
       .collection("ChatHeads")
       .onSnapshot(function(snapshot) {
         snapshot.docChanges().forEach(function(anotherSnapshot) {
-          console.log("anotherSnapshot.doc.data()", anotherSnapshot.doc.data());
-
           // ChatHeadsArr.push(anotherSnapshot.doc.data())
           for (var i = 0; i < anotherSnapshot.doc.data.length; i++) {
             ChatHeadsArr.push({
