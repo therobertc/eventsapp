@@ -1,231 +1,464 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { Component } from "react";
 import {
   View,
-  Text,
-  FlatList,
-  StyleSheet,
-  Animated,
   TouchableOpacity,
-  ScrollView,
-  Image
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
 } from "react-native";
-import StockGroupCard from "../components/StockGroupCard";
-import firebase, { firestore } from "../database/firebase";
 
-import LinkPortfolioButton from "../components/LinkPortfolioButton";
+import * as firebase from "firebase";
+const { height } = Dimensions.get("screen");
+class _Profile extends Component {
+  state = {
+    images: [],
+    userDetails: {},
+    userKey: "",
+    user: "",
+    following: false,
+    blockedusers: [],
+  };
 
-import { AntDesign } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { Link } from "@react-navigation/native";
+  componentDidMount() {
+    if (this.props.route.params && this.props.route.params.uid) {
+      this.setState(
+        {
+          user: this.props.route.params.uid,
+        },
+        () => this.fetchUsers()
+      );
+    } else {
+      this.setState(
+        {
+          user: firebase.default.auth().currentUser.uid,
+        },
+        () => this.fetchUsers()
+      );
+    }
+  }
 
-const Profile = props => {
-  return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <View style={styles.col}>
-        <Text style={styles.header}>Profile</Text>
-        <TouchableOpacity
+  fetchUsers = async () => {
+    const db = firebase.default.firestore();
+    var users = db.collection("users");
+    users
+      .where("id", "==", this.state.user)
+      .get()
+      .then((s) => {
+        s.docs.forEach((doc) => {
+          // console.log(doc.data().followers["YaNfxIeJSLRAZNSOPH39nnuaEIt2"]);
+          this.setState({
+            userDetails: doc.data(),
+            userKey: doc.id,
+            following: doc.data().followers,
+            blockedusers: doc.data().blockedusers,
+          });
+        });
+      })
+      .catch((e) => {
+        console.log("e", e);
+      });
+  };
+
+  follow = async () => {
+    const uid = this.state.user;
+    let udetails = this.state.userDetails;
+    udetails.followers = [{ id: true }];
+
+    firebase.default
+      .firestore()
+      .collection("users")
+      .doc(this.state.userKey)
+      .update({
+        followers: firebase.firestore.FieldValue.arrayUnion(uid),
+      })
+
+      .then((s) => this.fetchUsers())
+      .catch((e) => console.log("e", e));
+  };
+
+  unFollow = async () => {
+    const uid = this.state.user;
+    let udetails = this.state.userDetails;
+    udetails.followers = [{ id: true }];
+
+    firebase.default
+      .firestore()
+      .collection("users")
+      .doc(this.state.userKey)
+      .update({
+        followers: firebase.firestore.FieldValue.arrayRemove(uid),
+      })
+
+      .then((s) => {
+        console.log(s);
+        this.fetchUsers();
+      })
+      .catch((e) => console.log("e", e));
+  };
+
+  block = async () => {
+    const uid = this.state.user;
+
+    firebase.default
+      .firestore()
+      .collection("users")
+      .doc(this.state.userKey)
+      .update({
+        blockedusers: firebase.firestore.FieldValue.arrayUnion(uid),
+      })
+
+      .then((s) => this.fetchUsers())
+      .catch((e) => console.log("e", e));
+  };
+
+  unBlock = async () => {
+    const uid = this.state.user;
+    let udetails = this.state.userDetails;
+    udetails.followers = [{ id: true }];
+
+    firebase.default
+      .firestore()
+      .collection("users")
+      .doc(this.state.userKey)
+      .update({
+        blockedusers: firebase.firestore.FieldValue.arrayRemove(uid),
+      })
+
+      .then((s) => {
+        this.fetchUsers();
+      })
+      .catch((e) => console.log("e", e));
+  };
+
+  render() {
+    const { userKey, userDetails, following, blockedusers, user } = this.state;
+    let isFollowing = false;
+    let isBlocked = false;
+
+    if (following && following.includes(user)) {
+      isFollowing = true;
+    }
+
+    if (blockedusers && blockedusers.includes(user)) {
+      isBlocked = true;
+    }
+
+    return (
+      <View
+        style={{
+          padding: 10,
+          marginTop: 15,
+          backgroundColor: "white",
+          height: height,
+        }}
+      >
+        <View
           style={{
-            paddingHorizontal: 10,
-            marginRight: 20,
+            display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            backgroundColor: "#35383F",
-            borderRadius: 20,
-            paddingVertical: 5,
-            borderWidth: 1,
-            borderColor: "#F5F8FA"
+            justifyContent: "space-around",
           }}
-          // onPress={() => props.navigation.navigate("Wallet")}
         >
-          <Feather name="stop-circle" size={20} color="#5294e2" />
+          <View>
+            <Image
+              source={require("../../assets/profile.jpeg")}
+              style={{ width: 80, height: 80, borderRadius: 50 }}
+            />
+            <Text
+              style={{
+                textAlign: "center",
+                fontWeight: "600",
+                fontSize: 12,
+                top: 10,
+              }}
+            >
+              {userDetails.Name ? userDetails.Name : ""}
+            </Text>
+          </View>
+          <View>
+            <Text
+              style={{ fontSize: 14, fontWeight: "500", textAlign: "center" }}
+            >
+              {userDetails.followers ? userDetails.followers.length : ""}
+            </Text>
+            <Text style={{ fontSize: 12, textAlign: "center" }}>Followers</Text>
+          </View>
+          {userDetails.id &&
+          userDetails.id !== firebase.default.auth().currentUser.uid ? (
+            <View>
+              {/* {this.state.following ? ( */}
+              {!isFollowing ? (
+                <TouchableOpacity
+                  style={styles.follow}
+                  onPress={() => this.follow()}
+                >
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      fontWeight: "bold",
+                      textAlign: "center",
+                    }}
+                  >
+                    Follow
+                  </Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={styles.unfollow}
+                  onPress={() => this.unFollow()}
+                >
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      color: "white",
+                    }}
+                  >
+                    Following
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          ) : null}
+        </View>
+        {userDetails.id &&
+        userDetails.id !== firebase.default.auth().currentUser.uid ? (
+          <View style={{ marginTop: 20 }}>
+            {!isBlocked ? (
+              <TouchableOpacity
+                style={[
+                  styles.editprofile,
+                  { backgroundColor: "red", borderColor: "white" },
+                ]}
+                onPress={() => this.block()}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "500",
+                    textAlign: "center",
+                    color: "white",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Block User
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={styles.editprofile}
+                onPress={() => this.unBlock()}
+              >
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontWeight: "500",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    color: "red",
+                  }}
+                >
+                  Unblock User
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        ) : (
+          <View style={{ marginTop: 20 }}>
+            <TouchableOpacity
+              style={styles.editprofile}
+              onPress={() =>
+                this.props.navigation.push("Editprofile", {
+                  userkey: userKey,
+                  fetchUsers: this.fetchUsers,
+                })
+              }
+            >
+              <Text
+                style={{ fontSize: 12, fontWeight: "500", textAlign: "center" }}
+              >
+                Edit Profile
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
 
-          <Text
+        <View
+          style={{
+            marginTop: 10,
+          }}
+        >
+          <View
             style={{
-              fontWeight: "bold",
-              paddingLeft: 5,
-              fontSize: 16,
-              color: "#F5F8FA"
+              display: "flex",
+              flexDirection: "row",
+              marginTop: 10,
+              alignItems: "center",
             }}
           >
-            0
-          </Text>
-        </TouchableOpacity>
-        {/* <TouchableOpacity
-          style={{ paddingHorizontal: 20 }}
-          onPress={() => props.navigation.navigate("Wallet")}
-        >
-          <Feather name="credit-card" size={30} color="#FFF" />
-        </TouchableOpacity> */}
-        <TouchableOpacity onPress={() => props.navigation.navigate("Settings")}>
-          <Feather name="settings" size={30} color="#FFF" />
-        </TouchableOpacity>
-      </View>
-      <View style={{ paddingVertical: 20, marginHorizontal: 20 }}>
-        <View>
-          <Image
-            source={require("../../assets/icon.png")}
-            // source={{ uri: itemPic }}
-            style={styles.avatar}
-          />
-
-          <Text style={styles.biotext}>Rob Calderon</Text>
-          <Text style={styles.biotext}>@rob</Text>
-
-          <View style={{ flexDirection: "row" }}>
-            <Text style={styles.biotext}>100 followers</Text>
-            <Text style={styles.biotext}>10 following</Text>
-          </View>
-
-          <Text style={styles.biotext}>Building apps for traders</Text>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={styles.linktext}>link twitter</Text>
-            <Text style={styles.linktext}>link instagram</Text>
-          </View>
-        </View>
-        <View style={styles.feed}>
-          <Text style={styles.header}>Portfolio</Text>
-          <Text style={styles.text}>Your portfolio is not connected.</Text>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => props.navigation.navigate("LinkPortfolio")}
-            // onPress={() => setModal(true)}
-          >
-            <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
-              Connect Portfolio
+            <Image
+              source={require("../../assets/profile2.png")}
+              style={{ width: 30, height: 30 }}
+            />
+            <Text style={{ fontSize: 13, marginLeft: 10 }}>
+              {userDetails.Name ? userDetails.Name : ""}
             </Text>
-          </TouchableOpacity>
+          </View>
+
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={require("../../assets/email.png")}
+              style={{ width: 30, height: 22 }}
+            />
+            <Text style={{ fontSize: 13, marginLeft: 10 }}>
+              {userDetails.email ? userDetails.email : ""}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={require("../../assets/phone2.png")}
+              style={{ width: 30, height: 30 }}
+            />
+            <Text style={{ fontSize: 13, marginLeft: 10 }}>
+              {userDetails.phoneNo ? userDetails.phoneNo : "-"}
+            </Text>
+          </View>
+
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Text
+              style={{
+                width: 30,
+                height: 30,
+                textAlign: "center",
+                marginTop:5
+              }}
+            >
+              *
+            </Text>
+            <Text style={{ fontSize: 13, marginLeft: 10 }}>
+              {userDetails.bio ? userDetails.bio : "no bio present"}
+            </Text>
+          </View>
         </View>
       </View>
+    );
+  }
+}
 
-      {/* <LinkPortfolioButton></LinkPortfolioButton> */}
-    </ScrollView>
-  );
-};
-export default Profile;
+export default _Profile;
 
 const styles = StyleSheet.create({
-  list: {
-    marginTop: 300
-  },
-  card: {
-    marginLeft: 400,
-    width: 400,
-    flexDirection: "row"
-  },
-  seperator: {
-    borderColor: "lightgrey",
-    borderWidth: 0.5,
-    marginLeft: 30,
-    marginVertical: 10,
-    width: "100%"
-  },
-  gradient: {
-    height: "100%",
-    //position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    //paddingHorizontal: 20,
-    paddingTop: 30
-  },
-  btn: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: 200,
-    //position: "absolute",
-    //bottom: 10,
-    //right: 110,
-    //top: 200,
-    height: 50,
-    backgroundColor: "#147efb",
-    borderRadius: 100,
-    flexDirection: "row",
-    alignSelf: "center",
-    marginTop: 30
-  },
-  container: {
-    height: "100%",
-    backgroundColor: "#35383F",
-    // left: 0,
-    // right: 0,
-    // top: 0,
-    //paddingHorizontal: 20,
-    paddingTop: 60
-  },
-  headerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingTop: 30,
-    paddingHorizontal: 20
+  root: {
+    //   backgroundColor: theme['color-basic-100'],
+    marginTop: 10,
   },
   header: {
-    fontFamily: "Montserrat_800ExtraBold",
-    color: "#FFF",
-    flex: 1,
-    fontSize: 20
+    alignItems: "center",
+    paddingTop: 25,
+    paddingBottom: 17,
   },
-  header2: {
-    fontFamily: "Montserrat_800ExtraBold",
-    color: "#FFF",
-    flex: 1,
-    fontSize: 24,
-    paddingBottom: 10
+  userInfo: {
+    flexDirection: "row",
+    paddingVertical: 18,
   },
-  proContainer: {
-    marginRight: -20,
-    alignSelf: "center"
+  bordered: {
+    borderBottomWidth: 1,
+    borderColor: "transparent",
+  },
+  section: {
+    flex: 1,
+    alignItems: "center",
+  },
+  space: {
+    marginBottom: 3,
+    // color: theme["color-basic-1000"],
+  },
+  separator: {
+    backgroundColor: "transparent",
+    alignSelf: "center",
+    flexDirection: "row",
+    flex: 0,
+    width: 1,
+    height: 42,
+  },
+  buttons: {
+    flexDirection: "row",
+    paddingVertical: 8,
+  },
+  button: {
+    flex: 1,
+    alignSelf: "center",
   },
   text: {
-    //fontFamily: "Montserrat_400Regular",
-    color: "#FFF",
-    textAlign: "center",
-    fontSize: 20,
-    paddingTop: 20
+    color: "transparent",
   },
-  biotext: {
-    //fontFamily: "Montserrat_400Regular",
-    color: "#FFF",
-    textAlign: "left",
-    fontSize: 20,
-    marginVertical: 5,
-    paddingRight: 10
+  add: {
+    backgroundColor: "#939393",
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  linktext: {
-    //fontFamily: "Montserrat_400Regular",
-    color: "#147efb",
-    textAlign: "left",
-    fontSize: 20,
-    marginVertical: 5,
-    paddingRight: 10
-  },
-
-  feed: {
-    paddingTop: 20
-  },
-
-  col: {
+  unfollow: {
+    borderWidth: 1,
+    display: "flex",
     flexDirection: "row",
-    //marginTop: 25,
-    marginHorizontal: 20,
-    alignItems: "center"
+    justifyContent: "center",
+    width: "80%",
+    padding: 10,
+    left: 10,
+    borderColor: "white",
+    borderRadius: 5,
+    backgroundColor: "#3b5998",
   },
-
-  stockchats: {
-    //flexDirection: "row"
-    marginVertical: 10,
-    marginHorizontal: 20
-    //alignItems: "center"
+  follow: {
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "80%",
+    padding: 10,
+    left: 10,
+    borderColor: "silver",
+    borderRadius: 5,
   },
-  day: {
-    fontFamily: "Montserrat_800ExtraBold",
-    color: "#FFF",
-    flex: 1,
-    fontSize: 20
+  editprofile: {
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+    padding: 5,
+    borderColor: "silver",
+    borderRadius: 3,
   },
-  avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    marginBottom: 10
-  }
 });

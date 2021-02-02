@@ -37,7 +37,7 @@ const Messages = ({ item, totalmembers, lastmessage, uri }) => {
             borderRadius: 20,
             //borderWidth: 2,
             marginBottom: 0,
-            marginRight: 5,
+            //marginRight: 5,
             borderColor: "#147efb"
             //alignSelf: "center",
             //marginTop: 15
@@ -46,7 +46,7 @@ const Messages = ({ item, totalmembers, lastmessage, uri }) => {
             uri: "https://i.stack.imgur.com/l60Hf.png"
           }}
         /> */}
-        <View style={{ marginLeft: 10 }}>
+        <View>
           <Text style={styles.username}>#{item}</Text>
           {/* <Text style={styles.preview}>{totalmembers} members </Text> */}
           <Text style={styles.preview}>
@@ -101,31 +101,37 @@ const styles = StyleSheet.create({
   username: {
     color: "#FFF",
     fontFamily: "Montserrat_700Bold",
-    fontSize: 15,
-    paddingLeft: 10
+    fontSize: 15
+    //paddingLeft: 10
   },
   preview: {
     //color: "#657786",
     color: "#7c818c",
     //fontFamily: "Montserrat_300SemiBold",
     fontSize: 15,
-    paddingLeft: 10
+    //paddingLeft: 10,
+    marginRight: 10
   },
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 2,
+    borderBottomColor: "#60646C",
+    borderBottomWidth: 0.5,
+
     //shadowColor: "#B9BABD",
-    marginHorizontal: 10,
+    //marginHorizontal: 10,
     shadowOpacity: 0.2,
-    marginVertical: 5,
+    //marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
-    //backgroundColor: "#35383F"
-    backgroundColor: "#35383F",
-    borderRadius: 20,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    //backgroundColor: "#282c34"
+    //backgroundColor: "#4b5162",
+    //backgroundColor: "#282c34",
+    //borderRadius: 20,
+    paddingRight: 20,
+    paddingVertical: 5,
     flexDirection: "row",
+    marginLeft: 10,
     //paddingHorizontal: 40,
     alignItems: "center",
     //marginTop: 15,

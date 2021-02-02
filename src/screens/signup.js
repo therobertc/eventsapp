@@ -8,7 +8,7 @@ import {
   Button,
   Alert,
   ActivityIndicator,
-  Image
+  Image,
 } from "react-native";
 import fire, { firestore } from "../database/firebase";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
@@ -30,7 +30,7 @@ export default function Signup({ route, navigation }) {
   }, [isVisible]);
 
   function AuthUser() {
-    fire.auth().onAuthStateChanged(function(user) {
+    fire.auth().onAuthStateChanged(function (user) {
       if (user) {
         navigation.navigate("Chat");
       } else {
@@ -50,7 +50,7 @@ export default function Signup({ route, navigation }) {
       fire
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(res => {
+        .then((res) => {
           firestore
             .collection("users")
             .doc(res.user.uid)
@@ -58,18 +58,20 @@ export default function Signup({ route, navigation }) {
               id: res.user.uid,
               Name: username,
               email: email,
-              phoneNo: phoneNo
+              phoneNo: phoneNo,
+              followers: [],
+              blockedusers: [],
             })
             .then(() => {
               res.user.updateProfile({
-                displayName: username
+                displayName: username,
               });
               alert("User registered succesfully");
               navigation.navigate("Chat");
             })
-            .catch(error => alert(error.message));
+            .catch((error) => alert(error.message));
         })
-        .catch(error => alert(error.message));
+        .catch((error) => alert(error.message));
     } else {
       alert("please fill all fields!!!");
     }
@@ -100,13 +102,13 @@ export default function Signup({ route, navigation }) {
             style={styles.inputStyle}
             placeholder="Email"
             value={email}
-            onChangeText={val => setEmail(val)}
+            onChangeText={(val) => setEmail(val)}
           />
           <TextInput
             style={styles.inputStyle}
             placeholder="Password"
             value={password}
-            onChangeText={val => setPass(val)}
+            onChangeText={(val) => setPass(val)}
             maxLength={15}
             secureTextEntry={true}
           />
@@ -142,14 +144,14 @@ const styles = StyleSheet.create({
     marginEnd: 20,
     alignSelf: "center",
     borderColor: "#ccc",
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
   loginText: {
     color: "#FFF",
     marginTop: 20,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 17
+    fontSize: 17,
   },
   preloader: {
     left: 0,
@@ -159,33 +161,33 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
   },
   container: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "#35383F"
+    backgroundColor: "#282c34"
   },
   tcontainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20
+    padding: 20,
   },
   bcontainer: {
     flex: 5,
     padding: 30,
     width: "100%",
     justifyContent: "center",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   tHeading: {
     color: "#FFF",
     fontWeight: "bold",
     fontSize: 25,
-    paddingTop: 20
+    paddingTop: 20,
   },
   toptcontainer: {
     //backgroundColor: "#3498db",
@@ -194,12 +196,12 @@ const styles = StyleSheet.create({
   topbcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   bottombcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   menuContainer: {
     justifyContent: "space-around",
@@ -207,7 +209,7 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: 30,
     width: "100%",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 26
   },
   activemenu: {
@@ -216,17 +218,17 @@ const styles = StyleSheet.create({
     height: "80%",
     width: "45%",
     backgroundColor: "#17C37B",
-    borderRadius: 10
+    borderRadius: 10,
   },
   activemenuText: {
     fontSize: 20,
     color: "#FFF000",
-    marginTop: 5
+    marginTop: 5,
   },
   aText: {
     color: "#F5F8FA",
     fontSize: 20,
-    marginTop: 5
+    marginTop: 5,
   },
 
   inputs: {
@@ -236,7 +238,7 @@ const styles = StyleSheet.create({
     width: "90%",
     height: "10%",
     borderWidth: 1,
-    borderColor: "grey"
+    borderColor: "grey",
   },
   btn: {
     borderRadius: 16,
@@ -246,12 +248,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    width: 120
+    width: 120,
   },
   Stockchat: {
     color: "#1E2429",
     textAlign: "center",
     fontSize: 40,
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });

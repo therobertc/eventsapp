@@ -7,7 +7,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 const Input = ({ term, onSendPress, onTermChange, onValidateTextField }) => {
   return (
-    <View style={{ backgroundColor: "#35383F", height: 80 }}>
+    <View style={{ backgroundColor: "#282c34", height: 80 }}>
       <View style={styles.container}>
         {/* <Ionicons name="ios-add" color="#147efb" size={30} /> */}
         <TextInput

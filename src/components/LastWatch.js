@@ -12,7 +12,7 @@ export default LastWatch;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     elevation: 3,
     paddingVertical: 2,
     paddingHorizontal: 15,

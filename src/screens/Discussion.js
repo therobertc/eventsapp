@@ -3,10 +3,12 @@ import {
   Alert,
   KeyboardAvoidingView,
   StyleSheet,
+  Clipboard,
   Text,
   TouchableOpacity,
   View,
-  Image
+  Image,
+  Share
 } from "react-native";
 import firebase, { firestore } from "./../database/firebase";
 import * as ImagePicker from "expo-image-picker";
@@ -18,7 +20,7 @@ import {
   Bubble,
   InputToolbar,
   Time,
-  SystemMessage
+  SystemMessage,
 } from "react-native-gifted-chat";
 import {
   AntDesign,
@@ -28,7 +30,7 @@ import {
   Feather,
   FontAwesome,
   FontAwesome5,
-  MaterialCommunityIcons
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
 function Discussion({ route, navigation }) {
@@ -49,21 +51,24 @@ function Discussion({ route, navigation }) {
       .doc(item.groupID)
       .collection("messages")
       .orderBy("createdAt", "desc")
-      .onSnapshot(querySnapshot => {
-        const messages = querySnapshot.docs.map(doc => {
+      .onSnapshot((querySnapshot) => {
+        const messages = querySnapshot.docs.map((doc) => {
           let firebaseData = doc.data();
           firebaseData.createdAt = firebaseData.createdAt
             .toDate()
             .toUTCString();
           console.log("userid is", userid);
           console.log("mainid is", firebaseData["user"]["_id"]);
+          firebaseData["user"]["userid"] = firebaseData["user"]["_id"];
+
           firebaseData["user"]["_id"] =
-              (firebaseData["user"]["_id"] == userid) ? 1 : 2;
+            firebaseData["user"]["_id"] == userid ? 1 : 2;
+
           const data = {
             _id: doc.id,
             text: "",
             createdAt: new Date().getTime(),
-            ...firebaseData
+            ...firebaseData,
           };
           return data;
         });
@@ -79,9 +84,9 @@ function Discussion({ route, navigation }) {
       .collection("member")
       .where("userID", "==", userid)
       .get()
-      .then(function(querySnapshot) {
+      .then(function (querySnapshot) {
         if (querySnapshot.size > 0) {
-          querySnapshot.forEach(function(doc) {
+          querySnapshot.forEach(function (doc) {
             if (doc.data() != null) {
               setIsJoined(true);
             } else {
@@ -93,7 +98,7 @@ function Discussion({ route, navigation }) {
           showAlertToJoinGroup();
         }
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log("Error getting documents: ", error);
       });
   }
@@ -117,12 +122,12 @@ function Discussion({ route, navigation }) {
           text: "Yes",
           onPress: () => {
             joinGroup();
-          }
+          },
         },
         {
           text: "No",
-          onPress: () => {}
-        }
+          onPress: () => {},
+        },
       ],
       { cancelable: false }
     );
@@ -136,47 +141,43 @@ function Discussion({ route, navigation }) {
       .doc();
     groupMemberRef
       .set({
-        userID: userID
+        userID: userID,
       })
-      .then(function(docRef) {
+      .then(function (docRef) {
         setIsJoined(true);
         Alert.alert(Strings.joinMessage);
         setMessage("");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         setIsJoined(false);
         Alert.alert(Strings.JoinGroupError);
       });
   }
 
-  const onPressCashtag = cashtag => {
+  const onPressCashtag = (cashtag) => {
     let symbol = cashtag.replace("$", "");
     if (isNaN(symbol)) {
       navigation.navigate("StockDetails", {
         symbol: symbol,
-        screen: "StockDetails"
+        screen: "StockDetails",
       });
     }
   };
 
-  const lastMessage = async message => {
-    await firestore
-      .collection("publicgroups")
-      .doc(item.groupID)
-      .update({
-        lastmessage: message
-      });
+  const lastMessage = async (message) => {
+    await firestore.collection("publicgroups").doc(item.groupID).update({
+      lastmessage: message,
+    });
   };
 
-
   function onSend(newMessage = []) {
-
     const messageRef = firestore
       .collection("message")
       .doc(item.groupID)
       .collection("messages")
       .doc();
     for (let i = 0; i < newMessage.length; i++) {
+      newMessage[i]["user"]["_id"] = 2;
       messageRef
         .set({
           _id: newMessage[i]._id,
@@ -186,10 +187,10 @@ function Discussion({ route, navigation }) {
           text: newMessage[i].text,
           user: {
             _id: userid,
-            name: username
-          }
+            name: username,
+          },
         })
-        .then(function(docRef) {
+        .then(function (docRef) {
           setMessages(GiftedChat.append(messages, newMessage));
           let message = newMessage[i].text;
           lastMessage(message);
@@ -202,11 +203,11 @@ function Discussion({ route, navigation }) {
             isNaN(symbol[1])
           ) {
             navigation.push("StockDetails", {
-              symbol: symbol[1].trim().toUpperCase()
+              symbol: symbol[1].trim().toUpperCase(),
             });
           }
         })
-        .catch(function(error) {
+        .catch(function (error) {
           Alert.alert(error.message);
           console.log("Error:", error);
         });
@@ -214,36 +215,42 @@ function Discussion({ route, navigation }) {
     setMessages(GiftedChat.append(messages, newMessage));
   }
 
-
-
-  const renderBubble = props => {
+  const renderBubble = (props) => {
     return (
       <View>
-        <Text style={styles.username}>{props.currentMessage.user.name}</Text>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.push("Profile", {
+              uid: props.currentMessage.user.userid,
+            })
+          }
+        >
+          <Text style={styles.username}>{props.currentMessage.user.name}</Text>
+        </TouchableOpacity>
         <Bubble
           {...props}
           wrapperStyle={{
             right: {
-              backgroundColor: "transparent"
+              backgroundColor: "transparent",
             },
             left: {
-              backgroundColor: "transparent"
-            }
+              backgroundColor: "transparent",
+            },
           }}
           textStyle={{
             left: {
-              color: "#FFF"
+              color: "#FFF",
             },
             right: {
-              color: "#FFF"
-            }
+              color: "#FFF",
+            },
           }}
         />
       </View>
     );
   };
 
-  const renderSend = props => {
+  const renderSend = (props) => {
     return (
       <Send {...props} containerStyle={styles.sendContainer}>
         <View
@@ -255,7 +262,7 @@ function Discussion({ route, navigation }) {
             backgroundColor: "#147efb",
             justifyContent: "center",
             alignItems: "center",
-            alignSelf: "center"
+            alignSelf: "center",
             //marginBottom: -25
             //marginRight: 15
           }}
@@ -272,13 +279,13 @@ function Discussion({ route, navigation }) {
     );
   };
 
-  const customtInputToolbar = props => {
+  const customtInputToolbar = (props) => {
     return (
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "#35383F",
-          borderTopWidth: 0,
+          backgroundColor: "#282c34",
+          borderTopWidth: null,
           marginBottom: -10
         }}
       />
@@ -293,16 +300,58 @@ function Discussion({ route, navigation }) {
           right: {
             //color: Colors.snow,
             fontFamily: "Montserrat-Light",
-            fontSize: 14
+            fontSize: 14,
           },
           left: {
             ///color: Colors.snow,
             fontFamily: "Montserrat-Light",
-            fontSize: 14
-          }
+            fontSize: 14,
+          },
         }}
       />
     );
+  };
+
+  const report = async message => {
+    try {
+      const result = await Share.share({
+        message: "Hey, I'd like to report this message --> " + message + "."
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
+  const onLongPress = (context, currentMessage) => {
+    if (currentMessage.text) {
+      const options = ["Report", "Copy Text", "Cancel"];
+      const cancelButtonIndex = options.length - 1;
+      context.actionSheet().showActionSheetWithOptions(
+        {
+          options,
+          cancelButtonIndex
+        },
+        buttonIndex => {
+          switch (buttonIndex) {
+            case 0:
+              report(currentMessage.text);
+              break;
+            case 1:
+              Clipboard.setString(currentMessage.text);
+              break;
+          }
+        }
+      );
+    }
   };
 
   const CustomView = () => {
@@ -313,7 +362,7 @@ function Discussion({ route, navigation }) {
           justifyContent: "space-around",
           alignItems: "center",
           marginVertical: 40,
-          backgroundColor: "#FFF"
+          backgroundColor: "#FFF",
         }}
       >
         <TouchableOpacity>
@@ -322,8 +371,7 @@ function Discussion({ route, navigation }) {
         <TouchableOpacity>
           <Feather name="at-sign" size={22} color="#3e7af0" />
         </TouchableOpacity>
-        <TouchableOpacity
-        >
+        <TouchableOpacity>
           <Ionicons name="md-images" size={26} color="#3e7af0" />
         </TouchableOpacity>
         <TouchableOpacity>
@@ -332,7 +380,6 @@ function Discussion({ route, navigation }) {
       </View>
     );
   };
-  console.log("item is ", item);
   return (
     <View style={styles.main}>
       <View style={styles.headerContainer}>
@@ -341,12 +388,12 @@ function Discussion({ route, navigation }) {
         </TouchableOpacity>
         <Text style={styles.header}> {item.groupName}</Text>
         <TouchableOpacity
-          // onPress={() =>
-          //   navigation.push("StockDetails", {
-          //     symbol: "SQ"
-          //   })
-          // }
-          onPress={() => navigation.navigate("GroupProfile")}
+        // onPress={() =>
+        //   navigation.push("StockDetails", {
+        //     symbol: "SQ"
+        //   })
+        // }
+        // onPress={() => navigation.navigate("GroupProfile")}
         >
           <Image
             source={require("../../assets/icon.png")}
@@ -376,11 +423,12 @@ function Discussion({ route, navigation }) {
             flex: 1,
             height: "auto",
             paddingTop: 10,
-            paddingBottom: 10
-          }
+            paddingBottom: 10,
+          },
         }}
         scrollToBottom
         inverted={true}
+        onLongPress={onLongPress}
         timeTextStyle={{ left: { color: "#FFF" }, right: { color: "#FFF" } }}
         //renderTime={renderTime}
         renderAvatar={null}
@@ -390,18 +438,18 @@ function Discussion({ route, navigation }) {
         //textInputStyle={styles.textInput}
         //isTyping={true}
         //renderUsernameOnMessage={true}
-        renderInputToolbar={props => customtInputToolbar(props)}
+        renderInputToolbar={(props) => customtInputToolbar(props)}
         multiline
         placeholder={"Enter a message..."}
-        onSend={newMessages => onSend(newMessages)}
+        onSend={(newMessages) => onSend(newMessages)}
         user={{
           _id: 1,
-          name: username
+          name: username,
         }}
-        parsePatterns={linkStyle => [
+        parsePatterns={(linkStyle) => [
           {
             type: "phone",
-            style: linkStyle
+            style: linkStyle,
             // onPress: this.onPressPhoneNumber
           },
           {
@@ -410,8 +458,8 @@ function Discussion({ route, navigation }) {
               ...linkStyle,
               color: "#FFF",
               fontWeight: "bold",
-              textDecorationLine: "underline"
-            }
+              textDecorationLine: "underline",
+            },
             // onPress: this.onPressHashtag
           },
           {
@@ -421,9 +469,9 @@ function Discussion({ route, navigation }) {
               ...linkStyle,
               color: "#33CC00",
               fontWeight: "bold",
-              textDecorationLine: "underline"
+              textDecorationLine: "underline",
             },
-            onPress: onPressCashtag
+            onPress: onPressCashtag,
           },
           {
             pattern: /\@(\w+)/,
@@ -431,10 +479,10 @@ function Discussion({ route, navigation }) {
               ...linkStyle,
               color: "#33CC00",
               fontWeight: "bold",
-              textDecorationLine: "underline"
-            }
+              textDecorationLine: "underline",
+            },
             // onPress: this.onPressHashtag
-          }
+          },
         ]}
       />
     </View>
@@ -444,19 +492,19 @@ export default Discussion;
 
 const styles = StyleSheet.create({
   input: {
-    width: 80
+    width: 80,
   },
   ImageStyle: {
     height: 25,
     width: 25,
     resizeMode: "stretch",
-    alignItems: "center"
+    alignItems: "center",
   },
   flatList: {
     //position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
+    left: null,
+    right: null,
+    top: null,
     height: "100%"
   },
   sendContainer: {
@@ -464,21 +512,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     marginRight: 15,
-    color: "#FFF"
+    color: "#FFF",
   },
 
   main: {
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
     // borderBottomRightRadius: 35,
-    paddingTop: 40
+    paddingTop: 40,
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
     //backgroundColor: "#303135"
   },
   username: {
@@ -487,11 +535,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     flex: 1,
     paddingVertical: 5,
-    position: "relative"
+    position: "relative",
+    paddingLeft: 10
   },
 
   // textInput: {
-  //   backgroundColor: "#35383F",
+  //   backgroundColor: "#282c34",
   //   borderRadius: 30,
   //   marginRight: 20,
   //   marginLeft: 20,
@@ -503,13 +552,13 @@ const styles = StyleSheet.create({
   avatar: {
     width: 40,
     height: 40,
-    borderRadius: 20
+    borderRadius: 20,
   },
   container: {
     //position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
+    left: null,
+    right: null,
+    top: null,
     height: "100%"
   },
   header: {
@@ -517,11 +566,11 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
     flex: 1,
-    textAlign: "center"
+    textAlign: "center",
   },
   systemMessageText: {
     fontSize: 14,
     color: "#FFF",
-    fontWeight: "bold"
-  }
+    fontWeight: "bold",
+  },
 });

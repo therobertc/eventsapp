@@ -20,7 +20,7 @@ const onShare = async () => {
   try {
     const result = await Share.share({
       message:
-        "Download Stock Chat and join my trading group! https://stockchatapp.com"
+        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://testflight.apple.com/join/EbkJK1RL"
     });
     if (result.action === Share.sharedAction) {
       if (result.activityType) {
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#35383F",
+    // backgroundColor: "#282c34",
     // marginHorizontal: -20,
     //paddingHorizontal: 20
   },
@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     borderRadius: 5,
     marginHorizontal: 20,
     marginTop: -10,

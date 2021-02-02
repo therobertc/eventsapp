@@ -37,7 +37,7 @@ const LinkPortfolio = props => {
           <Text style={styles.text}>
             Account and trade values will be private
           </Text>
-          <Text style={styles.link}>Why link an account?</Text>
+          {/* <Text style={styles.link}>Why link an account?</Text> */}
         </View>
       </View>
 
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#35383F",
+    // backgroundColor: "#282c34",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },

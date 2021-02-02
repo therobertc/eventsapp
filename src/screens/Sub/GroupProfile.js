@@ -47,7 +47,9 @@ const GroupProfile = props => {
 
         <View style={styles.col}>
           <Text style={styles.title}>Share Link</Text>
-          <Text style={styles.about}>https://stockchatapp.com/stockchat</Text>
+          <Text style={styles.about}>
+            https://testflight.apple.com/join/EbkJK1RL
+          </Text>
         </View>
 
         <View style={styles.col}>
@@ -56,7 +58,7 @@ const GroupProfile = props => {
             Connect with investors from around the world
           </Text>
         </View>
-        <View style={styles.col}>
+        {/* <View style={styles.col}>
           <Text style={styles.title}>Upgrades</Text>
           <Text style={styles.about}>
             ChartBot Stock Alerts{"\n"}News Bot {"\n"}5 Pro Screeners {"\n"}
@@ -64,12 +66,12 @@ const GroupProfile = props => {
             Voice Chat{"\n"}Connect with 7000+ members{"\n"}10 Videos{"\n"}
             Weekly Newsletter
           </Text>
-        </View>
+        </View> */}
       </ScrollView>
       <View
         style={{
           height: 100,
-          backgroundColor: "#35383F",
+          backgroundColor: "#282c34",
           flexDirection: "row"
         }}
       >
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#35383F",
+    backgroundColor: "#282c34",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -228,7 +230,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#35383F",
+    // backgroundColor: "#282c34",
     // marginHorizontal: -20,
     paddingHorizontal: 20
   },
