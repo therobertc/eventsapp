@@ -25,7 +25,7 @@
     "expo-linear-gradient": "~8.2.1",
     "expo-mixpanel-analytics": "0.0.7",
     "expo-status-bar": "^1.0.2",
-    "expo-web-browser": "^8.6.0",
+    "expo-web-browser": "^9.0.0",
     "firebase": "^8.1.2",
     "native-base": "^2.15.0",
     "react": "~16.11.0",
