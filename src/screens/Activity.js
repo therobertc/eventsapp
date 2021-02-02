@@ -24,6 +24,7 @@ class Activity extends React.Component {
   }
 
   render(props) {
+    console.log("--",props)
     return (
       <View style={styles.container}>
         <View
@@ -43,7 +44,7 @@ class Activity extends React.Component {
               fontSize: 30
             }}
             name="settings"
-            //onPress={onShare}
+            onPress={() => this.props.navigation.navigate("Settings")}
           />
         </View>
 

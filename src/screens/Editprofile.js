@@ -10,7 +10,7 @@ import {
   TextInput,
   ActivityIndicator,
 } from "react-native";
-
+import { Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import * as firebase from "firebase";
 
@@ -29,15 +29,6 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
-    // if (Platform.OS !== "web") {
-    //   const {
-    //     status,
-    //   } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    //   if (status !== "granted") {
-    //     alert("Sorry, we need camera roll permissions to make this work!");
-    //   }
-    // }
-
     this.fetchUser();
   }
 
@@ -87,6 +78,7 @@ class App extends React.Component {
         this.setState({ updating: false });
 
         this.props.navigation.goBack();
+        this.props.route.params.fetchUsers();
       })
       .catch((e) => this.setState({ updating: false }));
   };
@@ -140,81 +132,52 @@ class App extends React.Component {
 
   render() {
     return (
-      <ScrollView
-        style={{
-          padding: 10,
-          marginTop: 15,
-          height: height,
-          backgroundColor: "white",
-        }}
-      >
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+      <ScrollView style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+            <Feather name="chevron-left" size={30} color="black" />
+          </TouchableOpacity>
+
+          <Text style={styles.headertitle}>Edit Profile</Text>
+        </View>
+
+        <View style={styles.pickimage}>
           <TouchableOpacity onPress={() => this.pickImage()}>
             <Image
               source={
                 this.state.image && this.state.image !== ""
                   ? { uri: this.state.image }
-                  : require("../../assets/profile.jpeg")
+                  : require("../../assets/placeholderimage.png")
               }
               style={{ width: 80, height: 80, borderRadius: 50 }}
             />
-            <Text
-              style={{
-                textAlign: "center",
-                fontWeight: "600",
-                fontSize: 12,
-                marginTop: 10,
-              }}
-            >
-              {this.state.Name}
-            </Text>
+            <Text style={styles.name}>{this.state.Name}</Text>
           </TouchableOpacity>
         </View>
         <View>
           <View>
             <Text style={{ marginTop: 20 }}>Change Username:</Text>
             <TextInput
-              style={{
-                marginTop: 10,
-                height: 40,
-                borderColor: "gray",
-                borderWidth: 1,
-              }}
+              style={styles.changeusername}
               value={this.state.Name}
               onChangeText={(e) => this.setState({ Name: e })}
             ></TextInput>
           </View>
 
-          <View>
+          {/* <View>
             <Text style={{ marginTop: 20 }}>Change Emal:</Text>
             <TextInput
-              style={{
-                marginTop: 10,
-                height: 40,
-                borderColor: "gray",
-                borderWidth: 1,
-              }}
+              editable={false}
+              style={[styles.change,{backgroundColor:'#E8E8E8'}]}
               value={this.state.email}
               onChangeText={(e) => this.setState({ email: e })}
             ></TextInput>
-          </View>
+          </View> */}
 
           <View>
             <Text style={{ marginTop: 20 }}>Change Phone:</Text>
             <TextInput
-              style={{
-                marginTop: 10,
-                height: 40,
-                borderColor: "gray",
-                borderWidth: 1,
-              }}
+              style={styles.change}
               value={this.state.phoneNo}
               onChangeText={(e) => this.setState({ phoneNo: e })}
             ></TextInput>
@@ -223,12 +186,7 @@ class App extends React.Component {
           <View>
             <Text style={{ marginTop: 20 }}>Bio:</Text>
             <TextInput
-              style={{
-                marginTop: 10,
-                height: 40,
-                borderColor: "gray",
-                borderWidth: 1,
-              }}
+              style={styles.change}
               value={this.state.bio}
               onChangeText={(e) => this.setState({ bio: e })}
             ></TextInput>
@@ -237,16 +195,7 @@ class App extends React.Component {
           <View style={{ marginTop: 20 }}>
             {!this.state.updating ? (
               <TouchableOpacity
-                style={{
-                  borderWidth: 1,
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  width: "100%",
-                  padding: 10,
-                  borderColor: "silver",
-                  borderRadius: 3,
-                }}
+                style={styles.save}
                 onPress={(e) => {
                   if (this.state.imgSelected) {
                     this.uploadImageAsync(this.state.image);
@@ -275,6 +224,59 @@ class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    backgroundColor: "white",
+    height: height,
+  },
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 15,
+  },
+  headertitle: {
+    width: "82%",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  pickimage: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    margin: 20,
+  },
+  name: {
+    textAlign: "center",
+    fontWeight: "600",
+    fontSize: 12,
+    marginTop: 10,
+  },
+  changeusername: {
+    marginTop: 10,
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+  },
+  change: {
+    marginTop: 10,
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+  },
+  save: {
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+    padding: 10,
+    borderColor: "silver",
+    borderRadius: 3,
+  },
+});
 
 export default App;

@@ -6,9 +6,11 @@ import {
   StyleSheet,
   Image,
   Dimensions,
+  ScrollView,
 } from "react-native";
-
+import { Feather } from "@expo/vector-icons";
 import * as firebase from "firebase";
+
 const { height } = Dimensions.get("screen");
 class _Profile extends Component {
   state = {
@@ -46,7 +48,6 @@ class _Profile extends Component {
       .get()
       .then((s) => {
         s.docs.forEach((doc) => {
-          // console.log(doc.data().followers["YaNfxIeJSLRAZNSOPH39nnuaEIt2"]);
           this.setState({
             userDetails: doc.data(),
             userKey: doc.id,
@@ -91,7 +92,6 @@ class _Profile extends Component {
       })
 
       .then((s) => {
-        console.log(s);
         this.fetchUsers();
       })
       .catch((e) => console.log("e", e));
@@ -145,35 +145,32 @@ class _Profile extends Component {
     }
 
     return (
-      <View
-        style={{
-          padding: 10,
-          marginTop: 15,
-          backgroundColor: "white",
-          height: height,
-        }}
-      >
+      <ScrollView style={styles.container}>
         <View
           style={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
-            justifyContent: "space-around",
+            marginTop: 15,
           }}
         >
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+            <Feather name="chevron-left" size={30} color="black" />
+          </TouchableOpacity>
+
+          <Text style={styles.headertitle}>Profile</Text>
+        </View>
+        <View style={styles.data}>
           <View>
             <Image
-              source={require("../../assets/profile.jpeg")}
+              source={
+                userDetails.image && userDetails.image !== ""
+                  ? { uri: userDetails.image }
+                  : require("../../assets/placeholderimage.png")
+              }
               style={{ width: 80, height: 80, borderRadius: 50 }}
             />
-            <Text
-              style={{
-                textAlign: "center",
-                fontWeight: "600",
-                fontSize: 12,
-                top: 10,
-              }}
-            >
+            <Text style={styles.uname}>
               {userDetails.Name ? userDetails.Name : ""}
             </Text>
           </View>
@@ -181,7 +178,7 @@ class _Profile extends Component {
             <Text
               style={{ fontSize: 14, fontWeight: "500", textAlign: "center" }}
             >
-              {userDetails.followers ? userDetails.followers.length : ""}
+              {userDetails.followers ? userDetails.followers.length : "0"}
             </Text>
             <Text style={{ fontSize: 12, textAlign: "center" }}>Followers</Text>
           </View>
@@ -194,31 +191,14 @@ class _Profile extends Component {
                   style={styles.follow}
                   onPress={() => this.follow()}
                 >
-                  <Text
-                    style={{
-                      fontSize: 13,
-                      fontWeight: "bold",
-                      textAlign: "center",
-                    }}
-                  >
-                    Follow
-                  </Text>
+                  <Text style={styles.followtext}>Follow</Text>
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity
                   style={styles.unfollow}
                   onPress={() => this.unFollow()}
                 >
-                  <Text
-                    style={{
-                      fontSize: 13,
-                      fontWeight: "bold",
-                      textAlign: "center",
-                      color: "white",
-                    }}
-                  >
-                    Following
-                  </Text>
+                  <Text style={styles.following}>Following</Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -235,34 +215,14 @@ class _Profile extends Component {
                 ]}
                 onPress={() => this.block()}
               >
-                <Text
-                  style={{
-                    fontSize: 12,
-                    fontWeight: "500",
-                    textAlign: "center",
-                    color: "white",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Block User
-                </Text>
+                <Text style={styles.blockuser}>Block User</Text>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
                 style={styles.editprofile}
                 onPress={() => this.unBlock()}
               >
-                <Text
-                  style={{
-                    fontSize: 12,
-                    fontWeight: "500",
-                    textAlign: "center",
-                    fontWeight: "bold",
-                    color: "red",
-                  }}
-                >
-                  Unblock User
-                </Text>
+                <Text style={styles.unblockuser}>Unblock User</Text>
               </TouchableOpacity>
             )}
           </View>
@@ -277,11 +237,7 @@ class _Profile extends Component {
                 })
               }
             >
-              <Text
-                style={{ fontSize: 12, fontWeight: "500", textAlign: "center" }}
-              >
-                Edit Profile
-              </Text>
+              <Text style={styles.editprofiletext}>Edit Profile</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -291,14 +247,7 @@ class _Profile extends Component {
             marginTop: 10,
           }}
         >
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              marginTop: 10,
-              alignItems: "center",
-            }}
-          >
+          <View style={styles.common1}>
             <Image
               source={require("../../assets/profile2.png")}
               style={{ width: 30, height: 30 }}
@@ -308,14 +257,7 @@ class _Profile extends Component {
             </Text>
           </View>
 
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              marginTop: 10,
-              alignItems: "center",
-            }}
-          >
+          <View style={styles.common1}>
             <Image
               source={require("../../assets/email.png")}
               style={{ width: 30, height: 22 }}
@@ -325,14 +267,7 @@ class _Profile extends Component {
             </Text>
           </View>
 
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              marginTop: 10,
-              alignItems: "center",
-            }}
-          >
+          <View style={styles.common1}>
             <Image
               source={require("../../assets/phone2.png")}
               style={{ width: 30, height: 30 }}
@@ -342,20 +277,13 @@ class _Profile extends Component {
             </Text>
           </View>
 
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              marginTop: 10,
-              alignItems: "center",
-            }}
-          >
+          <View style={styles.common1}>
             <Text
               style={{
                 width: 30,
                 height: 30,
                 textAlign: "center",
-                marginTop:5
+                marginTop: 5,
               }}
             >
               *
@@ -365,7 +293,7 @@ class _Profile extends Component {
             </Text>
           </View>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -373,6 +301,11 @@ class _Profile extends Component {
 export default _Profile;
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 10,
+    backgroundColor: "white",
+    height: height,
+  },
   root: {
     //   backgroundColor: theme['color-basic-100'],
     marginTop: 10,
@@ -460,5 +393,105 @@ const styles = StyleSheet.create({
     padding: 5,
     borderColor: "silver",
     borderRadius: 3,
+  },
+  container: {
+    padding: 10,
+    backgroundColor: "white",
+    height: height,
+  },
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 15,
+  },
+  headertitle: {
+    width: "82%",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  pickimage: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom:20
+  },
+  name: {
+    textAlign: "center",
+    fontWeight: "600",
+    fontSize: 12,
+    marginTop: 10,
+  },
+  changeusername: {
+    marginTop: 10,
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+  },
+  change: {
+    marginTop: 10,
+    height: 40,
+    borderColor: "gray",
+    borderWidth: 1,
+  },
+  save: {
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+    padding: 10,
+    borderColor: "silver",
+    borderRadius: 3,
+  },
+  data: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+  },
+  uname: {
+    textAlign: "center",
+    fontWeight: "600",
+    fontSize: 12,
+    top: 10,
+  },
+  blockuser: {
+    fontSize: 12,
+    fontWeight: "500",
+    textAlign: "center",
+    color: "white",
+    fontWeight: "bold",
+  },
+  unblockuser: {
+    fontSize: 12,
+    fontWeight: "500",
+    textAlign: "center",
+    fontWeight: "bold",
+    color: "red",
+  },
+  common1: {
+    display: "flex",
+    flexDirection: "row",
+    marginTop: 10,
+    alignItems: "center",
+  },
+  following: {
+    fontSize: 13,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "white",
+  },
+  editprofiletext: {
+    fontSize: 12,
+    fontWeight: "500",
+    textAlign: "center",
+  },
+  followtext: {
+    fontSize: 13,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
