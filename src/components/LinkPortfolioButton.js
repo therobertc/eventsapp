@@ -82,19 +82,19 @@ const styles = StyleSheet.create({
   },
   modalView: {
     width: "100%",
-    height: "90%",
+    height: "92%",
     shadowColor: "#657786",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
+    // elevation: 5,
     backgroundColor: "#282c34"
   },
   webViewContainer: {
-    height: "90%",
+    height: "95%",
     width: "100%"
   },
   btn: {

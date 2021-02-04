@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as firebase from "firebase";
+import LinkPortfolioButton from "../components/LinkPortfolioButton";
 
 const { height } = Dimensions.get("screen");
 class _Profile extends Component {
@@ -264,7 +265,6 @@ class _Profile extends Component {
             </Text>
           </View>
         </View>
-
         <View
           style={{
             marginTop: 30
@@ -332,9 +332,24 @@ class _Profile extends Component {
             >
               bio
             </Text> */}
-          <Text style={styles.uname}>
-            @{userDetails.Name ? userDetails.Name : ""}
-          </Text>
+
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center"
+            }}
+          >
+            <Text style={styles.uname}>
+              @{userDetails.Name ? userDetails.Name : ""}
+            </Text>
+
+            <Image
+              source={require("../../assets/verified.png")}
+              // source={{ uri: itemPic }}
+              style={{ height: 20, width: 20 }}
+            />
+          </View>
+
           <Text style={styles.bio}>
             {userDetails.bio ? userDetails.bio : " "}
           </Text>
@@ -393,6 +408,37 @@ class _Profile extends Component {
               >
                 <Text style={styles.editprofiletext}>Edit Profile</Text>
               </TouchableOpacity>
+
+              <View style={styles.feed}>
+                {/* <Text style={styles.header}>Portfolio</Text> */}
+                <Text style={styles.text}>
+                  Your portfolio is not connected.
+                </Text>
+
+                <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+                  <View style={styles.feed}>
+                    {/* <Image
+                      source={require("../../assets/icon.png")}
+                      // source={{ uri: itemPic }}
+                      style={styles.avatar}
+                    /> */}
+                    <Text style={styles.header2}> Link your broker</Text>
+                    <Text style={styles.text}>
+                      Account values will always be private.
+                    </Text>
+                    <Text style={styles.link}>Why link an account?</Text>
+                  </View>
+                  <View
+                    style={{
+                      //justifyContent: "center",
+                      alignItems: "center",
+                      paddingTop: 50
+                    }}
+                  >
+                    <LinkPortfolioButton></LinkPortfolioButton>
+                  </View>
+                </View>
+              </View>
             </View>
           )}
         </View>
@@ -508,6 +554,10 @@ const styles = StyleSheet.create({
     borderRadius: 3
   },
 
+  feed: {
+    paddingTop: 20
+  },
+
   header: {
     display: "flex",
     flexDirection: "row",
@@ -567,9 +617,10 @@ const styles = StyleSheet.create({
   uname: {
     textAlign: "left",
     fontWeight: "600",
-    fontSize: 18,
-    top: 10,
+    fontSize: 20,
+    //top: 10,
     paddingLeft: 10,
+    paddingRight: 5,
     color: "#FFF"
   },
 
@@ -618,5 +669,48 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     color: "#FFF"
+  },
+  btn: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: 200,
+    //position: "absolute",
+    //bottom: 10,
+    //right: 110,
+    //top: 200,
+    height: 50,
+    backgroundColor: "#147efb",
+    borderRadius: 100,
+    flexDirection: "row",
+    alignSelf: "center",
+    marginTop: 30
+  },
+  avatar: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    marginBottom: 30,
+    alignSelf: "center"
+  },
+  header2: {
+    fontFamily: "Montserrat_800ExtraBold",
+    color: "#FFF",
+    flex: 1,
+    fontSize: 20,
+    paddingBottom: 10,
+    textAlign: "center"
+  },
+  text: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#FFF",
+    textAlign: "center",
+    fontSize: 20
+  },
+  link: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#147efb",
+    textAlign: "center",
+    fontSize: 20,
+    paddingVertical: 10
   }
 });
