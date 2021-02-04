@@ -20,7 +20,7 @@ import {
   Bubble,
   InputToolbar,
   Time,
-  SystemMessage,
+  SystemMessage
 } from "react-native-gifted-chat";
 import {
   AntDesign,
@@ -30,7 +30,7 @@ import {
   Feather,
   FontAwesome,
   FontAwesome5,
-  MaterialCommunityIcons,
+  MaterialCommunityIcons
 } from "@expo/vector-icons";
 
 function Discussion({ route, navigation }) {
@@ -51,8 +51,8 @@ function Discussion({ route, navigation }) {
       .doc(item.groupID)
       .collection("messages")
       .orderBy("createdAt", "desc")
-      .onSnapshot((querySnapshot) => {
-        const messages = querySnapshot.docs.map((doc) => {
+      .onSnapshot(querySnapshot => {
+        const messages = querySnapshot.docs.map(doc => {
           let firebaseData = doc.data();
           firebaseData.createdAt = firebaseData.createdAt
             .toDate()
@@ -63,12 +63,13 @@ function Discussion({ route, navigation }) {
 
           firebaseData["user"]["_id"] =
             firebaseData["user"]["_id"] == userid ? 1 : 2;
+          firebaseData["user"]["_id"] = 2;
 
           const data = {
             _id: doc.id,
             text: "",
             createdAt: new Date().getTime(),
-            ...firebaseData,
+            ...firebaseData
           };
           return data;
         });
@@ -84,9 +85,9 @@ function Discussion({ route, navigation }) {
       .collection("member")
       .where("userID", "==", userid)
       .get()
-      .then(function (querySnapshot) {
+      .then(function(querySnapshot) {
         if (querySnapshot.size > 0) {
-          querySnapshot.forEach(function (doc) {
+          querySnapshot.forEach(function(doc) {
             if (doc.data() != null) {
               setIsJoined(true);
             } else {
@@ -98,7 +99,7 @@ function Discussion({ route, navigation }) {
           showAlertToJoinGroup();
         }
       })
-      .catch(function (error) {
+      .catch(function(error) {
         console.log("Error getting documents: ", error);
       });
   }
@@ -122,12 +123,12 @@ function Discussion({ route, navigation }) {
           text: "Yes",
           onPress: () => {
             joinGroup();
-          },
+          }
         },
         {
           text: "No",
-          onPress: () => {},
-        },
+          onPress: () => {}
+        }
       ],
       { cancelable: false }
     );
@@ -141,33 +142,36 @@ function Discussion({ route, navigation }) {
       .doc();
     groupMemberRef
       .set({
-        userID: userID,
+        userID: userID
       })
-      .then(function (docRef) {
+      .then(function(docRef) {
         setIsJoined(true);
         Alert.alert(Strings.joinMessage);
         setMessage("");
       })
-      .catch(function (error) {
+      .catch(function(error) {
         setIsJoined(false);
         Alert.alert(Strings.JoinGroupError);
       });
   }
 
-  const onPressCashtag = (cashtag) => {
+  const onPressCashtag = cashtag => {
     let symbol = cashtag.replace("$", "");
     if (isNaN(symbol)) {
       navigation.navigate("StockDetails", {
         symbol: symbol,
-        screen: "StockDetails",
+        screen: "StockDetails"
       });
     }
   };
 
-  const lastMessage = async (message) => {
-    await firestore.collection("publicgroups").doc(item.groupID).update({
-      lastmessage: message,
-    });
+  const lastMessage = async message => {
+    await firestore
+      .collection("publicgroups")
+      .doc(item.groupID)
+      .update({
+        lastmessage: message
+      });
   };
 
   function onSend(newMessage = []) {
@@ -187,10 +191,10 @@ function Discussion({ route, navigation }) {
           text: newMessage[i].text,
           user: {
             _id: userid,
-            name: username,
-          },
+            name: username
+          }
         })
-        .then(function (docRef) {
+        .then(function(docRef) {
           setMessages(GiftedChat.append(messages, newMessage));
           let message = newMessage[i].text;
           lastMessage(message);
@@ -203,11 +207,11 @@ function Discussion({ route, navigation }) {
             isNaN(symbol[1])
           ) {
             navigation.push("StockDetails", {
-              symbol: symbol[1].trim().toUpperCase(),
+              symbol: symbol[1].trim().toUpperCase()
             });
           }
         })
-        .catch(function (error) {
+        .catch(function(error) {
           Alert.alert(error.message);
           console.log("Error:", error);
         });
@@ -215,13 +219,13 @@ function Discussion({ route, navigation }) {
     setMessages(GiftedChat.append(messages, newMessage));
   }
 
-  const renderBubble = (props) => {
+  const renderBubble = props => {
     return (
       <View>
         <TouchableOpacity
           onPress={() =>
             navigation.push("Profile", {
-              uid: props.currentMessage.user.userid,
+              uid: props.currentMessage.user.userid
             })
           }
         >
@@ -231,26 +235,26 @@ function Discussion({ route, navigation }) {
           {...props}
           wrapperStyle={{
             right: {
-              backgroundColor: "transparent",
+              backgroundColor: "transparent"
             },
             left: {
-              backgroundColor: "transparent",
-            },
+              backgroundColor: "transparent"
+            }
           }}
           textStyle={{
             left: {
-              color: "#FFF",
+              color: "#FFF"
             },
             right: {
-              color: "#FFF",
-            },
+              color: "#FFF"
+            }
           }}
         />
       </View>
     );
   };
 
-  const renderSend = (props) => {
+  const renderSend = props => {
     return (
       <Send {...props} containerStyle={styles.sendContainer}>
         <View
@@ -262,7 +266,7 @@ function Discussion({ route, navigation }) {
             backgroundColor: "#147efb",
             justifyContent: "center",
             alignItems: "center",
-            alignSelf: "center",
+            alignSelf: "center"
             //marginBottom: -25
             //marginRight: 15
           }}
@@ -279,7 +283,7 @@ function Discussion({ route, navigation }) {
     );
   };
 
-  const customtInputToolbar = (props) => {
+  const customtInputToolbar = props => {
     return (
       <InputToolbar
         {...props}
@@ -300,13 +304,13 @@ function Discussion({ route, navigation }) {
           right: {
             //color: Colors.snow,
             fontFamily: "Montserrat-Light",
-            fontSize: 14,
+            fontSize: 14
           },
           left: {
             ///color: Colors.snow,
             fontFamily: "Montserrat-Light",
-            fontSize: 14,
-          },
+            fontSize: 14
+          }
         }}
       />
     );
@@ -362,7 +366,7 @@ function Discussion({ route, navigation }) {
           justifyContent: "space-around",
           alignItems: "center",
           marginVertical: 40,
-          backgroundColor: "#FFF",
+          backgroundColor: "#FFF"
         }}
       >
         <TouchableOpacity>
@@ -423,8 +427,8 @@ function Discussion({ route, navigation }) {
             flex: 1,
             height: "auto",
             paddingTop: 10,
-            paddingBottom: 10,
-          },
+            paddingBottom: 10
+          }
         }}
         scrollToBottom
         inverted={true}
@@ -438,18 +442,18 @@ function Discussion({ route, navigation }) {
         //textInputStyle={styles.textInput}
         //isTyping={true}
         //renderUsernameOnMessage={true}
-        renderInputToolbar={(props) => customtInputToolbar(props)}
+        renderInputToolbar={props => customtInputToolbar(props)}
         multiline
         placeholder={"Enter a message..."}
-        onSend={(newMessages) => onSend(newMessages)}
+        onSend={newMessages => onSend(newMessages)}
         user={{
           _id: 1,
-          name: username,
+          name: username
         }}
-        parsePatterns={(linkStyle) => [
+        parsePatterns={linkStyle => [
           {
             type: "phone",
-            style: linkStyle,
+            style: linkStyle
             // onPress: this.onPressPhoneNumber
           },
           {
@@ -458,8 +462,8 @@ function Discussion({ route, navigation }) {
               ...linkStyle,
               color: "#FFF",
               fontWeight: "bold",
-              textDecorationLine: "underline",
-            },
+              textDecorationLine: "underline"
+            }
             // onPress: this.onPressHashtag
           },
           {
@@ -469,9 +473,9 @@ function Discussion({ route, navigation }) {
               ...linkStyle,
               color: "#33CC00",
               fontWeight: "bold",
-              textDecorationLine: "underline",
+              textDecorationLine: "underline"
             },
-            onPress: onPressCashtag,
+            onPress: onPressCashtag
           },
           {
             pattern: /\@(\w+)/,
@@ -479,10 +483,10 @@ function Discussion({ route, navigation }) {
               ...linkStyle,
               color: "#33CC00",
               fontWeight: "bold",
-              textDecorationLine: "underline",
-            },
+              textDecorationLine: "underline"
+            }
             // onPress: this.onPressHashtag
-          },
+          }
         ]}
       />
     </View>
@@ -492,13 +496,13 @@ export default Discussion;
 
 const styles = StyleSheet.create({
   input: {
-    width: 80,
+    width: 80
   },
   ImageStyle: {
     height: 25,
     width: 25,
     resizeMode: "stretch",
-    alignItems: "center",
+    alignItems: "center"
   },
   flatList: {
     //position: "absolute",
@@ -512,7 +516,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     marginRight: 15,
-    color: "#FFF",
+    color: "#FFF"
   },
 
   main: {
@@ -521,12 +525,12 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
     // borderBottomRightRadius: 35,
-    paddingTop: 40,
+    paddingTop: 40
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 20
     //backgroundColor: "#303135"
   },
   username: {
@@ -552,7 +556,7 @@ const styles = StyleSheet.create({
   avatar: {
     width: 40,
     height: 40,
-    borderRadius: 20,
+    borderRadius: 20
   },
   container: {
     //position: "absolute",
@@ -566,11 +570,11 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
     flex: 1,
-    textAlign: "center",
+    textAlign: "center"
   },
   systemMessageText: {
     fontSize: 14,
     color: "#FFF",
-    fontWeight: "bold",
-  },
+    fontWeight: "bold"
+  }
 });
