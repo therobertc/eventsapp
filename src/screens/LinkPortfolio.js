@@ -9,14 +9,10 @@ import {
   ScrollView,
   Image
 } from "react-native";
-import StockGroupCard from "../components/StockGroupCard";
-import firebase, { firestore } from "../database/firebase";
 
 import LinkPortfolioButton from "../components/LinkPortfolioButton";
-
-import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import { Link } from "@react-navigation/native";
+
 
 const LinkPortfolio = props => {
   return (

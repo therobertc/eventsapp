@@ -12,11 +12,13 @@ import {
 import { Feather } from "@expo/vector-icons";
 import * as firebase from "firebase";
 import LinkPortfolioButton from "../components/LinkPortfolioButton";
-
 const { height } = Dimensions.get("screen");
+
+
 class _Profile extends Component {
   state = {
     images: [],
+    currentUser: firebase.default.auth().currentUser.uid,
     userDetails: {},
     userKey: "",
     user: "",
@@ -25,6 +27,7 @@ class _Profile extends Component {
   };
 
   componentDidMount() {
+
     if (this.props.route.params && this.props.route.params.uid) {
       this.setState(
         {
@@ -182,9 +185,9 @@ class _Profile extends Component {
 
           <Text style={styles.headertitle}>Profile</Text>
 
-          <TouchableOpacity onPress={this.actionSheet}>
+          {(this.state.user  !== this.state.currentUser) ? <TouchableOpacity onPress={this.actionSheet}>
             <Feather name="more-horizontal" size={30} color="#FFF" />
-          </TouchableOpacity>
+          </TouchableOpacity>: <View/>}
         </View>
         <View style={styles.data}>
           <View>
