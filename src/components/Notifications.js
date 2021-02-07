@@ -9,6 +9,7 @@ import {
 import axios from "axios";
 import URL from "../../Constant/Constant";
 import moment from "moment";
+import { Feather } from "@expo/vector-icons";
 
 class Notifications extends Component {
   constructor(props) {
@@ -59,17 +60,88 @@ class Notifications extends Component {
                   marginLeft: 10
                 }}
               >
-                <Text
-                  style={{ color: "#FFF", fontWeight: "bold", fontSize: 16 }}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center"
+                  }}
                 >
-                  {data.title}
-                </Text>
+                  <Text
+                    style={{ color: "#FFF", fontWeight: "bold", fontSize: 16 }}
+                  >
+                    {data.title}
+                  </Text>
+                  <Text
+                    style={{ color: "#7c818c", fontSize: 16, paddingLeft: 5 }}
+                  >
+                    · {moment(new Date(data.dateTime)).fromNow()}
+                  </Text>
+
+                  {/* <Text
+                    style={{ color: "#7c818c", fontSize: 16, paddingLeft: 5 }}
+                  >
+                    · NewsBot
+                  </Text> */}
+                </View>
                 <Text style={{ color: "#FFF", paddingTop: 5, fontSize: 16 }}>
                   {data.message}
                 </Text>
-                <Text style={{ color: "#7c818c", paddingTop: 5, fontSize: 16 }}>
-                  {moment(new Date(data.dateTime)).fromNow()}
-                </Text>
+                {/* <Text style={{ color: "#7c818c", fontSize: 16, paddingTop: 5 }}>
+                  @NewsBot
+                </Text> */}
+                {/* <Text
+                  style={{ color: "#7c818c", fontSize: 16, paddingLeft: 5 }}
+                >
+                  · {moment(new Date(data.dateTime)).fromNow()}
+                </Text> */}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingTop: 10
+                  }}
+                >
+                  <TouchableOpacity>
+                    <Feather
+                      style={{
+                        color: "lightgrey",
+                        fontSize: 20
+                      }}
+                      name="message-circle"
+                      //onPress={() => this.props.navigation.navigate("Settings")}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Feather
+                      style={{
+                        color: "lightgrey",
+                        fontSize: 20
+                      }}
+                      name="repeat"
+                      //onPress={() => this.props.navigation.navigate("Settings")}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Feather
+                      style={{
+                        color: "lightgrey",
+                        fontSize: 20
+                      }}
+                      name="heart"
+                      //onPress={() => this.props.navigation.navigate("Settings")}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Feather
+                      style={{
+                        color: "lightgrey",
+                        fontSize: 20
+                      }}
+                      name="share"
+                      //onPress={() => this.props.navigation.navigate("Settings")}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
             </TouchableOpacity>
           </View>

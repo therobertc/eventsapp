@@ -8,7 +8,7 @@ import {
   Animated,
   TouchableOpacity,
   ScrollView,
-  Share,
+  Share
 } from "react-native";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
 import Messages from "../components/Messages";
@@ -194,28 +194,46 @@ const Chat = props => {
           {/* </Body> */}
 
           <Right>
-            <TouchableOpacity style={styles.invite} onPress={onShare}>
-              <Feather
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center"
+              }}
+            >
+              {/* <Feather
                 style={{
                   color: "#FFF",
                   fontWeight: "bold",
                   paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                  fontSize: 20
+                  fontSize: 30,
+                  marginRight: 10
                 }}
-                name="user-plus"
-              />
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontSize: 18,
-                  fontWeight: "600",
-                  color: "#FFF"
-                  //paddingLeft: 10
-                }}
-              >
-                Invite
-              </Text>
-            </TouchableOpacity>
+                name="mail"
+              /> */}
+              <TouchableOpacity style={styles.invite} onPress={onShare}>
+                <Feather
+                  style={{
+                    color: "#FFF",
+                    fontWeight: "bold",
+                    paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                    fontSize: 20
+                  }}
+                  name="user-plus"
+                />
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 18,
+                    fontWeight: "600",
+                    color: "#FFF"
+                    //paddingLeft: 10
+                  }}
+                >
+                  Invite
+                </Text>
+              </TouchableOpacity>
+            </View>
 
             {/* <Feather
             style={{
@@ -340,7 +358,7 @@ const Chat = props => {
           /> */}
         {/* </View>  */}
         <View style={styles.col}>
-          <Text style={styles.logotext}>Group Chats</Text>
+          <Text style={styles.header2}>Group Chats</Text>
           {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
@@ -542,8 +560,7 @@ const styles = StyleSheet.create({
   },
   col: {
     flexDirection: "row",
-    //marginTop: 25,
-    marginHorizontal: 10,
+    marginLeft: 20,
     alignItems: "center"
   },
   stockchats: {

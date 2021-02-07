@@ -24,7 +24,7 @@ class Activity extends React.Component {
   }
 
   render(props) {
-    console.log("--",props)
+    console.log("--", props);
     return (
       <View style={styles.container}>
         <View
@@ -36,16 +36,29 @@ class Activity extends React.Component {
           }}
         >
           <Text style={styles.header}>Activity</Text>
-          <Feather
-            style={{
-              color: "#FFF",
-              fontWeight: "bold",
-              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-              fontSize: 30
-            }}
-            name="settings"
-            onPress={() => this.props.navigation.navigate("Settings")}
-          />
+
+          <View style={{ flexDirection: "row" }}>
+            <Feather
+              style={{
+                color: "#FFF",
+                fontWeight: "bold",
+                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                fontSize: 30
+              }}
+              name="bell"
+              // onPress={() => this.props.navigation.navigate("Settings")}
+            />
+            <Feather
+              style={{
+                color: "#FFF",
+                fontWeight: "bold",
+                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                fontSize: 30
+              }}
+              name="search"
+              // onPress={() => this.props.navigation.navigate("Settings")}
+            />
+          </View>
         </View>
 
         <View style={styles.feed}>

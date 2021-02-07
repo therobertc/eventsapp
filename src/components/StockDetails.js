@@ -356,6 +356,10 @@ class StockDetails extends Component {
         if (news.length > 0) {
             return (
                 <View style={styles.card}>
+
+<View style={styles.adcard}>
+{/* <Text style={styles.heading}>Connect ChartBot</Text> */}
+    </View>
                     <View style={{ paddingBottom: 1 }}>
                         <Text style={styles.heading}>Latest News</Text>
                         {/* <Feedback></Feedback> */}
@@ -372,10 +376,10 @@ class StockDetails extends Component {
                                 <TouchableOpacity
                                     onPress={() => WebBrowser.openBrowserAsync(data.url)}
                                 >
-                                    <Text style={{ fontSize: 12, paddingBottom: 5, color: '#F5F8FA' }}>
-                                        {data.source}
+                                    <Text style={styles.username} >
+                                        @{data.source}
                                     </Text>
-                                    <Text style={styles.subheading}>{data.headline}</Text>
+                                    <Text style={styles.preview}>{data.headline}</Text>
                                 </TouchableOpacity>
                             </View>
                         );
@@ -835,7 +839,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#282c34"
+        
     },
     container: {
         flex: 1,
@@ -854,8 +858,21 @@ const styles = StyleSheet.create({
         backgroundColor: "#282c34",
         borderRadius: 20,
         paddingHorizontal: 20,
-        paddingVertical: 20
+        paddingVertical: 20,
+       
     },
+    preview: {
+        //color: "#657786",
+        color: "#7c818c",
+        //fontFamily: "Montserrat_300SemiBold",
+        fontSize: 15,
+        //paddingLeft: 10,
+        backgroundColor: "#282c34",
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1,
+        
+        marginRight: 10
+      },
     chart: {
         // shadowOffset: { width: 0.5, height: 0.5 },
         // shadowRadius: 5,
@@ -898,6 +915,12 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         color: '#FFF'
     },
+    username: {
+        color: "#FFF",
+        fontFamily: "Montserrat_700Bold",
+        fontSize: 15,
+        paddingVertical: 10
+      },
     subtext: {
         fontSize: 18,
         fontWeight: "500",

@@ -8,7 +8,8 @@ import {
   TouchableOpacity,
   View,
   Image,
-  Share
+  Share,
+  Linking
 } from "react-native";
 import firebase, { firestore } from "./../database/firebase";
 import * as ImagePicker from "expo-image-picker";
@@ -456,13 +457,22 @@ function Discussion({ route, navigation }) {
             style: linkStyle
             // onPress: this.onPressPhoneNumber
           },
+          // {
+          //   type: "url",
+          //   style: {
+          //     color: "#FFF",
+          //     fontWeight: "bold",
+          //     //textDecorationLine: "underline"
+          //     onPress: this.props.openURL
+          //   }
+          // },
           {
             pattern: /#(\w+)/,
             style: {
               ...linkStyle,
               color: "#FFF",
-              fontWeight: "bold",
-              textDecorationLine: "underline"
+              fontWeight: "bold"
+              //textDecorationLine: "underline"
             }
             // onPress: this.onPressHashtag
           },
@@ -472,8 +482,8 @@ function Discussion({ route, navigation }) {
             style: {
               ...linkStyle,
               color: "#33CC00",
-              fontWeight: "bold",
-              textDecorationLine: "underline"
+              fontWeight: "bold"
+              //textDecorationLine: "underline"
             },
             onPress: onPressCashtag
           },
@@ -482,8 +492,8 @@ function Discussion({ route, navigation }) {
             style: {
               ...linkStyle,
               color: "#33CC00",
-              fontWeight: "bold",
-              textDecorationLine: "underline"
+              fontWeight: "bold"
+              //textDecorationLine: "underline"
             }
             // onPress: this.onPressHashtag
           }
@@ -552,6 +562,10 @@ const styles = StyleSheet.create({
   //   color: "#FFF",
   //   paddingLeft: 20
   // },
+
+  linkStyle: {
+    color: "#FFF"
+  },
 
   avatar: {
     width: 40,

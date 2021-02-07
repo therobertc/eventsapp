@@ -8,11 +8,12 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-  ActivityIndicator,
+  ActivityIndicator
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import * as firebase from "firebase";
+import { Header, Left, Right, Icon, Body } from "native-base";
 
 const { height } = Dimensions.get("screen");
 
@@ -25,21 +26,21 @@ class App extends React.Component {
     bio: "",
     image: "",
     updating: false,
-    imgSelected: null,
+    imgSelected: null
   };
 
   async componentDidMount() {
     this.fetchUser();
   }
 
-  fetchUser = async (id) => {
+  fetchUser = async id => {
     const db = firebase.default.firestore();
     var users = db.collection("users");
     users
       .where("id", "==", firebase.default.auth().currentUser.uid)
       .get()
-      .then((s) => {
-        s.docs.forEach((doc) => {
+      .then(s => {
+        s.docs.forEach(doc => {
           this.setState(
             {
               Name: doc.data().Name ? doc.data().Name : "",
@@ -47,7 +48,7 @@ class App extends React.Component {
               phoneNo: doc.data().phoneNo ? doc.data().phoneNo : "",
               image: doc.data().image ? doc.data().image : "",
               bio: doc.data().bio ? doc.data().bio : "",
-              userKey: doc.id,
+              userKey: doc.id
             },
             () => {
               this.setState({ imgSelected: null });
@@ -55,12 +56,12 @@ class App extends React.Component {
           );
         });
       })
-      .catch((e) => {
+      .catch(e => {
         console.log("e", e);
       });
   };
 
-  update = (img) => {
+  update = img => {
     this.setState({ updating: true });
     firebase.default
       .firestore()
@@ -71,16 +72,16 @@ class App extends React.Component {
         email: this.state.email,
         phoneNo: this.state.phoneNo,
         bio: this.state.bio,
-        image: img,
+        image: img
       })
 
-      .then((s) => {
+      .then(s => {
         this.setState({ updating: false });
 
         this.props.navigation.goBack();
         this.props.route.params.fetchUsers();
       })
-      .catch((e) => this.setState({ updating: false }));
+      .catch(e => this.setState({ updating: false }));
   };
 
   pickImage = async () => {
@@ -88,7 +89,7 @@ class App extends React.Component {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 1
     });
 
     console.log(result);
@@ -96,21 +97,21 @@ class App extends React.Component {
     if (!result.cancelled) {
       this.setState({
         image: result.uri,
-        imgSelected: true,
+        imgSelected: true
       });
     }
   };
 
-  uploadImageAsync = async (uri) => {
+  uploadImageAsync = async uri => {
     this.setState({ updating: true });
 
     const uid = firebase.default.auth().currentUser.uid;
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.onload = function () {
+      xhr.onload = function() {
         resolve(xhr.response);
       };
-      xhr.onerror = function (e) {
+      xhr.onerror = function(e) {
         reject(new TypeError("Network request failed"));
       };
       xhr.responseType = "blob";
@@ -119,7 +120,10 @@ class App extends React.Component {
     });
 
     let key = new Date().getTime();
-    const ref = firebase.default.storage().ref().child(uid);
+    const ref = firebase.default
+      .storage()
+      .ref()
+      .child(uid);
     const snapshot = await ref.put(blob);
 
     // We're done with the blob, close and release it
@@ -133,13 +137,25 @@ class App extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-            <Feather name="chevron-left" size={30} color="black" />
-          </TouchableOpacity>
+        <Header style={{ backgroundColor: "#282c34", borderBottomWidth: 0 }}>
+          <Left>
+            <Icon
+              style={{
+                color: "#FFF",
+                paddingHorizontal: 20,
+                fontSize: 24,
+                fontWeight: "bold"
+              }}
+              name="arrow-back"
+              onPress={() => this.props.navigation.goBack()}
+            />
+          </Left>
 
-          <Text style={styles.headertitle}>Edit Profile</Text>
-        </View>
+          <Body>
+            <Text style={styles.headertitle}>Edit Profile</Text>
+          </Body>
+          <Right></Right>
+        </Header>
 
         <View style={styles.pickimage}>
           <TouchableOpacity onPress={() => this.pickImage()}>
@@ -149,18 +165,25 @@ class App extends React.Component {
                   ? { uri: this.state.image }
                   : require("../../assets/placeholderimage.png")
               }
-              style={{ width: 80, height: 80, borderRadius: 50 }}
+              style={{
+                width: 80,
+                height: 80,
+                borderRadius: 50,
+                borderWidth: 1,
+                borderColor: "#FFF",
+                alignSelf: "center"
+              }}
             />
-            <Text style={styles.name}>{this.state.Name}</Text>
+            <Text style={styles.formtext}>Update Photo</Text>
           </TouchableOpacity>
         </View>
         <View>
           <View>
-            <Text style={{ marginTop: 20 }}>Change Username:</Text>
+            <Text style={styles.formtext}>Update Username:</Text>
             <TextInput
               style={styles.changeusername}
               value={this.state.Name}
-              onChangeText={(e) => this.setState({ Name: e })}
+              onChangeText={e => this.setState({ Name: e })}
             ></TextInput>
           </View>
 
@@ -175,20 +198,20 @@ class App extends React.Component {
           </View> */}
 
           <View>
-            <Text style={{ marginTop: 20 }}>Change Phone:</Text>
+            <Text style={styles.formtext}>Update Phone Number:</Text>
             <TextInput
               style={styles.change}
               value={this.state.phoneNo}
-              onChangeText={(e) => this.setState({ phoneNo: e })}
+              onChangeText={e => this.setState({ phoneNo: e })}
             ></TextInput>
           </View>
 
           <View>
-            <Text style={{ marginTop: 20 }}>Bio:</Text>
+            <Text style={styles.formtext}>Update Bio:</Text>
             <TextInput
               style={styles.change}
               value={this.state.bio}
-              onChangeText={(e) => this.setState({ bio: e })}
+              onChangeText={e => this.setState({ bio: e })}
             ></TextInput>
           </View>
 
@@ -196,7 +219,7 @@ class App extends React.Component {
             {!this.state.updating ? (
               <TouchableOpacity
                 style={styles.save}
-                onPress={(e) => {
+                onPress={e => {
                   if (this.state.imgSelected) {
                     this.uploadImageAsync(this.state.image);
                   } else {
@@ -204,15 +227,7 @@ class App extends React.Component {
                   }
                 }}
               >
-                <Text
-                  style={{
-                    fontSize: 12,
-                    fontWeight: "500",
-                    textAlign: "center",
-                  }}
-                >
-                  Save
-                </Text>
+                <Text style={styles.text}>Save</Text>
               </TouchableOpacity>
             ) : (
               <ActivityIndicator size="large" color="#0000ff" />
@@ -227,45 +242,74 @@ class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    backgroundColor: "white",
-    height: height,
+    backgroundColor: "#282c34",
+    height: height
   },
   header: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 15,
+    marginTop: 30,
+    flex: 1
   },
   headertitle: {
-    width: "82%",
     textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
+    color: "#FFF"
   },
   pickimage: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    margin: 20,
+    margin: 20
   },
   name: {
     textAlign: "center",
     fontWeight: "600",
-    fontSize: 12,
+    fontSize: 20,
     marginTop: 10,
+    color: "#FFF"
   },
   changeusername: {
     marginTop: 10,
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
+    color: "#FFF",
+    paddingLeft: 20,
+    fontSize: 20
   },
   change: {
     marginTop: 10,
     height: 40,
     borderColor: "gray",
     borderWidth: 1,
+    color: "#FFF",
+    paddingLeft: 20,
+    fontSize: 20
+  },
+  text: {
+    fontSize: 20,
+    fontWeight: "500",
+    textAlign: "center",
+    color: "#FFF"
+  },
+  formtext: {
+    color: "#FFF",
+    flex: 1,
+    fontSize: 20,
+    paddingTop: 10
+  },
+
+  header2: {
+    fontFamily: "Montserrat_800ExtraBold",
+    color: "#FFF",
+    flex: 1,
+    fontSize: 20,
+    paddingBottom: 10,
+    textAlign: "center"
   },
   save: {
     borderWidth: 1,
@@ -274,9 +318,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: "100%",
     padding: 10,
-    borderColor: "silver",
-    borderRadius: 3,
-  },
+    borderColor: "grey",
+    borderRadius: 3
+  }
 });
 
 export default App;

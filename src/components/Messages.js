@@ -66,7 +66,7 @@ export default Messages;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10
+    //paddingHorizontal: 10
   },
   gradientStyle: {
     height: 20,
@@ -101,8 +101,8 @@ const styles = StyleSheet.create({
   username: {
     color: "#FFF",
     fontFamily: "Montserrat_700Bold",
-    fontSize: 15
-    //paddingLeft: 10
+    fontSize: 15,
+    paddingLeft: 10
   },
   preview: {
     //color: "#657786",
@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     //fontFamily: "Montserrat_300SemiBold",
     fontSize: 15,
     //paddingLeft: 10,
+    paddingLeft: 10,
     marginRight: 10
   },
   card: {
@@ -123,19 +124,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     //marginVertical: 5,
     elevation: 1,
-    //backgroundColor: "#e8eef1",
-    //backgroundColor: "#282c34"
-    //backgroundColor: "#4b5162",
-    //backgroundColor: "#282c34",
-    //borderRadius: 20,
+
     paddingRight: 20,
     paddingVertical: 5,
     flexDirection: "row",
-    marginLeft: 10,
+    //marginLeft: 10,
     //paddingHorizontal: 40,
     alignItems: "center",
-    //marginTop: 15,
-    //marginBottom: 20,
     justifyContent: "space-between",
     height: 80
   }

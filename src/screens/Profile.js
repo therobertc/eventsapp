@@ -12,8 +12,8 @@ import {
 import { Feather } from "@expo/vector-icons";
 import * as firebase from "firebase";
 import LinkPortfolioButton from "../components/LinkPortfolioButton";
+import PortfolioAuth from "../components/Cards/PortfolioAuth";
 const { height } = Dimensions.get("screen");
-
 
 class _Profile extends Component {
   state = {
@@ -27,7 +27,6 @@ class _Profile extends Component {
   };
 
   componentDidMount() {
-
     if (this.props.route.params && this.props.route.params.uid) {
       this.setState(
         {
@@ -183,11 +182,24 @@ class _Profile extends Component {
             <Feather name="chevron-left" size={30} color="#FFF" />
           </TouchableOpacity>
 
-          <Text style={styles.headertitle}>Profile</Text>
+          <Text style={styles.headertitle}>Wallet</Text>
 
-          {(this.state.user  !== this.state.currentUser) ? <TouchableOpacity onPress={this.actionSheet}>
-            <Feather name="more-horizontal" size={30} color="#FFF" />
-          </TouchableOpacity>: <View/>}
+          {this.state.user !== this.state.currentUser ? (
+            <TouchableOpacity onPress={this.actionSheet}>
+              <Feather name="more-horizontal" size={30} color="#FFF" />
+            </TouchableOpacity>
+          ) : (
+            <Feather
+              style={{
+                color: "#FFF",
+                fontWeight: "bold",
+                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                fontSize: 30
+              }}
+              name="settings"
+              onPress={() => this.props.navigation.navigate("Settings")}
+            />
+          )}
         </View>
         <View style={styles.data}>
           <View>
@@ -346,11 +358,11 @@ class _Profile extends Component {
               @{userDetails.Name ? userDetails.Name : ""}
             </Text>
 
-            <Image
+            {/* <Image
               source={require("../../assets/verified.png")}
               // source={{ uri: itemPic }}
               style={{ height: 20, width: 20 }}
-            />
+            /> */}
           </View>
 
           <Text style={styles.bio}>
@@ -373,7 +385,7 @@ class _Profile extends Component {
                   style={styles.unfollow}
                   onPress={() => this.unFollow()}
                 >
-                  <Text style={styles.following}>UNSUBSCRIBE</Text>
+                  <Text style={styles.followtext}>UNSUBSCRIBE</Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -391,7 +403,7 @@ class _Profile extends Component {
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity
-                  style={styles.editprofile}
+                  style={styles.blockview}
                   onPress={() => this.unBlock()}
                 >
                   <Text style={styles.unblockuser}>Unblock User</Text>
@@ -409,39 +421,10 @@ class _Profile extends Component {
                   })
                 }
               >
-                <Text style={styles.editprofiletext}>Edit Profile</Text>
+                <Text style={styles.text}>Edit Profile</Text>
               </TouchableOpacity>
 
-              <View style={styles.feed}>
-                {/* <Text style={styles.header}>Portfolio</Text> */}
-                <Text style={styles.text}>
-                  Your portfolio is not connected.
-                </Text>
-
-                <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
-                  <View style={styles.feed}>
-                    {/* <Image
-                      source={require("../../assets/icon.png")}
-                      // source={{ uri: itemPic }}
-                      style={styles.avatar}
-                    /> */}
-                    <Text style={styles.header2}> Link your broker</Text>
-                    <Text style={styles.text}>
-                      Account values will always be private.
-                    </Text>
-                    <Text style={styles.link}>Why link an account?</Text>
-                  </View>
-                  <View
-                    style={{
-                      //justifyContent: "center",
-                      alignItems: "center",
-                      paddingTop: 50
-                    }}
-                  >
-                    <LinkPortfolioButton></LinkPortfolioButton>
-                  </View>
-                </View>
-              </View>
+              <PortfolioAuth></PortfolioAuth>
             </View>
           )}
         </View>
@@ -499,9 +482,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: "center"
   },
-  text: {
-    color: "transparent"
-  },
+
   add: {
     backgroundColor: "#939393",
     position: "absolute",
@@ -533,7 +514,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: "silver",
     borderRadius: 5,
-    backgroundColor: "#3b5998"
+    backgroundColor: "#147efb"
   },
   editprofile: {
     borderWidth: 1,
@@ -543,6 +524,17 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     borderColor: "silver",
+    borderRadius: 3
+  },
+
+  blockview: {
+    borderWidth: 1,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    width: "100%",
+    padding: 10,
+    borderColor: "#ff3636",
     borderRadius: 3
   },
 
@@ -643,11 +635,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   unblockuser: {
-    fontSize: 12,
+    fontSize: 18,
     fontWeight: "500",
     textAlign: "center",
     fontWeight: "bold",
-    color: "red"
+    color: "#ff3636"
   },
   common1: {
     display: "flex",
@@ -668,8 +660,8 @@ const styles = StyleSheet.create({
     color: "#FFF"
   },
   followtext: {
-    fontSize: 13,
-    fontWeight: "bold",
+    fontSize: 18,
+    fontWeight: "700",
     textAlign: "center",
     color: "#FFF"
   },
@@ -703,11 +695,12 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     textAlign: "center"
   },
+
   text: {
-    //fontFamily: "Montserrat_400Regular",
-    color: "#FFF",
+    fontSize: 20,
+    fontWeight: "500",
     textAlign: "center",
-    fontSize: 20
+    color: "#FFF"
   },
   link: {
     //fontFamily: "Montserrat_400Regular",
