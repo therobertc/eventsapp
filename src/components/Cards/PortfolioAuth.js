@@ -19,7 +19,7 @@ const PortfolioAuth = ({ image, message }) => {
           <Text style={styles.text}>
             Account values will always be private.
           </Text>
-          <Text style={styles.link}>Why link an account?</Text>
+          {/* <Text style={styles.link}>Why link an account?</Text> */}
         </View>
         <View
           style={{

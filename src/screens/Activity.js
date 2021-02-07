@@ -46,9 +46,9 @@ class Activity extends React.Component {
                 fontSize: 30
               }}
               name="bell"
-              // onPress={() => this.props.navigation.navigate("Settings")}
+              onPress={() => this.props.navigation.navigate("Notification")}
             />
-            <Feather
+            {/* <Feather
               style={{
                 color: "#FFF",
                 fontWeight: "bold",
@@ -57,7 +57,7 @@ class Activity extends React.Component {
               }}
               name="search"
               // onPress={() => this.props.navigation.navigate("Settings")}
-            />
+            /> */}
           </View>
         </View>
 

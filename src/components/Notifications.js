@@ -94,7 +94,7 @@ class Notifications extends Component {
                 >
                   · {moment(new Date(data.dateTime)).fromNow()}
                 </Text> */}
-                <View
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -141,7 +141,7 @@ class Notifications extends Component {
                       //onPress={() => this.props.navigation.navigate("Settings")}
                     />
                   </TouchableOpacity>
-                </View>
+                </View> */}
               </View>
             </TouchableOpacity>
           </View>
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#60646C",
     borderBottomWidth: 1,
     // height: 500,
-    marginTop: 10,
+    marginVertical: 2,
     //marginHorizontal: 10,
     justifyContent: "center"
   }

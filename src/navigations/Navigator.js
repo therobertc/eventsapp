@@ -224,8 +224,8 @@ const BottomTabNavigator = () => {
           backgroundColor: "#282c34",
 
           alignContent: "center",
-          borderTopColor: "#282c34",
-        },
+          borderTopColor: "#282c34"
+        }
       }}
     >
       {/* <Tab.Screen
@@ -247,7 +247,7 @@ const BottomTabNavigator = () => {
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
             <Icon2 name="chat" color={color} size={30} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -258,7 +258,7 @@ const BottomTabNavigator = () => {
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
             <Feather name="trending-up" color={color} size={30} />
-          ),
+          )
         }}
       />
       <Tab.Screen
@@ -268,7 +268,7 @@ const BottomTabNavigator = () => {
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
             <Icon name="ios-person" color={color} size={30} />
-          ),
+          )
         }}
       />
     </Tab.Navigator>
@@ -294,7 +294,7 @@ const ChatStackNavigator = () => {
   const [isUser, SetUser] = useState(false);
 
   React.useEffect(() =>
-    fire.auth().onAuthStateChanged((user) => {
+    fire.auth().onAuthStateChanged(user => {
       if (user) {
         SetUser(true);
         console.log("IF ===> ", isUser);

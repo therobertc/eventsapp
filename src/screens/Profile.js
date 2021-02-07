@@ -182,7 +182,7 @@ class _Profile extends Component {
             <Feather name="chevron-left" size={30} color="#FFF" />
           </TouchableOpacity>
 
-          <Text style={styles.headertitle}>Wallet</Text>
+          <Text style={styles.headertitle}>Profile</Text>
 
           {this.state.user !== this.state.currentUser ? (
             <TouchableOpacity onPress={this.actionSheet}>

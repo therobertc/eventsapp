@@ -55,9 +55,9 @@ export default function App({ ...props }) {
             .collection("profile")
             .doc(props.route.params.username)
             .set({ token: token }, { merge: true });
-          props.navigation.push("Success");
+          props.navigation.navigate("Chat");
         })
-        .catch(error => props.navigation.push("Success"));
+        .catch(error => props.navigation.navigate("Chat"));
     } catch (e) {
       alert(e.message);
       console.log(e);
@@ -65,12 +65,12 @@ export default function App({ ...props }) {
   };
   return (
     <View style={styles.getStarted}>
-      {/* <TouchableOpacity
+      <TouchableOpacity
         style={{ position: "absolute", top: 50, left: 20 }}
         onPress={() => props.navigation.goBack()}
       >
         <AntDesign style={styles.back} name="left" size={30} color="#FFF" />
-      </TouchableOpacity> */}
+      </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
           source={require("../../../assets/logo-outline.png")}
@@ -114,7 +114,7 @@ export default function App({ ...props }) {
           </TouchableOpacity>
 
           <View>
-            <TouchableOpacity onPress={() => props.navigation.push("Success")}>
+            <TouchableOpacity onPress={() => props.navigation.navigate("Chat")}>
               <Text style={styles.username}>I'll do this later</Text>
             </TouchableOpacity>
           </View>
