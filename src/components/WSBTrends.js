@@ -8,7 +8,7 @@ import {
   ActivityIndicator
 } from "react-native";
 
-class InsiderTrades extends Component {
+class WSBTrends extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ class InsiderTrades extends Component {
 
   async getTrandingData() {
     return fetch(
-      "https://sharestock.io/api/insider-trades/?token=e10272b94c36ea1ccb217b30028b2e7e4756c9c7",
+      "https://sharestock.io/api/stockchat/wsb-trends/?token=e10272b94c36ea1ccb217b30028b2e7e4756c9c7",
       {
         method: "GET"
       }
@@ -58,7 +58,7 @@ class InsiderTrades extends Component {
           key={index}
           onPress={() =>
             this.props.navigation.push("StockDetails", {
-              symbol: service.Ticker
+              symbol: service.symbol
             })
           }
           //style={styles.card}
@@ -71,16 +71,20 @@ class InsiderTrades extends Component {
               borderBottomWidth: 0.5
             }}
           >
-            <View style={{ flexDirection: "row", paddingBottom: 10 }}>
+            <View style={{ flexDirection: "row", paddingBottom: 5 }}>
               <Text
                 style={{
                   fontWeight: "500",
                   fontSize: 18,
-                  //textAlign: "center",
                   color: "#FFF"
+                  //textAlign: "center",
+                  //   color:
+                  //     parseFloat(service.changePercent) < 0
+                  //       ? "#ff3636"
+                  //       : "#33CC00"
                 }}
               >
-                {service.Ticker}{" "}
+                {service.symbol}{" "}
               </Text>
 
               <Text
@@ -88,46 +92,47 @@ class InsiderTrades extends Component {
                   fontWeight: "500",
                   fontSize: 18,
                   //textAlign: "center",
-                  color: parseFloat(service.Qty) < 0 ? "#ff3636" : "#33CC00"
+                  color:
+                    parseFloat(service.changePercent) < 0
+                      ? "#ff3636"
+                      : "#33CC00"
                 }}
               >
-                {service.Qty}
+                {(service.changePercent * 100).toFixed(2)}%
               </Text>
-
               <Text
                 style={{
                   fontWeight: "500",
                   fontSize: 18,
-                  //textAlign: "center",
                   color: "#FFF"
+                  //textAlign: "center",
+                  //   color:
+                  //     parseFloat(service.changePercent) < 0
+                  //       ? "#ff3636"
+                  //       : "#33CC00"
                 }}
               >
                 {" "}
-                shares @ {service.Price}
+                to ${service.latestPrice}
               </Text>
             </View>
-            <View>
-              <Text style={styles.stocktext}>
-                {service.Title} {service["Insider Name"]}{" "}
-                {/* {service["Trade Type"] === "S - Sale"
-                  ? "Sold"
-                  : "Bought"}{" "} */}
-                {service["Trade Type"]} {service.Qty} shares of{" "}
-                {service["Company Name"]} at {service.Price} per share for a
-                total value of {service.Value} on {service["Trade Date"]}.
-              </Text>
-              <Text
-                style={{
-                  fontWeight: "400",
-                  fontSize: 16,
-                  textAlign: "left",
-                  color: "#7c818c",
-                  paddingTop: 5
-                }}
-              >
-                Insider Trades by Stock Chat
-              </Text>
-            </View>
+
+            <Text style={styles.stocktext}>
+              {service.companyName} was mentioned {service.count} times on
+              WallStreetBets in the last 24 hours
+            </Text>
+
+            <Text
+              style={{
+                fontWeight: "400",
+                fontSize: 16,
+                textAlign: "left",
+                color: "#7c818c",
+                paddingTop: 5
+              }}
+            >
+              WSB Trends by Stock Chat
+            </Text>
           </View>
         </TouchableOpacity>
       ));
@@ -162,12 +167,14 @@ class InsiderTrades extends Component {
   }
 }
 
-export default InsiderTrades;
+export default WSBTrends;
 
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
+
     backgroundColor: "#282c34"
+
     //marginLeft: 20
   },
   text: {

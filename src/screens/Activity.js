@@ -14,6 +14,8 @@ import { Feather } from "@expo/vector-icons";
 import InsiderTrades from "../components/InsiderTrades";
 import Notifications from "../components/Notifications";
 import DropDownPicker from "react-native-dropdown-picker";
+import WSBTrends from "../components/WSBTrends";
+import ActivityTabs from "../components/Tabs/ActivityTabs";
 
 class Activity extends React.Component {
   constructor(props) {
@@ -31,14 +33,14 @@ class Activity extends React.Component {
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            marginHorizontal: 10,
+            //marginHorizontal: 10,
             zIndex: 999
           }}
         >
           <Text style={styles.header}>Activity</Text>
 
           <View style={{ flexDirection: "row" }}>
-            <Feather
+            {/* <Feather
               style={{
                 color: "#FFF",
                 fontWeight: "bold",
@@ -47,7 +49,7 @@ class Activity extends React.Component {
               }}
               name="bell"
               onPress={() => this.props.navigation.navigate("Notification")}
-            />
+            /> */}
             {/* <Feather
               style={{
                 color: "#FFF",
@@ -63,13 +65,15 @@ class Activity extends React.Component {
 
         <View style={styles.feed}>
           {/* <Text style={styles.text}>No new notifications</Text> */}
-          <ScrollView
+          {/* <ScrollView
             showsVerticalScrollIndicator={false}
             //style={{ paddingHorizontal: 10 }}
           >
             <Notifications {...this.props} />
-          </ScrollView>
-          {/* <InsiderTrades {...props} /> */}
+          </ScrollView> */}
+          {/* <InsiderTrades {...this.props} /> */}
+          {/* <WSBTrends {...this.props}></WSBTrends> */}
+          <ActivityTabs></ActivityTabs>
         </View>
       </View>
     );

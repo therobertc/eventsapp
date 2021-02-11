@@ -179,12 +179,14 @@ class App extends React.Component {
         </View>
         <View>
           <View>
-            <Text style={styles.formtext}>Update Username:</Text>
-            <TextInput
-              style={styles.changeusername}
-              value={this.state.Name}
-              onChangeText={e => this.setState({ Name: e })}
-            ></TextInput>
+            <Text style={styles.formtext}>Username:</Text>
+            <Text
+              style={styles.name}
+
+              //onChangeText={e => this.setState({ Name: e })}
+            >
+              @{this.state.Name}
+            </Text>
           </View>
 
           {/* <View>
@@ -266,7 +268,7 @@ const styles = StyleSheet.create({
     margin: 20
   },
   name: {
-    textAlign: "center",
+    //textAlign: "center",
     fontWeight: "600",
     fontSize: 20,
     marginTop: 10,

@@ -4,12 +4,14 @@ import {
   Text,
   View,
   ActivityIndicator,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
 import axios from "axios";
 import URL from "../../Constant/Constant";
 import moment from "moment";
 import { Feather } from "@expo/vector-icons";
+import { FlatList } from "react-native-gesture-handler";
 
 class Notifications extends Component {
   constructor(props) {
@@ -165,7 +167,11 @@ class Notifications extends Component {
         </View>
       );
     }
-    return <View style={styles.container}>{this._render_post_data()}</View>;
+    return (
+      <ScrollView style={styles.container}>
+        {this._render_post_data()}
+      </ScrollView>
+    );
   }
 }
 

@@ -94,7 +94,7 @@ const Chat = props => {
     try {
       const result = await Share.share({
         message:
-          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://testflight.apple.com/join/EbkJK1RL"
+          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {

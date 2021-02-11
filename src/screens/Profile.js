@@ -13,6 +13,8 @@ import { Feather } from "@expo/vector-icons";
 import * as firebase from "firebase";
 import LinkPortfolioButton from "../components/LinkPortfolioButton";
 import PortfolioAuth from "../components/Cards/PortfolioAuth";
+import Stocks from "../components/Cards/Stocks";
+
 const { height } = Dimensions.get("screen");
 
 class _Profile extends Component {
@@ -247,7 +249,9 @@ class _Profile extends Component {
                 size={30}
                 color="#FFF"
               />
+              {/* <Text style={styles.change}>+12.68%</Text> */}
             </TouchableOpacity>
+
             <Text
               style={{
                 fontSize: 18,
@@ -425,6 +429,7 @@ class _Profile extends Component {
               </TouchableOpacity>
 
               <PortfolioAuth></PortfolioAuth>
+              {/* <Stocks></Stocks> */}
             </View>
           )}
         </View>
@@ -537,7 +542,12 @@ const styles = StyleSheet.create({
     borderColor: "#ff3636",
     borderRadius: 3
   },
-
+  change: {
+    color: "#33CC00",
+    fontFamily: "Montserrat_700Bold",
+    fontSize: 20,
+    paddingLeft: 10
+  },
   block: {
     //borderWidth: 1,
     display: "flex",
@@ -585,12 +595,12 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1
   },
-  change: {
-    marginTop: 10,
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1
-  },
+  // change: {
+  //   marginTop: 10,
+  //   height: 40,
+  //   borderColor: "gray",
+  //   borderWidth: 1
+  // },
   save: {
     borderWidth: 1,
     display: "flex",

@@ -390,7 +390,7 @@ function Discussion({ route, navigation }) {
         //     symbol: "SQ"
         //   })
         // }
-        // onPress={() => navigation.navigate("GroupProfile")}
+        onPress={() => navigation.navigate("GroupProfile")}
         >
           <Image
             source={require("../../assets/icon.png")}

@@ -48,7 +48,7 @@ const GroupProfile = props => {
         <View style={styles.col}>
           <Text style={styles.title}>Share Link</Text>
           <Text style={styles.about}>
-            https://testflight.apple.com/join/EbkJK1RL
+            https://stockchatapp.com
           </Text>
         </View>
 

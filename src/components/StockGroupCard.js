@@ -23,47 +23,19 @@ const randomTime = () => {
   return String(hFormat + hrs + ":" + mFormat + mins + " " + amPm);
 };
 
-const StockGroupCard = ({ ticker, pctchange, uri, count, onPress, image }) => {
+const StockGroupCard = ({
+  ticker,
+  pctchange,
+  name,
+  uri,
+  count,
+  onPress,
+  image
+}) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        {/* <Image
-          source={{ uri: uri }}
-          style={{
-            //flex: 1,
-            height: 40,
-            width: 40,
-            borderRadius: 20,
-            //borderWidth: 2,
-            marginBottom: 0,
-            marginRight: 5,
-            borderColor: "#147efb"
-            //alignSelf: "center",
-            //marginTop: 15
-          }}
-          source={{
-            uri: "https://i.stack.imgur.com/l60Hf.png"
-          }}
-        /> */}
-        <View style={{ marginLeft: 10 }}>
-          <View style={{ flexDirection: "row" }}>
-            <Text style={styles.username}>{ticker}</Text>
-            <Text style={styles.change}>{pctchange}</Text>
-          </View>
-          <Text style={styles.preview}>This stock is trending</Text>
-          {/* <Text style={styles.text}>{item.groupMembers}</Text> */}
-        </View>
-      </View>
-
-      <View>
-        <Text style={styles.duration}>{randomTime()}</Text>
-      </View>
+      <Text style={styles.username}>{ticker}</Text>
+      <Text style={styles.change}>{pctchange}</Text>
     </TouchableOpacity>
   );
 };
@@ -107,13 +79,13 @@ const styles = StyleSheet.create({
   username: {
     color: "#FFF",
     fontFamily: "Montserrat_700Bold",
-    fontSize: 15,
+    fontSize: 20,
     paddingLeft: 10
   },
   change: {
     color: "#33CC00",
     fontFamily: "Montserrat_700Bold",
-    fontSize: 15,
+    fontSize: 20,
     paddingLeft: 10
   },
   preview: {
@@ -127,9 +99,9 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     shadowColor: "lightgrey",
     marginHorizontal: 10,
-    shadowOpacity: 1.0,
+    shadowOpacity: 0.5,
     marginVertical: 5,
-    elevation: 1,
+    //elevation: 1,
     //backgroundColor: "#e8eef1",
     //backgroundColor: "#282c34"
     backgroundColor: "#282c34",

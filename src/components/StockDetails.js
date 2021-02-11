@@ -370,16 +370,25 @@ class StockDetails extends Component {
                                 key={index}
                                 style={{
                                     flexDirection: "row",
-                                    justifyContent: "space-between"
+                                    justifyContent: "space-between",
+                                    borderBottomColor: "lightgrey",
+                                    borderBottomWidth: 1,
+                                    paddingVertical: 10
+                                   
                                 }}
                             >
                                 <TouchableOpacity
+                                style={{
+                                    
+                                    
+                                }}
                                     onPress={() => WebBrowser.openBrowserAsync(data.url)}
                                 >
-                                    <Text style={styles.username} >
-                                        @{data.source}
+                                   <Text style={styles.preview} >
+                                    {data.source}
                                     </Text>
-                                    <Text style={styles.preview}>{data.headline}</Text>
+                                    <Text style={styles.username}>{data.headline}</Text>
+                                   
                                 </TouchableOpacity>
                             </View>
                         );
