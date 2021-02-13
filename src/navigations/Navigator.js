@@ -243,6 +243,7 @@ const BottomTabNavigator = () => {
       <Tab.Screen
         name="Chat"
         component={Chat}
+        swipeEnabled={false}
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
