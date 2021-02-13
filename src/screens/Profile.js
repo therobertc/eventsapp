@@ -27,8 +27,12 @@ class _Profile extends Component {
     following: false,
     blockedusers: []
   };
+  static navigationOptions = {
+    gesturesEnabled: false
+  }
 
   componentDidMount() {
+
     if (this.props.route.params && this.props.route.params.uid) {
       this.setState(
         {

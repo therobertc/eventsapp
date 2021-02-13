@@ -23,7 +23,15 @@ class Activity extends React.Component {
     this.state = {
       country: "Stock Alerts"
     };
+    props.navigation.setOptions({
+      gesturesEnabled: false,
+    })
   }
+  static navigationOptions = {
+    gesturesEnabled: false,
+    swipeEnabled: false
+  }
+
 
   render(props) {
     console.log("--", props);

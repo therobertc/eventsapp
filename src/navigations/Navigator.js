@@ -211,24 +211,24 @@ import Editprofile from "../screens/Editprofile";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
-  return (
-    <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: "#147efb",
-        inactiveTintColor: "#AAB8C2",
-        style: {
-          height: "10%",
-          //justifyContent: "center",
-          //alignItems: "center",
-          paddingTop: 15,
-          backgroundColor: "#282c34",
+    return (
+        <Tab.Navigator
+            tabBarOptions={{
+                activeTintColor: "#147efb",
+                inactiveTintColor: "#AAB8C2",
+                style: {
+                    height: "10%",
+                    paddingTop: 15,
+                    backgroundColor: "#282c34",
+                    alignContent: "center",
+                    borderTopColor: "#282c34"
+                },
 
-          alignContent: "center",
-          borderTopColor: "#282c34"
-        }
-      }}
-    >
-      {/* <Tab.Screen
+                swipeEnabled: false,
+
+            }}
+        >
+            {/* <Tab.Screen
         name="Home"
         component={Home}
         options={{
@@ -240,50 +240,54 @@ const BottomTabNavigator = () => {
         }}
       /> */}
 
-      <Tab.Screen
-        name="Chat"
-        component={Chat}
-        swipeEnabled={false}
-        options={{
-          tabBarLabel: "",
-          tabBarIcon: ({ color, size }) => (
-            <Icon2 name="chat" color={color} size={30} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="Alerts"
-        component={Activity}
-        options={{
-          headerShown: false,
-          tabBarLabel: "",
-          tabBarIcon: ({ color, size }) => (
-            <Feather name="trending-up" color={color} size={30} />
-          )
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarLabel: "",
-          tabBarIcon: ({ color, size }) => (
-            <Icon name="ios-person" color={color} size={30} />
-          )
-        }}
-      />
-    </Tab.Navigator>
-  );
+            <Tab.Screen
+                name="Chat"
+                component={Chat}
+                swipeEnabled={false}
+                options={{
+                    tabBarLabel: "",
+                    swipeEnabled: false,
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon2 name="chat" color={color} size={30} />
+                    )
+                }}
+            />
+            <Tab.Screen
+                name="Alerts"
+                component={Activity}
+                options={{
+                    gestureEnabled: false,
+                    swipeEnabled: false,
+                    headerShown: false,
+                    tabBarLabel: "",
+                    tabBarIcon: ({ color, size }) => (
+                        <Feather name="trending-up" color={color} size={30} />
+                    )
+                }}
+            />
+            <Tab.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    tabBarLabel: "",
+                    gestureEnabled: false,
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon name="ios-person" color={color} size={30} />
+                    )
+                }}
+            />
+        </Tab.Navigator>
+    );
 };
 
 const Drawer = createDrawerNavigator();
 
 const SideDrawerNavigator = () => {
-  return (
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="Chat" component={Chat} />
-    </Drawer.Navigator>
-  );
+    return (
+        <Drawer.Navigator initialRouteName="Home">
+            <Drawer.Screen name="Chat" component={Chat} />
+        </Drawer.Navigator>
+    );
 };
 
 const Stack = createStackNavigator();
@@ -292,217 +296,235 @@ const Stack = createStackNavigator();
 // };
 
 const ChatStackNavigator = () => {
-  const [isUser, SetUser] = useState(false);
+    const [isUser, SetUser] = useState(false);
 
-  React.useEffect(() =>
-    fire.auth().onAuthStateChanged(user => {
-      if (user) {
-        SetUser(true);
-        console.log("IF ===> ", isUser);
-      } else {
-        SetUser(false);
-        console.log("ELSE ===>", isUser);
-      }
-    })
-  );
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="GetStarted"
-        component={GetStarted}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ChoosingUsername"
-        component={ChoosingUsername}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Email"
-        component={Email}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Password"
-        component={Password}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="VerifyPhoneNumber"
-        component={VerifyPhoneNumber}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="PhoneNumber"
-        component={PhoneNumber}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="LinkPortfolio"
-        component={LinkPortfolio}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="InviteFriends"
-        component={InviteFriends}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Notification"
-        component={Notification}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Success"
-        component={Success}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Chat"
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CreateChat"
-        component={CreateMsg}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ChatRoom"
-        component={ChatRoom}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="AddMember"
-        component={AddGroupMember}
-        //options={{ title: "Add Receipents" }}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="AddMoreMember"
-        component={AddMoreGroupMember}
-        //options={{ title: "Add Receipents" }}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Discussion"
-        component={Discussion}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="AddGroup"
-        component={AddGroup}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="GroupChat"
-        component={GroupChat}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="GroupInfo"
-        component={GroupInfo}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StockChat"
-        component={StockChat}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StockProfile"
-        component={StockProfile}
-        options={{ headerShown: false }}
-      />
+    React.useEffect(() =>
+        fire.auth().onAuthStateChanged(user => {
+            if (user) {
+                SetUser(true);
+                console.log("IF ===> ", isUser);
+            } else {
+                SetUser(false);
+                console.log("ELSE ===>", isUser);
+            }
+        })
+    );
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name="GetStarted"
+                component={GetStarted}
+                options={{ headerShown: false,
+                    gestureEnabled: false,
+                }}
+            />
+            <Stack.Screen
+                name="ChoosingUsername"
+                component={ChoosingUsername}
+                options={{ headerShown: false,
+                    gestureEnabled: false
+                }}
+            />
+            <Stack.Screen
+                name="Email"
+                component={Email}
+                options={{
+                    headerShown: false,
+                    gestureEnabled: false
+                }}
+            />
+            <Stack.Screen
+                name="Password"
+                component={Password}
+                options={{
+                    headerShown: false,
+                    gestureEnabled: false
+                }}
+            />
+            <Stack.Screen
+                name="VerifyPhoneNumber"
+                component={VerifyPhoneNumber}
+                options={{
+                    headerShown: false ,
+                    gestureEnabled: false
+                }}
+            />
+            <Stack.Screen
+                name="PhoneNumber"
+                component={PhoneNumber}
+                options={{
+                    headerShown: false ,
+                    gestureEnabled: false
+                }}
+            />
+            <Stack.Screen
+                name="LinkPortfolio"
+                component={LinkPortfolio}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="InviteFriends"
+                component={InviteFriends}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Notification"
+                component={Notification}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Success"
+                component={Success}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="SignUp"
+                component={SignUp}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Login"
+                component={Login}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Chat"
+                component={BottomTabNavigator}
+                options={{ headerShown: false,
+                    gestureEnabled: false
+                }}
+            />
+            <Stack.Screen
+                name="CreateChat"
+                component={CreateMsg}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="ChatRoom"
+                component={ChatRoom}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="AddMember"
+                component={AddGroupMember}
+                //options={{ title: "Add Receipents" }}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="AddMoreMember"
+                component={AddMoreGroupMember}
+                //options={{ title: "Add Receipents" }}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Discussion"
+                component={Discussion}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="AddGroup"
+                component={AddGroup}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="GroupChat"
+                component={GroupChat}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="GroupInfo"
+                component={GroupInfo}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="StockChat"
+                component={StockChat}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="StockProfile"
+                component={StockProfile}
+                options={{ headerShown: false }}
+            />
 
-      <Stack.Screen
-        name="Settings"
-        component={Settings}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StockDetails"
-        component={StockDetails}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="TrendingStocks"
-        component={TrendingStocks}
-        options={{ headerShown: true }}
-      />
-      <Stack.Screen
-        name="Wallet"
-        component={Wallet}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="GroupProfile"
-        component={GroupProfile}
-        options={{ headerShown: false }}
-      />
+            <Stack.Screen
+                name="Settings"
+                component={Settings}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="StockDetails"
+                component={StockDetails}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="TrendingStocks"
+                component={TrendingStocks}
+                options={{ headerShown: true }}
+            />
+            <Stack.Screen
+                name="Wallet"
+                component={Wallet}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="GroupProfile"
+                component={GroupProfile}
+                options={{ headerShown: false }}
+            />
 
-      <Stack.Screen
-        name="LargeCap"
-        component={LargeCap}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="MostVolatile"
-        component={MostVolatile}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Overbought"
-        component={Overbought}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Oversold"
-        component={Oversold}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="PopularStocks"
-        component={PopularStocks}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="TopGainers"
-        component={TopGainers}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Activity"
-        component={Activity}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="DirectMessages"
-        component={DirectMessages}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Editprofile"
-        options={{ headerShown: false }}
-        component={Editprofile}
-      />
-      <Stack.Screen
-        name="Profile"
-        options={{ headerShown: false }}
-        component={Profile}
-      />
-    </Stack.Navigator>
-  );
+            <Stack.Screen
+                name="LargeCap"
+                component={LargeCap}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="MostVolatile"
+                component={MostVolatile}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Overbought"
+                component={Overbought}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Oversold"
+                component={Oversold}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="PopularStocks"
+                component={PopularStocks}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="TopGainers"
+                component={TopGainers}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Activity"
+                component={Activity}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="DirectMessages"
+                component={DirectMessages}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name="Editprofile"
+                options={{ headerShown: false }}
+                component={Editprofile}
+            />
+            <Stack.Screen
+                name="Profile"
+                options={{ headerShown: false }}
+                component={Profile}
+            />
+        </Stack.Navigator>
+    );
 };
 
 export default ChatStackNavigator;
