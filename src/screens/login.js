@@ -1,5 +1,3 @@
-import { AntDesign, Ionicons } from "@expo/vector-icons";
-
 import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
@@ -8,9 +6,9 @@ import {
   Text,
   View,
   TextInput,
-  Button,
   Alert,
-  ActivityIndicator
+  ActivityIndicator,
+  ScrollView
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import fire, { firestore } from "../database/firebase";
@@ -20,7 +18,6 @@ export default function Login({ navigation }) {
   const [email, setEmail] = useState();
   const [password, setPass] = useState();
   const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState();
   const isVisible = useIsFocused();
 
   useEffect(() => {
@@ -39,120 +36,101 @@ export default function Login({ navigation }) {
   }
 
   const userLogin = () => {
+    setLoading(true);
     if (
-      email !== undefined &&
-      email !== "" &&
-      password !== undefined &&
-      password !== ""
+        email !== undefined &&
+        email !== "" &&
+        password !== undefined &&
+        password !== ""
     ) {
-      setLoading(true);
       fire
-        .auth()
-        .signInWithEmailAndPassword(email, password)
-        .then(res => {
-          console.log(res);
-          // Alert.alert("User logged-in successfully!");
-          setLoading(false);
-          setEmail("");
-          setPass("");
-          navigation.navigate("Chat");
-        })
-        .catch(error => Alert.alert(error.message));
+          .auth()
+          .signInWithEmailAndPassword(email, password)
+          .then(res => {
+            setEmail("");
+            setPass("");
+            setLoading(false);
+            navigation.navigate("Chat");
+          })
+          .catch(error =>{
+            setLoading(false);
+            Alert.alert(error.message)
+          });
     } else {
+      setLoading(false);
       Alert.alert("Enter details to signin!");
     }
   };
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.tcontainer}>
-        <Image
-          style={{ height: 150, width: 150 }}
-          source={require("../../assets/logo-outline.png")}
-        ></Image>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={styles.Stockchat}> stockchat</Text>
+  if(isLoading){
+    return (
+        <View style={{ flex:1, justifyContent:"center", height: '100%', backgroundColor: '#282c34'}}>
+          <ActivityIndicator color="#FFF" size="large" />
         </View>
-        <Text style={styles.tHeading}>Welcome Back</Text>
+    )
+  }
+  return (
+      <ScrollView >
+        <SafeAreaView style={styles.container}>
+          <View style={styles.tcontainer}>
+            <Image
+                style={{ height: 150, width: 150 }}
+                source={require("../../assets/logo-outline.png")}
+            />
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text style={styles.Stockchat}> stockchat</Text>
+            </View>
+            <Text style={styles.tHeading}>Welcome Back</Text>
 
-        <View
-          style={{
-            padding: 15,
-            width: "100%",
-            alignItems: "center",
-            marginTop: 15,
-            paddingHorizontal: 40
-          }}
-        >
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Email"
-            value={email}
-            onChangeText={val => setEmail(val)}
-            placeholderTextColor="#FFF"
-          />
-          <TextInput
-            style={styles.inputStyle}
-            placeholder="Password"
-            value={password}
-            onChangeText={val => setPass(val)}
-            maxLength={15}
-            secureTextEntry={true}
-            placeholderTextColor="#FFF"
-          />
-          <TouchableOpacity onPress={() => userLogin()}>
-            <View style={styles.btn}>
-              <Text
+            <View
                 style={{
-                  fontSize: 18,
-                  textAlign: "center",
-                  color: "#FFF",
-                  fontWeight: "600"
+                  padding: 15,
+                  width: "100%",
+                  alignItems: "center",
+                  marginTop: 15,
+                  paddingHorizontal: 40
                 }}
+            >
+              <TextInput
+                  style={styles.inputStyle}
+                  placeholder="Email"
+                  value={email}
+                  onChangeText={val => setEmail(val)}
+                  placeholderTextColor="#FFF"
+              />
+              <TextInput
+                  style={styles.inputStyle}
+                  placeholder="Password"
+                  value={password}
+                  onChangeText={val => setPass(val)}
+                  maxLength={15}
+                  secureTextEntry={true}
+                  placeholderTextColor="#FFF"
+              />
+              <TouchableOpacity onPress={() => userLogin()}>
+                <View style={styles.btn}>
+                  <Text
+                      style={{
+                        fontSize: 18,
+                        textAlign: "center",
+                        color: "#FFF",
+                        fontWeight: "600"
+                      }}
+                  >
+                    Sign In
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              <Text
+                  style={styles.loginText}
+                  onPress={() => navigation.navigate("ChoosingUsername")}
               >
-                Sign In
+                Don't have an account? Sign Up
               </Text>
             </View>
-          </TouchableOpacity>
-
-          <Text
-            style={styles.loginText}
-            onPress={() => navigation.navigate("ChoosingUsername")}
-          >
-            Don't have an account? Sign Up
-          </Text>
-        </View>
-      </View>
-      {/* <View style={styles.bcontainer}>
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Email"
-          value={email}
-          onChangeText={val => setEmail(val)}
-        />
-        <TextInput
-          style={styles.inputStyle}
-          placeholder="Password"
-          value={password}
-          onChangeText={val => setPass(val)}
-          maxLength={15}
-          secureTextEntry={true}
-        />
-        <TouchableOpacity onPress={() => userLogin()}>
-          <View style={styles.btn}>
-            <Text style={{ color: "#F5F8FA", fontSize: 19, fontWeight: "bold" }}>
-              Sign In
-            </Text>
           </View>
-        </TouchableOpacity>
-
-        <Text
-          style={styles.loginText}
-          onPress={() => navigation.navigate("SignUp")}
-        >
-          Don't have an account? Sign Up
-        </Text>
-      </View> */}
-    </SafeAreaView>
+        </SafeAreaView>
+      </ScrollView>
   );
 }
 
