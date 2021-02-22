@@ -38,99 +38,106 @@ export default function Login({ navigation }) {
   const userLogin = () => {
     setLoading(true);
     if (
-        email !== undefined &&
-        email !== "" &&
-        password !== undefined &&
-        password !== ""
+      email !== undefined &&
+      email !== "" &&
+      password !== undefined &&
+      password !== ""
     ) {
       fire
-          .auth()
-          .signInWithEmailAndPassword(email, password)
-          .then(res => {
-            setEmail("");
-            setPass("");
-            setLoading(false);
-            navigation.navigate("Chat");
-          })
-          .catch(error =>{
-            setLoading(false);
-            Alert.alert(error.message)
-          });
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(res => {
+          setEmail("");
+          setPass("");
+          setLoading(false);
+          navigation.navigate("Chat");
+        })
+        .catch(error => {
+          setLoading(false);
+          Alert.alert(error.message);
+        });
     } else {
       setLoading(false);
       Alert.alert("Enter details to signin!");
     }
   };
-  if(isLoading){
+  if (isLoading) {
     return (
-        <View style={{ flex:1, justifyContent:"center", height: '100%', backgroundColor: '#282c34'}}>
-          <ActivityIndicator color="#FFF" size="large" />
-        </View>
-    )
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          height: "100%",
+          backgroundColor: "#282c34"
+        }}
+      >
+        <ActivityIndicator color="#FFF" size="large" />
+      </View>
+    );
   }
   return (
-      <ScrollView >
-        <SafeAreaView style={styles.container}>
-          <View style={styles.tcontainer}>
-            <Image
-                style={{ height: 150, width: 150 }}
-                source={require("../../assets/logo-outline.png")}
-            />
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text style={styles.Stockchat}> stockchat</Text>
-            </View>
-            <Text style={styles.tHeading}>Welcome Back</Text>
-
-            <View
-                style={{
-                  padding: 15,
-                  width: "100%",
-                  alignItems: "center",
-                  marginTop: 15,
-                  paddingHorizontal: 40
-                }}
-            >
-              <TextInput
-                  style={styles.inputStyle}
-                  placeholder="Email"
-                  value={email}
-                  onChangeText={val => setEmail(val)}
-                  placeholderTextColor="#FFF"
-              />
-              <TextInput
-                  style={styles.inputStyle}
-                  placeholder="Password"
-                  value={password}
-                  onChangeText={val => setPass(val)}
-                  maxLength={15}
-                  secureTextEntry={true}
-                  placeholderTextColor="#FFF"
-              />
-              <TouchableOpacity onPress={() => userLogin()}>
-                <View style={styles.btn}>
-                  <Text
-                      style={{
-                        fontSize: 18,
-                        textAlign: "center",
-                        color: "#FFF",
-                        fontWeight: "600"
-                      }}
-                  >
-                    Sign In
-                  </Text>
-                </View>
-              </TouchableOpacity>
-
-              <Text
-                  style={styles.loginText}
-                  onPress={() => navigation.navigate("ChoosingUsername")}
-              >
-                Don't have an account? Sign Up
-              </Text>
-            </View>
+    <ScrollView style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.tcontainer}>
+          <Image
+            style={{ height: 150, width: 150 }}
+            source={require("../../assets/logo-outline.png")}
+          />
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={styles.Stockchat}> stockchat</Text>
           </View>
-        </SafeAreaView>
-      </ScrollView>
+          <Text style={styles.tHeading}>Welcome Back</Text>
+
+          <View
+            style={{
+              padding: 15,
+              width: "100%",
+              alignItems: "center",
+              marginTop: 15,
+              paddingHorizontal: 40
+            }}
+          >
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="Email"
+              value={email}
+              onChangeText={val => setEmail(val)}
+              placeholderTextColor="#FFF"
+            />
+            <TextInput
+              style={styles.inputStyle}
+              placeholder="Password"
+              value={password}
+              onChangeText={val => setPass(val)}
+              maxLength={15}
+              secureTextEntry={true}
+              placeholderTextColor="#FFF"
+            />
+            <TouchableOpacity onPress={() => userLogin()}>
+              <View style={styles.btn}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    textAlign: "center",
+                    color: "#FFF",
+                    fontWeight: "600"
+                  }}
+                >
+                  Sign In
+                </Text>
+              </View>
+            </TouchableOpacity>
+
+            <Text
+              style={styles.loginText}
+              onPress={() => navigation.navigate("ChoosingUsername")}
+            >
+              Don't have an account? Sign Up
+            </Text>
+          </View>
+        </View>
+      </SafeAreaView>
+    </ScrollView>
   );
 }
 
@@ -139,7 +146,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    //justifyContent: "center",
     backgroundColor: "#282c34"
   },
   inputStyle: {

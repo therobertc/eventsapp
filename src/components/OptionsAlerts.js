@@ -38,7 +38,7 @@ class OptionsAlerts extends Component {
   _getBenzingaOptions = () => {
     if (this.state.sub_status) {
       this.setState({ isLoading: true });
-    //   Analytics.ANALYTICS.track("OPTION ALERT FEED", {});
+      //   Analytics.ANALYTICS.track("OPTION ALERT FEED", {});
       let url =
         "https://api.benzinga.com/api/v1/signal/option_activity&token=4c6c9bab036c4161ba7d6e4b7f30bfe6";
       let headers = { Accept: "application/json" };
@@ -101,12 +101,7 @@ class OptionsAlerts extends Component {
                     }}
                   >
                     <Text
-                      style={{
-                        color: "black",
-                        fontSize: 16,
-                        paddingTop: 5,
-                        fontWeight: "500"
-                      }}
+                      style={{ color: "#FFF", paddingTop: 5, fontSize: 16 }}
                     >
                       {data.description}
                     </Text>
@@ -118,14 +113,10 @@ class OptionsAlerts extends Component {
                       justifyContent: "space-between"
                     }}
                   >
-                    <Text
-                      style={{ color: "#657786", fontSize: 16, paddingTop: 5 }}
-                    >
+                    <Text style={{ color: "#7c818c", fontSize: 16 }}>
                       Date: {data.date}
                     </Text>
-                    <Text
-                      style={{ color: "#657786", fontSize: 16, paddingTop: 5 }}
-                    >
+                    <Text style={{ color: "#7c818c", fontSize: 16 }}>
                       Time: {data.time}
                     </Text>
                   </View>
@@ -222,7 +213,7 @@ class OptionsAlerts extends Component {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "white"
+            backgroundColor: "#282c34"
           }}
         >
           <ActivityIndicator />
@@ -234,10 +225,10 @@ class OptionsAlerts extends Component {
     }
     return (
       <View style={styles.container}>
-        <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "row", backgroundColor: "#282c34" }}>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={{ paddingHorizontal: 10 }}
+            //style={{ paddingHorizontal: 10 }}
           >
             {this._renderOptions()}
             <View style={{ height: 100 }}></View>
@@ -296,22 +287,25 @@ const styles = StyleSheet.create({
     fontSize: 50,
     alignSelf: "center"
   },
+  options: {
+    color: "#FFF",
+    fontWeight: "bold",
+    fontSize: 16
+  },
+
   card: {
     //backgroundColor: "#F5F8FA",
     shadowOffset: { width: 0.5, height: 0.5 },
-    shadowColor: "lightgrey",
-    shadowOpacity: 2.0,
-    backgroundColor: "#FFF",
-    borderRadius: 10,
+    shadowColor: "#4b5162",
+    //shadowOpacity: 2.0,
+    //backgroundColor: "#4b5162",
+    //borderRadius: 10,
     padding: 10,
+    borderBottomColor: "#60646C",
+    borderBottomWidth: 1,
     // height: 500,
-    marginTop: 10,
-    marginHorizontal: 10,
+    marginVertical: 2,
+    //marginHorizontal: 10,
     justifyContent: "center"
-  },
-  options: {
-    color: "black",
-    fontWeight: "bold",
-    fontSize: 16
   }
 });

@@ -15,6 +15,8 @@ import InsiderTrades from "../components/InsiderTrades";
 import Notifications from "../components/Notifications";
 import DropDownPicker from "react-native-dropdown-picker";
 import WSBTrends from "../components/WSBTrends";
+import WSBETF from "../components/WSBETF";
+
 import ActivityTabs from "../components/Tabs/ActivityTabs";
 
 class Activity extends React.Component {
@@ -24,14 +26,13 @@ class Activity extends React.Component {
       country: "Stock Alerts"
     };
     props.navigation.setOptions({
-      gesturesEnabled: false,
-    })
+      gesturesEnabled: false
+    });
   }
   static navigationOptions = {
     gesturesEnabled: false,
     swipeEnabled: false
-  }
-
+  };
 
   render(props) {
     console.log("--", props);
@@ -40,14 +41,15 @@ class Activity extends React.Component {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "space-between"
             //marginHorizontal: 10,
-            zIndex: 999
+            //zIndex: 999
           }}
         >
           <Text style={styles.header}>Activity</Text>
 
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row", paddingRight: 10 }}>
+            {/* <Text style={styles.header}>+2.91%</Text> */}
             {/* <Feather
               style={{
                 color: "#FFF",
@@ -81,6 +83,7 @@ class Activity extends React.Component {
           </ScrollView> */}
           {/* <InsiderTrades {...this.props} /> */}
           {/* <WSBTrends {...this.props}></WSBTrends> */}
+          {/* <WSBETF {...this.props}></WSBETF> */}
           <ActivityTabs></ActivityTabs>
         </View>
       </View>

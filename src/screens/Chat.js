@@ -17,18 +17,16 @@ import { Feather } from "@expo/vector-icons";
 import AddGroup from "./Sub/AddGroup";
 import fire, { firestore } from "../database/firebase";
 
-
 const Chat = props => {
   const isVisible = useIsFocused();
   const [groups, setGroups] = useState([]);
   const [publicgroups, setpublicgroups] = useState([]);
   const [Chatheads, setChatheads] = useState([]);
 
-
   useEffect(() => {
     props.navigation.setOptions({
       gesturesEnabled: false
-    })
+    });
 
     if (isVisible) {
       getChats();
@@ -60,36 +58,36 @@ const Chat = props => {
     });
 
     db.collection("users")
-        .doc(UserId)
-        .collection("Groups")
-        .onSnapshot(function(snapshot) {
-          snapshot.docChanges().forEach(function(change) {
-            groupArray.push(change.doc.data());
-            setGroups(groupArray);
-          });
+      .doc(UserId)
+      .collection("Groups")
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+          groupArray.push(change.doc.data());
+          setGroups(groupArray);
         });
+      });
 
     db.collection("users")
-        .doc(UserId)
-        .collection("ChatHeads")
-        .onSnapshot(function(snapshot) {
-          snapshot.docChanges().forEach(function(anotherSnapshot) {
-            // ChatHeadsArr.push(anotherSnapshot.doc.data())
-            for (var i = 0; i < anotherSnapshot.doc.data.length; i++) {
-              ChatHeadsArr.push({
-                name: anotherSnapshot.doc.data().name,
-                uid: anotherSnapshot.doc.data().uid
-              });
-            }
-            setChatheads(ChatHeadsArr);
-          });
+      .doc(UserId)
+      .collection("ChatHeads")
+      .onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(anotherSnapshot) {
+          // ChatHeadsArr.push(anotherSnapshot.doc.data())
+          for (var i = 0; i < anotherSnapshot.doc.data.length; i++) {
+            ChatHeadsArr.push({
+              name: anotherSnapshot.doc.data().name,
+              uid: anotherSnapshot.doc.data().uid
+            });
+          }
+          setChatheads(ChatHeadsArr);
         });
+      });
   }
   const onShare = async () => {
     try {
       const result = await Share.share({
         message:
-            "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
+          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -106,57 +104,57 @@ const Chat = props => {
   };
 
   return (
-      <View style={styles.container}>
-        <View>
-          <Header
+    <View style={styles.container}>
+      <View>
+        <Header
+          style={{
+            backgroundColor: "#282c34",
+            borderBottomWidth: 0.2,
+            borderBottomColor: "#282c34"
+          }}
+        >
+          <Left>
+            <Text style={styles.logotext}>#STOCKCHAT</Text>
+          </Left>
+          <Right>
+            <View
               style={{
-                backgroundColor: "#282c34",
-                borderBottomWidth: 0.2,
-                borderBottomColor: "#282c34"
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center"
               }}
-          >
-            <Left>
-              <Text style={styles.logotext}>#STOCKCHAT</Text>
-            </Left>
-            <Right>
-              <View
+            >
+              <TouchableOpacity style={styles.invite} onPress={onShare}>
+                <Feather
                   style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "center"
+                    color: "#FFF",
+                    fontWeight: "bold",
+                    paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                    fontSize: 20
                   }}
-              >
-                <TouchableOpacity style={styles.invite} onPress={onShare}>
-                  <Feather
-                      style={{
-                        color: "#FFF",
-                        fontWeight: "bold",
-                        paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                        fontSize: 20
-                      }}
-                      name="user-plus"
-                  />
-                  <Text
-                      style={{
-                        textAlign: "center",
-                        fontSize: 18,
-                        fontWeight: "600",
-                        color: "#FFF"
-                        //paddingLeft: 10
-                      }}
-                  >
-                    Invite
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </Right>
-          </Header>
-        </View>
+                  name="user-plus"
+                />
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 18,
+                    fontWeight: "600",
+                    color: "#FFF"
+                    //paddingLeft: 10
+                  }}
+                >
+                  Invite
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Right>
+        </Header>
+      </View>
 
-        <ScrollView style={styles.col2}>
-          <View style={styles.headerContainer}>
-            <Text style={styles.header2}>Trending Stocks</Text>
-            {/* <View>
+      <ScrollView style={styles.col2}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.header2}>Trending Stocks</Text>
+          {/* <View>
             <TouchableOpacity
               style={styles.invite}
               onPress={onShare}
@@ -170,18 +168,18 @@ const Chat = props => {
               </Text>
             </TouchableOpacity>
           </View> */}
-          </View>
+        </View>
 
-          <TrendingStocks {...props} />
+        <TrendingStocks {...props} />
 
-          {/* <TextInput
+        {/* <TextInput
           style={styles.inputStyle}
           placeholder="Search for groups or messages"
           // value={email}
           // onChangeText={val => setEmail(val)}
         /> */}
 
-          {/* <View style={styles.col}>
+        {/* <View style={styles.col}>
           <Text style={styles.header}>Stock Chats</Text>
           <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
@@ -211,7 +209,7 @@ const Chat = props => {
               Connect Portfolio
             </Text>
           </TouchableOpacity> */}
-          {/* <StockGroupCard
+        {/* <StockGroupCard
             ticker="$TSLA"
             pctchange="+1.02%"
             onPress={() => {
@@ -223,7 +221,7 @@ const Chat = props => {
             }}
             msg="This stock is trending"
           /> */}
-          {/* <StockGroupCard
+        {/* <StockGroupCard
             ticker="$SQ"
             pctchange="+4.55%"
             onPress={() => {
@@ -238,7 +236,7 @@ const Chat = props => {
             }}
             msg="This stock is trending"
           /> */}
-          {/* <StockGroupCard
+        {/* <StockGroupCard
             ticker="$NET"
             pctchange="+3.521%"
             onPress={() => {
@@ -251,68 +249,68 @@ const Chat = props => {
             }}
             msg="This stock is trending"
           /> */}
-          {/* </View>  */}
-          <View style={styles.col}>
-            <Text style={styles.header2}>Group Chats</Text>
-            {/* <TouchableOpacity
+        {/* </View>  */}
+        <View style={styles.col}>
+          <Text style={styles.header2}>Group Chats</Text>
+          {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
             <AntDesign name="pluscircleo" size={24} color="#FFF" />
           </TouchableOpacity> */}
-          </View>
-          <View style={{ paddingVertical: 10, marginHorizontal: 10 }}>
-            <FlatList
-                data={publicgroups}
-                keyExtractor={(item, index) => "key" + index}
-                renderItem={({ item }) => {
-                  const name = item.groupName;
-                  const totalmembers =
-                      item && item.totalmembers ? item.totalmembers : 0;
-                  const lastmessage =
-                      item && item.lastmessage ? item.lastmessage : "";
-                  return (
-                      <TouchableOpacity
-                          onPress={() => {
-                            props.navigation.navigate("Discussion", {
-                              item,
-                              itemPic: "https://i.stack.imgur.com/l60Hf.png"
-                            });
-                          }}
-                      >
-                        <Messages
-                            item={name}
-                            totalmembers={totalmembers}
-                            lastmessage={lastmessage}
-                        ></Messages>
-                      </TouchableOpacity>
-                  );
-                }}
-            />
+        </View>
+        <View style={{ paddingVertical: 10, marginHorizontal: 10 }}>
+          <FlatList
+            data={publicgroups}
+            keyExtractor={(item, index) => "key" + index}
+            renderItem={({ item }) => {
+              const name = item.groupName;
+              const totalmembers =
+                item && item.totalmembers ? item.totalmembers : 0;
+              const lastmessage =
+                item && item.lastmessage ? item.lastmessage : "";
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    props.navigation.navigate("Discussion", {
+                      item,
+                      itemPic: "https://i.stack.imgur.com/l60Hf.png"
+                    });
+                  }}
+                >
+                  <Messages
+                    item={name}
+                    totalmembers={totalmembers}
+                    lastmessage={lastmessage}
+                  ></Messages>
+                </TouchableOpacity>
+              );
+            }}
+          />
 
-            <FlatList
-                data={groups}
-                keyExtractor={(item, index) => "key" + index}
-                renderItem={({ item }) => {
-                  // console.log("FLAAAAAAAAAATIST ==>", item);
-                  const name = item.GroupName;
-                  return (
-                      <TouchableOpacity
-                          onPress={() => {
-                            props.navigation.navigate("GroupChat", {
-                              groupName: name,
-                              itemPic: "https://i.stack.imgur.com/l60Hf.png"
-                            });
-                          }}
-                      >
-                        <Messages item={name}></Messages>
-                      </TouchableOpacity>
-                  );
-                }}
-            />
-          </View>
-        </ScrollView>
+          {/* <FlatList
+            data={groups}
+            keyExtractor={(item, index) => "key" + index}
+            renderItem={({ item }) => {
+              // console.log("FLAAAAAAAAAATIST ==>", item);
+              const name = item.GroupName;
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    props.navigation.navigate("GroupChat", {
+                      groupName: name,
+                      itemPic: "https://i.stack.imgur.com/l60Hf.png"
+                    });
+                  }}
+                >
+                  <Messages item={name}></Messages>
+                </TouchableOpacity>
+              );
+            }}
+          /> */}
+        </View>
+      </ScrollView>
 
-        <TouchableOpacity
+      {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
             style={{
               borderWidth: 1,
@@ -349,8 +347,8 @@ const Chat = props => {
           >
             Start Group
           </Text>
-        </TouchableOpacity>
-      </View>
+        </TouchableOpacity> */}
+    </View>
   );
 };
 export default Chat;
