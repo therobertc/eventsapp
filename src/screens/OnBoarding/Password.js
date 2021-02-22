@@ -11,16 +11,18 @@ import {
 import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import firebase, { firestore } from "../../database/firebase";
-import URL from "./../../../Constant/Constant"
-import axios from 'axios';
+import URL from "./../../../Constant/Constant";
+import axios from "axios";
 
 export default function App({ ...props }) {
   const [password, setPassword] = useState("");
   const [userId, setUserId] = useState("");
 
-  const send_mail = async (email) => {
-      return axios.post(URL.HOST_URL + "api/stockchat/send_welcome_mail/", {email:email});
-  }
+  const send_mail = async email => {
+    return axios.post(URL.HOST_URL + "api/stockchat/send_welcome_mail/", {
+      email: email
+    });
+  };
 
   const _signUp = () => {
     if (password === undefined || password === null || password.trim() === "") {
@@ -61,7 +63,7 @@ export default function App({ ...props }) {
               })
               .then(async () => {
                 await send_mail(email);
-                props.navigation.push("Chat", { username: username });
+                props.navigation.push("Notification", { username: username });
               })
               .catch(error => alert(error.message));
           })

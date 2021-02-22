@@ -83,8 +83,9 @@ export default function App({ ...props }) {
       </View>
       <View>
         <Text style={styles.username}>
-          You'll be notified when you get new messages. You can update your
-          notification settings inside the app.
+          You'll be notified when you get new messages and when stocks are
+          trending during market hours. You can update your notification
+          settings inside the app.
         </Text>
       </View>
 
