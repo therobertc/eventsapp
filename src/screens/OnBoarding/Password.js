@@ -13,6 +13,7 @@ import { AntDesign } from "@expo/vector-icons";
 import firebase, { firestore } from "../../database/firebase";
 import URL from "./../../../Constant/Constant";
 import axios from "axios";
+import * as WebBrowser from "expo-web-browser";
 
 export default function App({ ...props }) {
   const [password, setPassword] = useState("");
@@ -147,6 +148,36 @@ export default function App({ ...props }) {
               Continue
             </Text>
           </TouchableOpacity>
+
+          <View
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              marginHorizontal: 30,
+              justifyContent: "center",
+              paddingTop: 30
+            }}
+          >
+            <Text style={styles.txt}>By signing up, you agree to our</Text>
+
+            <TouchableOpacity
+              onPress={() =>
+                WebBrowser.openBrowserAsync("https://stockchatapp.com/eula")
+              }
+            >
+              <Text style={styles.link}> Terms</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.txt}>and that you have read our</Text>
+
+            <TouchableOpacity
+              onPress={() =>
+                WebBrowser.openBrowserAsync("https://stockchatapp.com/eula")
+              }
+            >
+              <Text style={styles.link}> Privacy Policy.</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </KeyboardAvoidingView>
     </View>
@@ -201,5 +232,13 @@ const styles = StyleSheet.create({
     height: 50,
     fontSize: 21,
     borderRadius: 30
+  },
+  txt: {
+    color: "#FFF",
+    fontSize: 12
+  },
+  link: {
+    color: "lightblue",
+    fontSize: 12
   }
 });

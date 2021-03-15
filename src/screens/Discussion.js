@@ -14,6 +14,7 @@ import {
 import firebase, { firestore } from "./../database/firebase";
 import * as ImagePicker from "expo-image-picker";
 import Icon from "@expo/vector-icons/AntDesign";
+import TrendingStocks from "../components/TrendingStocks";
 
 import {
   GiftedChat,
@@ -222,7 +223,7 @@ function Discussion({ route, navigation }) {
 
   const renderBubble = props => {
     return (
-      <View>
+      <View style={{ flex: 1, backgroundColor: "#303135" }}>
         <TouchableOpacity
           onPress={() =>
             navigation.push("Profile", {
@@ -232,14 +233,23 @@ function Discussion({ route, navigation }) {
         >
           <Text style={styles.username}>{props.currentMessage.user.name}</Text>
         </TouchableOpacity>
+
         <Bubble
           {...props}
           wrapperStyle={{
-            right: {
-              backgroundColor: "transparent"
-            },
             left: {
-              backgroundColor: "transparent"
+              //backgroundColor: "transparent"
+              //backgroundColor: "#303135",
+              backgroundColor: "#303135",
+              marginRight: 10,
+              alignSelf: "stretch"
+              //flex: 1
+            },
+            right: {
+              //backgroundColor: "transparent"
+              alignSelf: "stretch",
+              marginRight: 10
+              //backgroundColor: "#303135"
             }
           }}
           textStyle={{
@@ -251,6 +261,59 @@ function Discussion({ route, navigation }) {
             }
           }}
         />
+
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+
+            marginHorizontal: 20,
+            marginBottom: 20
+          }}
+        >
+          <TouchableOpacity
+            onPress={() =>
+              navigation.push("Profile", {
+                uid: props.currentMessage.user.userid
+              })
+            }
+          >
+            <FontAwesome5
+              name="comment"
+              color="grey"
+              size={20}
+              fontWeight={900}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.push("Profile", {
+                uid: props.currentMessage.user.userid
+              })
+            }
+          >
+            <FontAwesome5
+              name="heart"
+              color="grey"
+              size={20}
+              fontWeight={900}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.push("Profile", {
+                uid: props.currentMessage.user.userid
+              })
+            }
+          >
+            <FontAwesome5
+              name="share"
+              color="grey"
+              size={20}
+              fontWeight={900}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     );
   };
@@ -385,12 +448,12 @@ function Discussion({ route, navigation }) {
         </TouchableOpacity>
         <Text style={styles.header}> {item.groupName}</Text>
         <TouchableOpacity
-        // onPress={() =>
-        //   navigation.push("StockDetails", {
-        //     symbol: "SQ"
-        //   })
-        // }
-        // onPress={() => navigation.navigate("GroupProfile")}
+          // onPress={() =>
+          //   navigation.push("StockDetails", {
+          //     symbol: "SQ"
+          //   })
+          // }
+          onPress={() => navigation.navigate("GroupProfile")}
         >
           <Image
             source={require("../../assets/icon.png")}
@@ -398,6 +461,10 @@ function Discussion({ route, navigation }) {
             style={styles.avatar}
           />
         </TouchableOpacity>
+      </View>
+
+      <View>
+        <TrendingStocks></TrendingStocks>
       </View>
 
       <GiftedChat
@@ -416,7 +483,7 @@ function Discussion({ route, navigation }) {
             paddingLeft: 20,
             paddingRight: 20,
             width: "100%",
-            marginHorizontal: 30,
+            //marginHorizontal: 30,
             flex: 1,
             height: "auto",
             paddingTop: 10,
@@ -483,7 +550,7 @@ function Discussion({ route, navigation }) {
             pattern: /\@(\w+)/,
             style: {
               ...linkStyle,
-              color: "#33CC00",
+              color: "#147efb",
               fontWeight: "bold"
               //textDecorationLine: "underline"
             }
@@ -498,7 +565,7 @@ export default Discussion;
 
 const styles = StyleSheet.create({
   input: {
-    width: 80
+    //width: 80
   },
   ImageStyle: {
     height: 25,
@@ -524,7 +591,7 @@ const styles = StyleSheet.create({
   main: {
     backgroundColor: "#282c34",
     height: "100%",
-    //paddingHorizontal: 20,
+    paddingHorizontal: 0,
     // borderBottomLeftRadius: 35,
     // borderBottomRightRadius: 35,
     paddingTop: 40
@@ -566,10 +633,10 @@ const styles = StyleSheet.create({
   },
   container: {
     //position: "absolute",
-    left: null,
-    right: null,
-    top: null,
-    height: "100%"
+    // left: null,
+    // right: null,
+    // top: null,
+    // height: "100%"
   },
   header: {
     color: "#FFF",
