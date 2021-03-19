@@ -52,6 +52,7 @@ import PopularStocks from "../components/Screeners/DefaultScreeners/PopularStock
 import TopGainers from "../components/Screeners/DefaultScreeners/TopGainers";
 import Profile from "../screens/Profile";
 import Editprofile from "../screens/Editprofile";
+import Bank from "../screens/Bank";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -302,6 +303,11 @@ const ChatStackNavigator = () => {
       <Stack.Screen
         name="Wallet"
         component={Wallet}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Bank"
+        component={Bank}
         options={{ headerShown: false }}
       />
       <Stack.Screen

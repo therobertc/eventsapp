@@ -124,6 +124,22 @@ const Chat = props => {
                 justifyContent: "center"
               }}
             >
+              <TouchableOpacity
+                style={styles.invite}
+                onPress={() => {
+                  props.navigation.navigate("Bank");
+                }}
+              >
+                <Feather
+                  style={{
+                    color: "#FFF",
+                    fontWeight: "bold",
+                    paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                    fontSize: 20
+                  }}
+                  name="credit-card"
+                />
+              </TouchableOpacity>
               <TouchableOpacity style={styles.invite} onPress={onShare}>
                 <Feather
                   style={{

@@ -10,10 +10,7 @@ import {
   Image,
   Share
 } from "react-native";
-import ChartComp from "../components/ChartComp";
 
-import StockGroupCard from "../components/StockGroupCard";
-import firebase, { firestore } from "../database/firebase";
 import {
   Icon,
   Header,
@@ -53,11 +50,11 @@ const Bank = props => {
     <View style={styles.container}>
       <Header
         style={{
-          backgroundColor: "#282c34",
+          backgroundColor: "#03196D",
           borderBottomWidth: 0,
           flexDirection: "row",
           //marginTop: 25,
-          marginHorizontal: 10,
+          marginHorizontal: 30,
           alignItems: "center",
           justifyContent: "center"
           //flex: 1
@@ -65,16 +62,16 @@ const Bank = props => {
       >
         <Left>
           <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Feather name="user" size={30} color="#FFF" />
+            <Feather name="settings" size={30} color="#FFF" />
           </TouchableOpacity>
         </Left>
         <Body>
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
+          {/* <TouchableOpacity onPress={() => props.navigation.goBack()}>
             <Text style={styles.header}>$2,137.47</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </Body>
         <Right>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("Activity")}
           >
             <AntDesign
@@ -83,50 +80,125 @@ const Bank = props => {
               size={30}
               color="#FFF"
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
-            onPress={() => props.navigation.navigate("Activity")}
+            onPress={() => props.navigation.navigate("LinkPortfolio")}
           >
-            <Feather name="clock" size={30} color="#FFF" />
+            <Feather name="plus" size={30} color="#FFF" />
           </TouchableOpacity>
         </Right>
       </Header>
+      <View style={styles.col}>
+        <Text style={styles.balance}> Total Balance </Text>
 
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <View style={styles.col}>
-          <Text style={styles.header}> Bitcoin </Text>
+        <TouchableOpacity onPress={() => props.navigation.goBack()}>
+          <Text style={styles.total}> $32,651.74</Text>
+          <Text style={styles.change}> +20.13% this week </Text>
+        </TouchableOpacity>
+      </View>
 
-          <Text style={styles.header2}> ≈ </Text>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* <ChartComp symbol="TSLA" /> */}
 
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Text style={styles.header}> $32,651.74</Text>
-            {/* <Text style={styles.header}> +20.13% </Text> */}
-          </TouchableOpacity>
+        <View
+          style={{ backgroundColor: "white", margin: 20, borderRadius: 20 }}
+        >
+          <View style={styles.col2}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}> Personal Checking </Text>
+              <Text style={styles.header2}> Schwab </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}>$12,137.47</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.col2}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}> Investments </Text>
+              <Text style={styles.header2}> Schwab </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}>$12,137.47</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.col2}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}> Cryptocurrency </Text>
+              <Text style={styles.header2}> Coinbase </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}>$12,137.47</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.col2}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}> Credit </Text>
+              <Text style={styles.header2}> American Express </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}>$12,137.47</Text>
+            </TouchableOpacity>
+          </View>
         </View>
+        <View style={{ flexDirection: "row", paddingLeft: 30 }}>
+          <Text style={{ color: "#03196D", paddingRight: 20 }}> Expenses </Text>
+          <Text style={{ color: "grey" }}> Earnings </Text>
+        </View>
+        <View
+          style={{ backgroundColor: "white", margin: 20, borderRadius: 20 }}
+        >
+          <View style={styles.col2}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}> Blue Bottle </Text>
+              <Text style={styles.header2}> Food & Drink </Text>
+            </TouchableOpacity>
 
-        <ChartComp symbol="SQ" />
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}>- $5.47</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.col2}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}> Blue Bottle </Text>
+              <Text style={styles.header2}> Food & Drink </Text>
+            </TouchableOpacity>
 
-        <View style={styles.col2}>
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Text style={styles.header}> BTC WALLET </Text>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}>- $5.47</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.col2}>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}> Blue Bottle </Text>
+              <Text style={styles.header2}> Food & Drink </Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Text style={styles.header}>$2,137.47</Text>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => props.navigation.goBack()}>
+              <Text style={styles.header}>- $5.47</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
-      <View
+
+      {/* <View
         style={{
-          paddingBottom: 100,
+          paddingBottom: 50,
           flexDirection: "row",
-          justifyContent: "space-between",
+          justifyContent: "center",
           paddingHorizontal: 20
         }}
       >
         <Button
-          style={{ width: 150, alignItems: "center", justifyContent: "center" }}
-          onPress={() => props.navigation.navigate("BuyOrder")}
+          style={{
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
+          onPress={() => props.navigation.navigate("LinkPortfolio")}
           //   onPress={() => setModal(true)}
         >
           <Text
@@ -136,28 +208,18 @@ const Bank = props => {
               fontWeight: "bold"
             }}
           >
-            Buy
+            Add Account
           </Text>
-          {/* <Image
-          source={require("../../assets/robinhoodlogo.png")}
-          // source={{ uri: itemPic }}
-          style={styles.avatar}
-        /> */}
         </Button>
-        <Button
+        {/* <Button
           style={{ width: 150, alignItems: "center", justifyContent: "center" }}
           onPress={() => props.navigation.navigate("LinkPortfolio")}
         >
           <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
             Sell
           </Text>
-          {/* <Image
-          source={require("../../assets/robinhoodlogo.png")}
-          // source={{ uri: itemPic }}
-          style={styles.avatar}
-        /> */}
         </Button>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -203,36 +265,53 @@ const styles = StyleSheet.create({
     paddingVertical: 10
   },
   container: {
-    height: "100%",
-    backgroundColor: "#282c34",
+    height: "100%"
+    //backgroundColor: "#282c34",
     // left: 0,
     // right: 0,
     // top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 30
+    //paddingTop: 30
   },
   headerContainer: {
     flexDirection: "row",
-    alignItems: "center",
-    paddingTop: 30
+    alignItems: "center"
+    //paddingTop: 30
     //paddingHorizontal: 20
   },
   header: {
-    fontFamily: "Montserrat_800ExtraBold",
+    //fontFamily: "Montserrat_800ExtraBold",
+    color: "#000",
+    //flex: 1,
+    fontSize: 20
+    //paddingLeft: 10
+    //textAlign: "center"
+  },
+
+  balance: {
+    //fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     //flex: 1,
     fontSize: 20
     //paddingLeft: 10
     //textAlign: "center"
   },
-  header2: {
-    fontFamily: "Montserrat_800ExtraBold",
+  total: {
+    //fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     //flex: 1,
     fontSize: 30
     //paddingLeft: 10
     //textAlign: "center"
   },
+  change: {
+    //fontFamily: "Montserrat_800ExtraBold",
+    color: "#FFF",
+    //flex: 1,
+    fontSize: 20
+    //textAlign: "center"
+  },
+
   coins: {
     fontFamily: "Montserrat_700Bold",
     color: "#FFF",
@@ -266,22 +345,24 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 20
   },
   col: {
-    flexDirection: "row",
+    flexDirection: "column",
+    backgroundColor: "#03196D",
     //marginTop: 25,
-    marginHorizontal: 20,
-    alignItems: "center",
+    padding: 30,
+    //alignItems: "center",
     justifyContent: "space-between"
   },
   col2: {
     flexDirection: "row",
-    marginTop: 25,
+    //marginTop: 25,
     marginHorizontal: 20,
     alignItems: "center",
     justifyContent: "space-between",
-    borderBottomWidth: 0.5,
-    borderTopWidth: 0.5,
-    borderColor: "#7c818c",
+    //borderBottomWidth: 0.5,
+    // borderTopWidth: 0.5,
+    // borderColor: "#7c818c",
     paddingVertical: 20
+    //backgroundColor: "grey"
   },
   stockchats: {
     //flexDirection: "row"
