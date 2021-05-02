@@ -14,6 +14,10 @@ import fire, { firestore } from "../database/firebase";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useIsFocused } from "@react-navigation/native";
+import * as firebase from "firebase";
+import { Notifications } from "expo";
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
 
 export default function Signup({ route, navigation }) {
   // const [displayName, setdisplay] = useState();
@@ -21,11 +25,15 @@ export default function Signup({ route, navigation }) {
   const [password, setPass] = useState();
   const [isLoading, setLoading] = useState(false);
   const { username, phoneNo } = route.params;
+  const [expoPushToken, setExpoPushToken] = useState("");
   const isVisible = useIsFocused();
 
   useEffect(() => {
     if (isVisible) {
       AuthUser();
+      registerForPushNotificationsAsync().then((token) =>
+        setExpoPushToken(token)
+      );
     }
   }, [isVisible]);
 
@@ -36,6 +44,33 @@ export default function Signup({ route, navigation }) {
       } else {
       }
     });
+  }
+
+  async function registerForPushNotificationsAsync() {
+    let token;
+    if (Constants.isDevice) {
+      const { status: existingStatus } = await Permissions.getAsync(
+        Permissions.NOTIFICATIONS
+      );
+      let finalStatus = existingStatus;
+      if (existingStatus !== "granted") {
+        const { status } = await Permissions.askAsync(
+          Permissions.NOTIFICATIONS
+        );
+        finalStatus = status;
+      }
+      console.log("finalStatus", finalStatus);
+      if (finalStatus !== "granted") {
+        alert("Failed to get push token for push notification!");
+        return;
+      }
+      token = await Notifications.getExpoPushTokenAsync();
+      console.log("token", token);
+    } else {
+      alert("Must use physical device for Push Notifications");
+    }
+
+    return token;
   }
 
   const registerUser = () => {
@@ -61,6 +96,7 @@ export default function Signup({ route, navigation }) {
               phoneNo: phoneNo,
               followers: [],
               blockedusers: [],
+              expoPushToken: expoPushToken,
             })
             .then(() => {
               res.user.updateProfile({
@@ -161,14 +197,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
   },
   container: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
   },
   tcontainer: {
     flex: 1,
@@ -210,7 +246,7 @@ const styles = StyleSheet.create({
     padding: 30,
     width: "100%",
     backgroundColor: "#282c34",
-    borderRadius: 26
+    borderRadius: 26,
   },
   activemenu: {
     justifyContent: "center",

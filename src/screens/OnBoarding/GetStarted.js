@@ -5,7 +5,7 @@ import {
   Image,
   View,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import { Button } from "react-native-elements";
 import { Entypo } from "@expo/vector-icons";
@@ -14,7 +14,7 @@ import firebase, { firestore } from "../../database/firebase";
 export default function App({ ...props }) {
   const [isUser, SetUser] = useState(false);
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(function(user) {
+    firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         props.navigation.navigate("Chat");
       }
@@ -29,7 +29,7 @@ export default function App({ ...props }) {
             display: "flex",
             alignSelf: "center",
             marginTop: 10,
-            marginBottom: 10
+            marginBottom: 10,
           }}
         >
           <Image
@@ -56,7 +56,7 @@ export default function App({ ...props }) {
               fontSize: 18,
               textAlign: "center",
               color: "#FFF",
-              fontWeight: "600"
+              fontWeight: "600",
             }}
           >
             Get Started
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   getstartedButton: {
     backgroundColor: "#147efb",
     padding: 15,
-    borderRadius: 30
+    borderRadius: 30,
   },
   getStarted: {
     flex: 1,
@@ -97,20 +97,20 @@ const styles = StyleSheet.create({
     //backgroundColor: "#1E2429",
     backgroundColor: "#282c34",
 
-    width: Dimensions.get("screen").width
+    width: Dimensions.get("screen").width,
   },
 
   HaveAccount: {
     color: "#FFF",
     textAlign: "center",
     top: 35,
-    fontSize: 15
+    fontSize: 15,
   },
   Stockchat: {
     color: "#FFF",
     textAlign: "center",
     fontSize: 50,
-    fontWeight: "800"
+    fontWeight: "800",
     //fontFamily: "Montserrat_700Bold"
   },
   subtext: {
@@ -118,15 +118,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     top: 35,
     fontSize: 20,
-    marginHorizontal: 40
+    marginHorizontal: 40,
   },
   subtext2: {
     color: "#FFF",
     textAlign: "center",
 
-    fontSize: 18
+    fontSize: 18,
   },
   loginText: {
-    fontSize: 18
-  }
+    fontSize: 18,
+  },
 });

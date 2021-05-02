@@ -66,10 +66,10 @@ const BottomTabNavigator = () => {
           paddingTop: 15,
           backgroundColor: "#282c34",
           alignContent: "center",
-          borderTopColor: "#282c34"
+          borderTopColor: "#282c34",
         },
 
-        swipeEnabled: false
+        swipeEnabled: false,
       }}
     >
       {/* <Tab.Screen
@@ -93,7 +93,7 @@ const BottomTabNavigator = () => {
           swipeEnabled: false,
           tabBarIcon: ({ color, size }) => (
             <Icon2 name="chat" color={color} size={30} />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -106,7 +106,7 @@ const BottomTabNavigator = () => {
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
             <Feather name="trending-up" color={color} size={30} />
-          )
+          ),
         }}
       />
       <Tab.Screen
@@ -117,7 +117,7 @@ const BottomTabNavigator = () => {
           gestureEnabled: false,
           tabBarIcon: ({ color, size }) => (
             <Icon name="ios-person" color={color} size={30} />
-          )
+          ),
         }}
       />
     </Tab.Navigator>
@@ -143,7 +143,7 @@ const ChatStackNavigator = () => {
   const [isUser, SetUser] = useState(false);
 
   React.useEffect(() =>
-    fire.auth().onAuthStateChanged(user => {
+    fire.auth().onAuthStateChanged((user) => {
       if (user) {
         SetUser(true);
         console.log("IF ===> ", isUser);
@@ -170,7 +170,7 @@ const ChatStackNavigator = () => {
         component={Email}
         options={{
           headerShown: false,
-          gestureEnabled: false
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -178,7 +178,7 @@ const ChatStackNavigator = () => {
         component={Password}
         options={{
           headerShown: false,
-          gestureEnabled: false
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -186,7 +186,7 @@ const ChatStackNavigator = () => {
         component={VerifyPhoneNumber}
         options={{
           headerShown: false,
-          gestureEnabled: false
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen
@@ -194,7 +194,7 @@ const ChatStackNavigator = () => {
         component={PhoneNumber}
         options={{
           headerShown: false,
-          gestureEnabled: false
+          gestureEnabled: false,
         }}
       />
       <Stack.Screen

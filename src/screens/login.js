@@ -8,26 +8,35 @@ import {
   TextInput,
   Alert,
   ActivityIndicator,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import fire, { firestore } from "../database/firebase";
 import { useIsFocused } from "@react-navigation/native";
+import { Notifications } from "expo";
+import * as Permissions from "expo-permissions";
+import Constants from "expo-constants";
+import * as firebase from "firebase";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState();
+  const [userKey, setUserKey] = useState();
   const [password, setPass] = useState();
+  const [expoPushToken, setExpoPushToken] = useState("");
   const [isLoading, setLoading] = useState(false);
   const isVisible = useIsFocused();
 
   useEffect(() => {
     if (isVisible) {
       AuthUser();
+      registerForPushNotificationsAsync().then((token) =>
+        setExpoPushToken(token)
+      );
     }
   }, [isVisible]);
 
   function AuthUser() {
-    fire.auth().onAuthStateChanged(function(user) {
+    fire.auth().onAuthStateChanged(function (user) {
       if (user) {
         navigation.navigate("Chat");
       } else {
@@ -35,7 +44,60 @@ export default function Login({ navigation }) {
     });
   }
 
+  // async function getNotificationToken() {
+  //   await Notifications.getExpoPushTokenAsync()
+  //     .then((token) => {
+  //       setToken(token);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // }
+
+  async function registerForPushNotificationsAsync() {
+    let token;
+    if (Constants.isDevice) {
+      const { status: existingStatus } = await Permissions.getAsync(
+        Permissions.NOTIFICATIONS
+      );
+      let finalStatus = existingStatus;
+      if (existingStatus !== "granted") {
+        const { status } = await Permissions.askAsync(
+          Permissions.NOTIFICATIONS
+        );
+        finalStatus = status;
+      }
+      console.log("finalStatus", finalStatus);
+      if (finalStatus !== "granted") {
+        alert("Failed to get push token for push notification!");
+        return;
+      }
+      token = await Notifications.getExpoPushTokenAsync();
+      console.log("token", token);
+    } else {
+      alert("Must use physical device for Push Notifications");
+    }
+
+    return token;
+  }
+
+  const update = (id) => {
+    firebase.default.firestore().collection("users").doc(id).update({
+      expoPushToken: expoPushToken,
+    });
+    console.log("Update Successfull");
+
+    // .then((s) => {
+    //   this.setState({ updating: false });
+
+    //   this.props.navigation.goBack();
+    //   this.props.route.params.fetchUsers();
+    // })
+    // .catch((e) => this.setState({ updating: false }));
+  };
+
   const userLogin = () => {
+    console.log("expoPushToken", expoPushToken);
     setLoading(true);
     if (
       email !== undefined &&
@@ -46,13 +108,15 @@ export default function Login({ navigation }) {
       fire
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(res => {
+        .then((res) => {
+          console.log("res", res);
           setEmail("");
           setPass("");
+          fetchUser(res.user.uid);
           setLoading(false);
           navigation.navigate("Chat");
         })
-        .catch(error => {
+        .catch((error) => {
           setLoading(false);
           Alert.alert(error.message);
         });
@@ -61,6 +125,24 @@ export default function Login({ navigation }) {
       Alert.alert("Enter details to signin!");
     }
   };
+
+  const fetchUser = async (id) => {
+    const db = firebase.default.firestore();
+    var users = db.collection("users");
+    users
+      .where("id", "==", id)
+      .get()
+      .then((s) => {
+        s.docs.forEach((doc) => {
+          setUserKey(doc.id);
+          update(doc.id);
+        });
+      })
+      .catch((e) => {
+        console.log("e", e);
+      });
+  };
+
   if (isLoading) {
     return (
       <View
@@ -68,7 +150,7 @@ export default function Login({ navigation }) {
           flex: 1,
           justifyContent: "center",
           height: "100%",
-          backgroundColor: "#282c34"
+          backgroundColor: "#282c34",
         }}
       >
         <ActivityIndicator color="#FFF" size="large" />
@@ -94,21 +176,21 @@ export default function Login({ navigation }) {
               width: "100%",
               alignItems: "center",
               marginTop: 15,
-              paddingHorizontal: 40
+              paddingHorizontal: 40,
             }}
           >
             <TextInput
               style={styles.inputStyle}
               placeholder="Email"
               value={email}
-              onChangeText={val => setEmail(val)}
+              onChangeText={(val) => setEmail(val)}
               placeholderTextColor="#FFF"
             />
             <TextInput
               style={styles.inputStyle}
               placeholder="Password"
               value={password}
-              onChangeText={val => setPass(val)}
+              onChangeText={(val) => setPass(val)}
               maxLength={15}
               secureTextEntry={true}
               placeholderTextColor="#FFF"
@@ -120,7 +202,7 @@ export default function Login({ navigation }) {
                     fontSize: 18,
                     textAlign: "center",
                     color: "#FFF",
-                    fontWeight: "600"
+                    fontWeight: "600",
                   }}
                 >
                   Sign In
@@ -147,7 +229,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     //justifyContent: "center",
-    backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
   },
   inputStyle: {
     width: "100%",
@@ -158,12 +240,12 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     margin: 20,
     fontSize: 20,
-    color: "#FFF"
+    color: "#FFF",
   },
   loginText: {
     color: "#FFF",
     marginTop: 40,
-    textAlign: "center"
+    textAlign: "center",
   },
   preloader: {
     left: 0,
@@ -173,14 +255,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
   },
   tcontainer: {
     //backgroundColor: "#FFF",
     flex: 1,
     paddingTop: 100,
     //justifyContent: "center"
-    alignItems: "center"
+    alignItems: "center",
     // borderBottomLeftRadius: 30,
     // borderBottomRightRadius: 30
   },
@@ -188,25 +270,25 @@ const styles = StyleSheet.create({
     flex: 1.5,
     borderTopLeftRadius: 90,
     width: "100%",
-    padding: 30
+    padding: 30,
   },
 
   tHeading: {
     color: "#FFF",
     fontWeight: "bold",
     fontSize: 25,
-    paddingTop: 20
+    paddingTop: 20,
   },
 
   topbcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   bottombcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   menuContainer: {
     justifyContent: "space-around",
@@ -215,7 +297,7 @@ const styles = StyleSheet.create({
     padding: 30,
     width: "100%",
     backgroundColor: "#282c34",
-    borderRadius: 26
+    borderRadius: 26,
   },
   activemenu: {
     justifyContent: "center",
@@ -223,17 +305,17 @@ const styles = StyleSheet.create({
     height: "80%",
     width: "45%",
     backgroundColor: "#17C37B",
-    borderRadius: 10
+    borderRadius: 10,
   },
   activemenuText: {
     fontSize: 20,
     color: "#FFF000",
-    marginTop: 5
+    marginTop: 5,
   },
   aText: {
     color: "#F5F8FA",
     fontSize: 20,
-    marginTop: 5
+    marginTop: 5,
   },
 
   inputs: {
@@ -243,7 +325,7 @@ const styles = StyleSheet.create({
     width: "90%",
     height: "10%",
     borderWidth: 1,
-    borderColor: "grey"
+    borderColor: "grey",
   },
   header: { alignItems: "center", padding: 30 },
   btn: {
@@ -251,13 +333,71 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 30,
     width: 300,
-    marginTop: 30
+    marginTop: 30,
   },
   Stockchat: {
     color: "#FFF",
     textAlign: "center",
     fontSize: 40,
-    fontWeight: "bold"
+    fontWeight: "bold",
     //fontFamily: "Montserrat_700Bold"
-  }
+  },
 });
+
+// import Constants from "expo-constants";
+// import { Notifications } from "expo";
+// import * as Permissions from "expo-permissions";
+// import React, { useState, useEffect, useRef } from "react";
+// import { Text, View, Button, Platform } from "react-native";
+
+// export default function App() {
+//   const [expoPushToken, setExpoPushToken] = useState("");
+
+//   useEffect(() => {
+//     registerForPushNotificationsAsync().then((token) =>
+//       setExpoPushToken(token)
+//     );
+//   }, []);
+
+//   return (
+//     <View
+//       style={{
+//         flex: 1,
+//         alignItems: "center",
+//         justifyContent: "space-around",
+//       }}
+//     >
+//       <Text>Your expo push token: {expoPushToken}</Text>
+
+//       <Button
+//         title="Press to schedule a notification"
+//         onPress={() => alert(expoPushToken)}
+//       />
+//     </View>
+//   );
+// }
+
+// async function registerForPushNotificationsAsync() {
+//   let token;
+//   if (Constants.isDevice) {
+//     const { status: existingStatus } = await Permissions.getAsync(
+//       Permissions.NOTIFICATIONS
+//     );
+//     let finalStatus = existingStatus;
+//     if (existingStatus !== "granted") {
+//       const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+//       finalStatus = status;
+//     }
+//     console.log("finalStatus", finalStatus);
+//     if (finalStatus !== "granted") {
+//       alert("Failed to get push token for push notification!");
+//       return;
+//     }
+//     token = await Notifications.getExpoPushTokenAsync();
+//     console.log("token", token);
+//   } else {
+//     alert("Must use physical device for Push Notifications");
+//   }
+
+//   return token;
+// }

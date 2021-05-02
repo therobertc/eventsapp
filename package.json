@@ -25,6 +25,8 @@
     "expo-image-picker": "~8.3.0",
     "expo-linear-gradient": "~8.2.1",
     "expo-mixpanel-analytics": "^0.0.7",
+    "expo-notifications": "^0.11.6",
+    "expo-permissions": "~9.0.1",
     "expo-status-bar": "^1.0.2",
     "expo-web-browser": "^9.0.0",
     "firebase": "^8.1.2",

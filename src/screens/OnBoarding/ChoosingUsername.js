@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View
+  View,
 } from "react-native";
 import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
@@ -34,7 +34,7 @@ export default function App({ ...props }) {
       .collection("profile")
       .doc(user_name)
       .get()
-      .then(doc => {
+      .then((doc) => {
         if (doc.exists) {
           alert("Username already exists!!");
           return false;
@@ -42,7 +42,7 @@ export default function App({ ...props }) {
           props.navigation.push("Email", { username: user_name });
         }
       })
-      .catch(error => alert(error.message));
+      .catch((error) => alert(error.message));
   };
 
   return (
@@ -76,7 +76,7 @@ export default function App({ ...props }) {
             style={styles.Input}
             placeholder="Username"
             placeholderTextColor="lightgrey"
-            onChangeText={username => setUsername(username)}
+            onChangeText={(username) => setUsername(username)}
           />
           {/* <TextInput
               style={styles.inputStyle}
@@ -92,7 +92,7 @@ export default function App({ ...props }) {
             paddingHorizontal: 10,
             top: 50,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           {/* <TouchableOpacity
@@ -116,7 +116,7 @@ export default function App({ ...props }) {
                 fontSize: 18,
                 textAlign: "center",
                 color: "#FFF",
-                fontWeight: "600"
+                fontWeight: "600",
               }}
             >
               Continue
@@ -134,18 +134,18 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 20,
     backgroundColor: "#282c34",
-    width: Dimensions.get("screen").width
+    width: Dimensions.get("screen").width,
   },
   Button: {
     backgroundColor: "#147efb",
     padding: 15,
     borderRadius: 30,
-    width: "100%"
+    width: "100%",
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
-    fontSize: 15
+    fontSize: 15,
   },
   Stockchat: {
     marginTop: 50,
@@ -154,14 +154,14 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   username: {
     marginTop: 10,
     color: "#FFF",
     textAlign: "center",
     fontSize: 15,
-    padding: 18
+    padding: 18,
   },
   Input: {
     borderBottomWidth: 0,
@@ -175,6 +175,6 @@ const styles = StyleSheet.create({
     color: "#FFF",
     height: 50,
     fontSize: 21,
-    borderRadius: 30
-  }
+    borderRadius: 30,
+  },
 });

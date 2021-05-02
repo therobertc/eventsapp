@@ -6,7 +6,7 @@ import {
   View,
   TouchableOpacity,
   Dimensions,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
@@ -14,14 +14,51 @@ import firebase, { firestore } from "../../database/firebase";
 import URL from "./../../../Constant/Constant";
 import axios from "axios";
 import * as WebBrowser from "expo-web-browser";
+import { Notifications } from "expo";
+import Constants from "expo-constants";
+import * as Permissions from "expo-permissions";
 
 export default function App({ ...props }) {
   const [password, setPassword] = useState("");
   const [userId, setUserId] = useState("");
+  const [expoPushToken, setExpoPushToken] = useState("");
 
-  const send_mail = async email => {
+  React.useEffect(() => {
+    registerForPushNotificationsAsync().then((token) =>
+      setExpoPushToken(token)
+    );
+  }, []);
+
+  async function registerForPushNotificationsAsync() {
+    let token;
+    if (Constants.isDevice) {
+      const { status: existingStatus } = await Permissions.getAsync(
+        Permissions.NOTIFICATIONS
+      );
+      let finalStatus = existingStatus;
+      if (existingStatus !== "granted") {
+        const { status } = await Permissions.askAsync(
+          Permissions.NOTIFICATIONS
+        );
+        finalStatus = status;
+      }
+      console.log("finalStatus", finalStatus);
+      if (finalStatus !== "granted") {
+        alert("Failed to get push token for push notification!");
+        return;
+      }
+      token = await Notifications.getExpoPushTokenAsync();
+      console.log("token", token);
+    } else {
+      alert("Must use physical device for Push Notifications");
+    }
+
+    return token;
+  }
+
+  const send_mail = async (email) => {
     return axios.post(URL.HOST_URL + "api/stockchat/send_welcome_mail/", {
-      email: email
+      email: email,
     });
   };
 
@@ -36,9 +73,9 @@ export default function App({ ...props }) {
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password.trim())
-      .then(user => {
+      .then((user) => {
         user.user.updateProfile({
-          displayName: username
+          displayName: username,
         });
         setUserId(user.user.uid);
         var user_id = user.user.uid;
@@ -50,9 +87,9 @@ export default function App({ ...props }) {
             phone: phone,
             username: username,
             password: password,
-            user_id: user_id
+            user_id: user_id,
           })
-          .then(res => {
+          .then((res) => {
             firestore
               .collection("users")
               .doc(user_id)
@@ -60,17 +97,18 @@ export default function App({ ...props }) {
                 id: user_id,
                 Name: username,
                 email: email,
-                phoneNo: phone
+                phoneNo: phone,
+                expoPushToken: expoPushToken,
               })
               .then(async () => {
                 await send_mail(email);
                 props.navigation.push("Notification", { username: username });
               })
-              .catch(error => alert(error.message));
+              .catch((error) => alert(error.message));
           })
-          .catch(error => alert(error.message));
+          .catch((error) => alert(error.message));
       })
-      .catch(error => alert(error.message));
+      .catch((error) => alert(error.message));
   };
 
   return (
@@ -104,7 +142,7 @@ export default function App({ ...props }) {
             style={styles.Input}
             placeholder="Password"
             placeholderTextColor="lightgrey"
-            onChangeText={password => setPassword(password)}
+            onChangeText={(password) => setPassword(password)}
             secureTextEntry={true}
           />
           {/* <TextInput
@@ -121,7 +159,7 @@ export default function App({ ...props }) {
             paddingHorizontal: 10,
             top: 50,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           {/* <TouchableOpacity
@@ -142,7 +180,7 @@ export default function App({ ...props }) {
                 fontSize: 18,
                 textAlign: "center",
                 color: "#FFF",
-                fontWeight: "600"
+                fontWeight: "600",
               }}
             >
               Continue
@@ -155,7 +193,7 @@ export default function App({ ...props }) {
               flexWrap: "wrap",
               marginHorizontal: 30,
               justifyContent: "center",
-              paddingTop: 30
+              paddingTop: 30,
             }}
           >
             <Text style={styles.txt}>By signing up, you agree to our</Text>
@@ -190,18 +228,18 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 20,
     backgroundColor: "#282c34",
-    width: Dimensions.get("screen").width
+    width: Dimensions.get("screen").width,
   },
   Button: {
     backgroundColor: "#147efb",
     padding: 15,
     borderRadius: 30,
-    width: "100%"
+    width: "100%",
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
-    fontSize: 15
+    fontSize: 15,
   },
   Stockchat: {
     marginTop: 50,
@@ -210,14 +248,14 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   username: {
     marginTop: 10,
     color: "#FFF",
     textAlign: "center",
     fontSize: 15,
-    padding: 18
+    padding: 18,
   },
   Input: {
     borderBottomWidth: 0,
@@ -231,14 +269,14 @@ const styles = StyleSheet.create({
     color: "#FFF",
     height: 50,
     fontSize: 21,
-    borderRadius: 30
+    borderRadius: 30,
   },
   txt: {
     color: "#FFF",
-    fontSize: 12
+    fontSize: 12,
   },
   link: {
     color: "lightblue",
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });
