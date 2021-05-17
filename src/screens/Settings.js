@@ -7,7 +7,7 @@ import {
   Animated,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
 } from "react-native";
 import StockGroupCard from "../components/StockGroupCard";
 import firebase, { firestore } from "../database/firebase";
@@ -16,7 +16,7 @@ import ToggleSwitch from "../components/ToggleSwitch";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
-const Settings = props => {
+const Settings = (props) => {
   return (
     <View>
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -36,7 +36,7 @@ const Settings = props => {
                 flexDirection: "column",
                 width: "100%",
 
-                paddingHorizontal: 10
+                paddingHorizontal: 10,
               }}
             >
               <View
@@ -45,7 +45,7 @@ const Settings = props => {
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingTop: 20,
-                  paddingHorizontal: 20
+                  paddingHorizontal: 20,
                 }}
               >
                 <Text style={styles.switch}>Portfolio</Text>
@@ -57,7 +57,7 @@ const Settings = props => {
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingVertical: 20,
-                  paddingHorizontal: 20
+                  paddingHorizontal: 20,
                 }}
               >
                 <Text style={styles.switchtitle}>Go Public</Text>
@@ -70,7 +70,7 @@ const Settings = props => {
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingTop: 20,
-                  paddingHorizontal: 20
+                  paddingHorizontal: 20,
                 }}
               >
                 <Text style={styles.switch}>Notifications</Text>
@@ -82,7 +82,7 @@ const Settings = props => {
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingVertical: 20,
-                  paddingHorizontal: 20
+                  paddingHorizontal: 20,
                 }}
               >
                 <Text style={styles.switchtitle}>Mentions</Text>
@@ -94,7 +94,7 @@ const Settings = props => {
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingVertical: 20,
-                  paddingHorizontal: 20
+                  paddingHorizontal: 20,
                 }}
               >
                 <Text style={styles.switchtitle}>New Messages</Text>
@@ -107,7 +107,7 @@ const Settings = props => {
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingTop: 20,
-                  paddingHorizontal: 20
+                  paddingHorizontal: 20,
                 }}
               >
                 <Text style={styles.switch}>Stock Alerts</Text>
@@ -119,7 +119,7 @@ const Settings = props => {
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingVertical: 20,
-                  paddingHorizontal: 20
+                  paddingHorizontal: 20,
                 }}
               >
                 <Text style={styles.switchtitle}>Price Movements</Text>
@@ -131,7 +131,7 @@ const Settings = props => {
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingVertical: 20,
-                  paddingHorizontal: 20
+                  paddingHorizontal: 20,
                 }}
               >
                 <Text style={styles.switchtitle}>Trending Stocks</Text>
@@ -140,22 +140,58 @@ const Settings = props => {
             </View>
           </View>
         </View>
+
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <TouchableOpacity
+            style={styles.btn}
+            // onPress={() => {
+            //   firebase
+            //     .auth()
+            //     .signOut()
+            //     .then(function () {
+            //       props.navigation.navigate("GetStarted");
+            //     });
+            // }}
+          >
+            <Text
+              style={{
+                color: "#FFF",
+                fontSize: 19,
+                fontWeight: "500",
+                textAlign: "center",
+              }}
+            >
+              Save
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            // style={styles.btn}
+            onPress={() => {
+              firebase
+                .auth()
+                .signOut()
+                .then(function () {
+                  props.navigation.navigate("GetStarted");
+                });
+            }}
+          >
+            <Text
+              style={{
+                color: "grey",
+                fontSize: 19,
+                fontWeight: "500",
+                textAlign: "center",
+                paddingTop: 30,
+              }}
+            >
+              Logout
+            </Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
-      <TouchableOpacity
-        style={styles.btn}
-        onPress={() => {
-          firebase
-            .auth()
-            .signOut()
-            .then(function() {
-              props.navigation.navigate("GetStarted");
-            });
-        }}
-      >
-        <Text style={{ color: "#FFF", fontSize: 19, fontWeight: "bold" }}>
-          Logout
-        </Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -163,19 +199,19 @@ export default Settings;
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 300
+    marginTop: 300,
   },
   card: {
     marginLeft: 400,
     width: 400,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   seperator: {
     borderColor: "lightgrey",
     borderWidth: 0.5,
     marginLeft: 30,
     marginVertical: 10,
-    width: "100%"
+    width: "100%",
   },
   gradient: {
     height: "100%",
@@ -184,7 +220,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 30
+    paddingTop: 30,
   },
   container: {
     height: "100%",
@@ -193,12 +229,12 @@ const styles = StyleSheet.create({
     // right: 0,
     // top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 60
+    paddingTop: 60,
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingTop: 30
+    paddingTop: 30,
     //paddingHorizontal: 20
   },
   header: {
@@ -206,18 +242,18 @@ const styles = StyleSheet.create({
     color: "#FFF",
     flex: 1,
     fontSize: 24,
-    textAlign: "center"
+    textAlign: "center",
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
     fontSize: 24,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   proContainer: {
     marginRight: -20,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   ops: {
     // borderTopLeftRadius: 40,
@@ -225,25 +261,25 @@ const styles = StyleSheet.create({
     //height: "75%",
     // backgroundColor: "#282c34",
     // marginHorizontal: -20,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   col: {
     flexDirection: "row",
     //marginTop: 25,
     marginHorizontal: 20,
-    alignItems: "center"
+    alignItems: "center",
   },
   stockchats: {
     //flexDirection: "row"
     marginVertical: 10,
-    marginHorizontal: 20
+    marginHorizontal: 20,
     //alignItems: "center"
   },
   day: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
-    fontSize: 20
+    fontSize: 20,
   },
   Stockchat: {
     marginTop: 50,
@@ -252,7 +288,7 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   switch: {
     //marginTop: 5,
@@ -261,7 +297,7 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
 
   switchtitle: {
@@ -270,7 +306,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     //width: Dimensions.get("screen").width,
     fontWeight: "500",
-    textAlign: "center"
+    textAlign: "center",
     //fontFamily: "Montserrat_700Bold"
   },
   btn: {
@@ -279,13 +315,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: 200,
-    position: "absolute",
-    bottom: 100,
+    //position: "absolute",
+    //bottom: 100,
 
-    right: 110,
+    //right: 110,
     height: 50,
     backgroundColor: "#147efb",
     borderRadius: 100,
-    flexDirection: "row"
-  }
+    flexDirection: "row",
+  },
 });

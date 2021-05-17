@@ -7,7 +7,7 @@ import {
   Image,
   Dimensions,
   ScrollView,
-  ActionSheetIOS
+  ActionSheetIOS,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import * as firebase from "firebase";
@@ -25,25 +25,24 @@ class _Profile extends Component {
     userKey: "",
     user: "",
     following: false,
-    blockedusers: []
+    blockedusers: [],
   };
   static navigationOptions = {
-    gesturesEnabled: false
-  }
+    gesturesEnabled: false,
+  };
 
   componentDidMount() {
-
     if (this.props.route.params && this.props.route.params.uid) {
       this.setState(
         {
-          user: this.props.route.params.uid
+          user: this.props.route.params.uid,
         },
         () => this.fetchUsers()
       );
     } else {
       this.setState(
         {
-          user: firebase.default.auth().currentUser.uid
+          user: firebase.default.auth().currentUser.uid,
         },
         () => this.fetchUsers()
       );
@@ -56,9 +55,9 @@ class _Profile extends Component {
         options: ["Cancel", "Block User"],
         destructiveButtonIndex: 1,
         cancelButtonIndex: 0,
-        userInterfaceStyle: "dark"
+        userInterfaceStyle: "dark",
       },
-      buttonIndex => {
+      (buttonIndex) => {
         if (buttonIndex === 0) {
           // cancel action
         } else if (buttonIndex === 1) {
@@ -75,17 +74,17 @@ class _Profile extends Component {
     users
       .where("id", "==", this.state.user)
       .get()
-      .then(s => {
-        s.docs.forEach(doc => {
+      .then((s) => {
+        s.docs.forEach((doc) => {
           this.setState({
             userDetails: doc.data(),
             userKey: doc.id,
             following: doc.data().followers,
-            blockedusers: doc.data().blockedusers
+            blockedusers: doc.data().blockedusers,
           });
         });
       })
-      .catch(e => {
+      .catch((e) => {
         console.log("e", e);
       });
   };
@@ -100,11 +99,11 @@ class _Profile extends Component {
       .collection("users")
       .doc(this.state.userKey)
       .update({
-        followers: firebase.firestore.FieldValue.arrayUnion(uid)
+        followers: firebase.firestore.FieldValue.arrayUnion(uid),
       })
 
-      .then(s => this.fetchUsers())
-      .catch(e => console.log("e", e));
+      .then((s) => this.fetchUsers())
+      .catch((e) => console.log("e", e));
   };
 
   unFollow = async () => {
@@ -117,13 +116,13 @@ class _Profile extends Component {
       .collection("users")
       .doc(this.state.userKey)
       .update({
-        followers: firebase.firestore.FieldValue.arrayRemove(uid)
+        followers: firebase.firestore.FieldValue.arrayRemove(uid),
       })
 
-      .then(s => {
+      .then((s) => {
         this.fetchUsers();
       })
-      .catch(e => console.log("e", e));
+      .catch((e) => console.log("e", e));
   };
 
   block = async () => {
@@ -134,11 +133,11 @@ class _Profile extends Component {
       .collection("users")
       .doc(this.state.userKey)
       .update({
-        blockedusers: firebase.firestore.FieldValue.arrayUnion(uid)
+        blockedusers: firebase.firestore.FieldValue.arrayUnion(uid),
       })
 
-      .then(s => this.fetchUsers())
-      .catch(e => console.log("e", e));
+      .then((s) => this.fetchUsers())
+      .catch((e) => console.log("e", e));
   };
 
   unBlock = async () => {
@@ -151,13 +150,13 @@ class _Profile extends Component {
       .collection("users")
       .doc(this.state.userKey)
       .update({
-        blockedusers: firebase.firestore.FieldValue.arrayRemove(uid)
+        blockedusers: firebase.firestore.FieldValue.arrayRemove(uid),
       })
 
-      .then(s => {
+      .then((s) => {
         this.fetchUsers();
       })
-      .catch(e => console.log("e", e));
+      .catch((e) => console.log("e", e));
   };
 
   render() {
@@ -181,7 +180,7 @@ class _Profile extends Component {
             flexDirection: "row",
             alignItems: "center",
             marginTop: 30,
-            paddingHorizontal: 10
+            paddingHorizontal: 10,
           }}
         >
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
@@ -200,7 +199,7 @@ class _Profile extends Component {
                 color: "#FFF",
                 fontWeight: "bold",
                 paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                fontSize: 30
+                fontSize: 30,
               }}
               name="settings"
               onPress={() => this.props.navigation.navigate("Settings")}
@@ -220,7 +219,7 @@ class _Profile extends Component {
                 height: 80,
                 borderRadius: 50,
                 borderWidth: 1,
-                borderColor: "#FFF"
+                borderColor: "#FFF",
               }}
             />
           </View>
@@ -247,7 +246,7 @@ class _Profile extends Component {
                   textAlign: "center",
 
                   color: "#FFF",
-                  fontWeight: "500"
+                  fontWeight: "500",
                 }}
                 name="lock"
                 size={30}
@@ -260,7 +259,7 @@ class _Profile extends Component {
               style={{
                 fontSize: 18,
                 top: 10,
-                color: "#FFF"
+                color: "#FFF",
               }}
             >
               Monthly Gain
@@ -272,7 +271,7 @@ class _Profile extends Component {
                 fontSize: 18,
                 fontWeight: "500",
                 textAlign: "center",
-                color: "#FFF"
+                color: "#FFF",
               }}
             >
               {userDetails.followers ? userDetails.followers.length : "0"}
@@ -281,7 +280,7 @@ class _Profile extends Component {
               style={{
                 fontSize: 18,
                 top: 10,
-                color: "#FFF"
+                color: "#FFF",
               }}
             >
               Subscribers
@@ -290,7 +289,7 @@ class _Profile extends Component {
         </View>
         <View
           style={{
-            marginTop: 30
+            marginTop: 30,
           }}
         >
           {/* <View style={styles.common1}>
@@ -359,7 +358,7 @@ class _Profile extends Component {
           <View
             style={{
               flexDirection: "row",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <Text style={styles.uname}>
@@ -425,14 +424,14 @@ class _Profile extends Component {
                 onPress={() =>
                   this.props.navigation.push("Editprofile", {
                     userkey: userKey,
-                    fetchUsers: this.fetchUsers
+                    fetchUsers: this.fetchUsers,
                   })
                 }
               >
                 <Text style={styles.text}>Edit Profile</Text>
               </TouchableOpacity>
 
-              <PortfolioAuth></PortfolioAuth>
+              {/* <PortfolioAuth></PortfolioAuth> */}
               {/* <Stocks></Stocks> */}
             </View>
           )}
@@ -448,31 +447,31 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     height: height,
-    backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
   },
   root: {
     //   backgroundColor: theme['color-basic-100'],
-    marginTop: 10
+    marginTop: 10,
   },
   header: {
     alignItems: "center",
     paddingTop: 25,
-    paddingBottom: 17
+    paddingBottom: 17,
   },
   userInfo: {
     flexDirection: "row",
-    paddingVertical: 18
+    paddingVertical: 18,
   },
   bordered: {
     borderBottomWidth: 1,
-    borderColor: "transparent"
+    borderColor: "transparent",
   },
   section: {
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
   },
   space: {
-    marginBottom: 3
+    marginBottom: 3,
     // color: theme["color-basic-1000"],
   },
   separator: {
@@ -481,15 +480,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 0,
     width: 1,
-    height: 42
+    height: 42,
   },
   buttons: {
     flexDirection: "row",
-    paddingVertical: 8
+    paddingVertical: 8,
   },
   button: {
     flex: 1,
-    alignSelf: "center"
+    alignSelf: "center",
   },
 
   add: {
@@ -501,7 +500,7 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 15,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   unfollow: {
     //borderWidth: 1,
@@ -512,7 +511,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: "silver",
     borderRadius: 5,
-    backgroundColor: "#7c818c"
+    backgroundColor: "#7c818c",
   },
   follow: {
     //borderWidth: 1,
@@ -523,7 +522,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: "silver",
     borderRadius: 5,
-    backgroundColor: "#147efb"
+    backgroundColor: "#147efb",
   },
   editprofile: {
     borderWidth: 1,
@@ -533,7 +532,7 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     borderColor: "silver",
-    borderRadius: 3
+    borderRadius: 3,
   },
 
   blockview: {
@@ -544,13 +543,13 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     borderColor: "#ff3636",
-    borderRadius: 3
+    borderRadius: 3,
   },
   change: {
     color: "#33CC00",
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   block: {
     //borderWidth: 1,
@@ -560,44 +559,44 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     borderColor: "silver",
-    borderRadius: 3
+    borderRadius: 3,
   },
 
   feed: {
-    paddingTop: 20
+    paddingTop: 20,
   },
 
   header: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 15
+    marginTop: 15,
   },
   headertitle: {
     width: "82%",
     textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
-    color: "#FFF"
+    color: "#FFF",
   },
   pickimage: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20
+    marginBottom: 20,
   },
   name: {
     textAlign: "center",
     fontWeight: "600",
     fontSize: 12,
-    marginTop: 10
+    marginTop: 10,
   },
   changeusername: {
     marginTop: 10,
     height: 40,
     borderColor: "gray",
-    borderWidth: 1
+    borderWidth: 1,
   },
   // change: {
   //   marginTop: 10,
@@ -613,7 +612,7 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     borderColor: "silver",
-    borderRadius: 3
+    borderRadius: 3,
   },
   data: {
     display: "flex",
@@ -621,7 +620,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    paddingTop: 20
+    paddingTop: 20,
   },
   uname: {
     textAlign: "left",
@@ -630,7 +629,7 @@ const styles = StyleSheet.create({
     //top: 10,
     paddingLeft: 10,
     paddingRight: 5,
-    color: "#FFF"
+    color: "#FFF",
   },
 
   bio: {
@@ -639,45 +638,45 @@ const styles = StyleSheet.create({
     fontSize: 18,
     paddingVertical: 20,
     paddingLeft: 10,
-    color: "#FFF"
+    color: "#FFF",
   },
   blockuser: {
     fontSize: 12,
     fontWeight: "500",
     textAlign: "center",
     color: "white",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   unblockuser: {
     fontSize: 18,
     fontWeight: "500",
     textAlign: "center",
     fontWeight: "bold",
-    color: "#ff3636"
+    color: "#ff3636",
   },
   common1: {
     display: "flex",
     flexDirection: "row",
     marginTop: 10,
-    alignItems: "center"
+    alignItems: "center",
   },
   following: {
     fontSize: 13,
     fontWeight: "bold",
     textAlign: "center",
-    color: "white"
+    color: "white",
   },
   editprofiletext: {
     fontSize: 12,
     fontWeight: "500",
     textAlign: "center",
-    color: "#FFF"
+    color: "#FFF",
   },
   followtext: {
     fontSize: 18,
     fontWeight: "700",
     textAlign: "center",
-    color: "#FFF"
+    color: "#FFF",
   },
   btn: {
     alignItems: "center",
@@ -692,14 +691,14 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     flexDirection: "row",
     alignSelf: "center",
-    marginTop: 30
+    marginTop: 30,
   },
   avatar: {
     width: 80,
     height: 80,
     borderRadius: 40,
     marginBottom: 30,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
@@ -707,20 +706,20 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     paddingBottom: 10,
-    textAlign: "center"
+    textAlign: "center",
   },
 
   text: {
     fontSize: 20,
     fontWeight: "500",
     textAlign: "center",
-    color: "#FFF"
+    color: "#FFF",
   },
   link: {
     //fontFamily: "Montserrat_400Regular",
     color: "#147efb",
     textAlign: "center",
     fontSize: 20,
-    paddingVertical: 10
-  }
+    paddingVertical: 10,
+  },
 });

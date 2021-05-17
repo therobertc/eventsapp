@@ -19,6 +19,7 @@ import TrendingStocks from "../components/TrendingStocks";
 import { Feather } from "@expo/vector-icons";
 import AddGroup from "./Sub/AddGroup";
 import fire, { firestore } from "../database/firebase";
+import StockGroupCard from "../components/StockGroupCard";
 
 const Chat = (props) => {
   const isVisible = useIsFocused();
@@ -148,7 +149,7 @@ const Chat = (props) => {
           }}
         >
           <Left>
-            <Text style={styles.logotext}>#STOCKCHAT</Text>
+            <Text style={styles.logotext}>Groups</Text>
           </Left>
           <Right>
             <View
@@ -158,7 +159,7 @@ const Chat = (props) => {
                 justifyContent: "center",
               }}
             >
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={styles.invite}
                 onPress={() => {
                   props.navigation.navigate("Bank");
@@ -173,8 +174,8 @@ const Chat = (props) => {
                   }}
                   name="credit-card"
                 />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.invite} onPress={onShare}>
+              </TouchableOpacity> */}
+              {/* <TouchableOpacity style={styles.invite} onPress={onShare}>
                 <Feather
                   style={{
                     color: "#FFF",
@@ -195,16 +196,38 @@ const Chat = (props) => {
                 >
                   Invite
                 </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
+
+            <Feather
+              style={{
+                color: "#FFF",
+                fontWeight: "bold",
+                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                fontSize: 30,
+              }}
+              name="user-plus"
+              onPress={onShare}
+            />
+
+            <Feather
+              style={{
+                color: "#FFF",
+                fontWeight: "bold",
+                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                fontSize: 30,
+              }}
+              name="bell"
+              onPress={() => props.navigation.navigate("Activity")}
+            />
           </Right>
         </Header>
       </View>
 
       <ScrollView style={styles.col2}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.header2}>Trending Stocks</Text>
-          {/* <View>
+        {/* <View style={styles.headerContainer}> */}
+        {/* <Text style={styles.header2}>Trending Stocks</Text> */}
+        {/* <View>
             <TouchableOpacity
               style={styles.invite}
               onPress={onShare}
@@ -218,7 +241,7 @@ const Chat = (props) => {
               </Text>
             </TouchableOpacity>
           </View> */}
-        </View>
+        {/* </View> */}
 
         <TrendingStocks {...props} />
 
@@ -260,17 +283,17 @@ const Chat = (props) => {
             </Text>
           </TouchableOpacity> */}
         {/* <StockGroupCard
-            ticker="$TSLA"
-            pctchange="+1.02%"
-            onPress={() => {
-              props.navigation.navigate("StockChat", {
-                //itemId: "TSLA",
-                itemName: "$TSLA",
-                itemPic: "https://i.stack.imgur.com/l60Hf.png"
-              });
-            }}
-            msg="This stock is trending"
-          /> */}
+          ticker="$TSLA"
+          pctchange="+1.02%"
+          onPress={() => {
+            props.navigation.navigate("StockChat", {
+              //itemId: "TSLA",
+              itemName: "$TSLA",
+              itemPic: "https://i.stack.imgur.com/l60Hf.png",
+            });
+          }}
+          msg="This stock is trending"
+        /> */}
         {/* <StockGroupCard
             ticker="$SQ"
             pctchange="+4.55%"
@@ -300,44 +323,44 @@ const Chat = (props) => {
             msg="This stock is trending"
           /> */}
         {/* </View>  */}
-        <View style={styles.col}>
-          <Text style={styles.header2}>Group Chats</Text>
-          {/* <TouchableOpacity
+        {/* <View style={styles.col}> */}
+        {/* <Text style={styles.header2}>Groups</Text> */}
+        {/* <TouchableOpacity
             onPress={() => props.navigation.navigate("AddGroup")}
           >
             <AntDesign name="pluscircleo" size={24} color="#FFF" />
           </TouchableOpacity> */}
-        </View>
-        <View style={{ paddingVertical: 10, marginHorizontal: 10 }}>
-          <FlatList
-            data={publicgroups}
-            keyExtractor={(item, index) => "key" + index}
-            renderItem={({ item }) => {
-              const name = item.groupName;
-              const totalmembers =
-                item && item.totalmembers ? item.totalmembers : 0;
-              const lastmessage =
-                item && item.lastmessage ? item.lastmessage : "";
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    props.navigation.navigate("Discussion", {
-                      item,
-                      itemPic: "https://i.stack.imgur.com/l60Hf.png",
-                    });
-                  }}
-                >
-                  <Messages
-                    item={name}
-                    totalmembers={totalmembers}
-                    lastmessage={lastmessage}
-                  ></Messages>
-                </TouchableOpacity>
-              );
-            }}
-          />
+        {/* </View> */}
+        {/* <View style={{ paddingVertical: 5, marginHorizontal: 10 }}> */}
+        <FlatList
+          data={publicgroups}
+          keyExtractor={(item, index) => "key" + index}
+          renderItem={({ item }) => {
+            const name = item.groupName;
+            const totalmembers =
+              item && item.totalmembers ? item.totalmembers : 0;
+            const lastmessage =
+              item && item.lastmessage ? item.lastmessage : "";
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate("Discussion", {
+                    item,
+                    itemPic: "https://i.stack.imgur.com/l60Hf.png",
+                  });
+                }}
+              >
+                <Messages
+                  item={name}
+                  totalmembers={totalmembers}
+                  lastmessage={lastmessage}
+                ></Messages>
+              </TouchableOpacity>
+            );
+          }}
+        />
 
-          {/* <FlatList
+        {/* <FlatList
             data={groups}
             keyExtractor={(item, index) => "key" + index}
             renderItem={({ item }) => {
@@ -357,47 +380,47 @@ const Chat = (props) => {
               );
             }}
           /> */}
-        </View>
+        {/* </View> */}
       </ScrollView>
 
       {/* <TouchableOpacity
-            onPress={() => props.navigation.navigate("AddGroup")}
-            style={{
-              borderWidth: 1,
-              borderColor: "rgba(0,0,0,0.2)",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 200,
-              position: "absolute",
-              bottom: 10,
-              right: 110,
-              height: 50,
-              backgroundColor: "#147efb",
-              borderRadius: 100,
-              flexDirection: "row"
-            }}
+        onPress={() => props.navigation.navigate("AddGroup")}
+        style={{
+          borderWidth: 1,
+          borderColor: "rgba(0,0,0,0.2)",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 200,
+          position: "absolute",
+          bottom: 10,
+          right: 110,
+          height: 50,
+          backgroundColor: "#ed6ac3",
+          borderRadius: 100,
+          flexDirection: "row",
+        }}
+      >
+        <Feather
+          style={{
+            color: "#FFF",
+            fontWeight: "bold",
+            //paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+            fontSize: 20,
+          }}
+          name="plus"
+        />
+        <Text
+          style={{
+            textAlign: "center",
+            fontSize: 18,
+            fontWeight: "600",
+            color: "#FFF",
+            paddingLeft: 10,
+          }}
         >
-          <Feather
-              style={{
-                color: "#FFF",
-                fontWeight: "bold",
-                //paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                fontSize: 20
-              }}
-              name="plus"
-          />
-          <Text
-              style={{
-                textAlign: "center",
-                fontSize: 18,
-                fontWeight: "600",
-                color: "#FFF",
-                paddingLeft: 10
-              }}
-          >
-            Start Group
-          </Text>
-        </TouchableOpacity> */}
+          Start Group
+        </Text>
+      </TouchableOpacity> */}
     </View>
   );
 };

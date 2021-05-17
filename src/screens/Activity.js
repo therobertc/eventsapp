@@ -7,7 +7,7 @@ import {
   Animated,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
 } from "react-native";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
 import { Feather } from "@expo/vector-icons";
@@ -23,15 +23,15 @@ class Activity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      country: "Stock Alerts"
+      country: "Stock Alerts",
     };
     props.navigation.setOptions({
-      gesturesEnabled: false
+      gesturesEnabled: false,
     });
   }
   static navigationOptions = {
     gesturesEnabled: false,
-    swipeEnabled: false
+    swipeEnabled: false,
   };
 
   render(props) {
@@ -41,11 +41,14 @@ class Activity extends React.Component {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between"
-            //marginHorizontal: 10,
+            justifyContent: "space-between",
+            marginHorizontal: 20,
             //zIndex: 999
           }}
         >
+          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+            <Feather name="chevron-left" size={30} color="#FFF" />
+          </TouchableOpacity>
           <Text style={styles.header}>Activity</Text>
 
           <View style={{ flexDirection: "row", paddingRight: 10 }}>
@@ -75,16 +78,16 @@ class Activity extends React.Component {
 
         <View style={styles.feed}>
           {/* <Text style={styles.text}>No new notifications</Text> */}
-          {/* <ScrollView
+          <ScrollView
             showsVerticalScrollIndicator={false}
             //style={{ paddingHorizontal: 10 }}
           >
             <Notifications {...this.props} />
-          </ScrollView> */}
+          </ScrollView>
           {/* <InsiderTrades {...this.props} /> */}
           {/* <WSBTrends {...this.props}></WSBTrends> */}
           {/* <WSBETF {...this.props}></WSBETF> */}
-          <ActivityTabs></ActivityTabs>
+          {/* <ActivityTabs></ActivityTabs> */}
         </View>
       </View>
     );
@@ -94,19 +97,19 @@ export default Activity;
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 300
+    marginTop: 300,
   },
   card: {
     marginLeft: 400,
     width: 400,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   seperator: {
     borderColor: "#303135",
     borderWidth: 0.5,
     marginLeft: 30,
     marginVertical: 10,
-    width: "100%"
+    width: "100%",
   },
   gradient: {
     height: "100%",
@@ -115,7 +118,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 30
+    paddingTop: 30,
   },
   btn: {
     borderRadius: 16,
@@ -125,7 +128,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   container: {
     height: "100%",
@@ -134,13 +137,13 @@ const styles = StyleSheet.create({
     // right: 0,
     // top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 60
+    paddingTop: 60,
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
     //paddingTop: 30,
-    paddingHorizontal: 20
+    //paddingHorizontal: 20,
   },
   header: {
     fontFamily: "Montserrat_800ExtraBold",
@@ -148,28 +151,28 @@ const styles = StyleSheet.create({
     //width: "105%",
     //flex: 1,
     fontSize: 20,
-    marginLeft: 20
+    //marginLeft: 20,
   },
   text: {
     //fontFamily: "Montserrat_400Regular",
     color: "#FFF",
     textAlign: "center",
     fontSize: 20,
-    paddingVertical: 30
+    paddingVertical: 30,
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
     fontSize: 24,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   feed: {
-    flex: 1
+    flex: 1,
   },
   proContainer: {
     marginRight: -20,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   ops: {
     // borderTopLeftRadius: 40,
@@ -177,24 +180,24 @@ const styles = StyleSheet.create({
     //height: "75%",
     // backgroundColor: "#282c34",
     // marginHorizontal: -20,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   col: {
     flexDirection: "row",
     //marginTop: 25,
     marginHorizontal: 20,
-    alignItems: "center"
+    alignItems: "center",
   },
   stockchats: {
     //flexDirection: "row"
     marginVertical: 10,
-    marginHorizontal: 20
+    marginHorizontal: 20,
     //alignItems: "center"
   },
   day: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 });

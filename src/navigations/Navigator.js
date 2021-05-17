@@ -62,8 +62,9 @@ const BottomTabNavigator = () => {
         activeTintColor: "#147efb",
         inactiveTintColor: "#AAB8C2",
         style: {
-          height: "10%",
-          paddingTop: 15,
+          //height: "15%",
+          //paddingTop: 15,
+          paddingBottom: 10,
           backgroundColor: "#282c34",
           alignContent: "center",
           borderTopColor: "#282c34",
@@ -79,8 +80,22 @@ const BottomTabNavigator = () => {
           headerShown: false,
           tabBarLabel: "",
           tabBarIcon: ({ color, size }) => (
-            <Icon name="ios-trending-up" color={color} size={30} />
-          )
+            <Feather name="home" color={color} size={30} />
+          ),
+        }}
+      /> */}
+
+      {/* <Tab.Screen
+        name="Alerts"
+        component={Activity}
+        options={{
+          gestureEnabled: false,
+          swipeEnabled: false,
+          headerShown: false,
+          tabBarLabel: "",
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="trending-up" color={color} size={30} />
+          ),
         }}
       /> */}
 
@@ -96,19 +111,7 @@ const BottomTabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="Alerts"
-        component={Activity}
-        options={{
-          gestureEnabled: false,
-          swipeEnabled: false,
-          headerShown: false,
-          tabBarLabel: "",
-          tabBarIcon: ({ color, size }) => (
-            <Feather name="trending-up" color={color} size={30} />
-          ),
-        }}
-      />
+
       <Tab.Screen
         name="Profile"
         component={Profile}

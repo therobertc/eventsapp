@@ -5,13 +5,14 @@ import {
   View,
   ActivityIndicator,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import axios from "axios";
 import URL from "../../Constant/Constant";
 import moment from "moment";
 import { Feather } from "@expo/vector-icons";
 import { FlatList } from "react-native-gesture-handler";
+import TrendingStocks from "./TrendingStocks";
 
 class Notifications extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class Notifications extends Component {
     this.state = {
       post_data: null,
       isLoading: true,
-      user_email: null
+      user_email: null,
     };
   }
 
@@ -29,18 +30,18 @@ class Notifications extends Component {
 
   _getManualNotification = () => {
     let url = URL.HOST_URL + "api/getAllNotification/?type=1";
-    axios.get(url).then(response => {
+    axios.get(url).then((response) => {
       this.setState({ post_data: response.data.data, isLoading: false });
     });
   };
 
-  navigate_to_details = data => {
+  navigate_to_details = (data) => {
     if (data !== null && data !== undefined) {
       let list = data.title.split(" ");
       let symbol = list[0].trim();
       if (symbol === symbol.toUpperCase())
         this.props.navigation.push("StockDetails", {
-          symbol: list[0]
+          symbol: list[0],
         });
     }
   };
@@ -59,13 +60,13 @@ class Notifications extends Component {
                 style={{
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  marginLeft: 10
+                  marginLeft: 10,
                 }}
               >
                 <View
                   style={{
                     flexDirection: "row",
-                    alignItems: "center"
+                    alignItems: "center",
                   }}
                 >
                   <Text
@@ -160,7 +161,7 @@ class Notifications extends Component {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "#282c34"
+            backgroundColor: "#282c34",
           }}
         >
           <ActivityIndicator />
@@ -180,31 +181,31 @@ export default Notifications;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
   },
   text: {
     marginHorizontal: 8,
-    marginVertical: 10
+    marginVertical: 10,
   },
   bottom: {
     flex: 1,
     justifyContent: "flex-end",
-    marginBottom: 36
+    marginBottom: 36,
   },
   searchbar: {
-    marginTop: 50
+    marginTop: 50,
   },
   loadCon: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#147efb"
+    backgroundColor: "#147efb",
   },
   loadTitle: {
     color: "#fff",
     fontSize: 16,
     margin: 8,
-    fontWeight: "700"
+    fontWeight: "700",
   },
   profileImage: {
     flex: 1,
@@ -216,7 +217,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
     borderColor: "#147efb",
     alignSelf: "flex-start",
-    marginTop: 15
+    marginTop: 15,
   },
   card: {
     //backgroundColor: "#F5F8FA",
@@ -231,6 +232,6 @@ const styles = StyleSheet.create({
     // height: 500,
     marginVertical: 2,
     //marginHorizontal: 10,
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
