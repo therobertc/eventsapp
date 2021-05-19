@@ -20,6 +20,7 @@ import { Feather } from "@expo/vector-icons";
 import AddGroup from "./Sub/AddGroup";
 import fire, { firestore } from "../database/firebase";
 import StockGroupCard from "../components/StockGroupCard";
+import ChartComp from "../components/ChartComp";
 
 const Chat = (props) => {
   const isVisible = useIsFocused();
@@ -140,175 +141,105 @@ const Chat = (props) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Header
-          style={{
-            backgroundColor: "#282c34",
-            borderBottomWidth: 0.2,
-            borderBottomColor: "#282c34",
-          }}
-        >
-          <Left>
-            <Text style={styles.logotext}>Groups</Text>
-          </Left>
-          <Right>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              {/* <TouchableOpacity
-                style={styles.invite}
-                onPress={() => {
-                  props.navigation.navigate("Bank");
-                }}
-              >
-                <Feather
-                  style={{
-                    color: "#FFF",
-                    fontWeight: "bold",
-                    paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                    fontSize: 20,
-                  }}
-                  name="credit-card"
-                />
-              </TouchableOpacity> */}
-              {/* <TouchableOpacity style={styles.invite} onPress={onShare}>
-                <Feather
-                  style={{
-                    color: "#FFF",
-                    fontWeight: "bold",
-                    paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                    fontSize: 20,
-                  }}
-                  name="user-plus"
-                />
-                <Text
-                  style={{
-                    textAlign: "center",
-                    fontSize: 18,
-                    fontWeight: "600",
-                    color: "#FFF",
-                    //paddingLeft: 10
-                  }}
-                >
-                  Invite
-                </Text>
-              </TouchableOpacity> */}
-            </View>
+      <Header
+        style={{
+          backgroundColor: "#282c34",
+          borderBottomWidth: 0.2,
+          borderBottomColor: "#282c34",
+        }}
+      >
+        <Left>
+          <Text style={styles.logotext}>#stockchat</Text>
+          {/* <Feather
+            style={{
+              color: "#FFF",
+              fontWeight: "bold",
+              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+              fontSize: 30,
+            }}
+            name="menu"
+            onPress={onShare}
+          /> */}
+        </Left>
+        <Right>
+          <Feather
+            style={{
+              color: "#FFF",
+              fontWeight: "bold",
+              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+              fontSize: 30,
+            }}
+            name="user-plus"
+            onPress={onShare}
+          />
 
-            <Feather
-              style={{
-                color: "#FFF",
-                fontWeight: "bold",
-                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                fontSize: 30,
-              }}
-              name="user-plus"
-              onPress={onShare}
-            />
-
-            <Feather
-              style={{
-                color: "#FFF",
-                fontWeight: "bold",
-                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                fontSize: 30,
-              }}
-              name="bell"
-              onPress={() => props.navigation.navigate("Activity")}
-            />
-          </Right>
-        </Header>
-      </View>
+          <Feather
+            style={{
+              color: "#FFF",
+              fontWeight: "bold",
+              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+              fontSize: 30,
+            }}
+            name="bell"
+            onPress={() => props.navigation.navigate("Activity")}
+          />
+        </Right>
+      </Header>
 
       <ScrollView style={styles.col2}>
-        {/* <View style={styles.headerContainer}> */}
-        {/* <Text style={styles.header2}>Trending Stocks</Text> */}
-        {/* <View>
-            <TouchableOpacity
-              style={styles.invite}
-              onPress={onShare}
-              title="Share"
-              //onPress={() => props.navigation.navigate("InviteFriends")}
-            >
-              <Feather name="user-plus" size={20} color="#F5F8FA" />
-              <Text style={{ color: "#F5F8FA", fontWeight: "500" }}>
-                {" "}
-                Invite{" "}
-              </Text>
-            </TouchableOpacity>
-          </View> */}
-        {/* </View> */}
-
-        <TrendingStocks {...props} />
-
-        {/* <TextInput
-          style={styles.inputStyle}
-          placeholder="Search for groups or messages"
-          // value={email}
-          // onChangeText={val => setEmail(val)}
-        /> */}
-
-        {/* <View style={styles.col}>
-          <Text style={styles.header}>Stock Chats</Text>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("AddGroup")}
+        <View style={styles.card}>
+          <Text
+            style={{
+              fontSize: 14,
+              color: "#FFF",
+              fontWeight: "600",
+              marginBottom: 10,
+            }}
           >
-            <AntDesign name="pluscircleo" size={24} color="#FFF" />
-          </TouchableOpacity>
-        </View>
-        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
-          {/* <TouchableOpacity
-            style={styles.btn}
-            // onPress={() => {
-            //   firebase
-            //     .auth()
-            //     .signOut()
-            //     .then(function() {
-            //       props.navigation.navigate("GetStarted");
-            //     });
-            // }}
+            ACTIVITY
+          </Text>
+          <Text style={{ fontSize: 18, color: "#FFF" }}>
+            Today's trending assets, scroll for more.
+          </Text>
+
+          <View
+            style={{
+              //flexDirection: "row",
+              //justifyContent: "space-between",
+              marginTop: 20,
+            }}
+          >
+            <TrendingStocks {...props} />
+          </View>
+
+          {/* <Button
+            full
+            iconLeft
+            primary
+            style={{
+              borderRadius: 10,
+              //marginTop: 20,
+              //marginHorizontal: 30,
+              height: 50,
+            }}
+            // onPress={() => this.props.navigation.navigate("Subscribe")}
           >
             <Text
               style={{
-                color: "#F5F8FA",
-                fontSize: 19,
-                fontFamily: "Montserrat_700Bold"
+                flex: 2,
+                fontSize: 18,
+                color: "white",
+                fontWeight: "bold",
+                textAlign: "center",
               }}
             >
-              Connect Portfolio
+              Update Portfolio
             </Text>
-          </TouchableOpacity> */}
-        {/* <StockGroupCard
-          ticker="$TSLA"
-          pctchange="+1.02%"
-          onPress={() => {
-            props.navigation.navigate("StockChat", {
-              //itemId: "TSLA",
-              itemName: "$TSLA",
-              itemPic: "https://i.stack.imgur.com/l60Hf.png",
-            });
-          }}
-          msg="This stock is trending"
-        /> */}
-        {/* <StockGroupCard
-            ticker="$SQ"
-            pctchange="+4.55%"
-            onPress={() => {
-              props.navigation.navigate("GroupProfile");
+          </Button> */}
+        </View>
 
-              // onPress={() => {
-              //   props.navigation.navigate("StockChat", {
-              //     // itemId: item.id,
-              //     // itemName: item.login,
-              //     itemPic: "https://i.stack.imgur.com/l60Hf.png",
-              //     itemName: "$SQ"
-            }}
-            msg="This stock is trending"
-          /> */}
+        {/* <TrendingStocks {...props} /> */}
+
         {/* <StockGroupCard
             ticker="$NET"
             pctchange="+3.521%"
@@ -322,43 +253,46 @@ const Chat = (props) => {
             }}
             msg="This stock is trending"
           /> */}
-        {/* </View>  */}
-        {/* <View style={styles.col}> */}
-        {/* <Text style={styles.header2}>Groups</Text> */}
-        {/* <TouchableOpacity
-            onPress={() => props.navigation.navigate("AddGroup")}
+
+        <View style={styles.card}>
+          <Text
+            style={{
+              fontSize: 14,
+              color: "#FFF",
+              fontWeight: "600",
+              marginBottom: 10,
+            }}
           >
-            <AntDesign name="pluscircleo" size={24} color="#FFF" />
-          </TouchableOpacity> */}
-        {/* </View> */}
-        {/* <View style={{ paddingVertical: 5, marginHorizontal: 10 }}> */}
-        <FlatList
-          data={publicgroups}
-          keyExtractor={(item, index) => "key" + index}
-          renderItem={({ item }) => {
-            const name = item.groupName;
-            const totalmembers =
-              item && item.totalmembers ? item.totalmembers : 0;
-            const lastmessage =
-              item && item.lastmessage ? item.lastmessage : "";
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  props.navigation.navigate("Discussion", {
-                    item,
-                    itemPic: "https://i.stack.imgur.com/l60Hf.png",
-                  });
-                }}
-              >
-                <Messages
-                  item={name}
-                  totalmembers={totalmembers}
-                  lastmessage={lastmessage}
-                ></Messages>
-              </TouchableOpacity>
-            );
-          }}
-        />
+            GROUPS
+          </Text>
+          <FlatList
+            data={publicgroups}
+            keyExtractor={(item, index) => "key" + index}
+            renderItem={({ item }) => {
+              const name = item.groupName;
+              const totalmembers =
+                item && item.totalmembers ? item.totalmembers : 0;
+              const lastmessage =
+                item && item.lastmessage ? item.lastmessage : "";
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    props.navigation.navigate("Discussion", {
+                      item,
+                      itemPic: "https://i.stack.imgur.com/l60Hf.png",
+                    });
+                  }}
+                >
+                  <Messages
+                    item={name}
+                    totalmembers={totalmembers}
+                    lastmessage={lastmessage}
+                  ></Messages>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </View>
 
         {/* <FlatList
             data={groups}
@@ -430,11 +364,11 @@ const styles = StyleSheet.create({
   list: {
     marginTop: 300,
   },
-  card: {
-    marginLeft: 400,
-    width: 400,
-    flexDirection: "row",
-  },
+  // card: {
+  //   marginLeft: 400,
+  //   width: 400,
+  //   flexDirection: "row",
+  // },
   btn: {
     borderRadius: 16,
     //borderTopRightRadius: 0,
@@ -496,11 +430,33 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     width: 300,
   },
-  header2: {
-    fontFamily: "Montserrat_800ExtraBold",
+  greeting: {
+    //fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
+    fontSize: 30,
+    width: "70%",
+    padding: 20,
+    //paddingVertical: 10
+  },
+  balance: {
+    //fontFamily: "Montserrat_400Regular",
+    color: "#FFF",
+    flex: 1,
+    fontSize: 30,
+    fontWeight: "700",
+    width: "70%",
+    paddingHorizontal: 20,
+    //paddingVertical: 10
+  },
+  change: {
+    fontFamily: "Montserrat_800ExtraBold",
+    color: "lightgrey",
+    flex: 1,
     fontSize: 20,
+    //fontWeight: "700",
+    width: "70%",
+    paddingHorizontal: 20,
     //paddingVertical: 10
   },
   proContainer: {
@@ -556,6 +512,23 @@ const styles = StyleSheet.create({
     color: "#FFF",
     flex: 1,
     fontSize: 20,
+  },
+  card: {
+    shadowOffset: { width: 0.5, height: 0.5 },
+    shadowRadius: 5,
+    shadowColor: "#000",
+    marginHorizontal: 10,
+    shadowOpacity: 0.5,
+    marginVertical: 5,
+    elevation: 1,
+    //backgroundColor: "#e8eef1",
+    //backgroundColor: "#35383F"
+    backgroundColor: "#35383F",
+    //backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
   },
 });
 

@@ -9,6 +9,8 @@ import {
   ScrollView,
   ActionSheetIOS,
 } from "react-native";
+import { Icon, Header, Left, Right, Body, Button } from "native-base";
+
 import { Feather } from "@expo/vector-icons";
 import * as firebase from "firebase";
 import LinkPortfolioButton from "../components/LinkPortfolioButton";
@@ -173,39 +175,40 @@ class _Profile extends Component {
     }
 
     return (
-      <ScrollView style={styles.container}>
-        <View
+      <View style={styles.container}>
+        <Header
           style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            marginTop: 30,
-            paddingHorizontal: 10,
+            backgroundColor: "#282c34",
+            borderBottomWidth: 0.2,
+            borderBottomColor: "#282c34",
           }}
         >
-          <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-            <Feather name="chevron-left" size={30} color="#FFF" />
-          </TouchableOpacity>
-
-          <Text style={styles.headertitle}>Profile</Text>
-
-          {this.state.user !== this.state.currentUser ? (
-            <TouchableOpacity onPress={this.actionSheet}>
-              <Feather name="more-horizontal" size={30} color="#FFF" />
+          <Left>
+            {/* <Text style={styles.logotext}>Groups</Text> */}
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+              <Feather name="chevron-left" size={30} color="#FFF" />
             </TouchableOpacity>
-          ) : (
-            <Feather
-              style={{
-                color: "#FFF",
-                fontWeight: "bold",
-                paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
-                fontSize: 30,
-              }}
-              name="settings"
-              onPress={() => this.props.navigation.navigate("Settings")}
-            />
-          )}
-        </View>
+          </Left>
+          <Right>
+            {this.state.user !== this.state.currentUser ? (
+              <TouchableOpacity onPress={this.actionSheet}>
+                <Feather name="more-horizontal" size={30} color="#FFF" />
+              </TouchableOpacity>
+            ) : (
+              <Feather
+                style={{
+                  color: "#FFF",
+                  fontWeight: "bold",
+                  paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+                  fontSize: 30,
+                }}
+                name="settings"
+                onPress={() => this.props.navigation.navigate("Settings")}
+              />
+            )}
+          </Right>
+        </Header>
+
         <View style={styles.data}>
           <View>
             <Image
@@ -229,7 +232,6 @@ class _Profile extends Component {
               style={{
                 fontSize: 18,
                 textAlign: "center",
-
                 color: "#FFF",
                 fontWeight: "500"
               }}
@@ -436,7 +438,7 @@ class _Profile extends Component {
             </View>
           )}
         </View>
-      </ScrollView>
+      </View>
     );
   }
 }

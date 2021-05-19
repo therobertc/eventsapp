@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     //shadowColor: "#657786",
     borderWidth: 1,
     borderColor: "#60646C",
-    marginLeft: 10,
+    marginRight: 10,
     shadowOpacity: 0.2,
     //marginVertical: 5,
     //elevation: 1,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     //marginBottom: 20,
     justifyContent: "space-between",
     height: 60,
-    start: 5,
+    //start: 5,
   },
   datacard: {
     //backgroundColor: "#147efb",

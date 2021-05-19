@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Image,
-  SnapshotViewIOS
+  SnapshotViewIOS,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -25,7 +25,7 @@ const Messages = ({ item, totalmembers, lastmessage, uri }) => {
         style={{
           flexDirection: "row",
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         {/* <Image
@@ -38,14 +38,31 @@ const Messages = ({ item, totalmembers, lastmessage, uri }) => {
             //borderWidth: 2,
             marginBottom: 0,
             //marginRight: 5,
-            borderColor: "#147efb"
+            borderColor: "#147efb",
             //alignSelf: "center",
             //marginTop: 15
           }}
           source={{
-            uri: "https://i.stack.imgur.com/l60Hf.png"
+            uri: "https://i.stack.imgur.com/l60Hf.png",
           }}
         /> */}
+
+        <Image
+          source={require("../../assets/icon.png")}
+          // source={{ uri: itemPic }}
+          style={{
+            //flex: 1,
+            height: 40,
+            width: 40,
+            borderRadius: 20,
+            //borderWidth: 2,
+            marginBottom: 0,
+            //marginRight: 5,
+            borderColor: "#147efb",
+            //alignSelf: "center",
+            //marginTop: 15
+          }}
+        />
         <View>
           <Text style={styles.username}>#{item}</Text>
           {/* <Text style={styles.preview}>{totalmembers} members </Text> */}
@@ -74,21 +91,21 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 20
+    marginRight: 20,
   },
   count: {
     color: "#F5F8FA",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   image: {
     width: 60,
     height: 60,
-    borderRadius: 30
+    borderRadius: 30,
   },
   text: {
     color: "#FFF",
     fontFamily: "Montserrat_600SemiBold",
-    fontSize: 11
+    fontSize: 11,
   },
   duration: {
     color: "#FFF",
@@ -96,13 +113,13 @@ const styles = StyleSheet.create({
     //flex: 1,
 
     //position: "absolute",
-    fontFamily: "Montserrat_600SemiBold"
+    fontFamily: "Montserrat_600SemiBold",
   },
   username: {
     color: "#FFF",
     fontFamily: "Montserrat_700Bold",
     fontSize: 15,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   preview: {
     //color: "#657786",
@@ -111,7 +128,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     //paddingLeft: 10,
     paddingLeft: 10,
-    marginRight: 10
+    marginRight: 10,
   },
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
@@ -132,6 +149,6 @@ const styles = StyleSheet.create({
     //paddingHorizontal: 40,
     alignItems: "center",
     justifyContent: "space-between",
-    height: 80
-  }
+    height: 80,
+  },
 });
