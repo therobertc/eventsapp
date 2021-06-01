@@ -39,11 +39,13 @@ export default function App({ ...props }) {
         </View>
 
         <View>
-          <Text style={styles.Stockchat}> stockchat</Text>
+          <Text style={styles.stockchat}> stockchat</Text>
         </View>
 
         <View>
-          <Text style={styles.subtext}>Connect with investors</Text>
+          <Text style={styles.subtext}>
+            Stocks and Crypto{"\n"}with friends {"\n"} 💬 💸 ✨
+          </Text>
         </View>
       </View>
       <View>
@@ -106,25 +108,26 @@ const styles = StyleSheet.create({
     top: 35,
     fontSize: 15,
   },
-  Stockchat: {
+  stockchat: {
     color: "#FFF",
     textAlign: "center",
     fontSize: 50,
-    fontWeight: "800",
-    //fontFamily: "Montserrat_700Bold"
+    fontWeight: "500",
+    fontFamily: "Avenir",
   },
   subtext: {
     color: "#FFF",
     textAlign: "center",
     top: 35,
-    fontSize: 20,
-    marginHorizontal: 40,
+    fontSize: 25,
+    marginHorizontal: 20,
+    fontFamily: "Menlo-Regular",
   },
   subtext2: {
     color: "#FFF",
     textAlign: "center",
 
-    fontSize: 18,
+    fontSize: 15,
   },
   loginText: {
     fontSize: 18,

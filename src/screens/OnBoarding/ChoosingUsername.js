@@ -65,7 +65,7 @@ export default function App({ ...props }) {
       </View>
       <View>
         <Text style={styles.username}>
-          Usernames will be tagged in messages and shown inside your chats.
+          Usernames will be tagged in messages and shown inside your groups.
         </Text>
       </View>
 
