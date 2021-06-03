@@ -317,7 +317,7 @@ const Chat = (props) => {
         {/* </View> */}
       </ScrollView>
 
-      {/* <TouchableOpacity
+      <TouchableOpacity
         onPress={() => props.navigation.navigate("AddGroup")}
         style={{
           borderWidth: 1,
@@ -354,7 +354,7 @@ const Chat = (props) => {
         >
           Start Group
         </Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   );
 };

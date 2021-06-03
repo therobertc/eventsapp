@@ -484,12 +484,12 @@ function Discussion({ route, navigation }) {
         </TouchableOpacity>
         <Text style={styles.header}> {item.groupName}</Text>
         <TouchableOpacity
-        // onPress={() =>
-        //   navigation.push("StockDetails", {
-        //     symbol: "SQ"
-        //   })
-        // }
-        //onPress={() => navigation.navigate("GroupProfile")}
+          // onPress={() =>
+          //   navigation.push("StockDetails", {
+          //     symbol: "SQ"
+          //   })
+          // }
+          onPress={() => navigation.navigate("GroupProfile")}
         >
           <Image
             source={require("../../assets/icon.png")}

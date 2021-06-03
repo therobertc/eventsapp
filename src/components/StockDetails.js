@@ -146,9 +146,9 @@ class StockDetails extends Component {
             }
           }
         >
-          <View style={{ paddingBottom: 1 }}>
+          {/* <View style={{ paddingBottom: 1 }}>
             <Text style={styles.heading}>Tweets</Text>
-          </View>
+          </View> */}
           {news.map((data, index) => {
             return (
               <View
@@ -156,8 +156,8 @@ class StockDetails extends Component {
                 style={{
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  borderBottomWidth: 1,
-                  borderBottomColor: "grey",
+                  //borderBottomWidth: 1,
+                  //borderBottomColor: "grey",
                 }}
               >
                 <Text
@@ -183,13 +183,17 @@ class StockDetails extends Component {
   };
 
   renderError = () => {
+    let stock_tweet = this._render_stock_tweet_feed();
     return (
       <View
         style={{ paddingTop: 50, height: "100%", backgroundColor: "#282c34" }}
       >
         <Text style={{ color: "#FFF", textAlign: "center", fontSize: 20 }}>
-          This stock is currently unavailable.
+          This chart is currently unavailable.
         </Text>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {stock_tweet}
+        </ScrollView>
       </View>
     );
   };

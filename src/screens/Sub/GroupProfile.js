@@ -7,7 +7,7 @@ import {
   Animated,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
 } from "react-native";
 import StockGroupCard from "../../components/StockGroupCard";
 import firebase, { firestore } from "../../database/firebase";
@@ -15,7 +15,7 @@ import firebase, { firestore } from "../../database/firebase";
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
-const GroupProfile = props => {
+const GroupProfile = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.bio}>
@@ -34,7 +34,7 @@ const GroupProfile = props => {
             height: 100,
             width: 100,
             borderRadius: 50,
-            alignSelf: "center"
+            alignSelf: "center",
           }}
           source={require("../../../assets/icon.png")}
         ></Image>
@@ -47,9 +47,7 @@ const GroupProfile = props => {
 
         <View style={styles.col}>
           <Text style={styles.title}>Share Link</Text>
-          <Text style={styles.about}>
-            https://stockchatapp.com
-          </Text>
+          <Text style={styles.about}>https://stockchatapp.com</Text>
         </View>
 
         <View style={styles.col}>
@@ -72,10 +70,10 @@ const GroupProfile = props => {
         style={{
           height: 100,
           backgroundColor: "#282c34",
-          flexDirection: "row"
+          flexDirection: "row",
         }}
       >
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{
             height: 50,
             width: 60,
@@ -84,20 +82,20 @@ const GroupProfile = props => {
             backgroundColor: "#147efb",
             borderRadius: 20,
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
           }}
           onPress={() => {
             props.navigation.navigate("StockChat", {
               // itemId: item.id,
               // itemName: item.login,
               itemName: "$SQ",
-              itemPic: "https://i.stack.imgur.com/l60Hf.png"
+              itemPic: "https://i.stack.imgur.com/l60Hf.png",
             });
           }}
         >
           <Feather name="send" size={25} color="#FFF" />
-        </TouchableOpacity>
-        <TouchableOpacity
+        </TouchableOpacity> */}
+        {/* <TouchableOpacity
           style={{
             height: 50,
             marginHorizontal: 10,
@@ -123,7 +121,7 @@ const GroupProfile = props => {
           >
             125 / Month
           </Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -132,19 +130,19 @@ export default GroupProfile;
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 300
+    marginTop: 300,
   },
   card: {
     marginLeft: 400,
     width: 400,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   seperator: {
     borderColor: "lightgrey",
     borderWidth: 0.5,
     marginLeft: 30,
     marginVertical: 10,
-    width: "100%"
+    width: "100%",
   },
   gradient: {
     height: "100%",
@@ -153,7 +151,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 30
+    paddingTop: 30,
   },
   btn: {
     borderRadius: 16,
@@ -163,7 +161,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   container: {
     height: "100%",
@@ -172,13 +170,13 @@ const styles = StyleSheet.create({
     // right: 0,
     // top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 60
+    paddingTop: 60,
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
     paddingTop: 30,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   header: {
     fontFamily: "Montserrat_800ExtraBold",
@@ -187,19 +185,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingLeft: 10,
     textAlign: "center",
-    paddingTop: 20
+    paddingTop: 20,
   },
 
   title: {
     color: "#FFF",
     flex: 1,
-    fontSize: 18
+    fontSize: 18,
   },
   volume: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
-    fontSize: 30
+    fontSize: 30,
   },
   members: {
     //fontFamily: "Montserrat_800ExtraBold",
@@ -207,24 +205,24 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
     textAlign: "center",
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   about: {
     color: "#FFF",
     fontSize: 14,
     fontWeight: "700",
-    paddingVertical: 20
+    paddingVertical: 20,
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
     fontSize: 24,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   proContainer: {
     marginRight: -20,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   ops: {
     // borderTopLeftRadius: 40,
@@ -232,12 +230,12 @@ const styles = StyleSheet.create({
     //height: "75%",
     // backgroundColor: "#282c34",
     // marginHorizontal: -20,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   col: {
     flexDirection: "column",
 
-    marginHorizontal: 20
+    marginHorizontal: 20,
     //alignItems: "center"
   },
 
@@ -246,24 +244,24 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 20,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   bio: {
     flexDirection: "row",
     marginBottom: 20,
     marginHorizontal: 20,
-    alignItems: "center"
+    alignItems: "center",
   },
   stockchats: {
     //flexDirection: "row"
     marginVertical: 10,
-    marginHorizontal: 20
+    marginHorizontal: 20,
     //alignItems: "center"
   },
   day: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 });
