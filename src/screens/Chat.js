@@ -5,7 +5,7 @@ import {
   Text,
   FlatList,
   StyleSheet,
-  Animated,
+  RefreshControl,
   TouchableOpacity,
   ScrollView,
   Share,
@@ -27,6 +27,7 @@ const Chat = (props) => {
   const [groups, setGroups] = useState([]);
   const [publicgroups, setpublicgroups] = useState([]);
   const [Chatheads, setChatheads] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     // askPermission();
@@ -38,6 +39,11 @@ const Chat = (props) => {
       getChats();
     }
   }, [isVisible]);
+
+  const refreshChats = () => {
+    setRefreshing(true);
+    getChats();
+  };
 
   async function askPermission() {
     try {
@@ -118,6 +124,9 @@ const Chat = (props) => {
           setChatheads(ChatHeadsArr);
         });
       });
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 3000);
   }
   const onShare = async () => {
     try {
@@ -186,7 +195,18 @@ const Chat = (props) => {
         </Right>
       </Header>
 
-      <ScrollView style={styles.col2}>
+      <ScrollView
+        style={styles.col2}
+        refreshControl={
+          <RefreshControl
+            tintColor="#fff"
+            titleColor="#fff"
+            colors={["#fff"]}
+            refreshing={refreshing}
+            onRefresh={refreshChats}
+          />
+        }
+      >
         <View style={styles.card}>
           <Text
             style={{
