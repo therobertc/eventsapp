@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
-  Share
+  Share,
 } from "react-native";
 
 import {
@@ -19,7 +19,7 @@ import {
   Body,
   Button,
   Footer,
-  FooterTab
+  FooterTab,
 } from "native-base";
 
 import { AntDesign } from "@expo/vector-icons";
@@ -29,7 +29,7 @@ const onShare = async () => {
   try {
     const result = await Share.share({
       message:
-        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
+        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchat.me",
     });
     if (result.action === Share.sharedAction) {
       if (result.activityType) {
@@ -45,7 +45,7 @@ const onShare = async () => {
   }
 };
 
-const Bank = props => {
+const Bank = (props) => {
   return (
     <View style={styles.container}>
       <Header
@@ -56,7 +56,7 @@ const Bank = props => {
           //marginTop: 25,
           marginHorizontal: 30,
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
           //flex: 1
         }}
       >
@@ -227,22 +227,22 @@ export default Bank;
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 300
+    marginTop: 300,
   },
   btn: {
-    padding: 50
+    padding: 50,
   },
   card: {
     marginLeft: 400,
     width: 400,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   seperator: {
     borderColor: "lightgrey",
     borderWidth: 0.5,
     marginLeft: 30,
     marginVertical: 10,
-    width: "100%"
+    width: "100%",
   },
   gradient: {
     height: "100%",
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 30
+    paddingTop: 30,
   },
   btn: {
     borderRadius: 16,
@@ -262,10 +262,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     marginHorizontal: 50,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   container: {
-    height: "100%"
+    height: "100%",
     //backgroundColor: "#282c34",
     // left: 0,
     // right: 0,
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
     //paddingTop: 30
     //paddingHorizontal: 20
   },
@@ -283,7 +283,7 @@ const styles = StyleSheet.create({
     //fontFamily: "Montserrat_800ExtraBold",
     color: "#000",
     //flex: 1,
-    fontSize: 20
+    fontSize: 20,
     //paddingLeft: 10
     //textAlign: "center"
   },
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     //fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     //flex: 1,
-    fontSize: 20
+    fontSize: 20,
     //paddingLeft: 10
     //textAlign: "center"
   },
@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
     //fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     //flex: 1,
-    fontSize: 30
+    fontSize: 30,
     //paddingLeft: 10
     //textAlign: "center"
   },
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
     //fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     //flex: 1,
-    fontSize: 20
+    fontSize: 20,
     //textAlign: "center"
   },
 
@@ -317,24 +317,24 @@ const styles = StyleSheet.create({
     color: "#FFF",
     flex: 1,
     fontSize: 25,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   buycoins: {
     //fontFamily: "Montserrat_500Bold",
     color: "#FFF",
     flex: 1,
     fontSize: 20,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   coinrow: {
     paddingVertical: 20,
     marginHorizontal: 20,
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   proContainer: {
     //marginRight: -20,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   ops: {
     // borderTopLeftRadius: 40,
@@ -350,7 +350,7 @@ const styles = StyleSheet.create({
     //marginTop: 25,
     padding: 30,
     //alignItems: "center",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   col2: {
     flexDirection: "row",
@@ -361,20 +361,20 @@ const styles = StyleSheet.create({
     //borderBottomWidth: 0.5,
     // borderTopWidth: 0.5,
     // borderColor: "#7c818c",
-    paddingVertical: 20
+    paddingVertical: 20,
     //backgroundColor: "grey"
   },
   stockchats: {
     //flexDirection: "row"
     marginVertical: 10,
-    marginHorizontal: 20
+    marginHorizontal: 20,
     //alignItems: "center"
   },
   day: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
-    fontSize: 20
+    fontSize: 20,
   },
   invite: {
     flexDirection: "row",
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     //paddingHorizontal: 20,
     paddingVertical: 10,
-    width: 100
+    width: 100,
   },
   earncoins: {
     flexDirection: "row",
@@ -397,7 +397,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     width: 120,
     borderWidth: 1,
-    borderColor: "lightgrey"
+    borderColor: "lightgrey",
   },
   earnbox: {
     backgroundColor: "orange",
@@ -405,6 +405,6 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 20,
     justifyContent: "flex-start",
-    height: 200
-  }
+    height: 200,
+  },
 });

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   Image,
-  Share
+  Share,
 } from "react-native";
 import StockGroupCard from "../components/StockGroupCard";
 import firebase, { firestore } from "../database/firebase";
@@ -20,7 +20,7 @@ const onShare = async () => {
   try {
     const result = await Share.share({
       message:
-        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
+        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchat.me",
     });
     if (result.action === Share.sharedAction) {
       if (result.activityType) {
@@ -36,7 +36,7 @@ const onShare = async () => {
   }
 };
 
-const Wallet = props => {
+const Wallet = (props) => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.col}>
@@ -74,7 +74,7 @@ const Wallet = props => {
             fontSize: 18,
             paddingRight: 5,
             textAlign: "center",
-            paddingTop: 10
+            paddingTop: 10,
           }}
         >
           Invite an investor who signs up
@@ -86,7 +86,7 @@ const Wallet = props => {
               color: "#F5F8FA",
               fontWeight: "500",
               paddingRight: 5,
-              fontSize: 18
+              fontSize: 18,
             }}
           >
             Copy my link
@@ -99,7 +99,7 @@ const Wallet = props => {
             fontSize: 14,
             paddingHorizontal: 20,
             textAlign: "center",
-            paddingTop: 20
+            paddingTop: 20,
           }}
         >
           Share your link with other investors. Once 5 people you refer sign up,
@@ -163,19 +163,19 @@ export default Wallet;
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 300
+    marginTop: 300,
   },
   card: {
     marginLeft: 400,
     width: 400,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   seperator: {
     borderColor: "lightgrey",
     borderWidth: 0.5,
     marginLeft: 30,
     marginVertical: 10,
-    width: "100%"
+    width: "100%",
   },
   gradient: {
     height: "100%",
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 30
+    paddingTop: 30,
   },
   btn: {
     borderRadius: 16,
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     marginHorizontal: 50,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   container: {
     height: "100%",
@@ -204,12 +204,12 @@ const styles = StyleSheet.create({
     // right: 0,
     // top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 60
+    paddingTop: 60,
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingTop: 30
+    paddingTop: 30,
     //paddingHorizontal: 20
   },
   header: {
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     color: "#FFF",
     flex: 1,
     fontSize: 20,
-    paddingLeft: 10
+    paddingLeft: 10,
     //textAlign: "center"
   },
   header2: {
@@ -225,31 +225,31 @@ const styles = StyleSheet.create({
     color: "#FFF",
     flex: 1,
     fontSize: 18,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   coins: {
     fontFamily: "Montserrat_700Bold",
     color: "#FFF",
     flex: 1,
     fontSize: 25,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   buycoins: {
     //fontFamily: "Montserrat_500Bold",
     color: "#FFF",
     flex: 1,
     fontSize: 20,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   coinrow: {
     paddingVertical: 20,
     marginHorizontal: 20,
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   proContainer: {
     //marginRight: -20,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   ops: {
     // borderTopLeftRadius: 40,
@@ -264,25 +264,25 @@ const styles = StyleSheet.create({
     //marginTop: 25,
     marginHorizontal: 10,
     alignItems: "center",
-    flex: 1
+    flex: 1,
   },
   col2: {
     flexDirection: "row",
     marginTop: 25,
     marginHorizontal: 20,
-    alignItems: "center"
+    alignItems: "center",
   },
   stockchats: {
     //flexDirection: "row"
     marginVertical: 10,
-    marginHorizontal: 20
+    marginHorizontal: 20,
     //alignItems: "center"
   },
   day: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
-    fontSize: 20
+    fontSize: 20,
   },
   invite: {
     flexDirection: "row",
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     //paddingHorizontal: 20,
     paddingVertical: 10,
-    width: 100
+    width: 100,
   },
   earncoins: {
     flexDirection: "row",
@@ -305,7 +305,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     width: 120,
     borderWidth: 1,
-    borderColor: "lightgrey"
+    borderColor: "lightgrey",
   },
   earnbox: {
     backgroundColor: "orange",
@@ -313,6 +313,6 @@ const styles = StyleSheet.create({
     margin: 20,
     borderRadius: 20,
     justifyContent: "flex-start",
-    height: 200
-  }
+    height: 200,
+  },
 });
