@@ -18,7 +18,7 @@ const randomTime = () => {
   return String(hFormat + hrs + ":" + mFormat + mins + " " + amPm);
 };
 
-const Messages = ({ item, totalmembers, lastmessage, uri }) => {
+const Messages = ({ item, totalmembers, lastmessage, uri, unSeen }) => {
   return (
     <View style={styles.card}>
       <View
@@ -73,9 +73,11 @@ const Messages = ({ item, totalmembers, lastmessage, uri }) => {
         </View>
       </View>
 
-      {/* <View>
-        <Text style={styles.duration}>{randomTime()}</Text>
-      </View> */}
+      <View>
+        {!unSeen ? (
+          <View style={{ width: 10, height: 10,borderRadius:10, backgroundColor: "blue" }} />
+        ) : null}
+      </View>
     </View>
   );
 };
