@@ -76,6 +76,16 @@ const Chat = (props) => {
     }
   }
 
+  async function checkUnseenMessages(groupId) {
+    const db = firestore;
+    var UserId = fire.auth().currentUser.uid;
+
+    return await db
+      .collection("UnSeenMessages")
+      .where(`${groupId}-${UserId}`, "==", true)
+      .get();
+  }
+
   function getChats() {
     const db = firestore;
     var groupArray = [];
@@ -85,10 +95,22 @@ const Chat = (props) => {
     var UserId = fire.auth().currentUser.uid;
 
     db.collection("publicgroups").onSnapshot(function (snapshot) {
-      snapshot.docChanges().forEach(function (change) {
+      snapshot.docChanges().forEach(async function (change) {
+        let result = await checkUnseenMessages(change.doc.data().groupID);
+        let data = change.doc.data();
+        if (!result.empty) {
+          result.forEach((v) => {
+            data.unSeen = true;
+            data.time = v.data().time;
+          });
+        } else {
+          data.time = 0;
+        }
+
         if (change.type == "added") {
-          console.log("New Group: ", change.doc.data());
-          pubgroupArray.push(change.doc.data());
+          pubgroupArray.push(data);
+
+          await pubgroupArray.sort((a, b) => a.time > b.time);
         }
         if (change.type === "modified") {
           console.log("Modified Group: ", change.doc.data());
@@ -148,6 +170,16 @@ const Chat = (props) => {
       alert(error.message);
     }
   };
+
+  function updateUnseenMessages(groupId) {
+    const db = firestore;
+    var UserId = fire.auth().currentUser.uid;
+
+    var ref = db.collection("UnSeenMessages").doc(`${groupId}`);
+    ref.update({
+      [`${groupId}-${UserId}`]: true,
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -302,6 +334,7 @@ const Chat = (props) => {
               return (
                 <TouchableOpacity
                   onPress={() => {
+                    updateUnseenMessages(item.groupID);
                     props.navigation.navigate("Discussion", {
                       item,
                       itemPic: "https://i.stack.imgur.com/l60Hf.png",
@@ -312,6 +345,7 @@ const Chat = (props) => {
                     item={name}
                     totalmembers={totalmembers}
                     lastmessage={lastmessage}
+                    unSeen={item.unSeen}
                   ></Messages>
                 </TouchableOpacity>
               );

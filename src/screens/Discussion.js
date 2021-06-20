@@ -178,6 +178,17 @@ function Discussion({ route, navigation }) {
     });
   };
 
+  function updateUnseenMessages(groupId) {
+    const db = firestore;
+    var UserId = fire.auth().currentUser.uid;
+    console.log("=", UserId);
+
+    var ref = db.collection("UnSeenMessages").doc(`${groupId}`);
+    ref.set({
+      time: new Date().getTime(),
+    });
+  }
+
   function onSend(newMessage = []) {
     console.log("------------------newMessage", item.groupID);
     const messageRef = firestore
@@ -200,6 +211,7 @@ function Discussion({ route, navigation }) {
           },
         })
         .then(function (docRef) {
+          updateUnseenMessages(item.groupID);
           setMessages(GiftedChat.append(messages, newMessage));
           let message = newMessage[i].text;
           lastMessage(message);
