@@ -97,6 +97,7 @@ export default function Signup({ route, navigation }) {
               followers: [],
               blockedusers: [],
               expoPushToken: expoPushToken,
+              notifications_enable: true,
             })
             .then(() => {
               res.user.updateProfile({

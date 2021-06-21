@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Component } from "react";
 import {
   View,
   Text,
@@ -10,191 +10,248 @@ import {
   Image,
 } from "react-native";
 import StockGroupCard from "../components/StockGroupCard";
-import firebase, { firestore } from "../database/firebase";
+// import firebase, { firestore } from "../database/firebase";
+import * as firebase from "firebase";
+
 import ToggleSwitch from "../components/ToggleSwitch";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
-const Settings = (props) => {
-  return (
-    <View>
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-        <View style={styles.col}>
-          <TouchableOpacity onPress={() => props.navigation.goBack()}>
-            <Feather name="chevron-left" size={30} color="#FFF" />
-          </TouchableOpacity>
-          <Text style={styles.header}>Settings</Text>
-        </View>
+class Settings extends Component {
+  // const userData = props.route.params.userData;
 
-        <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
-          <View>
-            <View
-              style={{
-                backgroundColor: "#282c34",
+  // const [user, setUser] = useState({});
 
-                flexDirection: "column",
-                width: "100%",
+  state = {
+    user: {},
+  };
 
-                paddingHorizontal: 10,
-              }}
-            >
+  componentWillMount() {
+    this.fetchUser();
+  }
+
+  enableNotification = (notifications_enable) => {
+    const user_uid = firebase.auth().currentUser.uid;
+
+    console.log("status", notifications_enable);
+    firebase.default.firestore().collection("users").doc(user_uid).update({
+      notifications_enable,
+    });
+    this.fetchUser();
+  };
+
+  fetchUser = async () => {
+    const user_uid = firebase.auth().currentUser.uid;
+
+    const db = firebase.default.firestore();
+    var users = db.collection("users");
+    users
+      .where("id", "==", user_uid)
+      .get()
+      .then((s) => {
+        s.docs.forEach((doc) => {
+          console.log("notifications_enable", doc.data());
+          const new_data = doc.data();
+
+          this.setState({ user: { ...new_data } }, () => {
+            console.log("xx", this.state.user);
+          });
+          // console.log("FUCCCK", user);
+        });
+      })
+      .catch((e) => {
+        console.log("e", e);
+      });
+  };
+
+  render() {
+    console.log("staete", this.state);
+    return (
+      <View>
+        <ScrollView
+          style={styles.container}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.col}>
+            <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
+              <Feather name="chevron-left" size={30} color="#FFF" />
+            </TouchableOpacity>
+            <Text style={styles.header}>Settings</Text>
+          </View>
+
+          <View style={{ paddingVertical: 20, marginHorizontal: 10 }}>
+            <View>
               <View
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingTop: 20,
-                  paddingHorizontal: 20,
-                }}
-              >
-                <Text style={styles.switch}>Portfolio</Text>
-              </View>
+                  backgroundColor: "#282c34",
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingVertical: 20,
-                  paddingHorizontal: 20,
-                }}
-              >
-                <Text style={styles.switchtitle}>Go Public</Text>
-                <ToggleSwitch></ToggleSwitch>
-              </View>
+                  flexDirection: "column",
+                  width: "100%",
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingTop: 20,
-                  paddingHorizontal: 20,
+                  paddingHorizontal: 10,
                 }}
               >
-                <Text style={styles.switch}>Notifications</Text>
-              </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingTop: 20,
+                    paddingHorizontal: 20,
+                  }}
+                >
+                  <Text style={styles.switch}>Portfolio</Text>
+                </View>
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingVertical: 20,
-                  paddingHorizontal: 20,
-                }}
-              >
-                <Text style={styles.switchtitle}>Mentions</Text>
-                <ToggleSwitch></ToggleSwitch>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingVertical: 20,
-                  paddingHorizontal: 20,
-                }}
-              >
-                <Text style={styles.switchtitle}>New Messages</Text>
-                <ToggleSwitch></ToggleSwitch>
-              </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingVertical: 20,
+                    paddingHorizontal: 20,
+                  }}
+                >
+                  <Text style={styles.switchtitle}>Go Public</Text>
+                  <ToggleSwitch></ToggleSwitch>
+                </View>
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingTop: 20,
-                  paddingHorizontal: 20,
-                }}
-              >
-                <Text style={styles.switch}>Stock Alerts</Text>
-              </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingTop: 20,
+                    paddingHorizontal: 20,
+                  }}
+                >
+                  <Text style={styles.switch}>Notifications</Text>
+                </View>
 
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingVertical: 20,
-                  paddingHorizontal: 20,
-                }}
-              >
-                <Text style={styles.switchtitle}>Price Movements</Text>
-                <ToggleSwitch></ToggleSwitch>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  paddingVertical: 20,
-                  paddingHorizontal: 20,
-                }}
-              >
-                <Text style={styles.switchtitle}>Trending Stocks</Text>
-                <ToggleSwitch></ToggleSwitch>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingVertical: 20,
+                    paddingHorizontal: 20,
+                  }}
+                >
+                  <Text style={styles.switchtitle}>Mentions</Text>
+                  <ToggleSwitch></ToggleSwitch>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingVertical: 20,
+                    paddingHorizontal: 20,
+                  }}
+                >
+                  <Text style={styles.switchtitle}>New Messages</Text>
+                  <ToggleSwitch
+                    onPress={this.enableNotification}
+                    isActive={this.state.user.notifications_enable}
+                  />
+                </View>
+
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingTop: 20,
+                    paddingHorizontal: 20,
+                  }}
+                >
+                  <Text style={styles.switch}>Stock Alerts</Text>
+                </View>
+
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingVertical: 20,
+                    paddingHorizontal: 20,
+                  }}
+                >
+                  <Text style={styles.switchtitle}>Price Movements</Text>
+                  <ToggleSwitch></ToggleSwitch>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    paddingVertical: 20,
+                    paddingHorizontal: 20,
+                  }}
+                >
+                  <Text style={styles.switchtitle}>Trending Stocks</Text>
+                  <ToggleSwitch></ToggleSwitch>
+                </View>
               </View>
             </View>
           </View>
-        </View>
 
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <TouchableOpacity
-            style={styles.btn}
-            // onPress={() => {
-            //   firebase
-            //     .auth()
-            //     .signOut()
-            //     .then(function () {
-            //       props.navigation.navigate("GetStarted");
-            //     });
-            // }}
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            <Text
-              style={{
-                color: "#FFF",
-                fontSize: 19,
-                fontWeight: "500",
-                textAlign: "center",
+            <TouchableOpacity
+              style={styles.btn}
+              // onPress={() => {
+              //   firebase
+              //     .auth()
+              //     .signOut()
+              //     .then(function () {
+              //       props.navigation.navigate("GetStarted");
+              //     });
+              // }}
+            >
+              <Text
+                style={{
+                  color: "#FFF",
+                  fontSize: 19,
+                  fontWeight: "500",
+                  textAlign: "center",
+                }}
+              >
+                Save
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              // style={styles.btn}
+              onPress={() => {
+                firebase
+                  .auth()
+                  .signOut()
+                  .then(function () {
+                    this.props.navigation.navigate("GetStarted");
+                  });
               }}
             >
-              Save
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            // style={styles.btn}
-            onPress={() => {
-              firebase
-                .auth()
-                .signOut()
-                .then(function () {
-                  props.navigation.navigate("GetStarted");
-                });
-            }}
-          >
-            <Text
-              style={{
-                color: "grey",
-                fontSize: 19,
-                fontWeight: "500",
-                textAlign: "center",
-                paddingTop: 30,
-              }}
-            >
-              Logout
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </View>
-  );
-};
+              <Text
+                style={{
+                  color: "grey",
+                  fontSize: 19,
+                  fontWeight: "500",
+                  textAlign: "center",
+                  paddingTop: 30,
+                }}
+              >
+                Logout
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+}
 export default Settings;
 
 const styles = StyleSheet.create({

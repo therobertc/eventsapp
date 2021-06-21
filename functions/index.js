@@ -1,3 +1,4 @@
+/* eslint-disable promise/no-nesting */
 const functions = require("firebase-functions");
 
 const fetch = require("node-fetch");
@@ -29,8 +30,9 @@ exports.sendPushNotification = functions.firestore
           data.forEach((doc) => {
             const expoToken = doc.data().expoPushToken;
             const userId = doc.data().id;
+            const notifications_enable = doc.data().notifications_enable;
             console.log("expoPushToken", expoToken);
-            if (expoToken && noti.userID !== userId) {
+            if (expoToken && noti.userID !== userId && notifications_enable) {
               messages.push({
                 to: expoToken,
                 title: `#${noti.groupName}`,
@@ -42,14 +44,25 @@ exports.sendPushNotification = functions.firestore
         })
         // eslint-disable-next-line promise/always-return
         .then((messages) => {
+          console.log("length", messages.length);
+          console.log("messages", messages);
           fetch("https://exp.host/--/api/v2/push/send", {
             method: "POST",
             headers: {
               Accept: "application/json",
               "Content-Type": "application/json",
             },
+            // body: JSON.stringify({
+            //   to: "ExponentPushToken[1tpLX9Hn1PlKDNAdC-Gv6j]",
+            //   title: `#${noti.groupName}`,
+            //   body: noti.lastmessage,
+            // }),
             body: JSON.stringify(messages),
-          });
+          })
+            .then((response) => console.log("fetch", response))
+            .catch((reason) => {
+              console.log(reason);
+            });
         })
         .catch((reason) => {
           console.log(reason);
