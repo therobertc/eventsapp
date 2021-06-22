@@ -15,7 +15,7 @@ import {
   TextInputComponent,
   TouchableHighlight,
   Alert,
-  Share
+  Share,
 } from "react-native";
 import fire, { firestore } from "../../database/firebase";
 import {
@@ -25,7 +25,7 @@ import {
   FontAwesome,
   AntDesign,
   MaterialCommunityIcons,
-  Feather
+  Feather,
 } from "@expo/vector-icons";
 
 export default function AddMember({ route, navigation }) {
@@ -43,7 +43,7 @@ export default function AddMember({ route, navigation }) {
     try {
       const result = await Share.share({
         message:
-          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
+          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.me",
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -74,7 +74,7 @@ export default function AddMember({ route, navigation }) {
       .collection("Participents")
       .doc("IDsofParticipants")
       .get()
-      .then(function(snapshot) {
+      .then(function (snapshot) {
         setParticipentsID(snapshot.data().PartcipentsList);
         console.log("PARTICIPENTS FROM GROUP CHAT", ParticipentsIDS);
       })
@@ -86,12 +86,12 @@ export default function AddMember({ route, navigation }) {
             .collection("users")
             .doc(ParticipentsIDS[i])
             .get()
-            .then(snapshot => {
+            .then((snapshot) => {
               console.log("SNAPSHOOOOOOOOT", snapshot.data());
               items.push({
                 id: snapshot.data().id,
                 Name: snapshot.data().Name,
-                email: snapshot.data().email
+                email: snapshot.data().email,
               });
             })
             .then(() => {
@@ -113,7 +113,7 @@ export default function AddMember({ route, navigation }) {
           alignItems: "center",
           justifyContent: "space-around",
           paddingTop: 30,
-          marginBottom: 20
+          marginBottom: 20,
         }}
       >
         <TouchableOpacity
@@ -132,7 +132,7 @@ export default function AddMember({ route, navigation }) {
             fontSize: 22,
             fontWeight: "bold",
             marginTop: 20,
-            color: "#FFF"
+            color: "#FFF",
           }}
         >
           {groupName}
@@ -153,7 +153,7 @@ export default function AddMember({ route, navigation }) {
           onPress={() =>
             navigation.navigate("AddMoreMember", {
               groupName: groupName,
-              ParticipentsIDS: ParticipentsIDS
+              ParticipentsIDS: ParticipentsIDS,
             })
           }
         >
@@ -164,7 +164,7 @@ export default function AddMember({ route, navigation }) {
                 alignItems: "center",
                 justifyContent: "flex-start",
                 height: 60,
-                marginBottom: 10
+                marginBottom: 10,
               }}
             >
               <View
@@ -176,7 +176,7 @@ export default function AddMember({ route, navigation }) {
                   alignItems: "center",
                   justifyContent: "center",
                   borderWidth: 2,
-                  borderColor: "#F5F8FA"
+                  borderColor: "#F5F8FA",
                 }}
               >
                 <Feather name="user-plus" size={20} color="#F5F8FA" />
@@ -196,7 +196,7 @@ export default function AddMember({ route, navigation }) {
                 alignItems: "center",
                 justifyContent: "flex-start",
                 height: 60,
-                marginBottom: 10
+                marginBottom: 10,
               }}
             >
               <View
@@ -208,7 +208,7 @@ export default function AddMember({ route, navigation }) {
                   alignItems: "center",
                   justifyContent: "center",
                   borderWidth: 2,
-                  borderColor: "#F5F8FA"
+                  borderColor: "#F5F8FA",
                 }}
               >
                 <Feather name="link" size={20} color="#F5F8FA" />
@@ -274,7 +274,7 @@ export default function AddMember({ route, navigation }) {
             fontWeight: "bold",
             paddingLeft: 20,
             marginBottom: 20,
-            color: "#FFF"
+            color: "#FFF",
           }}
         >
           Members
@@ -297,7 +297,7 @@ export default function AddMember({ route, navigation }) {
                       alignItems: "center",
                       justifyContent: "flex-start",
                       height: 60,
-                      marginBottom: 10
+                      marginBottom: 10,
                     }}
                   >
                     <Image
@@ -310,12 +310,12 @@ export default function AddMember({ route, navigation }) {
                         //borderWidth: 2,
                         marginBottom: 0,
                         marginRight: 5,
-                        borderColor: "#147efb"
+                        borderColor: "#147efb",
                         //alignSelf: "center",
                         //marginTop: 15
                       }}
                       source={{
-                        url: "https://i.stack.imgur.com/l60Hf.png"
+                        url: "https://i.stack.imgur.com/l60Hf.png",
                       }}
                     />
                     <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
@@ -323,7 +323,7 @@ export default function AddMember({ route, navigation }) {
                       style={{
                         fontSize: 18,
                         fontWeight: "bold",
-                        color: "#FFF"
+                        color: "#FFF",
                       }}
                     >
                       @{item.Name}
@@ -343,16 +343,16 @@ export default function AddMember({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
   },
   viewseparator: {
     borderColor: "#F5F8FA",
     borderWidth: 0.5,
-    marginBottom: 20
+    marginBottom: 20,
   },
   listseparator: {
     borderColor: "#F5F8FA",
-    borderWidth: 0.5
+    borderWidth: 0.5,
     //marginVertical: 30
-  }
+  },
 });

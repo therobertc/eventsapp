@@ -14,6 +14,17 @@
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "wgtgroupchat.page.link",
+      // "versionCode": 4050,
+      "googleServicesFile": "./google-services.json",
+      "config": {
+        "googleSignIn": {
+          "apiKey": "AIzaSyBMDuYiQJEXcz30568adBfx-NGjPgiE00c"
+        }
+      },
+      "useNextNotificationsApi": true
+    },
     "ios": {
       "supportsTablet": true,
       "icon": "./assets/icon.png",

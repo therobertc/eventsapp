@@ -203,7 +203,11 @@ class _Profile extends Component {
                   fontSize: 30,
                 }}
                 name="settings"
-                onPress={() => this.props.navigation.navigate("Settings")}
+                onPress={() =>
+                  this.props.navigation.navigate("Settings", {
+                    userData: this.state.userDetails,
+                  })
+                }
               />
             )}
           </Right>

@@ -21,6 +21,7 @@ import AddGroup from "./Sub/AddGroup";
 import fire, { firestore } from "../database/firebase";
 import StockGroupCard from "../components/StockGroupCard";
 import ChartComp from "../components/ChartComp";
+import ChatTabs from "../components/Tabs/ChatTabs";
 
 const Chat = (props) => {
   const isVisible = useIsFocused();
@@ -105,9 +106,8 @@ const Chat = (props) => {
             data.unSeen = true;
             data.time = v.data().time;
           });
-        }
-        else{
-          unSeen = unSeen + 1
+        } else {
+          unSeen = unSeen + 1;
         }
         //    else {
         //     // data.unSeen = false;
@@ -164,7 +164,7 @@ const Chat = (props) => {
     try {
       const result = await Share.share({
         message:
-          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com",
+          "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchat.me",
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -249,18 +249,19 @@ const Chat = (props) => {
           />
         }
       >
-        <View style={styles.card}>
+        <View style={styles.headercard}>
           <Text
             style={{
               fontSize: 14,
               color: "#FFF",
               fontWeight: "600",
               marginBottom: 10,
+              marginHorizontal: 20,
             }}
           >
             ACTIVITY
           </Text>
-          <Text style={{ fontSize: 18, color: "#FFF" }}>
+          <Text style={{ fontSize: 18, color: "#FFF", marginHorizontal: 20 }}>
             Today's trending assets, scroll for more.
           </Text>
 
@@ -269,6 +270,7 @@ const Chat = (props) => {
               //flexDirection: "row",
               //justifyContent: "space-between",
               marginTop: 20,
+              start: 20,
             }}
           >
             <TrendingStocks {...props} />
@@ -332,21 +334,21 @@ const Chat = (props) => {
                 marginBottom: 10,
               }}
             >
-              GROUPS
+              PUBLIC GROUPS
             </Text>
-         {_unSeen > 0 ?
-            <Text
-              style={{
-                fontSize: 14,
-                color: "#FFF",
-                fontWeight: "600",
-                marginBottom: 10,
-                // backgroundColor: "green"
-              }}
-            >
-             {_unSeen} GROUPS UNSEEN 
-            </Text>
-            :null}
+            {_unSeen > 0 ? (
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: "#FFF",
+                  fontWeight: "600",
+                  marginBottom: 10,
+                  // backgroundColor: "green"
+                }}
+              >
+                {_unSeen} GROUPS UNSEEN
+              </Text>
+            ) : null}
           </View>
           <FlatList
             data={publicgroups}
@@ -402,7 +404,7 @@ const Chat = (props) => {
         {/* </View> */}
       </ScrollView>
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => props.navigation.navigate("AddGroup")}
         style={{
           borderWidth: 1,
@@ -439,7 +441,7 @@ const Chat = (props) => {
         >
           Start Group
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
@@ -602,134 +604,35 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 5,
     shadowColor: "#000",
-    marginHorizontal: 10,
+    //marginHorizontal: 10,
     shadowOpacity: 0.5,
-    marginVertical: 5,
+    //marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
     //backgroundColor: "#35383F"
     backgroundColor: "#35383F",
     //backgroundColor: "#282c34"
     backgroundColor: "#282c34",
-    borderRadius: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 20,
   },
+  headercard: {
+    shadowOffset: { width: 0.5, height: 0.5 },
+    shadowRadius: 5,
+    shadowColor: "#000",
+    //marginHorizontal: 10,
+    //shadowOpacity: 0.5,
+    marginVertical: 5,
+    //elevation: 1,
+    //backgroundColor: "#e8eef1",
+    //backgroundColor: "#35383F"
+    backgroundColor: "#35383F",
+    //backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
+    borderRadius: 20,
+    //paddingHorizontal: 20,
+    paddingVertical: 20,
+  },
 });
-
-// import Constants from "expo-constants";
-// import * as Notifications from "expo-notifications";
-// import React, { useState, useEffect, useRef } from "react";
-// import { Text, View, Button, Platform } from "react-native";
-
-// Notifications.setNotificationHandler({
-//   handleNotification: async () => ({
-//     shouldShowAlert: true,
-//     shouldPlaySound: false,
-//     shouldSetBadge: false,
-//   }),
-// });
-
-// export default function App() {
-//   const [expoPushToken, setExpoPushToken] = useState("");
-//   const [notification, setNotification] = useState(false);
-//   const notificationListener = useRef();
-//   const responseListener = useRef();
-
-//   useEffect(() => {
-//     registerForPushNotificationsAsync().then((token) =>
-//       setExpoPushToken(token)
-//     );
-
-//     notificationListener.current = Notifications.addNotificationReceivedListener(
-//       (notification) => {
-//         setNotification(notification);
-//       }
-//     );
-
-//     responseListener.current = Notifications.addNotificationResponseReceivedListener(
-//       (response) => {
-//         console.log(response);
-//       }
-//     );
-
-//     return () => {
-//       Notifications.removeNotificationSubscription(
-//         notificationListener.current
-//       );
-//       Notifications.removeNotificationSubscription(responseListener.current);
-//     };
-//   }, []);
-
-//   return (
-//     <View
-//       style={{
-//         flex: 1,
-//         alignItems: "center",
-//         justifyContent: "space-around",
-//       }}
-//     >
-//       <Text>Your expo push token: {expoPushToken}</Text>
-//       <View style={{ alignItems: "center", justifyContent: "center" }}>
-//         <Text>
-//           Title: {notification && notification.request.content.title}{" "}
-//         </Text>
-//         <Text>Body: {notification && notification.request.content.body}</Text>
-//         <Text>
-//           Data:{" "}
-//           {notification && JSON.stringify(notification.request.content.data)}
-//         </Text>
-//       </View>
-//       <Button
-//         title="Press to schedule a notification"
-//         onPress={async () => {
-//           await schedulePushNotification();
-//         }}
-//       />
-//     </View>
-//   );
-// }
-
-// async function schedulePushNotification() {
-//   await Notifications.scheduleNotificationAsync({
-//     content: {
-//       title: "You've got mail! 📬",
-//       body: "Here is the notification body",
-//       data: { data: "goes here" },
-//     },
-//     trigger: { seconds: 2 },
-//   });
-// }
-
-// async function registerForPushNotificationsAsync() {
-//   let token;
-//   if (Constants.isDevice) {
-//     const {
-//       status: existingStatus,
-//     } = await Notifications.getPermissionsAsync();
-//     let finalStatus = existingStatus;
-//     if (existingStatus !== "granted") {
-//       const { status } = await Notifications.requestPermissionsAsync();
-//       finalStatus = status;
-//     }
-//     if (finalStatus !== "granted") {
-//       alert("Failed to get push token for push notification!");
-//       return;
-//     }
-//     token = (await Notifications.getExpoPushTokenAsync()).data;
-//     console.log(token);
-//   } else {
-//     alert("Must use physical device for Push Notifications");
-//   }
-
-//   if (Platform.OS === "android") {
-//     Notifications.setNotificationChannelAsync("default", {
-//       name: "default",
-//       importance: Notifications.AndroidImportance.MAX,
-//       vibrationPattern: [0, 250, 250, 250],
-//       lightColor: "#FF231F7C",
-//     });
-//   }
-
-//   return token;
-// }

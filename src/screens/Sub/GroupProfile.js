@@ -47,7 +47,7 @@ const GroupProfile = (props) => {
 
         <View style={styles.col}>
           <Text style={styles.title}>Share Link</Text>
-          <Text style={styles.about}>https://stockchatapp.com</Text>
+          <Text style={styles.about}>https://stockchat.me</Text>
         </View>
 
         <View style={styles.col}>

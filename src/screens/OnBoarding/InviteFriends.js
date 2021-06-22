@@ -9,7 +9,7 @@ import {
   Dimensions,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  Share
+  Share,
 } from "react-native";
 import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
@@ -25,7 +25,7 @@ const onShare = async () => {
   try {
     const result = await Share.share({
       message:
-        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com"
+        "Hey - I have an invite to StockChat and want you to join. Here is the link! https://stockchatapp.com",
     });
     if (result.action === Share.sharedAction) {
       if (result.activityType) {
@@ -62,9 +62,7 @@ export default function App({ ...props }) {
       </View>
       <View>
         <TouchableOpacity>
-          <Text style={styles.username}>
-            https://stockchatapp.com
-          </Text>
+          <Text style={styles.username}>https://stockchat.me</Text>
         </TouchableOpacity>
       </View>
 
@@ -73,7 +71,7 @@ export default function App({ ...props }) {
           paddingHorizontal: 10,
           top: 50,
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <TouchableOpacity
@@ -87,7 +85,7 @@ export default function App({ ...props }) {
               fontSize: 18,
               textAlign: "center",
               color: "#F5F8FA",
-              fontWeight: "600"
+              fontWeight: "600",
             }}
           >
             Share Link
@@ -104,18 +102,18 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 20,
     backgroundColor: "#282c34",
-    width: Dimensions.get("screen").width
+    width: Dimensions.get("screen").width,
   },
   Button: {
     backgroundColor: "#147efb",
     padding: 15,
     borderRadius: 30,
-    width: "100%"
+    width: "100%",
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
-    fontSize: 15
+    fontSize: 15,
   },
   Stockchat: {
     marginTop: 50,
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   username: {
     marginTop: 10,
@@ -132,7 +130,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 20,
     padding: 18,
-    fontWeight: "800"
+    fontWeight: "800",
   },
   Input: {
     borderBottomWidth: 0,
@@ -146,6 +144,6 @@ const styles = StyleSheet.create({
     color: "#FFF",
     height: 50,
     fontSize: 21,
-    borderRadius: 30
-  }
+    borderRadius: 30,
+  },
 });
