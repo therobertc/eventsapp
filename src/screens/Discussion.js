@@ -187,6 +187,11 @@ function Discussion({ route, navigation }) {
     ref.set({
       time: new Date().getTime(),
     });
+
+    var ref = db.collection("publicgroups").doc(`${groupId}`);
+    ref.update({
+      time: new Date().getTime(),
+    });
   }
 
   function onSend(newMessage = []) {
