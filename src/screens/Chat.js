@@ -29,6 +29,7 @@ const Chat = (props) => {
   const [publicgroups, setpublicgroups] = useState([]);
   const [Chatheads, setChatheads] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
+  const [_unSeen, setUnseen] = useState(0);
 
   useEffect(() => {
     // askPermission();
@@ -94,6 +95,8 @@ const Chat = (props) => {
     var ChatHeadsArr = [];
     var UserId = fire.auth().currentUser.uid;
 
+    let unSeen = 0;
+
     db.collection("publicgroups").onSnapshot(function (snapshot) {
       snapshot.docChanges().forEach(async function (change) {
         let result = await checkUnseenMessages(change.doc.data().groupID);
@@ -104,13 +107,18 @@ const Chat = (props) => {
             data.time = v.data().time;
           });
         } else {
-          data.time = 0;
+          unSeen = unSeen + 1;
         }
+        //    else {
+        //     // data.unSeen = false;
+        //     // data.time = data.time;
+        //     // data.time = 0
+        // }
 
         if (change.type == "added") {
           pubgroupArray.push(data);
 
-          await pubgroupArray.sort((a, b) => a.time > b.time);
+          await pubgroupArray.sort((a, b) => a.time < b.time);
         }
         if (change.type === "modified") {
           console.log("Modified Group: ", change.doc.data());
@@ -119,6 +127,7 @@ const Chat = (props) => {
           console.log("Removed Group", change.doc.data());
         }
         setpublicgroups(pubgroupArray);
+        setUnseen(unSeen);
       });
     });
 
@@ -310,18 +319,37 @@ const Chat = (props) => {
           /> */}
 
         <View style={styles.card}>
-          <Text
+          <View
             style={{
-              fontSize: 14,
-              color: "#FFF",
-              fontWeight: "600",
-              //marginBottom: 10,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
           >
-            PUBLIC GROUPS
-          </Text>
-
-          {/* <ChatTabs></ChatTabs> */}
+            <Text
+              style={{
+                fontSize: 14,
+                color: "#FFF",
+                fontWeight: "600",
+                marginBottom: 10,
+              }}
+            >
+              PUBLIC GROUPS
+            </Text>
+            {_unSeen > 0 ? (
+              <Text
+                style={{
+                  fontSize: 14,
+                  color: "#FFF",
+                  fontWeight: "600",
+                  marginBottom: 10,
+                  // backgroundColor: "green"
+                }}
+              >
+                {_unSeen} GROUPS UNSEEN
+              </Text>
+            ) : null}
+          </View>
           <FlatList
             data={publicgroups}
             keyExtractor={(item, index) => "key" + index}
