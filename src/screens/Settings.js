@@ -14,6 +14,7 @@ import StockGroupCard from "../components/StockGroupCard";
 import * as firebase from "firebase";
 
 import ToggleSwitch from "../components/ToggleSwitch";
+import NavigationServices from "../Util/NavigationServices";
 
 import { AntDesign } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
@@ -32,13 +33,20 @@ class Settings extends Component {
   }
 
   enableNotification = (notifications_enable) => {
-    const user_uid = firebase.auth().currentUser.uid;
+    const userObj = { ...this.state.user, notifications_enable };
+    this.setState({ user: userObj }, () => {
+      console.log("bro", this.state.user);
+    });
+  };
 
-    console.log("status", notifications_enable);
+  save = () => {
+    const user_uid = firebase.auth().currentUser.uid;
+    // console.log("status", notifications_enable);
     firebase.default.firestore().collection("users").doc(user_uid).update({
-      notifications_enable,
+      notifications_enable: this.state.user.notifications_enable,
     });
     this.fetchUser();
+    NavigationServices.pop();
   };
 
   fetchUser = async () => {
@@ -200,17 +208,7 @@ class Settings extends Component {
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            <TouchableOpacity
-              style={styles.btn}
-              // onPress={() => {
-              //   firebase
-              //     .auth()
-              //     .signOut()
-              //     .then(function () {
-              //       props.navigation.navigate("GetStarted");
-              //     });
-              // }}
-            >
+            <TouchableOpacity style={styles.btn} onPress={this.save}>
               <Text
                 style={{
                   color: "#FFF",

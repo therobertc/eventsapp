@@ -37,7 +37,10 @@ import {
 } from "@expo/vector-icons";
 
 function Discussion({ route, navigation }) {
+  const { item, itemPic } = route.params;
+
   const [message, setMessage] = useState("");
+  const [data, setData] = useState(item);
   const [isJoined, setIsJoined] = useState(false);
   const [username, setUsername] = useState(
     firebase.auth().currentUser.displayName
@@ -45,12 +48,61 @@ function Discussion({ route, navigation }) {
   const [userid, setUserid] = useState(firebase.auth().currentUser.uid);
   const [messages, setMessages] = useState([]);
   const [userEmail, setUserEmail] = useState(firebase.auth().currentUser.email);
-  const { item, itemPic } = route.params;
+
+  const getData = async () => {
+    console.log("Hii i ii ii ");
+
+    firestore
+      .collection("publicgroups")
+      .doc("YlzfERExKSZr71rUbIIK")
+      .get()
+      .then((s) => {
+        console.log("s", s.data());
+        setData(s.data());
+      });
+
+    // const user = await firestore
+    //   .collection("users")
+    //   .doc("0C1WxzhOf6XhJ5syDe9PvtZGNtU2")
+    //   .get();
+
+    // console.log("item", userDocument);
+    // firestore
+    //   .collection("publicgroups")
+    //   .doc("YlzfERExKSZr71rUbIIK")
+    //   .onSnapshot(function (snapshot) {
+    //     const messages = querySnapshot.docs.map((doc) => {
+    //       console.log("doc", doc);
+    //     });
+    //   });
+  };
 
   useEffect(() => {
+    // getData();
     getUserJoinedAlreadyOrNot();
     getMessages();
   }, []);
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message: `${item.shareLink}`,
+        // message: `Share this link to invite your friends ${item.shareLink}`,
+      });
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   const getMessages = () => {
     const unsubscribeListener = firestore
@@ -501,6 +553,15 @@ function Discussion({ route, navigation }) {
         </TouchableOpacity>
         <Text style={styles.header}> {item.groupName}</Text>
         <TouchableOpacity
+          style={{ paddingRight: 20 }}
+          onPress={() => {
+            //share link here
+            onShare();
+          }}
+        >
+          <Icon name="share" color="#FFF" size={24} />
+        </TouchableOpacity>
+        <TouchableOpacity
         // onPress={() =>
         //   navigation.push("StockDetails", {
         //     symbol: "SQ"
@@ -697,6 +758,7 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
     flex: 1,
+    marginLeft: 20,
     textAlign: "center",
   },
   systemMessageText: {

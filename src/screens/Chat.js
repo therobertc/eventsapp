@@ -22,14 +22,52 @@ import fire, { firestore } from "../database/firebase";
 import StockGroupCard from "../components/StockGroupCard";
 import ChartComp from "../components/ChartComp";
 import ChatTabs from "../components/Tabs/ChatTabs";
+import NavigationServices from "../Util/NavigationServices";
 
 const Chat = (props) => {
   const isVisible = useIsFocused();
   const [groups, setGroups] = useState([]);
+  const [linkOpen, setLinkOpen] = useState(false);
   const [publicgroups, setpublicgroups] = useState([]);
   const [Chatheads, setChatheads] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
   const [_unSeen, setUnseen] = useState(0);
+
+  const _deepLinking = (status = true) => {
+    if (status) {
+      // If the app is already open, the app is foregrounded and a Linking event is fired
+      Linking.addEventListener("url", (event) => {
+        console.log("event", url);
+        // _handleOpenURL(event.url);
+      });
+
+      // If the app is not already open, it is opened and the url is passed in as the initialURL
+      Linking.getInitialURL()
+        .then((url) => {
+          console.log("event", url);
+          if (url.includes("group")) {
+            const item = url.split("group/")[1];
+            console.log("item", item);
+            firestore
+              .collection("publicgroups")
+              .doc(item)
+              // .doc("YlzfERExKSZr71rUbIIK")
+              .get()
+              .then((s) => {
+                // console.log("s", s.data());
+                NavigationServices.navigate("Discussion", { item: s.data() });
+                setLinkOpen(true);
+              });
+            // setTimeout(() => {
+            // }, 500);
+          }
+          // _handleOpenURL(url);
+        })
+        .catch((err) => {
+          console.warn("Deep-Linking Error", err);
+        });
+    }
+  };
 
   useEffect(() => {
     // askPermission();
@@ -39,6 +77,7 @@ const Chat = (props) => {
 
     if (isVisible) {
       getChats();
+      !linkOpen && _deepLinking();
     }
   }, [isVisible]);
 
@@ -126,6 +165,7 @@ const Chat = (props) => {
         if (change.type === "removed") {
           console.log("Removed Group", change.doc.data());
         }
+        console.log("pubgroupArray", pubgroupArray);
         setpublicgroups(pubgroupArray);
         setUnseen(unSeen);
       });
@@ -404,7 +444,7 @@ const Chat = (props) => {
         {/* </View> */}
       </ScrollView>
 
-      {/* <TouchableOpacity
+      <TouchableOpacity
         onPress={() => props.navigation.navigate("AddGroup")}
         style={{
           borderWidth: 1,
@@ -441,7 +481,7 @@ const Chat = (props) => {
         >
           Start Group
         </Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   );
 };

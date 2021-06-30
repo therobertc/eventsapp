@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "google.com",
     "name": "StockChat",
     "slug": "StockChat",
     "version": "0.55",
@@ -23,12 +24,26 @@
           "apiKey": "AIzaSyBMDuYiQJEXcz30568adBfx-NGjPgiE00c"
         }
       },
-      "useNextNotificationsApi": true
+      "useNextNotificationsApi": true,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "https",
+              "host": "wgtgroupchat.page.link",
+              "pathPrefix": "/"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "ios": {
       "supportsTablet": true,
       "icon": "./assets/icon.png",
-      "bundleIdentifier": "com.tradechat.tradechatapp"
+      "bundleIdentifier": "com.tradechat.tradechatapp",
+      "associatedDomains": ["applinks:wgtgroupchat.page.link"]
     },
     "web": {
       "favicon": "./assets/favicon.png"

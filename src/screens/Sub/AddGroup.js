@@ -12,11 +12,15 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   TextInputComponent,
-  Alert
+  Alert,
 } from "react-native";
+import * as Linking from "expo-linking";
+
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import fire, { firestore } from "../../database/firebase";
 import { Input } from "react-native-elements";
+// import dynamicLinks from "@react-native-firebase/dynamic-links";
+import axios from "axios";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { Feather } from "@expo/vector-icons";
@@ -27,23 +31,72 @@ export default function AddGroup(props) {
   const [errorState, setErrorState] = useState("");
   const [isLoading, setisLoading] = useState(false);
 
+  function buildLink(id) {
+    // async function buildLink(id) {
+    const devUrlPrefix = "exp://127.0.0.1:19000/--/";
+
+    const link = `${devUrlPrefix}group/${id}`;
+
+    // const link = axios.post(
+    //   "https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=AIzaSyCGU67bg0E88BW7tJHUf_mDA37SNX-bTxU",
+    //   {
+    //     dynamicLinkInfo: {
+    //       domainUriPrefix: "https://wgtgroupchat.page.link",
+    //       // link: `exp://www.google.com/${id}`,
+    //       link: `https://www.google.com`,
+    //       androidInfo: {
+    //         androidPackageName: "wgtgroupchat.page.link",
+    //       },
+    //       iosInfo: {
+    //         iosBundleId: "com.tradechat.tradechatapp",
+    //       },
+    //     },
+    //   }
+    // );
+    return link;
+    // let redirectUrl = Linking.makeUrl("group", {
+    //   queryParams: { id },
+    // });
+    // return redirectUrl;
+  }
+
+  const dynamicEventLink = async (id) => {
+    const link = new firebase.links.DynamicLink(
+      encodeURI(`https://eventsmag.page.link/${id}`),
+      "eventsmag.page.link"
+    ).android
+      .setPackageName("app_android_package_name")
+      .ios.setBundleId("app_ios_bundle_id");
+
+    const dymcLink = await firebase
+      .links()
+      .createShortDynamicLink(link, `UNGUESSABLE`)
+      .then((url) => decodeURIComponent(url));
+
+    return dymcLink;
+  };
+
   function createGroupToFirebaseGroup() {
     setisLoading(true);
     const groupRef = firestore.collection("publicgroups").doc();
     const userID = fire.auth().currentUser.uid;
 
+    const shareLink = buildLink(groupRef.id);
+    console.log("shareLink", shareLink);
+
     groupRef
       .set({
         groupID: groupRef.id,
         groupName: groupName,
-        userID: userID
+        userID: userID,
+        shareLink,
       })
-      .then(function(docRef) {
+      .then(function (docRef) {
         setisLoading(false);
         console.log("Document Written with ID", groupRef.id);
         addMemberOfChatInFirebase(groupRef.id, userID);
       })
-      .catch(function(error) {
+      .catch(function (error) {
         Alert.alert(error.message);
         setisLoading(false);
         console.log("error adding Doc", error);
@@ -57,12 +110,12 @@ export default function AddGroup(props) {
       .doc();
     memberRefs
       .set({
-        userID: userID
+        userID: userID,
       })
-      .then(function(docRef) {
+      .then(function (docRef) {
         props.navigation.goBack();
       })
-      .catch(function(error) {
+      .catch(function (error) {
         setisLoading(false);
         console.error("Error adding Document", error);
       });
@@ -81,7 +134,7 @@ export default function AddGroup(props) {
         .collection("Groups")
         .doc(groupName)
         .get()
-        .then(function(snapshot) {
+        .then(function (snapshot) {
           if (snapshot.exists) {
             Alert.alert("Group already exists with same name..");
           } else {
@@ -118,7 +171,7 @@ export default function AddGroup(props) {
             placeholderTextColor="lightgrey"
             placeholder="Enter Group Name"
             value={groupName}
-            onChangeText={val => setGroupName(val)}
+            onChangeText={(val) => setGroupName(val)}
           />
         </View>
 
@@ -127,7 +180,7 @@ export default function AddGroup(props) {
             paddingHorizontal: 10,
             top: 50,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <TouchableOpacity
@@ -140,7 +193,7 @@ export default function AddGroup(props) {
                 fontSize: 18,
                 textAlign: "center",
                 color: "#F5F8FA",
-                fontWeight: "600"
+                fontWeight: "600",
               }}
             >
               Public Group
@@ -155,7 +208,7 @@ export default function AddGroup(props) {
               style={{
                 flexDirection: "row",
                 justifyContent: "center",
-                alignItems: "center"
+                alignItems: "center",
               }}
             >
               <Feather name="lock" size={20} color="lightgrey" />
@@ -165,7 +218,7 @@ export default function AddGroup(props) {
                   textAlign: "center",
                   color: "lightgrey",
                   fontWeight: "600",
-                  paddingLeft: 20
+                  paddingLeft: 20,
                 }}
               >
                 Private Group
@@ -181,33 +234,33 @@ export default function AddGroup(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#282c34"
+    backgroundColor: "#282c34",
   },
   getStarted: {
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
     backgroundColor: "#282c34",
-    width: Dimensions.get("screen").width
+    width: Dimensions.get("screen").width,
   },
   Button: {
     backgroundColor: "#147efb",
     paddingVertical: 15,
     borderRadius: 30,
     width: "100%",
-    marginVertical: 20
+    marginVertical: 20,
   },
   lockedButton: {
     backgroundColor: "grey",
     paddingVertical: 15,
     borderRadius: 30,
     width: "100%",
-    marginVertical: 20
+    marginVertical: 20,
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
-    fontSize: 15
+    fontSize: 15,
   },
   Stockchat: {
     marginTop: 50,
@@ -216,14 +269,14 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   username: {
     marginTop: 10,
     color: "#FFF",
     textAlign: "center",
     fontSize: 15,
-    padding: 18
+    padding: 18,
   },
   Input: {
     borderBottomWidth: 0,
@@ -238,13 +291,13 @@ const styles = StyleSheet.create({
     height: 50,
     fontSize: 21,
     borderRadius: 30,
-    textAlign: "center"
+    textAlign: "center",
   },
   tcontainer: {
     //backgroundColor: "#FFF",
     //flex: 1,
     flexDirection: "row",
-    padding: 50
+    padding: 50,
     // borderBottomLeftRadius: 30,
     // borderBottomRightRadius: 30
   },
@@ -253,13 +306,13 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 90,
     width: "100%",
     justifyContent: "center",
-    flexDirection: "column"
+    flexDirection: "column",
   },
   tHeading: {
     color: "#F5F8FA",
     fontWeight: "bold",
     fontSize: 20,
-    paddingLeft: "30%"
+    paddingLeft: "30%",
   },
 
   inputStyle: {
@@ -269,21 +322,21 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderColor: "#ccc",
     borderBottomWidth: 1,
-    margin: 20
+    margin: 20,
   },
   toptcontainer: {
-    backgroundColor: "#3498db"
+    backgroundColor: "#3498db",
   },
 
   topbcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
   },
   bottombcontainer: {
     flex: 1,
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   menuContainer: {
     //justifyContent: "space-around",
@@ -292,7 +345,7 @@ const styles = StyleSheet.create({
     padding: 50,
     width: "100%",
     backgroundColor: "#282c34",
-    borderRadius: 26
+    borderRadius: 26,
   },
   activemenu: {
     justifyContent: "center",
@@ -300,18 +353,18 @@ const styles = StyleSheet.create({
     height: "80%",
     width: "45%",
     backgroundColor: "#17C37B",
-    borderRadius: 10
+    borderRadius: 10,
   },
   activemenuText: {
     fontSize: 30,
     color: "#FFF000",
     marginTop: 50,
-    marginBottom: 50
+    marginBottom: 50,
   },
   aText: {
     color: "#F5F8FA",
     fontSize: 20,
-    marginTop: 5
+    marginTop: 5,
   },
 
   inputs: {
@@ -321,7 +374,7 @@ const styles = StyleSheet.create({
     width: "90%",
     height: "10%",
     borderWidth: 1,
-    borderColor: "grey"
+    borderColor: "grey",
   },
   btn: {
     width: 300,
@@ -331,6 +384,6 @@ const styles = StyleSheet.create({
     height: 60,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });

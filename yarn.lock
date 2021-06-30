@@ -2141,6 +2141,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/viewpager/-/viewpager-4.2.4.tgz#fd17ba88e0cefc7e6c8ebfff6d4afd2b887f1b2c"
   integrity sha512-r7iOPPys5MS88VZuqipDadvAAjeW+PE+myhjvboH8rjNHxUUuofJW2uiiRKMSE0/qEyklIpLOCY+S0ZLHHe8Qg==
 
+"@react-native-firebase/dynamic-links@^12.1.0":
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/dynamic-links/-/dynamic-links-12.1.0.tgz#76135ad45619a2bae72e454f7a7a25d550adef25"
+  integrity sha512-yRZhumHXBc16T5I8NOPhwWfwIXoWRZx8KhfDfNGZg4+9OkAhYN7C9emtZiGeRqxevm6I8cv3aoyq8CHzWVi43A==
+
 "@react-native-picker/picker@^1.9.7":
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/@react-native-picker/picker/-/picker-1.16.1.tgz#cc5d05b0d651445afa519c67824d8af3e43fa10c"

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import * as Linking from "expo-linking";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
@@ -53,6 +54,7 @@ import TopGainers from "../components/Screeners/DefaultScreeners/TopGainers";
 import Profile from "../screens/Profile";
 import Editprofile from "../screens/Editprofile";
 import Bank from "../screens/Bank";
+import NavigationServices from "../Util/NavigationServices";
 
 const Tab = createBottomTabNavigator();
 const BottomTabNavigator = () => {
@@ -97,6 +99,9 @@ const BottomTabNavigator = () => {
             <Feather name="trending-up" color={color} size={30} />
           ),
         }}
+
+
+
       /> */}
 
       <Tab.Screen
@@ -145,17 +150,56 @@ const Stack = createStackNavigator();
 const ChatStackNavigator = () => {
   const [isUser, SetUser] = useState(false);
 
-  React.useEffect(() =>
+  // const _deepLinking = () => {
+  //   // If the app is already open, the app is foregrounded and a Linking event is fired
+  //   Linking.addEventListener("url", (event) => {
+  //     console.log("event", url);
+  //     // _handleOpenURL(event.url);
+  //   });
+
+  //   // If the app is not already open, it is opened and the url is passed in as the initialURL
+  //   Linking.getInitialURL()
+  //     .then((url) => {
+  //       console.log("event", url);
+  //       if (url.includes("group")) {
+  //         const item = url.split("group/")[1];
+  //         console.log("item", item);
+  //         NavigationServices.navigate("Discussion", { item });
+  //       }
+  //       // _handleOpenURL(url);
+  //     })
+  //     .catch((err) => {
+  //       console.warn("Deep-Linking Error", err);
+  //     });
+  // };
+
+  const _handleOpenURL = (url) => {
+    if (url) {
+      if (userExists) {
+        const route = url.replace(/.*?:\/\//g, "");
+        const id = route.match(/\/([^\/]+)\/?$/)[1];
+
+        if (url.includes("classified_share")) {
+          NavigationService.navigate("ClassifiedDetail", { classifiedId: id });
+        } else if (url.includes("advertisement_share")) {
+          NavigationService.navigate("AdvertismentDetail", { id });
+        }
+      }
+    }
+  };
+
+  React.useEffect(() => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
         SetUser(true);
         console.log("IF ===> ", isUser);
+        // _deepLinking();
       } else {
         SetUser(false);
         console.log("ELSE ===>", isUser);
       }
-    })
-  );
+    });
+  });
   return (
     <Stack.Navigator>
       <Stack.Screen

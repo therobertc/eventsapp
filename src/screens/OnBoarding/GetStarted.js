@@ -5,7 +5,7 @@ import {
   Image,
   View,
   TouchableOpacity,
-  Dimensions,
+  Dimensions,Linking,
 } from "react-native";
 import { Button } from "react-native-elements";
 import { Entypo } from "@expo/vector-icons";
