@@ -12,7 +12,7 @@ export default LastWatch;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     elevation: 3,
     paddingVertical: 2,
     paddingHorizontal: 15,
@@ -21,11 +21,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: 100,
     alignSelf: "center",
-    marginTop: 25
+    marginTop: 25,
   },
   text: {
     color: "#1DA1F2",
     fontSize: 12,
-    fontFamily: "Montserrat_600SemiBold"
-  }
+    fontFamily: "Montserrat_600SemiBold",
+  },
 });

@@ -92,7 +92,7 @@ class Settings extends Component {
             <View>
               <View
                 style={{
-                  backgroundColor: "#282c34",
+                  backgroundColor: "#000",
 
                   flexDirection: "column",
                   width: "100%",
@@ -100,7 +100,7 @@ class Settings extends Component {
                   paddingHorizontal: 10,
                 }}
               >
-                <View
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -110,8 +110,8 @@ class Settings extends Component {
                   }}
                 >
                   <Text style={styles.switch}>Portfolio</Text>
-                </View>
-
+                </View> */}
+                {/* 
                 <View
                   style={{
                     flexDirection: "row",
@@ -123,7 +123,7 @@ class Settings extends Component {
                 >
                   <Text style={styles.switchtitle}>Go Public</Text>
                   <ToggleSwitch></ToggleSwitch>
-                </View>
+                </View> */}
 
                 <View
                   style={{
@@ -137,7 +137,7 @@ class Settings extends Component {
                   <Text style={styles.switch}>Notifications</Text>
                 </View>
 
-                <View
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -148,7 +148,7 @@ class Settings extends Component {
                 >
                   <Text style={styles.switchtitle}>Mentions</Text>
                   <ToggleSwitch></ToggleSwitch>
-                </View>
+                </View> */}
                 <View
                   style={{
                     flexDirection: "row",
@@ -165,7 +165,7 @@ class Settings extends Component {
                   />
                 </View>
 
-                <View
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -175,9 +175,9 @@ class Settings extends Component {
                   }}
                 >
                   <Text style={styles.switch}>Stock Alerts</Text>
-                </View>
+                </View> */}
 
-                <View
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -188,8 +188,8 @@ class Settings extends Component {
                 >
                   <Text style={styles.switchtitle}>Price Movements</Text>
                   <ToggleSwitch></ToggleSwitch>
-                </View>
-                <View
+                </View> */}
+                {/* <View
                   style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
@@ -200,7 +200,7 @@ class Settings extends Component {
                 >
                   <Text style={styles.switchtitle}>Trending Stocks</Text>
                   <ToggleSwitch></ToggleSwitch>
-                </View>
+                </View> */}
               </View>
             </View>
           </View>
@@ -279,7 +279,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: "100%",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -314,7 +314,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#282c34",
+    // backgroundColor: "#000",
     // marginHorizontal: -20,
     paddingHorizontal: 20,
   },

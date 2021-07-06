@@ -9,7 +9,7 @@ import {
   ListView,
   ActivityIndicator,
   Image,
-  Modal
+  Modal,
 } from "react-native";
 import DraggableFlatList from "react-native-draggable-flatlist";
 import { Header, Left, Right, Icon, Body } from "native-base";
@@ -26,17 +26,17 @@ class Under5 extends Component {
       apidata: null,
       isLoading: true,
       key: null,
-      name: null
+      name: null,
     };
     this._apiCall = this._apiCall.bind(this);
   }
 
   _apiCall() {
     return fetch(URL.HOST_URL + "api/stockData", {
-      method: "GET"
+      method: "GET",
     })
-      .then(response => response.json())
-      .then(responseJson => {
+      .then((response) => response.json())
+      .then((responseJson) => {
         this.setState(
           {
             isLoading: false,
@@ -49,14 +49,14 @@ class Under5 extends Component {
               rating: service.rating,
               volume: service.volume,
               label: service.name,
-              backgroundColor: "#282c34",
-              marginTop: 1
-            }))
+              backgroundColor: "#000",
+              marginTop: 1,
+            })),
           },
-          function() {}
+          function () {}
         );
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   }
@@ -76,7 +76,7 @@ class Under5 extends Component {
           onPress={() => {
             this.props.navigation.navigate("search_detail", {
               symbol: item.label,
-              type: "mostActive"
+              type: "mostActive",
             });
           }}
         >
@@ -86,7 +86,7 @@ class Under5 extends Component {
                 style={{
                   flex: 1,
                   alignItems: "flex-start",
-                  justifyContent: "flex-start"
+                  justifyContent: "flex-start",
                   //marginTop: 10
                 }}
               >
@@ -96,7 +96,7 @@ class Under5 extends Component {
                     color: "#212121",
                     fontSize: 20,
                     textAlign: "center",
-                    paddingLeft: 20
+                    paddingLeft: 20,
                   }}
                 >
                   {""}
@@ -107,7 +107,7 @@ class Under5 extends Component {
                 style={{
                   flex: 1,
                   alignItems: "flex-start",
-                  justifyContent: "flex-start"
+                  justifyContent: "flex-start",
                 }}
               >
                 <Text
@@ -115,7 +115,7 @@ class Under5 extends Component {
                     fontWeight: "500",
                     color: "#808080",
                     fontSize: 12,
-                    paddingLeft: 20
+                    paddingLeft: 20,
                   }}
                 >
                   Volume: {item.volume}
@@ -125,7 +125,7 @@ class Under5 extends Component {
                     fontWeight: "500",
                     color: "#808080",
                     fontSize: 12,
-                    paddingLeft: 20
+                    paddingLeft: 20,
                   }}
                 >
                   {"Rating: "}
@@ -140,14 +140,14 @@ class Under5 extends Component {
                 flex: 1,
                 justifyContent: "flex-end",
                 alignItems: "flex-end",
-                marginRight: 20
+                marginRight: 20,
               }}
             >
               <View
                 style={{
                   flex: 1,
                   alignItems: "flex-start",
-                  justifyContent: "flex-start"
+                  justifyContent: "flex-start",
                   //marginTop: 10
                 }}
               >
@@ -156,7 +156,7 @@ class Under5 extends Component {
                     fontWeight: "600",
                     color: "#212121",
                     fontSize: 20,
-                    textAlign: "right"
+                    textAlign: "right",
                   }}
                 >
                   {" $"}
@@ -168,7 +168,7 @@ class Under5 extends Component {
                 style={{
                   flex: 1,
                   alignItems: "flex-start",
-                  justifyContent: "flex-start"
+                  justifyContent: "flex-start",
                   //marginTop: 5
                 }}
               >
@@ -176,7 +176,7 @@ class Under5 extends Component {
                   style={{
                     fontWeight: "600",
                     fontSize: 20,
-                    color: parseFloat(item.change) < 0 ? "red" : "#33CC00"
+                    color: parseFloat(item.change) < 0 ? "red" : "#33CC00",
                   }}
                 >
                   {" "}
@@ -202,14 +202,14 @@ class Under5 extends Component {
 
     return (
       <View style={styles.container}>
-        <Header style={{ backgroundColor: "#282c34", borderBottomWidth: 0 }}>
+        <Header style={{ backgroundColor: "#000", borderBottomWidth: 0 }}>
           <Left>
             <Icon
               style={{
                 color: "#FFF",
                 paddingHorizontal: 20,
                 fontSize: 24,
-                fontWeight: "bold"
+                fontWeight: "bold",
               }}
               name="arrow-back"
               onPress={() => props.navigation.goBack()}
@@ -221,13 +221,11 @@ class Under5 extends Component {
               style={{
                 alignItems: "center",
                 justifyContent: "center",
-                width: Platform.OS === "ios" ? 300 : 220
+                width: Platform.OS === "ios" ? 300 : 220,
               }}
               onPress={() => props.navigation.navigate("Home")}
             >
-              <Text
-                style={{ fontSize: 18, fontWeight: "bold", color: "#FFF" }}
-              >
+              <Text style={{ fontSize: 18, fontWeight: "bold", color: "#FFF" }}>
                 Under $5
               </Text>
             </TouchableOpacity>
@@ -239,7 +237,7 @@ class Under5 extends Component {
                 color: "#FFF",
                 fontWeight: "bold",
                 paddingHorizontal: Platform.OS === "ios" ? 20 : 15,
-                fontSize: 30
+                fontSize: 30,
               }}
               name="search"
               onPress={() => this.props.navigation.navigate("Search_page")}
@@ -263,44 +261,44 @@ export default Under5;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#282c34",
-    flex: 1
+    backgroundColor: "#000",
+    flex: 1,
   },
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowColor: "lightgrey",
     shadowOpacity: 1.0,
     shadowRadius: 2,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 10,
     padding: 10,
     height: 80,
     marginVertical: 5,
     marginHorizontal: 10,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   headerTop: {
     backgroundColor: "#3b5998",
     height: 60,
-    width: "100%"
+    width: "100%",
   },
   loadCon: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#282c34"
+    backgroundColor: "#000",
   },
   loadTitle: {
     color: "#FFF000",
     fontSize: 16,
     margin: 8,
-    fontWeight: "700"
+    fontWeight: "700",
   },
   statusBar: {
-    height: 60
+    height: 60,
   },
   image: {
     width: 100,
-    height: 100
-  }
+    height: 100,
+  },
 });

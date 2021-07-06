@@ -178,7 +178,7 @@ class _Profile extends Component {
       <View style={styles.container}>
         <Header
           style={{
-            backgroundColor: "#282c34",
+            backgroundColor: "#000",
             borderBottomWidth: 0.2,
             borderBottomColor: "#282c34",
           }}
@@ -453,7 +453,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     height: height,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
   },
   root: {
     //   backgroundColor: theme['color-basic-100'],

@@ -22,7 +22,7 @@ function ChatTabs() {
         tabStyle: {
           width: "auto",
         },
-        style: { backgroundColor: "#282c34" },
+        style: { backgroundColor: "#000" },
         labelStyle: {
           fontWeight: "700",
         },

@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import { Feather } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
 import Home from "../screens/Home";
 import Discussion from "../screens/Discussion";
@@ -17,6 +17,7 @@ import Settings from "../screens/Settings";
 import Chat from "../screens/Chat";
 import Icon from "@expo/vector-icons/Ionicons";
 import Icon2 from "@expo/vector-icons/Entypo";
+
 import AddGroup from "../screens/Sub/AddGroup";
 import AddGroupMember from "../screens/Sub/AddGroup_Members";
 import AddMoreGroupMember from "../screens/Sub/AddMore_GroupMembers";
@@ -67,7 +68,7 @@ const BottomTabNavigator = () => {
           //height: "15%",
           //paddingTop: 15,
           paddingBottom: 10,
-          backgroundColor: "#282c34",
+          backgroundColor: "#000",
           alignContent: "center",
           borderTopColor: "#282c34",
         },
@@ -112,7 +113,7 @@ const BottomTabNavigator = () => {
           tabBarLabel: "",
           swipeEnabled: false,
           tabBarIcon: ({ color, size }) => (
-            <Icon2 name="chat" color={color} size={30} />
+            <Ionicons name="ios-chatbubbles" color={color} size={35} />
           ),
         }}
       />
@@ -124,7 +125,7 @@ const BottomTabNavigator = () => {
           tabBarLabel: "",
           gestureEnabled: false,
           tabBarIcon: ({ color, size }) => (
-            <Icon name="ios-person" color={color} size={30} />
+            <FontAwesome name="user" color={color} size={35} />
           ),
         }}
       />

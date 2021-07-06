@@ -150,7 +150,7 @@ export default function Login({ navigation }) {
           flex: 1,
           justifyContent: "center",
           height: "100%",
-          backgroundColor: "#282c34",
+          backgroundColor: "#000",
         }}
       >
         <ActivityIndicator color="#FFF" size="large" />
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     //justifyContent: "center",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
   },
   inputStyle: {
     width: "100%",
@@ -255,7 +255,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
   },
   tcontainer: {
     //backgroundColor: "#FFF",
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: 30,
     width: "100%",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 26,
   },
   activemenu: {

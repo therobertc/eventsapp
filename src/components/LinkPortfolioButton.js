@@ -7,7 +7,7 @@ import {
   View,
   ActivityIndicator,
   Animated,
-  Image
+  Image,
 } from "react-native";
 import { WebView } from "react-native-webview";
 
@@ -56,7 +56,7 @@ const LinkPortfolioButton = () => {
               onLoadEnd={() => setLoading(false)}
               style={styles.webViewContainer}
               source={{
-                uri: `https://robinhood.com/login`
+                uri: `https://robinhood.com/login`,
               }}
             />
           </View>
@@ -71,14 +71,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 22,
   },
   buttonContainer: {
     display: "flex",
     paddingVertical: 20,
     height: 50,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   modalView: {
     width: "100%",
@@ -91,11 +91,11 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.25,
     // shadowRadius: 3.84,
     // elevation: 5,
-    backgroundColor: "#282c34"
+    backgroundColor: "#000",
   },
   webViewContainer: {
     height: "95%",
-    width: "100%"
+    width: "100%",
   },
   btn: {
     alignItems: "center",
@@ -108,19 +108,19 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#FFF",
     borderRadius: 100,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   close: {
     alignSelf: "flex-end",
     padding: 6,
     marginRight: 20,
-    marginTop: 10
+    marginTop: 10,
   },
   avatar: {
     width: 130,
-    height: 31
+    height: 31,
     //borderRadius: 20
-  }
+  },
 });
 
 export default LinkPortfolioButton;

@@ -4,7 +4,7 @@ import {
   Text,
   Image,
   StyleSheet,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
@@ -55,7 +55,7 @@ const StockProfile = ({ route, navigation }) => {
                     marginRight: 5,
                     //borderColor: "#147efb",
                     alignSelf: "center",
-                    marginTop: 15
+                    marginTop: 15,
                   }}
                   source={{ uri: "https://i.stack.imgur.com/l60Hf.png" }}
                 />
@@ -65,7 +65,7 @@ const StockProfile = ({ route, navigation }) => {
                   fontSize: 20,
                   fontWeight: "bold",
                   textAlign: "center",
-                  paddingVertical: 20
+                  paddingVertical: 20,
                 }}
               >
                 COMPANY, INC.
@@ -77,7 +77,7 @@ const StockProfile = ({ route, navigation }) => {
                   fontWeight: "bold",
                   textAlign: "left",
 
-                  paddingHorizontal: 30
+                  paddingHorizontal: 30,
                 }}
               >
                 About
@@ -91,7 +91,7 @@ const StockProfile = ({ route, navigation }) => {
                   flexWrap: "wrap",
                   flex: 1,
                   paddingHorizontal: 30,
-                  paddingVertical: 20
+                  paddingVertical: 20,
                 }}
               >
                 Company's mission is to accelerate the world's transition.
@@ -111,7 +111,7 @@ const StockProfile = ({ route, navigation }) => {
                   marginTop: 10,
 
                   backgroundColor: "#FFF",
-                  margin: 20
+                  margin: 20,
                 }}
                 //onPress={() => this.props.navigation.navigate("ThankYou")}
               >
@@ -121,7 +121,7 @@ const StockProfile = ({ route, navigation }) => {
                     fontSize: 18,
                     color: "#F5F8FA",
                     fontWeight: "bold",
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
                 >
                   Join Group
@@ -138,7 +138,7 @@ const StockProfile = ({ route, navigation }) => {
                   marginTop: 10,
 
                   backgroundColor: "#FFF",
-                  margin: 20
+                  margin: 20,
                 }}
                 // onPress={() => this.props.navigation.navigate("GroupFeed")}
                 //onPress={handleHelpPress}
@@ -149,7 +149,7 @@ const StockProfile = ({ route, navigation }) => {
                     fontSize: 18,
                     color: "#F5F8FA",
                     fontWeight: "bold",
-                    textAlign: "center"
+                    textAlign: "center",
                   }}
                 >
                   View Members
@@ -164,7 +164,7 @@ const StockProfile = ({ route, navigation }) => {
                   flexWrap: "wrap",
                   flex: 1,
                   paddingHorizontal: 30,
-                  paddingVertical: 20
+                  paddingVertical: 20,
                 }}
               >
                 All messages are for informational purposes only.
@@ -188,31 +188,31 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: "100%"
+    height: "100%",
   },
   main: {
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     height: "88%",
     paddingHorizontal: 20,
     borderBottomLeftRadius: 35,
     borderBottomRightRadius: 35,
-    paddingTop: 40
+    paddingTop: 40,
   },
   headerContainer: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   username: {
     color: "#FFF",
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
     flex: 1,
-    textAlign: "center"
+    textAlign: "center",
   },
   avatar: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "#FFF"
-  }
+    backgroundColor: "#FFF",
+  },
 });

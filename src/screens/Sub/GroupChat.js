@@ -12,7 +12,7 @@ import {
   ScrollView,
   Modal,
   TouchableHighlight,
-  Alert
+  Alert,
 } from "react-native";
 import {
   AntDesign,
@@ -22,7 +22,7 @@ import {
   Feather,
   FontAwesome,
   FontAwesome5,
-  MaterialCommunityIcons
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import * as Permissions from "expo-permissions";
 
@@ -33,7 +33,7 @@ import {
   GiftedChat,
   Send,
   Bubble,
-  InputToolbar
+  InputToolbar,
 } from "react-native-gifted-chat";
 import fire, { firestore } from "../../database/firebase";
 import * as ImagePicker from "expo-image-picker";
@@ -64,8 +64,7 @@ export default function GroupChat({ route, navigation }) {
       .collection("Participents")
       .doc("IDsofParticipants")
       .get()
-      .then(function(snapshot) {
-
+      .then(function (snapshot) {
         for (var i = 0; i < snapshot.data().PartcipentsList.length; i++) {
           if (
             snapshot.data().PartcipentsList[i] === fire.auth().currentUser.uid
@@ -87,8 +86,8 @@ export default function GroupChat({ route, navigation }) {
       .doc(groupName)
       .collection("Messages")
       .orderBy("createdAt", "desc")
-      .onSnapshot(querySnapshot => {
-        const messages = querySnapshot.docs.map(doc => {
+      .onSnapshot((querySnapshot) => {
+        const messages = querySnapshot.docs.map((doc) => {
           let firebaseData = doc.data();
           firebaseData.createdAt = firebaseData.createdAt
             .toDate()
@@ -98,7 +97,7 @@ export default function GroupChat({ route, navigation }) {
             _id: doc.id,
             text: "",
             createdAt: new Date().toUTCString(),
-            ...firebaseData
+            ...firebaseData,
           };
           // console.log("DDDDDDDDDAAAAAAAAAAATTTTTTTTTTA", data)
           return data;
@@ -109,7 +108,7 @@ export default function GroupChat({ route, navigation }) {
       });
   }
 
-  renderSend = props => {
+  renderSend = (props) => {
     return (
       <Send {...props} containerStyle={styles.sendContainer}>
         <View
@@ -121,7 +120,7 @@ export default function GroupChat({ route, navigation }) {
             backgroundColor: "#147efb",
             justifyContent: "center",
             alignItems: "center",
-            alignSelf: "center"
+            alignSelf: "center",
 
             //marginRight: 15
           }}
@@ -140,31 +139,31 @@ export default function GroupChat({ route, navigation }) {
     );
   };
 
-  renderBubble = props => {
+  renderBubble = (props) => {
     return (
       <Bubble
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: "#147efb"
+            backgroundColor: "#147efb",
           },
           left: {
-            backgroundColor: "#282c34"
-          }
+            backgroundColor: "#000",
+          },
         }}
       />
     );
   };
 
-  const customtInputToolbar = props => {
+  const customtInputToolbar = (props) => {
     return (
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "#282c34",
+          backgroundColor: "#000",
           borderTopColor: "#E8E8E8",
           borderTopWidth: 1,
-          paddingTop: 10
+          paddingTop: 10,
         }}
       />
     );
@@ -175,7 +174,7 @@ export default function GroupChat({ route, navigation }) {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1
+      quality: 1,
     });
 
     console.log(result);
@@ -186,19 +185,16 @@ export default function GroupChat({ route, navigation }) {
     }
   };
 
-  const uploadImage = async uri => {
+  const uploadImage = async (uri) => {
     // var _ = this;
     const response = await fetch(uri);
     const blob = await response.blob();
-    var ref = fire
-      .storage()
-      .ref("images")
-      .child(new Date().toDateString());
+    var ref = fire.storage().ref("images").child(new Date().toDateString());
     ref
       .put(blob)
 
-      .then(result => {
-        result.ref.getDownloadURL().then(url => {
+      .then((result) => {
+        result.ref.getDownloadURL().then((url) => {
           console.log(url);
           var UserId = fire.auth().currentUser.uid;
           const message = [
@@ -209,9 +205,9 @@ export default function GroupChat({ route, navigation }) {
               user: {
                 _id: 1,
                 name: fire.auth().currentUser.displayName,
-                avatar: "https://placeimg.com/140/140/any"
-              }
-            }
+                avatar: "https://placeimg.com/140/140/any",
+              },
+            },
           ];
 
           var ref = firestore.collection("users").doc();
@@ -233,8 +229,8 @@ export default function GroupChat({ route, navigation }) {
                   image: message[i].image,
                   user: {
                     _id: 2,
-                    name: fire.auth().currentUser.displayName
-                  }
+                    name: fire.auth().currentUser.displayName,
+                  },
                 });
 
               for (var x = 0; x < ParticipentsIDS.length; x++) {
@@ -257,8 +253,8 @@ export default function GroupChat({ route, navigation }) {
                     user: {
                       _id: 2,
                       // avatar: fire.auth().currentUser.photoURL,
-                      name: fire.auth().currentUser.displayName
-                    }
+                      name: fire.auth().currentUser.displayName,
+                    },
                   });
               }
             } else {
@@ -290,8 +286,8 @@ export default function GroupChat({ route, navigation }) {
           text: newMessage[i].text,
           user: {
             _id: 2,
-            name: fire.auth().currentUser.displayName
-          }
+            name: fire.auth().currentUser.displayName,
+          },
         });
 
       for (var x = 0; x < ParticipentsIDS.length; x++) {
@@ -309,8 +305,8 @@ export default function GroupChat({ route, navigation }) {
             text: newMessage[i].text,
             user: {
               _id: 2,
-              name: fire.auth().currentUser.displayName
-            }
+              name: fire.auth().currentUser.displayName,
+            },
           });
       }
     }
@@ -324,7 +320,7 @@ export default function GroupChat({ route, navigation }) {
           flexDirection: "row",
           justifyContent: "space-around",
           alignItems: "center",
-          paddingTop: 10
+          paddingTop: 10,
         }}
       >
         <TouchableOpacity>
@@ -375,18 +371,18 @@ export default function GroupChat({ route, navigation }) {
           textInputStyle={styles.textInput}
           isTyping={true}
           renderUsernameOnMessage={true}
-          renderInputToolbar={props => customtInputToolbar(props)}
+          renderInputToolbar={(props) => customtInputToolbar(props)}
           multiline
           placeholder={"Enter a message..."}
-          onSend={newMessages => onSend(newMessages)}
+          onSend={(newMessages) => onSend(newMessages)}
           user={{
             _id: 2,
-            name: fire.auth().currentUser.displayName
+            name: fire.auth().currentUser.displayName,
           }}
-          parsePatterns={linkStyle => [
+          parsePatterns={(linkStyle) => [
             {
               type: "phone",
-              style: linkStyle
+              style: linkStyle,
               // onPress: this.onPressPhoneNumber
             },
             {
@@ -395,8 +391,8 @@ export default function GroupChat({ route, navigation }) {
                 ...linkStyle,
                 color: "#FFF",
                 fontWeight: "bold",
-                textDecorationLine: "underline"
-              }
+                textDecorationLine: "underline",
+              },
               // onPress: this.onPressHashtag
             },
             {
@@ -405,8 +401,8 @@ export default function GroupChat({ route, navigation }) {
                 ...linkStyle,
                 color: "#FFF",
                 fontWeight: "bold",
-                textDecorationLine: "underline"
-              }
+                textDecorationLine: "underline",
+              },
               // onPress: this.onPressHashtag
             },
             {
@@ -415,10 +411,10 @@ export default function GroupChat({ route, navigation }) {
                 ...linkStyle,
                 color: "#FFF",
                 fontWeight: "bold",
-                textDecorationLine: "underline"
-              }
+                textDecorationLine: "underline",
+              },
               // onPress: this.onPressHashtag
-            }
+            },
           ]}
         />
       </View>
@@ -434,56 +430,56 @@ const styles = StyleSheet.create({
     marginRight: 20,
     marginLeft: 20,
     lineHeight: 20,
-    paddingLeft: 20
+    paddingLeft: 20,
   },
 
   container: {
     flex: 1,
-    backgroundColor: "#282c34"
+    backgroundColor: "#000",
   },
 
   ImageStyle: {
     height: 25,
     width: 25,
     resizeMode: "stretch",
-    alignItems: "center"
+    alignItems: "center",
   },
   flatList: {
     left: 0,
     right: 0,
     top: 0,
-    height: "80%"
+    height: "80%",
   },
   sendContainer: {
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    marginRight: 10
+    marginRight: 10,
   },
 
   main: {
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     height: "100%",
     //paddingHorizontal: 20,
     // borderBottomLeftRadius: 35,
     // borderBottomRightRadius: 35,
-    paddingTop: 40
+    paddingTop: 40,
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   username: {
     color: "#FFF",
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
     flex: 1,
-    textAlign: "center"
+    textAlign: "center",
   },
   avatar: {
     width: 40,
     height: 40,
-    borderRadius: 20
-  }
+    borderRadius: 20,
+  },
 });

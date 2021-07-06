@@ -7,14 +7,13 @@ import {
   Animated,
   TouchableOpacity,
   ScrollView,
-  Image
+  Image,
 } from "react-native";
 
 import LinkPortfolioButton from "../components/LinkPortfolioButton";
 import { Feather } from "@expo/vector-icons";
 
-
-const LinkPortfolio = props => {
+const LinkPortfolio = (props) => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.col}>
@@ -41,7 +40,7 @@ const LinkPortfolio = props => {
         style={{
           justifyContent: "center",
           alignItems: "center",
-          paddingTop: 200
+          paddingTop: 200,
         }}
       >
         <LinkPortfolioButton></LinkPortfolioButton>
@@ -53,19 +52,19 @@ export default LinkPortfolio;
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 300
+    marginTop: 300,
   },
   card: {
     marginLeft: 400,
     width: 400,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   seperator: {
     borderColor: "lightgrey",
     borderWidth: 0.5,
     marginLeft: 30,
     marginVertical: 10,
-    width: "100%"
+    width: "100%",
   },
   gradient: {
     height: "100%",
@@ -74,7 +73,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 30
+    paddingTop: 30,
   },
   btn: {
     alignItems: "center",
@@ -87,22 +86,22 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: "#147efb",
     borderRadius: 100,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   container: {
     height: "100%",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     // left: 0,
     // right: 0,
     // top: 0,
     //paddingHorizontal: 20,
-    paddingTop: 60
+    paddingTop: 60,
   },
   headerContainer: {
     flexDirection: "row",
     alignItems: "center",
     paddingTop: 30,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   header: {
     fontFamily: "Montserrat_800ExtraBold",
@@ -110,62 +109,62 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     textAlign: "center",
-    paddingVertical: 20
+    paddingVertical: 20,
   },
   header2: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
     fontSize: 24,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   proContainer: {
     marginRight: -20,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   text: {
     //fontFamily: "Montserrat_400Regular",
     color: "#FFF",
     textAlign: "center",
-    fontSize: 20
+    fontSize: 20,
   },
   link: {
     //fontFamily: "Montserrat_400Regular",
     color: "#147efb",
     textAlign: "center",
     fontSize: 20,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   ops: {
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#282c34",
+    // backgroundColor: "#000",
     // marginHorizontal: -20,
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   avatar: {
     width: 80,
     height: 80,
     borderRadius: 40,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   col: {
     flexDirection: "row",
     //marginTop: 25,
     marginHorizontal: 20,
-    alignItems: "center"
+    alignItems: "center",
   },
   stockchats: {
     //flexDirection: "row"
     marginVertical: 10,
-    marginHorizontal: 20
+    marginHorizontal: 20,
     //alignItems: "center"
   },
   day: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     flex: 1,
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 });

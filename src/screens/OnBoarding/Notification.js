@@ -10,7 +10,7 @@ import {
   TouchableWithoutFeedback,
   Alert,
   Keyboard,
-  Linking
+  Linking,
 } from "react-native";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
@@ -44,20 +44,20 @@ export default function App({ ...props }) {
           "Open your notification settings and turn on notifications for StockChat",
           [
             { text: "Cancel", onPress: () => console.log("cancel") },
-            { text: "Allow", onPress: () => Linking.openURL("app-settings:") }
+            { text: "Allow", onPress: () => Linking.openURL("app-settings:") },
           ],
           { cancelable: false }
         );
       }
       await Notifications.getExpoPushTokenAsync()
-        .then(async token => {
+        .then(async (token) => {
           await firestore
             .collection("profile")
             .doc(props.route.params.username)
             .set({ token: token }, { merge: true });
           props.navigation.navigate("Chat");
         })
-        .catch(error => props.navigation.navigate("Chat"));
+        .catch((error) => props.navigation.navigate("Chat"));
     } catch (e) {
       alert(e.message);
       console.log(e);
@@ -95,7 +95,7 @@ export default function App({ ...props }) {
             paddingHorizontal: 10,
             top: 60,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <TouchableOpacity
@@ -107,7 +107,7 @@ export default function App({ ...props }) {
                 fontSize: 18,
                 textAlign: "center",
                 color: "#F5F8FA",
-                fontWeight: "600"
+                fontWeight: "600",
               }}
             >
               Turn on Notifications
@@ -130,19 +130,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#282c34",
-    width: Dimensions.get("screen").width
+    backgroundColor: "#000",
+    width: Dimensions.get("screen").width,
   },
   Button: {
     backgroundColor: "#147efb",
     padding: 15,
     borderRadius: 30,
-    width: "100%"
+    width: "100%",
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
-    fontSize: 15
+    fontSize: 15,
   },
   Stockchat: {
     marginTop: 50,
@@ -151,18 +151,18 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   username: {
     marginTop: 10,
     color: "#FFF",
     textAlign: "center",
     fontSize: 15,
-    padding: 18
+    padding: 18,
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     //backgroundColor: "red",
     //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
@@ -172,6 +172,6 @@ const styles = StyleSheet.create({
     color: "#FFF",
     height: 50,
     fontSize: 21,
-    borderRadius: 30
-  }
+    borderRadius: 30,
+  },
 });

@@ -5,7 +5,7 @@ import {
   View,
   TouchableOpacity,
   AsyncStorage,
-  Share
+  Share,
 } from "react-native";
 import axios from "axios";
 import * as firebase from "firebase";
@@ -29,23 +29,23 @@ class UserScreener extends Component {
       searchResults: [],
       results: false,
       previous_query: null,
-      status: true
+      status: true,
     };
     this.arrayholder = [];
   }
 
-  _apiCall = async data => {
+  _apiCall = async (data) => {
     if (data !== undefined && data !== null) {
       let post_data = {
         filter: [
           {
             left: "market_cap_basic",
-            operation: "nempty"
+            operation: "nempty",
           },
           {
             left: "type",
             operation: "in_range",
-            right: ["stock", "dr", "fund"]
+            right: ["stock", "dr", "fund"],
           },
           {
             left: "subtype",
@@ -58,38 +58,38 @@ class UserScreener extends Component {
               "mutual",
               "money",
               "reit",
-              "trust"
-            ]
+              "trust",
+            ],
           },
           {
             left: "exchange",
             operation: "in_range",
-            right: ["AMEX", "NASDAQ", "NYSE"]
+            right: ["AMEX", "NASDAQ", "NYSE"],
           },
           {
             left: "close",
             operation: "less",
-            right: data.price
+            right: data.price,
           },
           {
             left: "sector",
             operation: "in_range",
-            right: data.types_of_sector
+            right: data.types_of_sector,
           },
           {
             left: "volume",
             operation: "in_range",
-            right: [parseInt(data.minvolume), parseInt(data.maxvolume)]
-          }
+            right: [parseInt(data.minvolume), parseInt(data.maxvolume)],
+          },
         ],
         options: {
-          lang: "en"
+          lang: "en",
         },
         symbols: {
           query: {
-            types: []
+            types: [],
           },
-          tickers: []
+          tickers: [],
         },
         columns: [
           "name",
@@ -111,10 +111,10 @@ class UserScreener extends Component {
           "pricescale",
           "minmov",
           "fractional",
-          "minmove2"
+          "minmove2",
         ],
         sort: { sortBy: "Recommend.All", sortOrder: "asc" },
-        range: [0, 5]
+        range: [0, 5],
       };
       return axios.post(
         "https://scanner.tradingview.com/america/scan",
@@ -126,26 +126,26 @@ class UserScreener extends Component {
   _retriveScreener = async () => {
     this.setState({ isLoading: true });
     await AsyncStorage.getItem("user")
-      .then(user => {
+      .then((user) => {
         user = JSON.parse(user);
         var ref = firebase.database().ref("/Screener");
         var query = ref.orderByChild("user").equalTo(user.email);
         query
           .once("value")
-          .then(data => {
+          .then((data) => {
             this.setState({
               screener: data.val(),
               user_email: user.email,
-              isLoading: false
+              isLoading: false,
             });
             this._renderScreener();
           })
-          .catch(err => {
+          .catch((err) => {
             this.setState({ isLoading: false });
             alert(err);
           });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error.message);
       });
   };
@@ -153,7 +153,7 @@ class UserScreener extends Component {
   async componentDidMount() {
     this._navListener = this.props.navigation.addListener(
       "didFocus",
-      payload => {
+      (payload) => {
         this._retriveScreener();
       }
     );
@@ -174,14 +174,14 @@ class UserScreener extends Component {
       let li = [];
       for (let i = 0; i < list.length; ++i) {
         await this._apiCall(list[i]["value"])
-          .then(resp => {
+          .then((resp) => {
             list[i]["value"]["key"] = list[i]["key"];
             resp.data.data.push(list[i]["value"]);
             li.push(resp.data.data);
             // console.log(li);
             this.setState({ final_data: li });
           })
-          .catch(error => {
+          .catch((error) => {
             console.log(error.message);
           });
       }
@@ -197,13 +197,13 @@ class UserScreener extends Component {
         .ref("Screener")
         .child("" + key)
         .remove()
-        .then(response => {
+        .then((response) => {
           let data = this.state.final_data;
           data.splice(index, 1);
           this.setState({ final_data: data });
           console.log("deleted");
         })
-        .catch(error => {
+        .catch((error) => {
           console.log("error is ", error.message);
         });
     }
@@ -223,7 +223,7 @@ class UserScreener extends Component {
               <View
                 style={{
                   flexDirection: "row",
-                  justifyContent: "space-between"
+                  justifyContent: "space-between",
                 }}
               >
                 <Text
@@ -232,7 +232,7 @@ class UserScreener extends Component {
                     fontSize: 18,
                     fontWeight: "700",
                     paddingLeft: 10,
-                    width: "80%"
+                    width: "80%",
                   }}
                 >
                   {data[5].name}
@@ -253,8 +253,8 @@ class UserScreener extends Component {
                           minvolume: data[5].minvolume,
                           maxvolume: data[5].maxvolume,
                           price: data[5].price,
-                          name: data[5].name
-                        }
+                          name: data[5].name,
+                        },
                       })
                     }
                   >
@@ -265,8 +265,10 @@ class UserScreener extends Component {
                           styles.stocktext,
                           {
                             color:
-                              parseFloat(data[0].d[2]) < 0 ? "#CF2727" : "#33CC00"
-                          }
+                              parseFloat(data[0].d[2]) < 0
+                                ? "#CF2727"
+                                : "#33CC00",
+                          },
                         ]}
                       >
                         {data[0].d[2] !== null ? data[0].d[2].toFixed(2) : "0"}%
@@ -285,8 +287,8 @@ class UserScreener extends Component {
                           minvolume: data[5].minvolume,
                           maxvolume: data[5].maxvolume,
                           price: data[5].price,
-                          name: data[5].name
-                        }
+                          name: data[5].name,
+                        },
                       })
                     }
                   >
@@ -298,8 +300,10 @@ class UserScreener extends Component {
                           styles.stocktext,
                           {
                             color:
-                              parseFloat(data[1].d[2]) < 0 ? "#CF2727" : "#33CC00"
-                          }
+                              parseFloat(data[1].d[2]) < 0
+                                ? "#CF2727"
+                                : "#33CC00",
+                          },
                         ]}
                       >
                         {data[1].d[2] !== null ? data[1].d[2].toFixed(2) : "0"}%
@@ -318,8 +322,8 @@ class UserScreener extends Component {
                           minvolume: data[5].minvolume,
                           maxvolume: data[5].maxvolume,
                           price: data[5].price,
-                          name: data[5].name
-                        }
+                          name: data[5].name,
+                        },
                       })
                     }
                   >
@@ -331,8 +335,10 @@ class UserScreener extends Component {
                           styles.stocktext,
                           {
                             color:
-                              parseFloat(data[2].d[2]) < 0 ? "#CF2727" : "#33CC00"
-                          }
+                              parseFloat(data[2].d[2]) < 0
+                                ? "#CF2727"
+                                : "#33CC00",
+                          },
                         ]}
                       >
                         {data[2].d[2] !== null ? data[2].d[2].toFixed(2) : "0"}%
@@ -351,8 +357,8 @@ class UserScreener extends Component {
                           minvolume: data[5].minvolume,
                           maxvolume: data[5].maxvolume,
                           price: data[5].price,
-                          name: data[5].name
-                        }
+                          name: data[5].name,
+                        },
                       })
                     }
                   >
@@ -363,8 +369,10 @@ class UserScreener extends Component {
                           styles.stocktext,
                           {
                             color:
-                              parseFloat(data[3].d[2]) < 0 ? "#CF2727" : "#33CC00"
-                          }
+                              parseFloat(data[3].d[2]) < 0
+                                ? "#CF2727"
+                                : "#33CC00",
+                          },
                         ]}
                       >
                         {data[3].d[2] !== null ? data[3].d[2].toFixed(2) : "0"}%
@@ -378,7 +386,7 @@ class UserScreener extends Component {
                 <View
                   style={{
                     flexDirection: "row",
-                    justifyContent: "center"
+                    justifyContent: "center",
                   }}
                 >
                   {/* <TouchableOpacity
@@ -392,7 +400,7 @@ class UserScreener extends Component {
                     style={{
                       justifyContent: "center",
                       alignItems: "center",
-                      paddingLeft: 10
+                      paddingLeft: 10,
                     }}
                     onPress={() =>
                       this.props.navigation.navigate("List_Screener", {
@@ -401,8 +409,8 @@ class UserScreener extends Component {
                           minvolume: data[5].minvolume,
                           maxvolume: data[5].maxvolume,
                           price: data[5].price,
-                          name: data[5].name
-                        }
+                          name: data[5].name,
+                        },
                       })
                     }
                   >
@@ -433,25 +441,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     //backgroundColor: "#e8eef1"
-    backgroundColor: "#282c34"
+    backgroundColor: "#000",
     //backgroundColor: "#FFF",
     //height: 1000
   },
   text: {
     marginHorizontal: 8,
-    marginVertical: 10
+    marginVertical: 10,
   },
   bottom: {
     flex: 1,
     justifyContent: "flex-end",
-    marginBottom: 36
+    marginBottom: 36,
   },
   searchbar: {
-    marginTop: 0
+    marginTop: 0,
   },
   inputContainer: {
     borderBottomColor: "#F5FCFF",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 30,
     borderBottomWidth: 1,
     height: 45,
@@ -459,19 +467,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
     margin: 0,
-    marginTop: 0
+    marginTop: 0,
   },
   formContent: {
     flexDirection: "row",
     //marginTop:30,
-    backgroundColor: "#147efb"
+    backgroundColor: "#147efb",
   },
   icon: {
     width: 30,
-    height: 30
+    height: 30,
   },
   iconBtnSearch: {
-    alignSelf: "center"
+    alignSelf: "center",
   },
   inputs: {
     height: 50,
@@ -479,12 +487,12 @@ const styles = StyleSheet.create({
     borderBottomColor: "#F5F8FA",
     //flex: 1,
     width: 300,
-    backgroundColor: "#282c34",
-    marginBottom: 50
+    backgroundColor: "#000",
+    marginBottom: 50,
   },
   inputIcon: {
     marginLeft: 15,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   saveButton: {
     height: 45,
@@ -495,31 +503,31 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     backgroundColor: "#147efb",
     borderRadius: 100,
-    marginBottom: 10
+    marginBottom: 10,
   },
   saveButtonText: {
-    color: "#F5F8FA"
+    color: "#F5F8FA",
   },
   notificationList: {
     marginTop: 20,
-    padding: 10
+    padding: 10,
   },
   notificationBox: {
     padding: 20,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     flexDirection: "row",
-    borderRadius: 10
+    borderRadius: 10,
   },
   image: {
     width: 45,
-    height: 45
+    height: 45,
   },
   description: {
     fontSize: 18,
     color: "#3498db",
-    marginLeft: 10
+    marginLeft: 10,
   },
   datacard: {
     //backgroundColor: "#147efb",
@@ -528,13 +536,13 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,
     justifyContent: "center",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
   },
   stocktext: {
     fontSize: 18,
     fontWeight: "500",
     justifyContent: "center",
-    color: "#FFF"
+    color: "#FFF",
   },
 
   offerCard: {
@@ -546,7 +554,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#e8eef1",
     margin: 10,
     borderRadius: 20,
-    width: 340
+    width: 340,
   },
   screenContainer: {
     shadowOffset: { width: 0.5, height: 0.5 },
@@ -554,29 +562,29 @@ const styles = StyleSheet.create({
     shadowOpacity: 2.0,
     marginHorizontal: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 20,
     padding: 10,
     paddingTop: 20,
-    marginBottom: 20
+    marginBottom: 20,
   },
   heading: {
     fontSize: 24,
     fontWeight: "700",
     //textAlign: "center"
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   subheading: {
     fontSize: 14,
     fontWeight: "400",
     //textAlign: "center",
     marginTop: 10,
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   ticker: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   tickertext: {
     //paddingLeft: 20,
@@ -584,27 +592,27 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   viewmore: {
     //color: "#147efb",
     color: "#282C34",
     fontWeight: "500",
     textAlign: "center",
-    paddingTop: 10
+    paddingTop: 10,
   },
   deleteScreener: {
     color: "#F32013",
     fontWeight: "800",
     textAlign: "center",
-    paddingTop: 20
+    paddingTop: 20,
   },
   tickerbox: {
-    padding: 10
+    padding: 10,
   },
   seperator: {
     marginVertical: 10,
     borderColor: "darkgrey",
-    borderWidth: 0.5
-  }
+    borderWidth: 0.5,
+  },
 });

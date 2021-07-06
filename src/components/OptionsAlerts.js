@@ -5,7 +5,7 @@ import {
   View,
   ScrollView,
   AsyncStorage,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 // import { withNavigation } from "react-navigation";
 import axios from "axios";
@@ -21,17 +21,17 @@ class OptionsAlerts extends Component {
       email: null,
       optionFeed: [],
       sub_status: true,
-      data: {}
+      data: {},
     };
   }
 
   async componentDidMount() {
     await AsyncStorage.getItem("user")
-      .then(user => {
+      .then((user) => {
         user = JSON.parse(user);
         this.setState({ sub_status: true });
       })
-      .catch(error => console.log(error.message));
+      .catch((error) => console.log(error.message));
     this._getBenzingaOptions();
   }
 
@@ -44,11 +44,11 @@ class OptionsAlerts extends Component {
       let headers = { Accept: "application/json" };
       axios
         .get(url, headers)
-        .then(async response => {
+        .then(async (response) => {
           let data = response.data;
           this.setState({ optionFeed: data.option_activity, isLoading: false });
         })
-        .catch(error => {
+        .catch((error) => {
           this.setState({ isLoading: false });
           alert(error.message);
         });
@@ -66,20 +66,20 @@ class OptionsAlerts extends Component {
               style={styles.card}
               onPress={() =>
                 this.props.navigation.navigate("search_detail", {
-                  symbol: data.ticker
+                  symbol: data.ticker,
                 })
               }
             >
               <View
                 style={{
                   flexDirection: "column",
-                  justifyContent: "space-between"
+                  justifyContent: "space-between",
                 }}
               >
                 <View
                   style={{
                     flexDirection: "row",
-                    justifyContent: "space-between"
+                    justifyContent: "space-between",
                   }}
                 >
                   <Text style={styles.options}>{data.ticker}</Text>
@@ -90,14 +90,14 @@ class OptionsAlerts extends Component {
                 </View>
                 <View
                   style={{
-                    flexDirection: "column"
+                    flexDirection: "column",
                     // justifyContent: "space-between"
                   }}
                 >
                   <View
                     style={{
                       flexDirection: "row",
-                      justifyContent: "space-between"
+                      justifyContent: "space-between",
                     }}
                   >
                     <Text
@@ -110,7 +110,7 @@ class OptionsAlerts extends Component {
                   <View
                     style={{
                       flexDirection: "row",
-                      justifyContent: "space-between"
+                      justifyContent: "space-between",
                     }}
                   >
                     <Text style={{ color: "#7c818c", fontSize: 16 }}>
@@ -137,14 +137,14 @@ class OptionsAlerts extends Component {
             flexDirection: "row",
             justifyContent: "center",
             flex: 1,
-            alignContent: "center"
+            alignContent: "center",
           }}
         >
           <View
             style={{
               justifyContent: "center",
               flex: 1,
-              alignContent: "center"
+              alignContent: "center",
             }}
           >
             <Feather style={styles.icon} name="lock" />
@@ -155,7 +155,7 @@ class OptionsAlerts extends Component {
                 fontSize: 30,
                 paddingHorizontal: 20,
                 textAlign: "center",
-                paddingTop: 20
+                paddingTop: 20,
               }}
             >
               Options Feed
@@ -167,7 +167,7 @@ class OptionsAlerts extends Component {
                 fontSize: 20,
                 paddingHorizontal: 20,
                 textAlign: "center",
-                paddingTop: 20
+                paddingTop: 20,
               }}
             >
               Unlock ChartBot Pro to get real-time trade alerts, unlimited
@@ -213,7 +213,7 @@ class OptionsAlerts extends Component {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "#282c34"
+            backgroundColor: "#000",
           }}
         >
           <ActivityIndicator />
@@ -225,7 +225,7 @@ class OptionsAlerts extends Component {
     }
     return (
       <View style={styles.container}>
-        <View style={{ flexDirection: "row", backgroundColor: "#282c34" }}>
+        <View style={{ flexDirection: "row", backgroundColor: "#000" }}>
           <ScrollView
             showsVerticalScrollIndicator={false}
             //style={{ paddingHorizontal: 10 }}
@@ -244,31 +244,31 @@ export default OptionsAlerts;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F8FA"
+    backgroundColor: "#F5F8FA",
   },
   text: {
     marginHorizontal: 8,
-    marginVertical: 10
+    marginVertical: 10,
   },
   bottom: {
     flex: 1,
     justifyContent: "flex-end",
-    marginBottom: 36
+    marginBottom: 36,
   },
   searchbar: {
-    marginTop: 50
+    marginTop: 50,
   },
   loadCon: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#147efb"
+    backgroundColor: "#147efb",
   },
   loadTitle: {
     color: "#fff",
     fontSize: 16,
     margin: 8,
-    fontWeight: "700"
+    fontWeight: "700",
   },
   profileImage: {
     flex: 1,
@@ -280,17 +280,17 @@ const styles = StyleSheet.create({
     marginRight: 5,
     borderColor: "#147efb",
     alignSelf: "flex-start",
-    marginTop: 15
+    marginTop: 15,
   },
   icon: {
     color: "black",
     fontSize: 50,
-    alignSelf: "center"
+    alignSelf: "center",
   },
   options: {
     color: "#FFF",
     fontWeight: "bold",
-    fontSize: 16
+    fontSize: 16,
   },
 
   card: {
@@ -306,6 +306,6 @@ const styles = StyleSheet.create({
     // height: 500,
     marginVertical: 2,
     //marginHorizontal: 10,
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });

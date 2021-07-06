@@ -5,7 +5,8 @@ import {
   Image,
   View,
   TouchableOpacity,
-  Dimensions,Linking,
+  Dimensions,
+  Linking,
 } from "react-native";
 import { Button } from "react-native-elements";
 import { Entypo } from "@expo/vector-icons";
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     //backgroundColor: "#1E2429",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
 
     width: Dimensions.get("screen").width,
   },

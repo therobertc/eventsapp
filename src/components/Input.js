@@ -7,7 +7,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 const Input = ({ term, onSendPress, onTermChange, onValidateTextField }) => {
   return (
-    <View style={{ backgroundColor: "#282c34", height: 80 }}>
+    <View style={{ backgroundColor: "#000", height: 80 }}>
       <View style={styles.container}>
         {/* <Ionicons name="ios-add" color="#147efb" size={30} /> */}
         <TextInput
@@ -25,7 +25,7 @@ const Input = ({ term, onSendPress, onTermChange, onValidateTextField }) => {
               borderRadius: 15,
               backgroundColor: "#147efb",
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             {/* <Ionicons name="ios-arrow-up" color="#F5F8FA" size={30} /> */}
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: "lightgrey"
+    borderColor: "lightgrey",
     //backgroundColor: "lightgrey"
   },
   input: {
@@ -67,6 +67,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#FFF",
     paddingHorizontal: 10,
-    flex: 1
-  }
+    flex: 1,
+  },
 });

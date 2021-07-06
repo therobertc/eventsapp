@@ -17,7 +17,7 @@
     "assetBundlePatterns": ["**/*"],
     "android": {
       "package": "wgtgroupchat.page.link",
-      // "versionCode": 4050,
+
       "googleServicesFile": "./google-services.json",
       "config": {
         "googleSignIn": {

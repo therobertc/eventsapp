@@ -5,7 +5,7 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import {
   Ionicons,
@@ -13,15 +13,13 @@ import {
   EvilIcons,
   FontAwesome,
   AntDesign,
-  MaterialCommunityIcons
+  MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { GiftedChat } from "react-native-gifted-chat";
 import fire, { firestore } from "../database/firebase";
 import * as ImagePicker from "expo-image-picker";
 
-
 export default function ChatRoom({ route, navigation }) {
-
   const [messages, setMessages] = useState([]);
   const [image, setImage] = useState(null);
   const [username, setUsername] = useState(fire.auth().currentUser.displayName);
@@ -36,8 +34,8 @@ export default function ChatRoom({ route, navigation }) {
       .doc(uid)
       .collection("ChatMsgs")
       .orderBy("createdAt", "desc")
-      .onSnapshot(querySnapshot => {
-        const messages = querySnapshot.docs.map(doc => {
+      .onSnapshot((querySnapshot) => {
+        const messages = querySnapshot.docs.map((doc) => {
           let firebaseData = doc.data();
           firebaseData.createdAt = firebaseData.createdAt
             .toDate()
@@ -46,7 +44,7 @@ export default function ChatRoom({ route, navigation }) {
             _id: doc.id,
             text: "",
             createdAt: new Date().getTime(),
-            ...firebaseData
+            ...firebaseData,
           };
           return data;
         });
@@ -61,7 +59,7 @@ export default function ChatRoom({ route, navigation }) {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1
+      quality: 1,
     });
 
     console.log(result);
@@ -72,15 +70,12 @@ export default function ChatRoom({ route, navigation }) {
     }
   };
 
-  const uploadImage = async uri => {
+  const uploadImage = async (uri) => {
     const response = await fetch(uri);
     const blob = await response.blob();
-    var ref = fire
-      .storage()
-      .ref("images")
-      .child(new Date().toDateString());
-    ref.put(blob).then(result => {
-      result.ref.getDownloadURL().then(url => {
+    var ref = fire.storage().ref("images").child(new Date().toDateString());
+    ref.put(blob).then((result) => {
+      result.ref.getDownloadURL().then((url) => {
         const message = [
           {
             _id: new Date().toUTCString(),
@@ -89,9 +84,9 @@ export default function ChatRoom({ route, navigation }) {
             user: {
               _id: 2,
               name: username,
-              avatar: "https://placeimg.com/140/140/any"
-            }
-          }
+              avatar: "https://placeimg.com/140/140/any",
+            },
+          },
         ];
         var ref = firestore.collection("users").doc();
         var newPostKey = ref.id;
@@ -104,7 +99,7 @@ export default function ChatRoom({ route, navigation }) {
               .doc(uid)
               .set({
                 name: name,
-                uid: uid
+                uid: uid,
               });
 
             firestore
@@ -114,7 +109,7 @@ export default function ChatRoom({ route, navigation }) {
               .doc(userId)
               .set({
                 name: username,
-                uid: userId
+                uid: userId,
               });
 
             firestore
@@ -130,8 +125,8 @@ export default function ChatRoom({ route, navigation }) {
                 image: message[i].image,
                 user: {
                   _id: 2,
-                  name: username
-                }
+                  name: username,
+                },
               });
 
             firestore
@@ -147,8 +142,8 @@ export default function ChatRoom({ route, navigation }) {
                 image: message[i].image,
                 user: {
                   _id: 2,
-                  name: username
-                }
+                  name: username,
+                },
               });
           } else {
             console.log("false");
@@ -169,7 +164,7 @@ export default function ChatRoom({ route, navigation }) {
       .doc(uid)
       .set({
         name: name,
-        uid: uid
+        uid: uid,
       });
 
     firestore
@@ -179,7 +174,7 @@ export default function ChatRoom({ route, navigation }) {
       .doc(UserId)
       .set({
         name: fire.auth().currentUser.displayName,
-        uid: UserId
+        uid: UserId,
       });
 
     var ref = firestore.collection("users").doc();
@@ -198,8 +193,8 @@ export default function ChatRoom({ route, navigation }) {
           text: newMessage[i].text,
           user: {
             _id: 1,
-            name: name
-          }
+            name: name,
+          },
         });
 
       firestore
@@ -215,8 +210,8 @@ export default function ChatRoom({ route, navigation }) {
           text: newMessage[i].text,
           user: {
             _id: 2,
-            name: username
-          }
+            name: username,
+          },
         });
     }
     setMessages(GiftedChat.append(messages, newMessage));
@@ -228,7 +223,7 @@ export default function ChatRoom({ route, navigation }) {
         style={{
           flexDirection: "row",
           justifyContent: "space-around",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <TouchableOpacity>
@@ -260,8 +255,8 @@ export default function ChatRoom({ route, navigation }) {
           flexDirection: "row",
           height: 80,
           width: "100%",
-          backgroundColor: "#282c34",
-          alignItems: "center"
+          backgroundColor: "#000",
+          alignItems: "center",
         }}
       >
         <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
@@ -277,7 +272,7 @@ export default function ChatRoom({ route, navigation }) {
             marginLeft: 20,
             fontSize: 20,
             marginTop: 20,
-            fontWeight: "bold"
+            fontWeight: "bold",
           }}
         >
           {name}
@@ -288,10 +283,10 @@ export default function ChatRoom({ route, navigation }) {
           isAnimated={true}
           renderAccessory={CustomView}
           messages={messages}
-          onSend={newMessages => onSend(newMessages)}
+          onSend={(newMessages) => onSend(newMessages)}
           user={{
             _id: 2,
-            name: username
+            name: username,
           }}
         />
       </KeyboardAvoidingView>
@@ -301,15 +296,15 @@ export default function ChatRoom({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   input: {
-    width: 80
+    width: 80,
   },
   ImageStyle: {
     height: 25,
     width: 25,
     resizeMode: "stretch",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });

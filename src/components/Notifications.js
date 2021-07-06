@@ -72,7 +72,7 @@ class Notifications extends Component {
                   <Text
                     style={{ color: "#FFF", fontWeight: "bold", fontSize: 16 }}
                   >
-                    {data.title}
+                    {data.title} 💬
                   </Text>
                   <Text
                     style={{ color: "#7c818c", fontSize: 16, paddingLeft: 5 }}
@@ -161,7 +161,7 @@ class Notifications extends Component {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "#282c34",
+            backgroundColor: "#000",
           }}
         >
           <ActivityIndicator />
@@ -181,7 +181,7 @@ export default Notifications;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
   },
   text: {
     marginHorizontal: 8,

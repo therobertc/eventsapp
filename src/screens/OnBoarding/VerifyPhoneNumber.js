@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Dimensions,
   KeyboardAvoidingView,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
@@ -61,7 +61,7 @@ export default function App({ route, navigation }) {
             paddingHorizontal: 10,
             top: 50,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <TouchableOpacity
@@ -69,7 +69,7 @@ export default function App({ route, navigation }) {
             onPress={() =>
               navigation.navigate("SignUp", {
                 username: username,
-                phoneNo: phoneNo
+                phoneNo: phoneNo,
               })
             }
           >
@@ -78,7 +78,7 @@ export default function App({ route, navigation }) {
                 fontSize: 18,
                 textAlign: "center",
                 color: "#FFF",
-                fontWeight: "600"
+                fontWeight: "600",
               }}
             >
               Continue
@@ -95,19 +95,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#282c34",
-    width: Dimensions.get("screen").width
+    backgroundColor: "#000",
+    width: Dimensions.get("screen").width,
   },
   Button: {
     backgroundColor: "#147efb",
     padding: 15,
     borderRadius: 30,
-    width: "100%"
+    width: "100%",
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
-    fontSize: 15
+    fontSize: 15,
   },
   Stockchat: {
     marginTop: 50,
@@ -116,18 +116,18 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   username: {
     marginTop: 10,
     color: "#FFF",
     textAlign: "center",
     fontSize: 15,
-    padding: 18
+    padding: 18,
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     //backgroundColor: "red",
     //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
@@ -137,6 +137,6 @@ const styles = StyleSheet.create({
     color: "#FFF",
     height: 50,
     fontSize: 21,
-    borderRadius: 30
-  }
+    borderRadius: 30,
+  },
 });

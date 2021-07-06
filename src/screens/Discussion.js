@@ -457,7 +457,7 @@ function Discussion({ route, navigation }) {
       <InputToolbar
         {...props}
         containerStyle={{
-          backgroundColor: "#282c34",
+          backgroundColor: "#000",
           borderTopWidth: null,
           marginBottom: -10,
         }}
@@ -552,15 +552,15 @@ function Discussion({ route, navigation }) {
           <Icon name="left" color="#FFF" size={24} />
         </TouchableOpacity>
         <Text style={styles.header}> {item.groupName}</Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{ paddingRight: 20 }}
           onPress={() => {
             //share link here
             onShare();
           }}
         >
-          <Icon name="share" color="#FFF" size={24} />
-        </TouchableOpacity>
+          <Icon name="link" color="#FFF" size={24} />
+        </TouchableOpacity> */}
         <TouchableOpacity
         // onPress={() =>
         //   navigation.push("StockDetails", {
@@ -704,7 +704,7 @@ const styles = StyleSheet.create({
   },
 
   main: {
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     height: "100%",
     paddingHorizontal: 0,
     // borderBottomLeftRadius: 35,
@@ -728,7 +728,7 @@ const styles = StyleSheet.create({
   },
 
   // textInput: {
-  //   backgroundColor: "#282c34",
+  //   backgroundColor: "#000",
   //   borderRadius: 30,
   //   marginRight: 20,
   //   marginLeft: 20,

@@ -24,8 +24,10 @@ const Messages = ({ item, totalmembers, lastmessage, uri, unSeen }) => {
       <View
         style={{
           flexDirection: "row",
-          justifyContent: "center",
+          justifyContent: "flex-start",
           alignItems: "center",
+          //flexWrap: "wrap",
+          //flex: 1,
         }}
       >
         {/* <Image
@@ -64,19 +66,28 @@ const Messages = ({ item, totalmembers, lastmessage, uri, unSeen }) => {
           }}
         />
         <View>
-          <Text style={styles.username}>#{item}</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={styles.username}>#{item}</Text>
+            <View>
+              {!unSeen ? (
+                <View
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 10,
+                    backgroundColor: "#147efb",
+                    marginLeft: 10,
+                  }}
+                />
+              ) : null}
+            </View>
+          </View>
           {/* <Text style={styles.preview}>{totalmembers} members </Text> */}
           <Text style={styles.preview}>
             {lastmessage > 10 ? `${lastmessage.slice(0, 40)}...` : lastmessage}
           </Text>
           {/* <Text style={styles.text}>{item.groupMembers}</Text> */}
         </View>
-      </View>
-
-      <View>
-        {!unSeen ? (
-          <View style={{ width: 10, height: 10,borderRadius:10, backgroundColor: "blue" }} />
-        ) : null}
       </View>
     </View>
   );
@@ -126,11 +137,16 @@ const styles = StyleSheet.create({
   preview: {
     //color: "#657786",
     color: "#7c818c",
-    //fontFamily: "Montserrat_300SemiBold",
-    fontSize: 15,
+    fontSize: 16,
+    //display: "flex",
     //paddingLeft: 10,
     paddingLeft: 10,
-    marginRight: 10,
+    //marginRight: 20,
+    //flexShrink: 1,
+    flexWrap: "wrap",
+    //width: 0,
+    //flexGrow: 1,
+    //flex: 1,
   },
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
@@ -140,11 +156,12 @@ const styles = StyleSheet.create({
 
     //shadowColor: "#B9BABD",
     //marginHorizontal: 10,
+    alignContent: "flex-start",
     shadowOpacity: 0.2,
     //marginVertical: 5,
     elevation: 1,
 
-    paddingRight: 20,
+    //paddingRight: 20,
     paddingVertical: 5,
     flexDirection: "row",
     //marginLeft: 10,

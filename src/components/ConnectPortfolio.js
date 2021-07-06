@@ -9,7 +9,7 @@ import {
   Platform,
   StyleSheet,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 
 import { Feather } from "@expo/vector-icons";
@@ -31,7 +31,7 @@ class ConnectPortfolio extends Component {
                 borderWidth: 2,
                 marginBottom: 0,
                 marginRight: 5,
-                borderColor: "#147efb"
+                borderColor: "#147efb",
                 //alignSelf: "center",
                 //marginTop: 15
               }}
@@ -41,14 +41,14 @@ class ConnectPortfolio extends Component {
           <View style={{ flexDirection: "column" }}>
             <View
               style={{
-                paddingBottom: 10
+                paddingBottom: 10,
               }}
             >
               <View
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  paddingBottom: 10
+                  paddingBottom: 10,
                 }}
               >
                 <Text
@@ -89,19 +89,19 @@ export default ConnectPortfolio;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   text: {
     marginHorizontal: 8,
-    marginVertical: 10
+    marginVertical: 10,
   },
   bottom: {
     flex: 1,
     justifyContent: "flex-end",
-    marginBottom: 36
+    marginBottom: 36,
   },
   searchbar: {
-    marginTop: 50
+    marginTop: 50,
   },
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
@@ -114,10 +114,10 @@ const styles = StyleSheet.create({
     //backgroundColor: "#e8eef1",
     //backgroundColor: "#35383F"
     backgroundColor: "#35383F",
-    //backgroundColor: "#282c34"
-    backgroundColor: "#282c34",
+    //backgroundColor: "#000"
+    backgroundColor: "#000",
     borderRadius: 20,
     paddingHorizontal: 20,
-    paddingVertical: 10
-  }
+    paddingVertical: 10,
+  },
 });

@@ -5,7 +5,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 
 class WSBTrends extends Component {
@@ -15,7 +15,7 @@ class WSBTrends extends Component {
       data: [],
       isLoading: true,
       final_data: [],
-      isSubscribed: true
+      isSubscribed: true,
     };
   }
 
@@ -31,20 +31,20 @@ class WSBTrends extends Component {
     return fetch(
       "https://sharestock.io/api/stockchat/wsb-trends/?token=e10272b94c36ea1ccb217b30028b2e7e4756c9c7",
       {
-        method: "GET"
+        method: "GET",
       }
     )
-      .then(response => response.json())
-      .then(responseJson => {
+      .then((response) => response.json())
+      .then((responseJson) => {
         this.setState(
           {
             data: responseJson.data,
-            isLoading: false
+            isLoading: false,
           },
-          function() {}
+          function () {}
         );
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({ isLoading: false });
         console.log(error);
       });
@@ -58,7 +58,7 @@ class WSBTrends extends Component {
           key={index}
           onPress={() =>
             this.props.navigation.push("StockDetails", {
-              symbol: service.symbol
+              symbol: service.symbol,
             })
           }
           //style={styles.card}
@@ -68,7 +68,7 @@ class WSBTrends extends Component {
               paddingVertical: 10,
               marginHorizontal: 10,
               borderBottomColor: "#7c818c",
-              borderBottomWidth: 0.5
+              borderBottomWidth: 0.5,
             }}
           >
             <View style={{ flexDirection: "row", paddingBottom: 5 }}>
@@ -76,7 +76,7 @@ class WSBTrends extends Component {
                 style={{
                   fontWeight: "500",
                   fontSize: 18,
-                  color: "#FFF"
+                  color: "#FFF",
                   //textAlign: "center",
                   //   color:
                   //     parseFloat(service.changePercent) < 0
@@ -95,7 +95,7 @@ class WSBTrends extends Component {
                   color:
                     parseFloat(service.changePercent) < 0
                       ? "#ff3636"
-                      : "#33CC00"
+                      : "#33CC00",
                 }}
               >
                 {(service.changePercent * 100).toFixed(2)}%
@@ -104,7 +104,7 @@ class WSBTrends extends Component {
                 style={{
                   fontWeight: "500",
                   fontSize: 18,
-                  color: "#FFF"
+                  color: "#FFF",
                   //textAlign: "center",
                   //   color:
                   //     parseFloat(service.changePercent) < 0
@@ -128,7 +128,7 @@ class WSBTrends extends Component {
                 fontSize: 16,
                 textAlign: "left",
                 color: "#7c818c",
-                paddingTop: 5
+                paddingTop: 5,
               }}
             >
               WSB Trends by Stock Chat
@@ -146,7 +146,7 @@ class WSBTrends extends Component {
           style={{
             flex: 1,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <ActivityIndicator />
@@ -173,41 +173,41 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 10,
 
-    backgroundColor: "#282c34"
+    backgroundColor: "#000",
 
     //marginLeft: 20
   },
   text: {
     marginHorizontal: 8,
-    marginVertical: 10
+    marginVertical: 10,
   },
 
   bottom: {
     flex: 1,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
     //marginBottom: 36
   },
 
   notificationList: {
     marginTop: 20,
-    padding: 10
+    padding: 10,
   },
   notificationBox: {
     padding: 20,
     marginTop: 5,
     marginBottom: 5,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     flexDirection: "row",
-    borderRadius: 10
+    borderRadius: 10,
   },
   image: {
     width: 45,
-    height: 45
+    height: 45,
   },
   description: {
     fontSize: 18,
     color: "#3498db",
-    marginLeft: 10
+    marginLeft: 10,
   },
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
@@ -218,8 +218,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     elevation: 1,
     //backgroundColor: "#e8eef1",
-    //backgroundColor: "#282c34"
-    backgroundColor: "#282c34",
+    //backgroundColor: "#000"
+    backgroundColor: "#000",
     borderRadius: 20,
     //paddingHorizontal: 20,
     paddingVertical: 10,
@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     //marginBottom: 20,
     justifyContent: "space-between",
     height: 80,
-    start: 10
+    start: 10,
   },
   datacard: {
     //backgroundColor: "#147efb",
@@ -239,19 +239,19 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,
     justifyContent: "center",
-    alignItems: "flex-end"
+    alignItems: "flex-end",
   },
   stocktext: {
     fontSize: 18,
     fontWeight: "500",
     justifyContent: "center",
-    color: "#FFF"
+    color: "#FFF",
   },
 
   stocktextred: {
     fontSize: 18,
     fontWeight: "500",
-    justifyContent: "center"
+    justifyContent: "center",
     //color: 'red'
   },
 
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#e8eef1",
     margin: 10,
     borderRadius: 20,
-    width: 340
+    width: 340,
   },
   screenContainer: {
     shadowOffset: { width: 0.5, height: 0.5 },
@@ -272,10 +272,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 2.0,
     margin: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 20,
     padding: 10,
-    paddingTop: 20
+    paddingTop: 20,
   },
   topContainer: {
     shadowOffset: { width: 0.5, height: 0.5 },
@@ -284,28 +284,28 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginBottom: 10,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 20,
     padding: 10,
-    paddingTop: 20
+    paddingTop: 20,
   },
   heading: {
     fontSize: 24,
     fontWeight: "700",
     //textAlign: "center"
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   subheading: {
     fontSize: 14,
     fontWeight: "400",
     //textAlign: "center",
     marginTop: 10,
-    marginHorizontal: 20
+    marginHorizontal: 20,
   },
   ticker: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
   tickertext: {
     //paddingLeft: 20,
@@ -313,21 +313,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "500",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   viewmore: {
     color: "#147efb",
     fontWeight: "500",
     textAlign: "center",
-    paddingTop: 10
+    paddingTop: 10,
   },
   tickerbox: {
-    padding: 10
+    padding: 10,
   },
   seperator: {
     marginVertical: 10,
     borderColor: "#F5F8FA",
-    borderWidth: 0.5
+    borderWidth: 0.5,
   },
   textview: {
     flex: 1,
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 20
+    paddingVertical: 20,
     //height: 100
-  }
+  },
 });

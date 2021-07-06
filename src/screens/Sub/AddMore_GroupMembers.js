@@ -14,7 +14,7 @@ import {
   KeyboardAvoidingView,
   TextInputComponent,
   TouchableHighlight,
-  Alert
+  Alert,
 } from "react-native";
 import fire, { firestore } from "../../database/firebase";
 import {
@@ -24,7 +24,7 @@ import {
   FontAwesome,
   AntDesign,
   MaterialCommunityIcons,
-  Feather
+  Feather,
 } from "@expo/vector-icons";
 
 export default function AddMoreMember({ route, navigation }) {
@@ -47,15 +47,15 @@ export default function AddMoreMember({ route, navigation }) {
     firestore
       .collection("users")
       .get()
-      .then(snapshot => {
-        snapshot.forEach(anotherSnapshot => {
+      .then((snapshot) => {
+        snapshot.forEach((anotherSnapshot) => {
           if (anotherSnapshot.data().id === fire.auth().currentUser.uid) {
             console.log("Current user profile");
           } else {
             items.push({
               id: anotherSnapshot.data().id,
               Name: anotherSnapshot.data().Name,
-              email: anotherSnapshot.data().email
+              email: anotherSnapshot.data().email,
             });
           }
         });
@@ -88,11 +88,11 @@ export default function AddMoreMember({ route, navigation }) {
     if (selectedReceipentsids.includes(userid)) {
       console.log("FIND");
     } else {
-      SetselectedReceipents(oldArray => [
+      SetselectedReceipents((oldArray) => [
         ...oldArray,
-        { uid: userid, name: username }
+        { uid: userid, name: username },
       ]);
-      SetselectedReceipentsids(oldArray => [...oldArray, userid]);
+      SetselectedReceipentsids((oldArray) => [...oldArray, userid]);
       console.log("selectedReceipents===>", selectedReceipents);
       console.log("selectedReceipentsids===>", selectedReceipentsids);
     }
@@ -124,7 +124,7 @@ export default function AddMoreMember({ route, navigation }) {
       .collection("Participents")
       .doc("IDsofParticipants")
       .set({
-        PartcipentsList: [...ParticipentsIDS, ...selectedReceipentsids]
+        PartcipentsList: [...ParticipentsIDS, ...selectedReceipentsids],
       });
 
     for (var i = 0; i < selectedReceipentsids.length; i++) {
@@ -137,7 +137,7 @@ export default function AddMoreMember({ route, navigation }) {
           GroupName: groupName,
           Creater_Uid: UserId,
           Creater_Name: fire.auth().currentUser.displayName,
-          Create_Date: new Date().toUTCString()
+          Create_Date: new Date().toUTCString(),
         });
     }
 
@@ -150,26 +150,26 @@ export default function AddMoreMember({ route, navigation }) {
         .collection("Participents")
         .doc("IDsofParticipants")
         .set({
-          PartcipentsList: selectedReceipentsids
+          PartcipentsList: selectedReceipentsids,
         });
     }
     navigation.navigate("GroupChat", {
-      groupName: groupName
+      groupName: groupName,
     });
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#282c34" }}>
+    <View style={{ flex: 1, backgroundColor: "#000" }}>
       <View
         style={{
           flexDirection: "row",
           height: 80,
           width: "100%",
-          backgroundColor: "#282c34",
+          backgroundColor: "#000",
           alignItems: "center",
           justifyContent: "space-around",
           paddingTop: 30,
-          marginBottom: 20
+          marginBottom: 20,
         }}
       >
         <TouchableOpacity
@@ -188,7 +188,7 @@ export default function AddMoreMember({ route, navigation }) {
             fontSize: 22,
             fontWeight: "bold",
             marginTop: 20,
-            color: "#FFF"
+            color: "#FFF",
           }}
         >
           {/* {groupName} */}
@@ -212,7 +212,7 @@ export default function AddMoreMember({ route, navigation }) {
               width: "100%",
               flex: 1,
               padding: 10,
-              height: 150
+              height: 150,
             }}
           >
             {selectedReceipents.map((data, index) => {
@@ -224,7 +224,7 @@ export default function AddMoreMember({ route, navigation }) {
                       justifyContent: "flex-start",
                       margin: 5,
                       alignItems: "center",
-                      width: 80
+                      width: 80,
                     }}
                   >
                     <View style={{ width: 62, height: 62 }}>
@@ -238,12 +238,12 @@ export default function AddMoreMember({ route, navigation }) {
                           //borderWidth: 2,
                           marginBottom: 0,
                           marginRight: 5,
-                          borderColor: "#147efb"
+                          borderColor: "#147efb",
                           //alignSelf: "center",
                           //marginTop: 15
                         }}
                         source={{
-                          url: "https://i.stack.imgur.com/l60Hf.png"
+                          url: "https://i.stack.imgur.com/l60Hf.png",
                         }}
                       />
                       <Entypo
@@ -253,8 +253,8 @@ export default function AddMoreMember({ route, navigation }) {
                           position: "absolute",
                           bottom: 4,
                           right: 7,
-                          //backgroundColor: "#282c34",
-                          borderRadius: 20
+                          //backgroundColor: "#000",
+                          borderRadius: 20,
                         }}
                         onPress={() =>
                           RemoveReceipent(data.name, data.uid, index)
@@ -265,7 +265,7 @@ export default function AddMoreMember({ route, navigation }) {
                       style={{
                         fontSize: 14,
                         marginLeft: -7,
-                        fontWeight: "bold"
+                        fontWeight: "bold",
                       }}
                     >
                       @{data.name}
@@ -297,7 +297,7 @@ export default function AddMoreMember({ route, navigation }) {
                         alignItems: "center",
                         justifyContent: "flex-start",
                         height: 60,
-                        marginBottom: 10
+                        marginBottom: 10,
                       }}
                     >
                       <Image
@@ -310,12 +310,12 @@ export default function AddMoreMember({ route, navigation }) {
                           //borderWidth: 2,
                           marginBottom: 0,
                           marginRight: 5,
-                          borderColor: "#147efb"
+                          borderColor: "#147efb",
                           //alignSelf: "center",
                           //marginTop: 15
                         }}
                         source={{
-                          url: "https://i.stack.imgur.com/l60Hf.png"
+                          url: "https://i.stack.imgur.com/l60Hf.png",
                         }}
                       />
                       <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
@@ -342,7 +342,7 @@ export default function AddMoreMember({ route, navigation }) {
             right: 30,
             borderRadius: 100,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <AntDesign name="check" size={20} color="#F5F8FA" />
@@ -355,6 +355,6 @@ export default function AddMoreMember({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#282c34"
-  }
+    backgroundColor: "#000",
+  },
 });

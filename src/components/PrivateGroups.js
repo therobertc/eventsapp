@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
   },
   container: {
     //height: "100%",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     // left: 0,
     // right: 0,
     // top: 0,
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
     // borderTopLeftRadius: 40,
     // borderTopRightRadius: 40,
     //height: "75%",
-    // backgroundColor: "#282c34",
+    // backgroundColor: "#000",
     // marginHorizontal: -20,
     paddingHorizontal: 20,
   },
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingRight: 20,
     fontSize: 20,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     flex: 1,
   },
   day: {
@@ -377,8 +377,8 @@ const styles = StyleSheet.create({
     //backgroundColor: "#e8eef1",
     //backgroundColor: "#35383F"
     //backgroundColor: "#35383F",
-    //backgroundColor: "#282c34"
-    backgroundColor: "#282c34",
+    //backgroundColor: "#000"
+    backgroundColor: "#000",
     //borderRadius: 20,
     // paddingHorizontal: 20,
     //paddingVertical: 20,

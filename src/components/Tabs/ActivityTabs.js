@@ -18,12 +18,12 @@ function ActivityTabs() {
         indicatorStyle: { backgroundColor: "#FFF" },
 
         tabStyle: {
-          width: "auto"
+          width: "auto",
         },
-        style: { backgroundColor: "#282c34" },
+        style: { backgroundColor: "#000" },
         labelStyle: {
-          fontWeight: "600"
-        }
+          fontWeight: "600",
+        },
       }}
     >
       <Tab.Screen name="Stock Alerts" component={Notifications} />

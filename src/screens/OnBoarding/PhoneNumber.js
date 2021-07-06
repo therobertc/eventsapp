@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   TextInput,
-  Keyboard
+  Keyboard,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -36,7 +36,7 @@ export default function App({ ...props }) {
     props.navigation.push("Password", {
       username: props.route.params.username,
       email: props.route.params.email,
-      phone: phone.trim()
+      phone: phone.trim(),
     });
   };
 
@@ -80,7 +80,7 @@ export default function App({ ...props }) {
             returnKeyLabel="Done"
             returnKeyType="done"
             onSubmitEditing={Keyboard.dismiss}
-            onChangeText={phone => setPhone(phone)}
+            onChangeText={(phone) => setPhone(phone)}
           />
         </View>
         <View
@@ -88,7 +88,7 @@ export default function App({ ...props }) {
             paddingHorizontal: 10,
             top: 50,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
           }}
         >
           <TouchableOpacity
@@ -100,7 +100,7 @@ export default function App({ ...props }) {
                 fontSize: 18,
                 textAlign: "center",
                 color: "#FFF",
-                fontWeight: "600"
+                fontWeight: "600",
               }}
             >
               Continue
@@ -111,7 +111,7 @@ export default function App({ ...props }) {
               props.navigation.push("Password", {
                 email: props.route.params.email,
                 username: props.route.params.username,
-                phone: ""
+                phone: "",
               })
             }
           >
@@ -128,19 +128,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#282c34",
-    width: Dimensions.get("screen").width
+    backgroundColor: "#000",
+    width: Dimensions.get("screen").width,
   },
   Button: {
     backgroundColor: "#147efb",
     padding: 15,
     borderRadius: 30,
-    width: "100%"
+    width: "100%",
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
-    fontSize: 15
+    fontSize: 15,
   },
   Stockchat: {
     marginTop: 50,
@@ -149,18 +149,18 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   username: {
     marginTop: 10,
     color: "#FFF",
     textAlign: "center",
     fontSize: 15,
-    padding: 18
+    padding: 18,
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     //backgroundColor: "red",
     //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
@@ -170,6 +170,6 @@ const styles = StyleSheet.create({
     color: "#FFF",
     height: 50,
     fontSize: 21,
-    borderRadius: 30
-  }
+    borderRadius: 30,
+  },
 });

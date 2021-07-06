@@ -103,13 +103,13 @@ export default function AddMember({ route, navigation }) {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#282c34" }}>
+    <View style={{ flex: 1, backgroundColor: "#000" }}>
       <View
         style={{
           flexDirection: "row",
           height: 80,
           width: "100%",
-          //backgroundColor: "#282c34",
+          //backgroundColor: "#000",
           alignItems: "center",
           justifyContent: "space-around",
           paddingTop: 30,
@@ -343,7 +343,7 @@ export default function AddMember({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
   },
   viewseparator: {
     borderColor: "#F5F8FA",

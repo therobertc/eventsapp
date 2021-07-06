@@ -10,7 +10,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   TextInput,
-  Keyboard
+  Keyboard,
 } from "react-native";
 import { AntDesign, Feather } from "@expo/vector-icons";
 import {
@@ -21,7 +21,7 @@ import {
   Body,
   Button,
   Footer,
-  FooterTab
+  FooterTab,
 } from "native-base";
 
 const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
@@ -58,13 +58,13 @@ export default function App({ ...props }) {
     >
       <Header
         style={{
-          backgroundColor: "#282c34",
+          backgroundColor: "#000",
           borderBottomWidth: 0,
           flexDirection: "row",
           //marginTop: 25,
           marginHorizontal: 10,
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
           //flex: 1
         }}
       >
@@ -91,7 +91,7 @@ export default function App({ ...props }) {
           paddingHorizontal: 10,
           alignItems: "center",
           flexDirection: "row",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <Text style={{ fontSize: 60, color: "#FFF" }}>$</Text>
@@ -104,7 +104,7 @@ export default function App({ ...props }) {
           returnKeyLabel="Done"
           returnKeyType="done"
           onSubmitEditing={Keyboard.dismiss}
-          onChangeText={phone => setPhone(phone)}
+          onChangeText={(phone) => setPhone(phone)}
         />
       </View>
       <View
@@ -112,7 +112,7 @@ export default function App({ ...props }) {
           paddingHorizontal: 10,
           top: 50,
           justifyContent: "center",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
         <TouchableOpacity
@@ -124,7 +124,7 @@ export default function App({ ...props }) {
               fontSize: 18,
               textAlign: "center",
               color: "#FFF",
-              fontWeight: "600"
+              fontWeight: "600",
             }}
           >
             Place Order
@@ -151,14 +151,14 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#282c34",
-    width: Dimensions.get("screen").width
+    backgroundColor: "#000",
+    width: Dimensions.get("screen").width,
   },
   header: {
     fontFamily: "Montserrat_800ExtraBold",
     color: "#FFF",
     //flex: 1,
-    fontSize: 20
+    fontSize: 20,
     //paddingLeft: 10
     //textAlign: "center"
   },
@@ -166,12 +166,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#147efb",
     padding: 15,
     borderRadius: 30,
-    width: "100%"
+    width: "100%",
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
-    fontSize: 15
+    fontSize: 15,
   },
   Stockchat: {
     marginTop: 50,
@@ -180,18 +180,18 @@ const styles = StyleSheet.create({
     //width: Dimensions.get("screen").width,
     fontWeight: "bold",
     textAlign: "center",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   username: {
     marginTop: 10,
     color: "#FFF",
     textAlign: "center",
     fontSize: 15,
-    padding: 18
+    padding: 18,
   },
   Input: {
     borderBottomWidth: 0,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     //backgroundColor: "red",
     //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
@@ -201,6 +201,6 @@ const styles = StyleSheet.create({
     height: 50,
     fontSize: 60,
     borderRadius: 30,
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 });

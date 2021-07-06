@@ -67,7 +67,26 @@ class TrendingStocks extends Component {
               symbol: service.symbol,
             })
           }
-          style={styles.card}
+          style={{
+            shadowOffset: { width: 0.5, height: 0.5 },
+            shadowRadius: 2,
+
+            shadowOpacity: 0.2,
+            borderWidth: 3,
+            borderColor:
+              parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00",
+            marginRight: 10,
+            shadowOpacity: 0.2,
+            elevation: 1,
+            //backgroundColor: "#000",
+            backgroundColor:
+              parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00",
+            borderRadius: 20,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            height: 60,
+          }}
         >
           <View
             style={{
@@ -81,7 +100,7 @@ class TrendingStocks extends Component {
           >
             <Text
               style={{
-                fontWeight: "600",
+                fontWeight: "800",
                 fontSize: 18,
                 //textAlign: "left"
                 color: "#FFF",
@@ -92,11 +111,12 @@ class TrendingStocks extends Component {
 
             <Text
               style={{
-                fontWeight: "500",
-                fontSize: 14,
+                fontWeight: "700",
+                fontSize: 18,
                 textAlign: "center",
-                color:
-                  parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00",
+                color: "#FFF",
+                // color:
+                //   parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00",
               }}
             >
               {parseFloat(service.changePercent) < 0
@@ -181,16 +201,22 @@ const styles = StyleSheet.create({
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
     shadowRadius: 2,
-    //shadowColor: "#657786",
+    borderBottomColor: "#60646C",
+    borderBottomWidth: 0.5,
+
+    shadowColor: "#B9BABD",
+    //marginHorizontal: 10,
+
+    shadowOpacity: 0.2,
     borderWidth: 1,
     borderColor: "#60646C",
     marginRight: 10,
     shadowOpacity: 0.2,
     //marginVertical: 5,
-    //elevation: 1,
+    elevation: 1,
     //backgroundColor: "#e8eef1",
     //backgroundColor: "#282c34"
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 20,
     //paddingHorizontal: 20,
     //paddingVertical: 10,

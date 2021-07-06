@@ -185,9 +185,7 @@ class StockDetails extends Component {
   renderError = () => {
     let stock_tweet = this._render_stock_tweet_feed();
     return (
-      <View
-        style={{ paddingTop: 50, height: "100%", backgroundColor: "#282c34" }}
-      >
+      <View style={{ paddingTop: 50, height: "100%", backgroundColor: "#000" }}>
         <Text style={{ color: "#FFF", textAlign: "center", fontSize: 20 }}>
           This chart is currently unavailable.
         </Text>
@@ -200,9 +198,7 @@ class StockDetails extends Component {
 
   renderLoading = () => {
     return (
-      <View
-        style={{ paddingTop: 50, height: "100%", backgroundColor: "#282c34" }}
-      >
+      <View style={{ paddingTop: 50, height: "100%", backgroundColor: "#000" }}>
         <ActivityIndicator color="#FFF" size="large" />
       </View>
     );
@@ -633,7 +629,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     //paddingHorizontal: 20
   },
   card: {
@@ -645,7 +641,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     elevation: 1,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 20,
@@ -656,7 +652,7 @@ const styles = StyleSheet.create({
     //fontFamily: "Montserrat_300SemiBold",
     fontSize: 15,
     //paddingLeft: 10,
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderBottomColor: "grey",
     borderBottomWidth: 1,
 
@@ -671,7 +667,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     elevation: 1,
     //backgroundColor: "#e8eef1",
-    //backgroundColor: "#282c34",
+    //backgroundColor: "#000",
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 20,
@@ -685,7 +681,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     elevation: 1,
     //backgroundColor: "#e8eef1",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -750,7 +746,7 @@ const styles = StyleSheet.create({
   chartdetails: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     padding: 10,
   },
   company: {

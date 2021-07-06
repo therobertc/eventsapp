@@ -4,7 +4,7 @@ import {
   Text,
   Image,
   StyleSheet,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
@@ -46,7 +46,7 @@ const StockChat = ({ route, navigation }) => {
             <TouchableOpacity
               onPress={() =>
                 navigation.push("StockDetails", {
-                  symbol: "SQ"
+                  symbol: "SQ",
                 })
               }
               //onPress={() => navigation.navigate("StockProfile")}
@@ -72,7 +72,7 @@ const StockChat = ({ route, navigation }) => {
           </ScrollView>
           <Input
             inputMessage={inputMessage}
-            setMessage={inputMessage => setMessage(inputMessage)}
+            setMessage={(inputMessage) => setMessage(inputMessage)}
             onSendPress={send}
           />
         </View>
@@ -88,31 +88,31 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: "100%"
+    height: "100%",
   },
   main: {
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     height: "88%",
     paddingHorizontal: 20,
     borderBottomLeftRadius: 35,
     borderBottomRightRadius: 35,
-    paddingTop: 40
+    paddingTop: 40,
   },
   headerContainer: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   username: {
     color: "#FFF",
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
     flex: 1,
-    textAlign: "center"
+    textAlign: "center",
   },
   avatar: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "#FFF"
-  }
+    backgroundColor: "#FFF",
+  },
 });

@@ -198,14 +198,14 @@ const styles = StyleSheet.create({
     position: "absolute",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
   },
   container: {
     flex: 1,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
   },
   tcontainer: {
     flex: 1,
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
     height: "100%",
     padding: 30,
     width: "100%",
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 26,
   },
   activemenu: {

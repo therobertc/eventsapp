@@ -31,7 +31,7 @@ const MessageItem = ({ item, image, message }) => {
             style={{
               flexDirection: "row",
 
-              justifyContent: "flex-end"
+              justifyContent: "flex-end",
             }}
           >
             <Text style={styles.duration}>{item.username}</Text>
@@ -50,7 +50,7 @@ const MessageItem = ({ item, image, message }) => {
           <Image
             style={styles.img}
             source={{
-              uri: "https://i.stack.imgur.com/l60Hf.png"
+              uri: "https://i.stack.imgur.com/l60Hf.png",
             }}
           />
           <View>
@@ -60,7 +60,7 @@ const MessageItem = ({ item, image, message }) => {
             <View
               style={{
                 flexDirection: "row",
-                justifyContent: "flex-start"
+                justifyContent: "flex-start",
               }}
             >
               <Text style={styles.recievedDuration}>{item.username}</Text>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
     fontFamily: "Montserrat_600SemiBold",
     textAlign: "right",
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
   },
   recievedDuration: {
     color: "#b6b6b6",
@@ -95,19 +95,19 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginTop: 5,
     fontFamily: "Montserrat_600SemiBold",
-    textAlign: "left"
+    textAlign: "left",
   },
   receivedContainer: {
     flexDirection: "row",
     marginTop: 10,
-    paddingRight: 20
+    paddingRight: 20,
 
     //width: "auto"
   },
   SentContainer: {
     marginVertical: 15,
     alignSelf: "flex-end",
-    borderRadius: 30
+    borderRadius: 30,
     //width: "auto"
   },
   img: {
@@ -116,12 +116,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 0,
     marginRight: 5,
-    borderColor: "#147efb"
+    borderColor: "#147efb",
   },
   message: {
     fontSize: 15,
     marginHorizontal: 5,
-    fontWeight: "500"
+    fontWeight: "500",
     //fontFamily: "Montserrat_700Bold"
   },
   sentMessage: {
@@ -129,23 +129,23 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     //fontFamily: "Montserrat_700Bold",
     color: "#F5F8FA",
-    fontWeight: "500"
+    fontWeight: "500",
   },
   sentBubble: {
     backgroundColor: "#147efb",
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 10,
-    borderBottomRightRadius: 5
+    borderBottomRightRadius: 5,
     //width: "auto"
   },
   recievedBubble: {
-    backgroundColor: "#282c34",
+    backgroundColor: "#000",
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderBottomLeftRadius: 5,
     width: "auto",
-    marginRight: 25
-  }
+    marginRight: 25,
+  },
 });

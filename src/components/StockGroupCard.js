@@ -9,7 +9,7 @@ import {
   Platform,
   StyleSheet,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 
 import { Feather } from "@expo/vector-icons";
@@ -30,7 +30,7 @@ const StockGroupCard = ({
   uri,
   count,
   onPress,
-  image
+  image,
 }) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress}>
@@ -44,7 +44,7 @@ export default StockGroupCard;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   gradientStyle: {
     height: 20,
@@ -52,21 +52,21 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 20
+    marginRight: 20,
   },
   count: {
     color: "#F5F8FA",
-    fontFamily: "Montserrat_700Bold"
+    fontFamily: "Montserrat_700Bold",
   },
   image: {
     width: 60,
     height: 60,
-    borderRadius: 30
+    borderRadius: 30,
   },
   text: {
     color: "#FFF",
     fontFamily: "Montserrat_600SemiBold",
-    fontSize: 11
+    fontSize: 11,
   },
   duration: {
     color: "#FFF",
@@ -74,25 +74,25 @@ const styles = StyleSheet.create({
     //flex: 1,
 
     //position: "absolute",
-    fontFamily: "Montserrat_600SemiBold"
+    fontFamily: "Montserrat_600SemiBold",
   },
   username: {
     color: "#FFF",
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   change: {
     color: "#33CC00",
     fontFamily: "Montserrat_700Bold",
     fontSize: 20,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   preview: {
     color: "#FFF",
     //fontFamily: "Montserrat_300SemiBold",
     fontSize: 15,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   card: {
     shadowOffset: { width: 0.5, height: 0.5 },
@@ -103,8 +103,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     //elevation: 1,
     //backgroundColor: "#e8eef1",
-    //backgroundColor: "#282c34"
-    backgroundColor: "#282c34",
+    //backgroundColor: "#000"
+    backgroundColor: "#000",
     borderRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -114,6 +114,6 @@ const styles = StyleSheet.create({
     //marginTop: 15,
     //marginBottom: 20,
     justifyContent: "space-between",
-    height: 80
-  }
+    height: 80,
+  },
 });

@@ -9,7 +9,7 @@ import {
   ScrollView,
   Alert,
   Button,
-  FlatList
+  FlatList,
 } from "react-native";
 import {
   Ionicons,
@@ -18,7 +18,7 @@ import {
   FontAwesome,
   AntDesign,
   MaterialCommunityIcons,
-  Feather
+  Feather,
 } from "@expo/vector-icons";
 import fire, { firestore } from "../database/firebase";
 
@@ -38,15 +38,15 @@ export default function CreateMsg({ navigation }) {
     firestore
       .collection("users")
       .get()
-      .then(snapshot => {
-        snapshot.forEach(anotherSnapshot => {
+      .then((snapshot) => {
+        snapshot.forEach((anotherSnapshot) => {
           if (anotherSnapshot.data().id === fire.auth().currentUser.uid) {
             console.log("Current user profile");
           } else {
             items.push({
               id: anotherSnapshot.data().id,
               Name: anotherSnapshot.data().Name,
-              email: anotherSnapshot.data().email
+              email: anotherSnapshot.data().email,
             });
           }
         });
@@ -63,7 +63,7 @@ export default function CreateMsg({ navigation }) {
         flex: 1,
         width: "100%",
         padding: 18,
-        backgroundColor: "#282c34"
+        backgroundColor: "#000",
       }}
     >
       <View
@@ -71,11 +71,11 @@ export default function CreateMsg({ navigation }) {
           flexDirection: "row",
           height: 80,
           //width: "100%",
-          //backgroundColor: "#282c34",
+          //backgroundColor: "#000",
           alignItems: "center",
           //justifyContent: "space-around",
           paddingTop: 30,
-          marginBottom: 20
+          marginBottom: 20,
         }}
       >
         <TouchableOpacity
@@ -95,7 +95,7 @@ export default function CreateMsg({ navigation }) {
             fontWeight: "bold",
             marginTop: 20,
             paddingLeft: 30,
-            color: "#FFF"
+            color: "#FFF",
           }}
         >
           {/* {groupName} */}
@@ -124,7 +124,7 @@ export default function CreateMsg({ navigation }) {
                   navigation.navigate("ChatRoom", {
                     name: item.Name,
                     uid: item.id,
-                    title: item.Name
+                    title: item.Name,
                   });
                 }}
               >
@@ -135,7 +135,7 @@ export default function CreateMsg({ navigation }) {
                       alignItems: "center",
                       justifyContent: "flex-start",
                       height: 60,
-                      marginBottom: 10
+                      marginBottom: 10,
                     }}
                   >
                     <Image
@@ -148,12 +148,12 @@ export default function CreateMsg({ navigation }) {
                         //borderWidth: 2,
                         marginBottom: 0,
                         marginRight: 5,
-                        borderColor: "#147efb"
+                        borderColor: "#147efb",
                         //alignSelf: "center",
                         //marginTop: 15
                       }}
                       source={{
-                        url: "https://i.stack.imgur.com/l60Hf.png"
+                        url: "https://i.stack.imgur.com/l60Hf.png",
                       }}
                     />
                     <Text>&nbsp;&nbsp;&nbsp;&nbsp;</Text>
@@ -161,7 +161,7 @@ export default function CreateMsg({ navigation }) {
                       style={{
                         fontSize: 18,
                         fontWeight: "bold",
-                        color: "#FFF"
+                        color: "#FFF",
                       }}
                     >
                       {item.Name}
