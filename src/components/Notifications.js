@@ -72,7 +72,7 @@ class Notifications extends Component {
                   <Text
                     style={{ color: "#FFF", fontWeight: "bold", fontSize: 16 }}
                   >
-                    {data.title} 💬
+                    {data.title}
                   </Text>
                   <Text
                     style={{ color: "#7c818c", fontSize: 16, paddingLeft: 5 }}

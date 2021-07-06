@@ -34,18 +34,22 @@ export default function App({ ...props }) {
           }}
         >
           <Image
-            source={require("../../../assets/logo-outline.png")}
+            source={require("../../../assets/blackicon.png")}
             style={{ width: 150, height: 150 }}
           />
         </View>
 
-        <View>
-          <Text style={styles.stockchat}> stockchat</Text>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <Image
+            source={require("../../../assets/logotext.png")}
+            style={{ width: "100%", height: 50, textAlign: "center" }}
+          />
         </View>
 
-        <View>
-          <Text style={styles.subtext}>
-            Stocks and Crypto{"\n"}with friends {"\n"} 💬 💸 ✨
+        <View style={{ flexDirection: "column" }}>
+          <Text style={styles.subtext}>Group Messaging for Investors</Text>
+          <Text style={{ fontSize: 30, marginTop: 50, textAlign: "center" }}>
+            💬 💸 💎 🙌
           </Text>
         </View>
       </View>

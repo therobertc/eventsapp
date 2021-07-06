@@ -201,6 +201,14 @@ const Chat = (props) => {
       setRefreshing(false);
     }, 3000);
   }
+
+  const diamondAlert = () =>
+    Alert.alert(
+      "Diamond Hands 💎 🙌",
+      "Get more 💎💎💎 by sending messages and tagging stocks",
+      [{ text: "OK", onPress: () => console.log("OK Pressed") }]
+    );
+
   const onShare = async () => {
     try {
       const result = await Share.share({
@@ -270,6 +278,17 @@ const Chat = (props) => {
           /> */}
         </Left>
         <Right>
+          <Text
+            style={{
+              color: "#FFF",
+              fontWeight: "bold",
+              paddingHorizontal: Platform.OS === "ios" ? 10 : 10,
+              fontSize: 30,
+            }}
+            onPress={diamondAlert}
+          >
+            💎
+          </Text>
           <Feather
             style={{
               color: "#FFF",
