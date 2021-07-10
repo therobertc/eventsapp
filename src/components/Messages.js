@@ -26,6 +26,7 @@ const Messages = ({ item, totalmembers, lastmessage, uri, unSeen }) => {
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
+          paddingHorizontal: 30,
           //flexWrap: "wrap",
           //flex: 1,
         }}

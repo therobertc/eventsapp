@@ -171,7 +171,7 @@ export default function Login({ navigation }) {
             style={{
               width: "80%",
               height: 50,
-              textAlign: "center",
+
               paddingHorizontal: 20,
             }}
           />

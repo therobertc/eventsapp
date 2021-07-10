@@ -24,6 +24,7 @@ import StockGroupCard from "../components/StockGroupCard";
 import ChartComp from "../components/ChartComp";
 import ChatTabs from "../components/Tabs/ChatTabs";
 import NavigationServices from "../Util/NavigationServices";
+// import InfoModal from "../components/Modals/InfoModal";
 
 const Chat = (props) => {
   const isVisible = useIsFocused();
@@ -278,6 +279,7 @@ const Chat = (props) => {
           /> */}
         </Left>
         <Right>
+          {/* <InfoModal></InfoModal> */}
           <Text
             style={{
               color: "#FFF",
@@ -394,8 +396,9 @@ const Chat = (props) => {
             msg="This stock is trending"
           /> */}
 
-        <View style={styles.card}>
-          <View
+        {/* <View style={styles.card}> */}
+        <ChatTabs></ChatTabs>
+        {/* <View
             style={{
               display: "flex",
               flexDirection: "row",
@@ -454,8 +457,8 @@ const Chat = (props) => {
                 </TouchableOpacity>
               );
             }}
-          />
-        </View>
+          /> */}
+        {/* </View> */}
 
         {/* <FlatList
             data={groups}

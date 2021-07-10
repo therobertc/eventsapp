@@ -42,7 +42,7 @@ export default function App({ ...props }) {
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Image
             source={require("../../../assets/logotext.png")}
-            style={{ width: "100%", height: 50, textAlign: "center" }}
+            style={{ width: "100%", height: 50 }}
           />
         </View>
 

@@ -1,49 +1,23 @@
 {
   "expo": {
-    "scheme": "google.com",
     "name": "StockChat",
     "slug": "StockChat",
-    "version": "0.55",
+    "version": "0.80",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/scsplash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000"
+      "backgroundColor": "#FFF"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
-    "android": {
-      "package": "wgtgroupchat.page.link",
-
-      "googleServicesFile": "./google-services.json",
-      "config": {
-        "googleSignIn": {
-          "apiKey": "AIzaSyBMDuYiQJEXcz30568adBfx-NGjPgiE00c"
-        }
-      },
-      "useNextNotificationsApi": true,
-      "intentFilters": [
-        {
-          "action": "VIEW",
-          "data": [
-            {
-              "scheme": "https",
-              "host": "wgtgroupchat.page.link",
-              "pathPrefix": "/"
-            }
-          ],
-          "category": ["BROWSABLE", "DEFAULT"]
-        }
-      ]
-    },
     "ios": {
       "supportsTablet": true,
       "icon": "./assets/icon.png",
-      "bundleIdentifier": "com.tradechat.tradechatapp",
-      "associatedDomains": ["applinks:wgtgroupchat.page.link"]
+      "bundleIdentifier": "com.tradechat.tradechatapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
