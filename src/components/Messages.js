@@ -26,7 +26,7 @@ const Messages = ({ item, totalmembers, lastmessage, uri, unSeen }) => {
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
-          paddingHorizontal: 30,
+          paddingHorizontal: 20,
           //flexWrap: "wrap",
           //flex: 1,
         }}
@@ -50,6 +50,20 @@ const Messages = ({ item, totalmembers, lastmessage, uri, unSeen }) => {
           }}
         /> */}
 
+        <View>
+          {!unSeen ? (
+            <View
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: 10,
+                backgroundColor: "#147efb",
+                marginHorizontal: 10,
+              }}
+            />
+          ) : null}
+        </View>
+
         <Image
           source={require("../../assets/icon.png")}
           // source={{ uri: itemPic }}
@@ -69,19 +83,6 @@ const Messages = ({ item, totalmembers, lastmessage, uri, unSeen }) => {
         <View>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text style={styles.username}>#{item}</Text>
-            <View>
-              {!unSeen ? (
-                <View
-                  style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: 10,
-                    backgroundColor: "#147efb",
-                    marginLeft: 10,
-                  }}
-                />
-              ) : null}
-            </View>
           </View>
           {/* <Text style={styles.preview}>{totalmembers} members </Text> */}
           <Text style={styles.preview}>

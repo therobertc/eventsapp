@@ -1,88 +1,103 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import {
-  StyleSheet,
-  Image,
-  Text,
-  View,
-  TouchableOpacity,
   Dimensions,
+  Image,
   KeyboardAvoidingView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
-  TextInput,
-  Keyboard,
+  View,
 } from "react-native";
+import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
+import { firestore } from "../../database/firebase";
+import { Icon, Header, Left, Right, Body, Button } from "native-base";
+import { Feather } from "@expo/vector-icons";
 
-const keyboardVerticalOffset = Platform.OS === "ios" ? 40 : 0;
+const DismissKeyboard = ({ children }) => (
+  <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    {" "}
+    {children}
+  </TouchableWithoutFeedback>
+);
 
 export default function App({ ...props }) {
-  const [phone, setPhone] = useState(0);
+  const [username, setUsername] = useState("");
 
-  const validateNumber = () => {
-    if (
-      phone === undefined ||
-      phone === null ||
-      phone.trim() === "" ||
-      phone.trim().length !== 10
-    ) {
-      alert("Phone number should be 10 digits");
+  const createUserInFirestore = () => {
+    if (username === undefined || username === null || username.trim() === "") {
+      alert("Username can't be blank!!");
       return false;
     }
-    if (isNaN(phone.trim())) {
-      alert("Only numbers are allowed");
-      return false;
-    }
-    props.navigation.push("Password", {
-      username: props.route.params.username,
-      email: props.route.params.email,
-      phone: phone.trim(),
-    });
+
+    let user_name = username.trim().toLowerCase();
+    firestore
+      .collection("profile")
+      .doc(user_name)
+      .get()
+      .then((doc) => {
+        if (doc.exists) {
+          alert("Username already exists!!");
+          return false;
+        } else {
+          props.navigation.push("Email", { username: user_name });
+        }
+      })
+      .catch((error) => alert(error.message));
   };
 
   return (
-    <KeyboardAvoidingView
-      //behavior="position"
-      keyboardVerticalOffset={keyboardVerticalOffset}
-      style={styles.getStarted}
-    >
-      <View>
-        <TouchableOpacity
-          style={{ position: "absolute", top: 50, left: 20 }}
-          onPress={() => props.navigation.goBack()}
-        >
-          <AntDesign style={styles.back} name="left" size={30} color="#FFF" />
-        </TouchableOpacity>
-        <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
-          <Image
-            source={require("../../../assets/blackicon.png")}
-            style={{ width: 150, height: 150 }}
-          />
-        </View>
+    <View style={styles.getStarted}>
+      <Header
+        style={{
+          backgroundColor: "#FFF",
+          borderBottomWidth: 0.1,
+          borderBottomColor: "#FFF",
+        }}
+      >
+        <Left>
+          <TouchableOpacity
+            style={{
+              position: "absolute",
+              //top: 50,
+              left: 20,
 
-        <View>
-          <Text style={styles.Stockchat}> WHAT'S YOUR MOBILE NUMBER?</Text>
-        </View>
-        <View>
-          <Text style={styles.username}>
-            You'll use this number when you log in and if you ever need to reset
-            your password.
-          </Text>
-        </View>
+              justifyContent: "center",
+              alignItems: "center",
+              borderColor: "#000",
+              borderRadius: 25,
+              height: 50,
+              width: 50,
+              borderWidth: 2,
+              borderBottomWidth: 5,
+            }}
+            onPress={() => props.navigation.goBack()}
+          >
+            <AntDesign style={styles.back} name="left" size={30} color="#000" />
+          </TouchableOpacity>
+        </Left>
+      </Header>
 
-        <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
-          <TextInput
-            //einputContainerStyle={{ borderBottomWidth: 0 }}
+      <View style={{ display: "flex", marginTop: 50, paddingLeft: 20 }}>
+        {/* <Image
+          source={require("../../../assets/icon.png")}
+          style={{ width: 250, height: 250, borderRadius: 150 }}
+        /> */}
+        <Text style={styles.heading}>VERIFY YOUR{"\n"}INVITE</Text>
+      </View>
+
+      <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
+        <View style={{ paddingTop: 100, paddingHorizontal: 10 }}>
+          <Input
+            inputContainerStyle={{ borderBottomWidth: 0 }}
             style={styles.Input}
             placeholder="Phone Number"
-            placeholderTextColor="lightgrey"
-            keyboardType="numeric"
-            returnKeyLabel="Done"
-            returnKeyType="done"
-            onSubmitEditing={Keyboard.dismiss}
-            onChangeText={(phone) => setPhone(phone)}
+            placeholderTextColor="grey"
+            //onChangeText={(username) => setUsername(username)}
           />
         </View>
+
         <View
           style={{
             paddingHorizontal: 10,
@@ -93,33 +108,23 @@ export default function App({ ...props }) {
         >
           <TouchableOpacity
             style={styles.Button}
-            onPress={() => validateNumber()}
+            // onPress={() => createUserInFirestore()}
+            onPress={() => props.navigation.push("Email")}
           >
             <Text
               style={{
-                fontSize: 18,
+                fontSize: 25,
                 textAlign: "center",
-                color: "#FFF",
+                color: "#000",
                 fontWeight: "600",
               }}
             >
-              Continue
+              Get In
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() =>
-              props.navigation.push("Password", {
-                email: props.route.params.email,
-                username: props.route.params.username,
-                phone: "",
-              })
-            }
-          >
-            <Text style={styles.username}>I'll do this later</Text>
-          </TouchableOpacity>
         </View>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </View>
   );
 }
 
@@ -128,27 +133,21 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#000",
+    backgroundColor: "#FFF",
     width: Dimensions.get("screen").width,
-  },
-  Button: {
-    backgroundColor: "#147efb",
-    padding: 15,
-    borderRadius: 30,
-    width: "100%",
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
     fontSize: 15,
   },
-  Stockchat: {
+  heading: {
     marginTop: 50,
-    color: "#FFF",
-    fontSize: 18,
+    color: "#000",
+    fontSize: 30,
     //width: Dimensions.get("screen").width,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: "800",
+    textAlign: "left",
     fontFamily: "Montserrat_700Bold",
   },
   username: {
@@ -158,18 +157,29 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 18,
   },
+  Button: {
+    backgroundColor: "#B295EF",
+    padding: 15,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderBottomWidth: 5,
+    width: "100%",
+    top: 150,
+  },
   Input: {
-    borderBottomWidth: 0,
-    backgroundColor: "#000",
-    //backgroundColor: "red",
+    borderWidth: 2,
+    backgroundColor: "#FFF",
     //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
-    borderColor: "#FFF",
-    padding: 12,
+    borderColor: "#000",
+    top: 50,
+    padding: 15,
     paddingLeft: 30,
-    color: "#FFF",
-    height: 50,
+    color: "#000",
+    //height: 50,
     fontSize: 21,
-    borderRadius: 30,
+    borderRadius: 20,
+
+    borderBottomWidth: 5,
   },
 });

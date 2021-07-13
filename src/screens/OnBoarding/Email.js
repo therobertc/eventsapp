@@ -14,6 +14,8 @@ import {
 import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import validate from "react-native-web/dist/exports/StyleSheet/validate";
+import { Icon, Header, Left, Right, Body, Button } from "native-base";
+import { Feather } from "@expo/vector-icons";
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -47,57 +49,109 @@ export default function App({ ...props }) {
   };
 
   return (
-    <ScrollView style={styles.getStarted} showsVerticalScrollIndicator={false}>
-      <TouchableOpacity
-        style={{ position: "absolute", top: 50, left: 20 }}
-        onPress={() => props.navigation.goBack()}
+    <View style={styles.getStarted}>
+      <Header
+        style={{
+          backgroundColor: "#FFF",
+          borderBottomWidth: 0.1,
+          borderBottomColor: "#FFF",
+        }}
       >
-        <AntDesign style={styles.back} name="left" size={30} color="#FFF" />
-      </TouchableOpacity>
-      <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
-        <Image
-          source={require("../../../assets/blackicon.png")}
-          style={{ width: 150, height: 150 }}
-        />
-      </View>
+        <Left>
+          <TouchableOpacity
+            style={{
+              position: "absolute",
+              //top: 50,
+              left: 20,
+
+              justifyContent: "center",
+              alignItems: "center",
+              borderColor: "#000",
+              borderRadius: 25,
+              height: 50,
+              width: 50,
+              borderWidth: 2,
+              borderBottomWidth: 5,
+            }}
+            onPress={() => props.navigation.goBack()}
+          >
+            <AntDesign style={styles.back} name="left" size={30} color="#000" />
+          </TouchableOpacity>
+        </Left>
+      </Header>
 
       <View>
-        <Text style={styles.Stockchat}>WHAT'S YOUR EMAIL ADDRESS?</Text>
-      </View>
-      <View>
-        <Text style={styles.username}>
-          You'll use this email when you log in and if you ever need to reset
-          your password.
-        </Text>
+        <Text style={styles.heading}>Welcome, JMJ.</Text>
       </View>
 
-      <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
-        <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
+      {/* <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}> */}
+      <View
+        style={{
+          paddingTop: 100,
+          //width: "100%",
+          //paddingHorizontal: 10,
+          justifyContent: "center",
+          flexDirection: "row",
+        }}
+      >
+        <View>
           <Input
-            //einputContainerStyle={{ borderBottomWidth: 0 }}
+            inputContainerStyle={{ borderBottomWidth: 0, width: 60 }}
             style={styles.Input}
-            placeholder="Enter your email address"
+            placeholder="__"
             placeholderTextColor="lightgrey"
             onChangeText={(email) => setEmail(email)}
           />
-          {/* <TextInput
-              style={styles.inputStyle}
-              placeholder="Enter Group Name"
-              value={groupName}
-              // onValidateTextField = {validateField}
-              onChangeText={val => setGroupName(val)}
-            /> */}
         </View>
+        <View>
+          <Input
+            inputContainerStyle={{ borderBottomWidth: 0, width: 60 }}
+            style={styles.Input}
+            placeholder="__"
+            placeholderTextColor="lightgrey"
+            onChangeText={(email) => setEmail(email)}
+          />
+        </View>
+        <View>
+          <Input
+            inputContainerStyle={{ borderBottomWidth: 0, width: 60 }}
+            style={styles.Input}
+            placeholder="__"
+            placeholderTextColor="lightgrey"
+            onChangeText={(email) => setEmail(email)}
+          />
+        </View>
+        <View>
+          <Input
+            inputContainerStyle={{ borderBottomWidth: 0, width: 60 }}
+            style={styles.Input}
+            placeholder="__"
+            placeholderTextColor="lightgrey"
+            onChangeText={(email) => setEmail(email)}
+          />
+        </View>
+      </View>
 
-        <View
-          style={{
-            paddingHorizontal: 10,
-            top: 50,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {/* <TouchableOpacity
+      <View
+        style={{
+          paddingTop: 50,
+          flexDirection: "row",
+          justifyContent: "center",
+        }}
+      >
+        <Text style={styles.subheading}>Didn't get a text?</Text>
+        <Text style={styles.sendAgain}>Send Again</Text>
+      </View>
+
+      <View
+        style={{
+          paddingHorizontal: 10,
+          top: 50,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {/* <TouchableOpacity
               onPress={performCreateGroup}
               isLoading={isLoading}
             >
@@ -109,26 +163,31 @@ export default function App({ ...props }) {
                 </Text>
               </View>
             </TouchableOpacity> */}
-          <TouchableOpacity style={styles.Button} onPress={() => submitEmail()}>
-            <Text
-              style={{
-                fontSize: 18,
-                textAlign: "center",
-                color: "#FFF",
-                fontWeight: "600",
-              }}
-            >
-              Continue
-            </Text>
-          </TouchableOpacity>
-          {/* <TouchableOpacity
+        <TouchableOpacity
+          style={styles.Button}
+          onPress={() => props.navigation.push("Activity")}
+
+          // onPress={() => submitEmail()}
+        >
+          <Text
+            style={{
+              fontSize: 25,
+              textAlign: "center",
+              color: "#000",
+              fontWeight: "600",
+            }}
+          >
+            Verify
+          </Text>
+        </TouchableOpacity>
+        {/* <TouchableOpacity
             onPress={() => props.navigation.goBack("Password")}
           >
             <Text style={styles.username}>I'll do this later</Text>
           </TouchableOpacity> */}
-        </View>
-      </KeyboardAvoidingView>
-    </ScrollView>
+      </View>
+      {/* </KeyboardAvoidingView> */}
+    </View>
   );
 }
 
@@ -137,26 +196,30 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#000",
+    backgroundColor: "#FFF",
     width: Dimensions.get("screen").width,
   },
   Button: {
-    backgroundColor: "#147efb",
-    padding: 15,
-    borderRadius: 30,
+    backgroundColor: "#B295EF",
+    paddingVertical: 20,
+    paddingHorizontal: 80,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderBottomWidth: 5,
     width: "100%",
+    top: 110,
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
     fontSize: 15,
   },
-  Stockchat: {
-    marginTop: 50,
-    color: "#FFF",
-    fontSize: 18,
+  heading: {
+    marginTop: 100,
+    color: "#000",
+    fontSize: 30,
     //width: Dimensions.get("screen").width,
-    fontWeight: "bold",
+    fontWeight: "800",
     textAlign: "center",
     fontFamily: "Montserrat_700Bold",
   },
@@ -168,17 +231,39 @@ const styles = StyleSheet.create({
     padding: 18,
   },
   Input: {
-    borderBottomWidth: 0,
-    backgroundColor: "#000",
-    //backgroundColor: "red",
+    borderWidth: 2,
+    backgroundColor: "#FFF",
     //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
-    borderColor: "#FFF",
-    padding: 12,
-    paddingLeft: 30,
-    color: "#FFF",
-    height: 50,
+    borderColor: "#000",
+    //width: 20,
+    top: 50,
+    padding: 15,
+    //paddingLeft: 30,
+    color: "#000",
+    //height: 50,
     fontSize: 21,
-    borderRadius: 30,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderBottomWidth: 5,
+  },
+  subheading: {
+    marginTop: 10,
+    color: "grey",
+    fontSize: 20,
+    //width: Dimensions.get("screen").width,
+    fontWeight: "800",
+    textAlign: "center",
+    fontFamily: "Montserrat_700Bold",
+  },
+  sendAgain: {
+    marginTop: 10,
+    color: "orange",
+    fontSize: 20,
+    paddingLeft: 10,
+    //width: Dimensions.get("screen").width,
+    fontWeight: "800",
+    textAlign: "center",
+    fontFamily: "Montserrat_700Bold",
   },
 });

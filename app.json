@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "StockChat",
-    "slug": "StockChat",
-    "version": "0.80",
+    "name": "lachat",
+    "slug": "lachat",
+    "version": "0.01",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/scsplash.png",
+      "image": "./assets/lasplash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#FFF"
+      "backgroundColor": "#000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "icon": "./assets/icon.png",
-      "bundleIdentifier": "com.tradechat.tradechatapp"
+      "bundleIdentifier": "com.latechchat.latechchat"
     },
     "web": {
       "favicon": "./assets/favicon.png"

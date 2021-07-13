@@ -27,64 +27,90 @@ export default function App({ ...props }) {
       <View>
         <View
           style={{
+            backgroundColor: "yellow",
+            height: 300,
+            width: 300,
+            borderRadius: 150,
+            borderWidth: 2,
+            borderBottomWidth: 5,
+          }}
+        ></View>
+        <View
+          style={{
             display: "flex",
             alignSelf: "center",
             marginTop: 10,
             marginBottom: 10,
           }}
         >
-          <Image
-            source={require("../../../assets/blackicon.png")}
-            style={{ width: 150, height: 150 }}
-          />
+          {/* <Image
+            source={require("../../../assets/icon.png")}
+            style={{ width: 200, height: 200, borderRadius: "150" }}
+          /> */}
+          {/* <Image
+            source={require("../../../assets/palmicon.png")}
+            style={{
+              width: 200,
+              height: 200,
+              borderRadius: "150",
+              alignSelf: "center",
+            }}
+          /> */}
+
+          <Text style={styles.heading}>la.chat 🌴</Text>
         </View>
 
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <Image
-            source={require("../../../assets/logotext.png")}
-            style={{ width: "100%", height: 50 }}
-          />
-        </View>
+        <View style={{ flexDirection: "column" }}></View>
 
-        <View style={{ flexDirection: "column" }}>
-          <Text style={styles.subtext}>Group Messaging for Investors</Text>
-          <Text style={{ fontSize: 30, marginTop: 50, textAlign: "center" }}>
-            💬 💸 💎 🙌
-          </Text>
-        </View>
+        <Text
+          style={{
+            fontSize: 25,
+            textAlign: "center",
+            color: "#FFF",
+            fontWeight: "600",
+            paddingTop: 30,
+            fontWeight: "700",
+          }}
+        >
+          Get access to the best LA {"\n"} tech events ✨
+        </Text>
       </View>
       <View>
         <TouchableOpacity
           style={styles.getstartedButton}
-          onPress={() => props.navigation.push("ChoosingUsername")}
+          onPress={() => props.navigation.push("PhoneNumber")}
         >
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 20,
               textAlign: "center",
-              color: "#FFF",
-              fontWeight: "600",
+              color: "#000",
+              fontWeight: "800",
             }}
           >
-            Get Started
+            Get Me On The List
           </Text>
         </TouchableOpacity>
 
         <View style={{ marginTop: 20 }}>
-          <Text
+          {/* <Image
+            source={require("../../../assets/icon.png")}
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: "150",
+              //justifyContent: "flex-end",
+              alignSelf: "flex-end",
+              //marginLeft: 30,
+            }}
+          /> */}
+          {/* <Text
             style={styles.subtext2}
             onPress={() => props.navigation.push("Login")}
           >
             Already have an account? Sign In
-          </Text>
+          </Text> */}
         </View>
-        {/* <View>
-          <TouchableOpacity onPress={() => props.navigation.push("Login")}>
-            <Text style={styles.HaveAccount}>
-              Already have an account? Sign In
-            </Text>
-          </TouchableOpacity>
-        </View> */}
       </View>
     </View>
   );
@@ -92,9 +118,14 @@ export default function App({ ...props }) {
 
 const styles = StyleSheet.create({
   getstartedButton: {
-    backgroundColor: "#147efb",
-    padding: 15,
-    borderRadius: 30,
+    backgroundColor: "#B295EF",
+    paddingVertical: 20,
+    paddingHorizontal: 80,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderBottomWidth: 5,
+    width: "100%",
+    top: 50,
   },
   getStarted: {
     flex: 1,
@@ -102,7 +133,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     //backgroundColor: "#1E2429",
-    backgroundColor: "#000",
+    backgroundColor: "#FF914D",
 
     width: Dimensions.get("screen").width,
   },
@@ -113,6 +144,10 @@ const styles = StyleSheet.create({
     top: 35,
     fontSize: 15,
   },
+
+  emoji: {
+    fontSize: 80,
+  },
   stockchat: {
     color: "#FFF",
     textAlign: "center",
@@ -121,20 +156,30 @@ const styles = StyleSheet.create({
     fontFamily: "Avenir",
   },
   subtext: {
-    color: "#FFF",
+    color: "#000",
     textAlign: "center",
-    top: 35,
-    fontSize: 25,
+    top: 15,
+    fontSize: 35,
     marginHorizontal: 20,
-    fontFamily: "Menlo-Regular",
+    //fontFamily: "Menlo-Regular",
+    fontWeight: "900",
   },
   subtext2: {
-    color: "#FFF",
+    color: "#000",
     textAlign: "center",
 
     fontSize: 15,
   },
   loginText: {
     fontSize: 18,
+  },
+  heading: {
+    marginTop: 50,
+    color: "#FFF",
+    fontSize: 30,
+    //width: Dimensions.get("screen").width,
+    fontWeight: "800",
+    textAlign: "left",
+    fontFamily: "Montserrat_700Bold",
   },
 });

@@ -1,5 +1,5 @@
-import * as firebase from 'firebase'
-import 'firebase/firestore';
+import * as firebase from "firebase";
+import "firebase/firestore";
 
 // const firebaseConfig = {
 //   apiKey: "AIzaSyDh4SqCbD5auLMv3dxR2gYEyWgFxubyZ6k",
@@ -24,18 +24,7 @@ const firebaseConfig = {
 export default fire = firebase.default.initializeApp(firebaseConfig);
 const firestore = firebase.default.firestore();
 
-export{
-  firestore
-}
-
-
-
-
-
-
-
-
-
+export { firestore };
 
 // import * as firebase from "firebase";
 
@@ -60,13 +49,6 @@ export{
 // messagingSenderId: "358291861577",
 // appId: "1:358291861577:web:26500643b9ac6e19514f98",
 // measurementId: "G-B9H238P35B",
-
-
-
-
-
-
-
 
 // import * as firebase from "firebase";
 // // import "firebase/firestore";

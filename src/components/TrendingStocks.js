@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  Image,
 } from "react-native";
 
 class TrendingStocks extends Component {
@@ -67,64 +68,52 @@ class TrendingStocks extends Component {
               symbol: service.symbol,
             })
           }
-          style={{
-            shadowOffset: { width: 0.5, height: 0.5 },
-            shadowRadius: 2,
-
-            shadowOpacity: 0.2,
-            borderWidth: 3,
-            borderColor:
-              parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00",
-            marginRight: 10,
-            shadowOpacity: 0.2,
-            elevation: 1,
-            //backgroundColor: "#000",
-            backgroundColor:
-              parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00",
-            borderRadius: 20,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            height: 60,
-          }}
+          style={
+            {
+              // shadowOffset: { width: 0.5, height: 0.5 },
+              // shadowRadius: 2,
+              // shadowOpacity: 0.2,
+              // borderWidth: 3,
+              // // borderColor:
+              // //   parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00",
+              // marginRight: 10,
+              // shadowOpacity: 0.2,
+              // elevation: 1,
+              // //backgroundColor: "#000",
+              // backgroundColor: "#FFF",
+              // borderRadius: 40,
+              // flexDirection: "row",
+              // alignItems: "center",
+              // justifyContent: "space-between",
+              // height: 80,
+              // width: 80,
+            }
+          }
         >
-          <View
+          <Image
+            source={require("../../assets/rohun.png")}
+            // source={{ uri: itemPic }}
             style={{
-              //height: 80,
-              width: 100,
+              shadowOffset: { width: 0.5, height: 0.5 },
+              shadowRadius: 2,
 
-              justifyContent: "space-between",
+              shadowOpacity: 0.2,
+              borderWidth: 3,
+              // borderColor:
+              //   parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00",
+              marginRight: 10,
+              shadowOpacity: 0.2,
+              elevation: 1,
+              //backgroundColor: "#000",
+              backgroundColor: "#FFF",
+              borderRadius: 40,
+              flexDirection: "row",
               alignItems: "center",
-              //paddingVertical: 0,
+              justifyContent: "space-between",
+              height: 80,
+              width: 80,
             }}
-          >
-            <Text
-              style={{
-                fontWeight: "800",
-                fontSize: 18,
-                //textAlign: "left"
-                color: "#FFF",
-              }}
-            >
-              {service.symbol}
-            </Text>
-
-            <Text
-              style={{
-                fontWeight: "700",
-                fontSize: 18,
-                textAlign: "center",
-                color: "#FFF",
-                // color:
-                //   parseFloat(service.changePercent) < 0 ? "#ff3636" : "#33CC00",
-              }}
-            >
-              {parseFloat(service.changePercent) < 0
-                ? (parseFloat(service.changePercent) * 100).toFixed(2)
-                : "+" + (parseFloat(service.changePercent) * 100).toFixed(2)}
-              %
-            </Text>
-          </View>
+          />
         </TouchableOpacity>
       ));
     }

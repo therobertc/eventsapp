@@ -12,6 +12,8 @@ import {
 import { Input } from "react-native-elements";
 import { AntDesign } from "@expo/vector-icons";
 import { firestore } from "../../database/firebase";
+import { Icon, Header, Left, Right, Body, Button } from "native-base";
+import { Feather } from "@expo/vector-icons";
 
 const DismissKeyboard = ({ children }) => (
   <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -47,44 +49,51 @@ export default function App({ ...props }) {
 
   return (
     <View style={styles.getStarted}>
-      <TouchableOpacity
-        style={{ position: "absolute", top: 50, left: 20 }}
-        onPress={() => props.navigation.goBack()}
+      <Header
+        style={{
+          backgroundColor: "#FFF",
+          borderBottomWidth: 0.1,
+          borderBottomColor: "#FFF",
+        }}
       >
-        <AntDesign style={styles.back} name="left" size={30} color="#FFF" />
-      </TouchableOpacity>
-      <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
-        <Image
-          source={require("../../../assets/blackicon.png")}
-          style={{ width: 150, height: 150 }}
-        />
-      </View>
+        <Left>
+          <TouchableOpacity
+            style={{
+              position: "absolute",
+              //top: 50,
+              left: 20,
+              borderWidth: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              borderColor: "#000",
+              borderRadius: 25,
+              height: 50,
+              width: 50,
+            }}
+            onPress={() => props.navigation.goBack()}
+          >
+            <AntDesign style={styles.back} name="left" size={30} color="#000" />
+          </TouchableOpacity>
+        </Left>
+      </Header>
 
-      <View>
-        <Text style={styles.Stockchat}>CREATE YOUR USERNAME</Text>
-      </View>
-      <View>
-        <Text style={styles.username}>
-          Usernames will be tagged in messages and shown inside your groups.
-        </Text>
+      <View style={{ display: "flex", marginTop: 50, paddingLeft: 20 }}>
+        {/* <Image
+          source={require("../../../assets/icon.png")}
+          style={{ width: 250, height: 250, borderRadius: 150 }}
+        /> */}
+        <Text style={styles.heading}>VERIFY YOUR{"\n"}ADDy</Text>
       </View>
 
       <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
-        <View style={{ paddingTop: 50, paddingHorizontal: 10 }}>
+        <View style={{ paddingTop: 100, paddingHorizontal: 10 }}>
           <Input
-            //einputContainerStyle={{ borderBottomWidth: 0 }}
+            inputContainerStyle={{ borderBottomWidth: 0 }}
             style={styles.Input}
-            placeholder="Username"
-            placeholderTextColor="lightgrey"
-            onChangeText={(username) => setUsername(username)}
+            placeholder="Phone Number"
+            placeholderTextColor="grey"
+            //onChangeText={(username) => setUsername(username)}
           />
-          {/* <TextInput
-              style={styles.inputStyle}
-              placeholder="Enter Group Name"
-              value={groupName}
-              // onValidateTextField = {validateField}
-              onChangeText={val => setGroupName(val)}
-            /> */}
         </View>
 
         <View
@@ -95,31 +104,20 @@ export default function App({ ...props }) {
             alignItems: "center",
           }}
         >
-          {/* <TouchableOpacity
-              onPress={performCreateGroup}
-              isLoading={isLoading}
-            >
-              <View style={styles.btn}>
-                <Text
-                  style={{ color: "#F5F8FA", fontSize: 19, fontWeight: "bold" }}
-                >
-                  Create Group
-                </Text>
-              </View>
-            </TouchableOpacity> */}
           <TouchableOpacity
             style={styles.Button}
-            onPress={() => createUserInFirestore()}
+            // onPress={() => createUserInFirestore()}
+            onPress={() => props.navigation.push("Activity")}
           >
             <Text
               style={{
-                fontSize: 18,
+                fontSize: 25,
                 textAlign: "center",
-                color: "#FFF",
+                color: "#000",
                 fontWeight: "600",
               }}
             >
-              Continue
+              Get In
             </Text>
           </TouchableOpacity>
         </View>
@@ -133,27 +131,21 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingHorizontal: 20,
-    backgroundColor: "#000",
+    backgroundColor: "#FFF",
     width: Dimensions.get("screen").width,
-  },
-  Button: {
-    backgroundColor: "#147efb",
-    padding: 15,
-    borderRadius: 30,
-    width: "100%",
   },
   HaveAccount: {
     color: "#F5F8FA",
     textAlign: "center",
     fontSize: 15,
   },
-  Stockchat: {
+  heading: {
     marginTop: 50,
-    color: "#FFF",
-    fontSize: 18,
+    color: "#000",
+    fontSize: 30,
     //width: Dimensions.get("screen").width,
-    fontWeight: "bold",
-    textAlign: "center",
+    fontWeight: "800",
+    textAlign: "left",
     fontFamily: "Montserrat_700Bold",
   },
   username: {
@@ -163,18 +155,26 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 18,
   },
+  Button: {
+    backgroundColor: "#147efb",
+    padding: 15,
+    borderRadius: 20,
+    borderWidth: 2,
+    width: "100%",
+    top: 150,
+  },
   Input: {
-    borderBottomWidth: 0,
-    backgroundColor: "#000",
-    //backgroundColor: "red",
+    borderWidth: 2,
+    backgroundColor: "#FFF",
     //borderBottomColor: "#FFF",
     //borderColor: "#3C4956",
-    borderColor: "#FFF",
-    padding: 12,
+    borderColor: "#000",
+    top: 50,
+    padding: 15,
     paddingLeft: 30,
-    color: "#FFF",
-    height: 50,
+    color: "#000",
+    //height: 50,
     fontSize: 21,
-    borderRadius: 30,
+    borderRadius: 20,
   },
 });

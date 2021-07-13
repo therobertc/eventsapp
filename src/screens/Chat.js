@@ -251,7 +251,11 @@ const Chat = (props) => {
       >
         <Left>
           {/* <Text style={styles.logotext}>#stockchat</Text> */}
-          <Image
+
+          <Text style={{ fontSize: 30, fontWeight: "800", color: "#FFF" }}>
+            LA.CHAT
+          </Text>
+          {/* <Image
             source={require("../../assets/logotext.png")}
             // source={{ uri: itemPic }}
             style={{
@@ -266,7 +270,7 @@ const Chat = (props) => {
               //alignSelf: "center",
               //marginTop: 15
             }}
-          />
+          /> */}
           {/* <Feather
             style={{
               color: "#FFF",
@@ -340,7 +344,7 @@ const Chat = (props) => {
             ACTIVITY
           </Text>
           <Text style={{ fontSize: 18, color: "#FFF", marginHorizontal: 20 }}>
-            Today's trending assets, scroll for more.
+            All your friends are having fun in LA
           </Text>
 
           <View
