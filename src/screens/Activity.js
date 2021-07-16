@@ -12,11 +12,7 @@ import {
 } from "react-native";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
 import { Feather } from "@expo/vector-icons";
-import InsiderTrades from "../components/InsiderTrades";
-import Notifications from "../components/Notifications";
-import DropDownPicker from "react-native-dropdown-picker";
-import WSBTrends from "../components/WSBTrends";
-import WSBETF from "../components/WSBETF";
+
 import { AntDesign } from "@expo/vector-icons";
 import ToggleSwitch from "../components/ToggleSwitch";
 

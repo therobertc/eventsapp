@@ -32,7 +32,7 @@ export default function App({ route, navigation }) {
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/blackicon.png")}
+          source={require("../../../assets/icon.png")}
           style={{ width: 80, height: 80 }}
         />
       </View>

@@ -15,12 +15,8 @@ import {
 import * as Permissions from "expo-permissions";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
 import Messages from "../components/Messages";
-import TrendingStocks from "../components/TrendingStocks";
 import { Feather } from "@expo/vector-icons";
 import fire, { firestore } from "../database/firebase";
-import StockGroupCard from "../components/StockGroupCard";
-import ChartComp from "../components/ChartComp";
-import ChatTabs from "../components/Tabs/ChatTabs";
 
 const Private = (props) => {
   const isVisible = useIsFocused();
@@ -143,20 +139,6 @@ const Private = (props) => {
       }
     >
       {/* <TrendingStocks {...props} /> */}
-
-      <StockGroupCard
-        ticker="$COMINGSOON"
-        //pctchange="+3.521%"
-        // onPress={() => {
-        //   props.navigation.navigate("StockChat", {
-        //     itemName: "$NET",
-        //     // itemId: item.id,
-        //     // itemName: item.login,
-        //     itemPic: "https://i.stack.imgur.com/l60Hf.png"
-        //   });
-        // }}
-        msg="Private groups coming soon"
-      />
 
       {/* <View style={styles.card}> */}
       {/* <FlatList

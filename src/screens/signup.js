@@ -120,7 +120,7 @@ export default function Signup({ route, navigation }) {
         <View style={{ flexDirection: "row" }}>
           <Image
             style={{ height: 100, width: 100 }}
-            source={require("../../assets/blackicon.png")}
+            source={require("../../assets/icon.png")}
           ></Image>
 
           <Text style={styles.Stockchat}> Stock Chat</Text>

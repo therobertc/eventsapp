@@ -9,14 +9,10 @@ import { Ionicons, FontAwesome, FontAwesome5 } from "@expo/vector-icons";
 
 import Home from "../screens/Home";
 import Discussion from "../screens/Discussion";
-import StockChat from "../screens/StockChat";
-import StockProfile from "../screens/StockProfile";
 
 import Settings from "../screens/Settings";
 
 import Chat from "../screens/Chat";
-import Icon from "@expo/vector-icons/Ionicons";
-import Icon2 from "@expo/vector-icons/Entypo";
 
 import AddGroup from "../screens/Sub/AddGroup";
 import AddGroupMember from "../screens/Sub/AddGroup_Members";
@@ -40,21 +36,13 @@ import fire, { firestore } from "../database/firebase";
 import { useLinkProps } from "@react-navigation/native";
 import Email from "../screens/OnBoarding/Email";
 import Password from "../screens/OnBoarding/Password";
-import StockDetails from "../components/StockDetails";
 import TrendingStocks from "../components/TrendingStocks";
-import Wallet from "../screens/Wallet";
 import GroupProfile from "../screens/Sub/GroupProfile";
 import Activity from "../screens/Activity";
 import DirectMessages from "../screens/DirectMessages";
-import LargeCap from "../components/Screeners/DefaultScreeners/LargeCap";
-import MostVolatile from "../components/Screeners/DefaultScreeners/MostVolatile";
-import Overbought from "../components/Screeners/DefaultScreeners/Overbought";
-import Oversold from "../components/Screeners/DefaultScreeners/Oversold";
-import PopularStocks from "../components/Screeners/DefaultScreeners/PopularStocks";
-import TopGainers from "../components/Screeners/DefaultScreeners/TopGainers";
+
 import Profile from "../screens/Profile";
 import Editprofile from "../screens/Editprofile";
-import Bank from "../screens/Bank";
 import NavigationServices from "../Util/NavigationServices";
 
 const Tab = createBottomTabNavigator();
@@ -245,11 +233,7 @@ const ChatStackNavigator = () => {
           gestureEnabled: false,
         }}
       />
-      <Stack.Screen
-        name="LinkPortfolio"
-        component={LinkPortfolio}
-        options={{ headerShown: false }}
-      />
+
       <Stack.Screen
         name="InviteFriends"
         component={InviteFriends}
@@ -322,78 +306,25 @@ const ChatStackNavigator = () => {
         component={GroupInfo}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="StockChat"
-        component={StockChat}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StockProfile"
-        component={StockProfile}
-        options={{ headerShown: false }}
-      />
 
       <Stack.Screen
         name="Settings"
         component={Settings}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="StockDetails"
-        component={StockDetails}
-        options={{ headerShown: false }}
-      />
+
       <Stack.Screen
         name="TrendingStocks"
         component={TrendingStocks}
         options={{ headerShown: true }}
       />
-      <Stack.Screen
-        name="Wallet"
-        component={Wallet}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Bank"
-        component={Bank}
-        options={{ headerShown: false }}
-      />
+
       <Stack.Screen
         name="GroupProfile"
         component={GroupProfile}
         options={{ headerShown: false }}
       />
 
-      <Stack.Screen
-        name="LargeCap"
-        component={LargeCap}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="MostVolatile"
-        component={MostVolatile}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Overbought"
-        component={Overbought}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Oversold"
-        component={Oversold}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="PopularStocks"
-        component={PopularStocks}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="TopGainers"
-        component={TopGainers}
-        options={{ headerShown: false }}
-      />
       <Stack.Screen
         name="Activity"
         component={Activity}

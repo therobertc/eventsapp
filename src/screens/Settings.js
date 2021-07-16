@@ -9,7 +9,6 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import StockGroupCard from "../components/StockGroupCard";
 // import firebase, { firestore } from "../database/firebase";
 import * as firebase from "firebase";
 

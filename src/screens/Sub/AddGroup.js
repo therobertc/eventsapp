@@ -156,7 +156,7 @@ export default function AddGroup(props) {
       </TouchableOpacity>
       <View style={{ display: "flex", alignSelf: "center", marginTop: 100 }}>
         <Image
-          source={require("../../../assets/blackicon.png")}
+          source={require("../../../assets/icon.png")}
           style={{ width: 150, height: 150 }}
         />
       </View>

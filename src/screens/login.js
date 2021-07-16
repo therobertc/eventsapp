@@ -163,10 +163,10 @@ export default function Login({ navigation }) {
         <View style={styles.tcontainer}>
           <Image
             style={{ height: 150, width: 150 }}
-            source={require("../../assets/blackicon.png")}
+            source={require("../../assets/icon.png")}
           />
 
-          <Image
+          {/* <Image
             source={require("../../assets/logotext.png")}
             style={{
               width: "80%",
@@ -174,7 +174,7 @@ export default function Login({ navigation }) {
 
               paddingHorizontal: 20,
             }}
-          />
+          /> */}
 
           <Text style={styles.tHeading}>Sign In</Text>
 

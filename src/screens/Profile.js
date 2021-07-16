@@ -13,9 +13,6 @@ import { Icon, Header, Left, Right, Body, Button } from "native-base";
 
 import { Feather } from "@expo/vector-icons";
 import * as firebase from "firebase";
-import LinkPortfolioButton from "../components/LinkPortfolioButton";
-import PortfolioAuth from "../components/Cards/PortfolioAuth";
-import Stocks from "../components/Cards/Stocks";
 
 const { height } = Dimensions.get("screen");
 

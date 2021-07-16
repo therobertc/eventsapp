@@ -20,8 +20,6 @@ import TrendingStocks from "../components/TrendingStocks";
 import { Feather } from "@expo/vector-icons";
 import AddGroup from "./Sub/AddGroup";
 import fire, { firestore } from "../database/firebase";
-import StockGroupCard from "../components/StockGroupCard";
-import ChartComp from "../components/ChartComp";
 import ChatTabs from "../components/Tabs/ChatTabs";
 import NavigationServices from "../Util/NavigationServices";
 // import InfoModal from "../components/Modals/InfoModal";
@@ -385,20 +383,6 @@ const Chat = (props) => {
         </View>
 
         {/* <TrendingStocks {...props} /> */}
-
-        {/* <StockGroupCard
-            ticker="$NET"
-            pctchange="+3.521%"
-            onPress={() => {
-              props.navigation.navigate("StockChat", {
-                itemName: "$NET",
-                // itemId: item.id,
-                // itemName: item.login,
-                itemPic: "https://i.stack.imgur.com/l60Hf.png"
-              });
-            }}
-            msg="This stock is trending"
-          /> */}
 
         {/* <View style={styles.card}> */}
         <ChatTabs></ChatTabs>

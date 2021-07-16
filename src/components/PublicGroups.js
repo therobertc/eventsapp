@@ -18,9 +18,6 @@ import Messages from "../components/Messages";
 import TrendingStocks from "../components/TrendingStocks";
 import { Feather } from "@expo/vector-icons";
 import fire, { firestore } from "../database/firebase";
-import StockGroupCard from "../components/StockGroupCard";
-import ChartComp from "../components/ChartComp";
-import ChatTabs from "../components/Tabs/ChatTabs";
 
 const Public = (props) => {
   const isVisible = useIsFocused();
@@ -143,20 +140,6 @@ const Public = (props) => {
       }
     >
       {/* <TrendingStocks {...props} /> */}
-
-      {/* <StockGroupCard
-            ticker="$NET"
-            pctchange="+3.521%"
-            onPress={() => {
-              props.navigation.navigate("StockChat", {
-                itemName: "$NET",
-                // itemId: item.id,
-                // itemName: item.login,
-                itemPic: "https://i.stack.imgur.com/l60Hf.png"
-              });
-            }}
-            msg="This stock is trending"
-          /> */}
 
       {/* <View style={styles.card}> */}
       <FlatList

@@ -10,7 +10,6 @@ import {
   Image,
 } from "react-native";
 
-import LinkPortfolioButton from "../components/LinkPortfolioButton";
 import { Feather } from "@expo/vector-icons";
 
 const LinkPortfolio = (props) => {
@@ -34,16 +33,6 @@ const LinkPortfolio = (props) => {
           </Text>
           {/* <Text style={styles.link}>Why link an account?</Text> */}
         </View>
-      </View>
-
-      <View
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          paddingTop: 200,
-        }}
-      >
-        <LinkPortfolioButton></LinkPortfolioButton>
       </View>
     </ScrollView>
   );

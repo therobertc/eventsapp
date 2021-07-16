@@ -11,8 +11,6 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Icon, Header, Left, Right, Body, Button } from "native-base";
-// import UserAdvanceScreener from "./UserAdvanceScreener";
-import UserScreener from "../components/Screeners/UserScreener";
 
 import * as Linking from "expo-linking";
 import URL from "../../Constant/Constant";

@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import WSBTrends from "../WSBTrends";
-import InsiderTrades from "../InsiderTrades";
-import Notifications from "../Notifications";
-import OptionsAlerts from "../OptionsAlerts";
+
 import PublicGroups from "../PublicGroups";
-import PrivateGroups from "../PrivateGroups";
 import {
   View,
   Text,

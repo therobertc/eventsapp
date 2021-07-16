@@ -9,7 +9,6 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import StockGroupCard from "../components/StockGroupCard";
 import Messages from "../components/Messages";
 import { useIsFocused } from "@react-navigation/native";
 
