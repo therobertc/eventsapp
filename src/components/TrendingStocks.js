@@ -63,11 +63,11 @@ class TrendingStocks extends Component {
         // >
         <TouchableOpacity
           key={index}
-          onPress={() =>
-            this.props.navigation.push("StockDetails", {
-              symbol: service.symbol,
-            })
-          }
+          // onPress={() =>
+          //   this.props.navigation.push("StockDetails", {
+          //     symbol: service.symbol,
+          //   })
+          // }
           style={
             {
               // shadowOffset: { width: 0.5, height: 0.5 },
